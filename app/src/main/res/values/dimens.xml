@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="rc_button_text_size_1">20sp</dimen>
+    <dimen name="rc_button_link_size">14sp</dimen>
+    <dimen name="rc_label_size_1" >20sp</dimen>
+    <dimen name="rc_padding_1">6dp</dimen>
+    <dimen name="rc_margin_1">6dp</dimen>
+    <dimen name="rc_padding_2">10dp</dimen>
+</resources>

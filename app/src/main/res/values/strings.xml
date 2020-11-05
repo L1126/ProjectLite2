@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ProjectLite</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="string_btn_login">Login</string>
+    <string name="string_link_signup">Sign Up</string>
+    <string name="string_image_descrip_profile_picture">Profile picture</string>
+    <string name="string_txt_descrip_phone">Phone number</string>
+    <string name="string_txt_descrip_pwd">Password</string>
+    <string name="string_txt_phone">Phone</string>
+    <string name="string_txt_pwd">Password</string>
+    <string name="string_link_smslogin">Login with SMS verification code</string>
+    <string name="string_checkbox_rememberPwd">Remember me</string>
+    <string name="string_link_forgetPwd">Forget ?</string>
+</resources>
