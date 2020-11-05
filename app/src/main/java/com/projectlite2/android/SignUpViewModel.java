@@ -1,21 +1,12 @@
 package com.projectlite2.android;
 
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
-import android.widget.Toast;
 
-import cn.leancloud.AVUser;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-
-
-public class LoginViewModel extends ViewModel {
-    
+public class SignUpViewModel extends ViewModel {
     public MutableLiveData<String> userName;
     public MutableLiveData<String> phoneNumber;
     public MutableLiveData<String> password;
-
 
     public MutableLiveData<String> getUserName() {
         if(userName == null) {

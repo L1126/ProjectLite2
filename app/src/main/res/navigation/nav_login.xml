@@ -7,5 +7,15 @@
         android:id="@+id/loginFragment2"
         android:name="com.projectlite2.android.LoginFragment"
         tools:layout="@layout/fragment_login"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment2_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.projectlite2.android.SignUpFragment"
+        tools:layout="@layout/fragment_sign_up"
+        android:label="SignUpFragment" />
 </navigation>
