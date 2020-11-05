@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ProjectLite</string>
+    <string name="string_btn_login">登录</string>
+    <string name="string_link_signup">注册i新账户</string>
+    <string name="string_image_descrip_profile_picture">账户头像</string>
+    <string name="string_txt_descrip_phone">手机号</string>
+    <string name="string_txt_descrip_pwd">密码</string>
+    <string name="string_txt_phone">手机号</string>
+    <string name="string_txt_pwd">密　码</string>
+    <string name="string_link_smslogin">短信验证码登录</string>
+    <string name="string_checkbox_rememberPwd">记住密码</string>
+    <string name="string_link_forgetPwd">忘记密码？</string>
+</resources>

@@ -4,6 +4,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import android.widget.Toast;
 
+import cn.leancloud.AVUser;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 
 public class LoginViewModel extends ViewModel {
@@ -40,7 +43,6 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void Login() {
-        Toast.makeText(MyApplication.getContext(),getPassword().getValue(),Toast.LENGTH_SHORT).show();
 
     }
 }

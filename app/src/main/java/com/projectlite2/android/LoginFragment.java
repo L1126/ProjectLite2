@@ -14,6 +14,11 @@ import android.view.ViewGroup;
 
 import com.projectlite2.android.databinding.FragmentLoginBinding;
 
+import cn.leancloud.AVObject;
+import cn.leancloud.AVUser;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 import static androidx.navigation.Navigation.findNavController;
 
 /**
@@ -36,8 +41,7 @@ public class LoginFragment extends Fragment {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                NavController controller = findNavController(v);
-//                controller.navigate(R.id.);
+                
             }
         });
         return binding.getRoot();
