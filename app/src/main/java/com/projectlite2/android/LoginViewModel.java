@@ -11,11 +11,17 @@ import io.reactivex.disposables.Disposable;
 
 
 public class LoginViewModel extends ViewModel {
-    
+
+    private SavedStateHandle handle;
+
     public MutableLiveData<String> userName;
     public MutableLiveData<String> phoneNumber;
     public MutableLiveData<String> password;
 
+
+    public LoginViewModel(SavedStateHandle handle) {
+        this.handle = handle;
+    }
 
     public MutableLiveData<String> getUserName() {
         if(userName == null) {

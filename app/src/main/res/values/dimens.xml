@@ -2,8 +2,20 @@
 <resources>
     <dimen name="rc_button_text_size_1">20sp</dimen>
     <dimen name="rc_button_link_size">14sp</dimen>
-    <dimen name="rc_label_size_1" >20sp</dimen>
+    <dimen name="rc_label_size_1">20sp</dimen>
     <dimen name="rc_padding_1">6dp</dimen>
     <dimen name="rc_margin_1">6dp</dimen>
     <dimen name="rc_padding_2">10dp</dimen>
+    <!--
+    Because the window insets on round devices are larger than 15dp, this padding only applies
+    to square screens.
+    -->
+    <dimen name="box_inset_layout_padding">0dp</dimen>
+
+    <!--
+    This padding applies to both square and round screens. The total padding between the buttons
+    and the window insets is box_inset_layout_padding (above variable) on square screens and
+    inner_frame_layout_padding (below variable) on round screens.
+    -->
+    <dimen name="inner_frame_layout_padding">5dp</dimen>
 </resources>

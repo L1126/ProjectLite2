@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/homePageFragment">
+
+    <fragment
+        android:id="@+id/cardcaseFragment"
+        android:name="com.projectlite2.android.CardcaseFragment"
+        android:label="名片夹"
+        tools:layout="@layout/cardcase_fragment" />
+    <fragment
+        android:id="@+id/homePageFragment"
+        android:name="com.projectlite2.android.HomePageFragment"
+        android:label="项目列表"
+        tools:layout="@layout/home_page_fragment" />
+    <fragment
+        android:id="@+id/messageBoxFragment"
+        android:name="com.projectlite2.android.MessageBoxFragment"
+        android:label="收件箱"
+        tools:layout="@layout/message_box_fragment" />
+    <fragment
+        android:id="@+id/myProfileFragment"
+        android:name="com.projectlite2.android.MyProfileFragment"
+        android:label="个人中心"
+        tools:layout="@layout/my_profile_fragment" />
+</navigation>
