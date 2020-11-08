@@ -12,14 +12,23 @@
     <string name="string_link_smslogin">Login with SMS verification code</string>
     <string name="string_checkbox_rememberPwd">Remember me</string>
     <string name="string_link_forgetPwd">Forget ?</string>
-    <string name="string_menu_home_page">项目列表</string>
-    <string name="string_menu_message_box">收件箱</string>
-    <string name="string_menu_cardcase">名片夹</string>
-    <string name="string_menu_my_profile">个人中心</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="string_menu_home_page">Projects</string>
+    <string name="string_menu_message_box">Messages</string>
+    <string name="string_menu_cardcase">Contacts</string>
+    <string name="string_menu_my_profile">Me</string>
+    <string name="title_activity_main" translatable="false">MainActivity</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+    <string name="string_link_pwdlogin">Login with password</string>
+    <string name="string_txt_sms_code">SMS code</string>
+    <string name="string_btn_get_code">Get code</string>
+    <string name="string_btn_next">Next</string>
+    <string name="string_txt_new_pwd">Password</string>
+    <string name="string_txt_confirm_password">Confirm</string>
+    <string name="string_btn_modify_pwd">Modify</string>
+    <string name="string_txt_set_pwd">Password</string>
+    <string name="string_btn_signup">Sign up</string>
 </resources>

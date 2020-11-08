@@ -1,16 +1,29 @@
 package com.projectlite2.android;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
 
 import cn.leancloud.AVLogger;
 import cn.leancloud.AVOSCloud;
 import cn.leancloud.AVObject;
+import cn.leancloud.chatkit.LCChatKit;
+
+import static androidx.navigation.Navigation.findNavController;
 
 public class MyApplication extends Application {
 
+    @SuppressLint("StaticFieldLeak")
     private static Context mContext;
+    @SuppressLint("StaticFieldLeak")
+    private static NavController navController;
 
     private String _appId= "xCPMuwMtvrHTaRYE3sdnlBez-MdYXbMMI";
     private String _appKey  = "nJY5JvhpKI3Nkcob3IevMNr3";
@@ -28,6 +41,11 @@ public class MyApplication extends Application {
 
         AVOSCloud.initialize(this, _appId, _appKey,_serverUrl );
 
+        //  初始化ChatKit
+        LCChatKit.getInstance().setProfileProvider(CustomUserProvider.getInstance());
+        LCChatKit.getInstance().init(mContext,_appId,_appKey,_serverUrl);
+
+
     }
 
     public static Context getContext() {
@@ -40,6 +58,14 @@ public class MyApplication extends Application {
 
     public static void showToast(Integer i) {
         Toast.makeText(MyApplication.getContext(), i, Toast.LENGTH_SHORT).show();
+    }
+    public static void navJump(View view, @IdRes int resId) {
+        navController=findNavController(view);
+        navController.navigate(resId);
+    }
+    public static void navJump(View view, @IdRes int resId, @Nullable Bundle bundle) {
+        navController=findNavController(view);
+        navController.navigate(resId,bundle);
     }
 
 }

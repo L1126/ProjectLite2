@@ -105,7 +105,7 @@
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/rc_login_buton_height"
             android:onClick="@{()->model.Login()}"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
@@ -116,7 +116,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline6"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.695" />
+            app:layout_constraintVertical_bias="0.7" />
 
         <TextView
             android:id="@+id/linkSignUp"
@@ -217,7 +217,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/linkForgetpwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/string_link_forgetPwd"
