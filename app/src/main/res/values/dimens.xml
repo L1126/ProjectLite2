@@ -18,5 +18,8 @@
     inner_frame_layout_padding (below variable) on round screens.
     -->
     <dimen name="inner_frame_layout_padding">5dp</dimen>
-    <dimen name="rc_login_buton_height">60dp</dimen>
+    <dimen name="rc_login_button_height">60dp</dimen>
+    <dimen name="rc_card_corner_radius">10dp</dimen>
+    <dimen name="rc_card_elevation">10dp</dimen>
+    <dimen name="rc_card_item_project_main_text">20sp</dimen>
 </resources>

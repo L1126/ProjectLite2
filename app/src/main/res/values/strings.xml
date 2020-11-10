@@ -31,4 +31,8 @@
     <string name="string_btn_modify_pwd">Modify</string>
     <string name="string_txt_set_pwd">Password</string>
     <string name="string_btn_signup">Sign up</string>
+    <string name="string_btn_descrip_project_tree">Project tree</string>
+    <string name="string_descrip_btn_project_tree">Project tree</string>
+    <string name="string_txt_isLeader">(Leader)</string>
+    <string name="string_descrip_dot_msg_count">There are unread messages</string>
 </resources>

@@ -1,36 +1,71 @@
 package com.projectlite2.android;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import java.util.ArrayList;
 
 public class HomePageFragment extends Fragment {
 
-    private HomePageViewModel mViewModel;
+    View mView;
+    RecyclerView mRecyclerView;
+    ProjectCardAdapter mAdapter;
 
-    public static HomePageFragment newInstance() {
-        return new HomePageFragment();
-    }
+    private ArrayList<ProjectCard> projectList = new ArrayList<ProjectCard>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.home_page_fragment, container, false);
+        mView = inflater.inflate(R.layout.home_page_fragment, container, false);
+        return mView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
-        // TODO: Use the ViewModel
+        //initRV();
+
+        addProjects();
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView = mView.findViewById(R.id.recyclerView);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new ProjectCardAdapter(projectList);
+        mRecyclerView.setAdapter(mAdapter);
+
     }
 
+    /*
+     * 初始化列表数据
+     */
+
+    private void addProjects() {
+        projectList.add(new ProjectCard("信息与交互设计", true, 25));
+        projectList.add(new ProjectCard("用户体验设计", false, 30));
+        projectList.add(new ProjectCard("产品设计方法学", false, 90));
+        projectList.add(new ProjectCard("交互设计专题（一）", true, 10));
+        projectList.add(new ProjectCard("产品设计专题", false, 60));
+        projectList.add(new ProjectCard("信息与交互设计", true, 25));
+        projectList.add(new ProjectCard("用户体验设计", false, 20));
+        projectList.add(new ProjectCard("产品设计方法学", false, 90));
+        projectList.add(new ProjectCard("交互设计专题（一）", true, 10));
+        projectList.add(new ProjectCard("产品设计专题", false, 60));
+
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuInflater menuInflater =new MenuInflater(getActivity().getApplicationContext());
+        menuInflater.inflate(R.menu.menu_add_project,menu);
+    }
 }

@@ -2,11 +2,16 @@ package com.projectlite2.android;
 
 import android.os.Bundle;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.projectlite2.android.databinding.FragmentModifyPwdBinding;
+import com.projectlite2.android.databinding.FragmentSetPwdBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,17 +22,22 @@ public class SetPwdFragment extends Fragment {
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_set_pwd, container, false);
+        LoginViewModel viewModel = new ViewModelProvider(getActivity()).get(LoginViewModel.class);
+        FragmentSetPwdBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_pwd, container, false);
+        binding.setModel(viewModel);
+        binding.setLifecycleOwner(getActivity());
+
+        binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        return binding.getRoot();
     }
 }

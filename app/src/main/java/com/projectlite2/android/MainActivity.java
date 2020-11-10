@@ -16,7 +16,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+
+        //  getSupportActionBar().hide();
+
         setContentView(R.layout.activity_main);
         //  导航栏跳转配置
         BottomNavigationView bottomNav=findViewById(R.id.navBottom);

@@ -104,7 +104,7 @@
         <Button
             android:id="@+id/btnModifyPwd"
             android:layout_width="0dp"
-            android:layout_height="@dimen/rc_login_buton_height"
+            android:layout_height="@dimen/rc_login_button_height"
             android:onClick="@{()->model.Login()}"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"

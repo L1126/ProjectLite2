@@ -56,6 +56,14 @@ public class VerifyPhoneFragment extends Fragment {
             }
         });
 
+        // 点击获取验证码
+        binding.btnGetCode.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
         return binding.getRoot();
     }
