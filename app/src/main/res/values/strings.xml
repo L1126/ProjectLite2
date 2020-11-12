@@ -35,4 +35,6 @@
     <string name="string_descrip_btn_project_tree">Project tree</string>
     <string name="string_txt_isLeader">(Leader)</string>
     <string name="string_descrip_dot_msg_count">There are unread messages</string>
+    <string name="string_btn_menu_create_project">Create a project</string>
+    <string name="string_btn_menu_add_project">Join a project</string>
 </resources>

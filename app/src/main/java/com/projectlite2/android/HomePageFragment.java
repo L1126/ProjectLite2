@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -18,16 +20,27 @@ import java.util.ArrayList;
 public class HomePageFragment extends Fragment {
 
     View mView;
+    Toolbar toolBar;
     RecyclerView mRecyclerView;
     ProjectCardAdapter mAdapter;
 
+
     private ArrayList<ProjectCard> projectList = new ArrayList<ProjectCard>();
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.home_page_fragment, container, false);
+        toolBar = mView.findViewById(R.id.toolBar);
+        toolBar.inflateMenu(R.menu.menu_add_project);
         return mView;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -65,7 +78,6 @@ public class HomePageFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        MenuInflater menuInflater =new MenuInflater(getActivity().getApplicationContext());
-        menuInflater.inflate(R.menu.menu_add_project,menu);
+        inflater.inflate(R.menu.menu_add_project,menu);
     }
 }
