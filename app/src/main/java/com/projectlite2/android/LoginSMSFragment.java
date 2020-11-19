@@ -73,7 +73,6 @@ public class LoginSMSFragment extends Fragment {
                     public void onError(@NotNull Throwable throwable) {
                         Log.d("TAG","Result: Failed to send verification code. Reason: " + throwable.getMessage());
                         MyApplication.showToast("发送失败");
-
                     }
                     @Override
                     public void onComplete() {
