@@ -19,7 +19,12 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 try{
                     sleep(1000);//使程序休眠五秒
-                    Intent it=new Intent(getApplicationContext(),MainActivity.class);//启动MainActivity
+                    Intent it;
+                    if (Constant.FIRST_USE){
+                         it=new Intent(getApplicationContext(),GuideActivity.class);//启动GuideActivity
+                    }else{
+                         it=new Intent(getApplicationContext(), MainActivity.class);//启动MainActivity
+                    }
                     startActivity(it);
                     finish();//关闭当前活动
                 }catch (Exception e){
