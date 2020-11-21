@@ -6,8 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-
+import android.util.Log;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -17,8 +16,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
+        String prefUserPhoneNumber=UserInfoSaveSharedPreference.getUserPhone(MyApplication.getContext());
+        Log.d("PREF", "onCreate: savedPhoneNumber? "+prefUserPhoneNumber);
         // 如果shp中存在保存的手机号码信息的话,自动登录
-        if(UserInfoSaveSharedPreference.getUserPhone(MyApplication.getContext()).length() != 0)
+        if(!prefUserPhoneNumber.equals(UserInfoSaveSharedPreference.PREF_NULL_VALUE))
         {
             // 跳转到主页
             Intent intent = new Intent(MyApplication.getContext(),MainActivity.class);

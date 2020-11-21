@@ -69,6 +69,11 @@ public class LoginFragment extends Fragment {
                             UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),phone);
                             UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),password);
                         }
+                        else{
+                            // 保存sharedPreferences
+                            UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
+                            UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
+                        }
                         // 跳转到主页
                         Intent intent = new Intent(MyApplication.getContext(),MainActivity.class);
                         startActivity(intent);

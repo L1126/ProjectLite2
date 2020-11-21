@@ -20,10 +20,10 @@ public class SplashActivity extends AppCompatActivity {
                 try{
                     sleep(1000);//使程序休眠五秒
                     Intent it;
-                    if (Constant.FIRST_USE){
+                    if (!UserInfoSaveSharedPreference.getPrefNotFirstUse(MyApplication.getContext())){
                          it=new Intent(getApplicationContext(),GuideActivity.class);//启动GuideActivity
                     }else{
-                         it=new Intent(getApplicationContext(), MainActivity.class);//启动MainActivity
+                         it=new Intent(getApplicationContext(), LoginActivity.class);//启动LoginActivity
                     }
                     startActivity(it);
                     finish();//关闭当前活动

@@ -1,5 +1,6 @@
 package com.projectlite2.android
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,10 @@ class GuideActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_guide)
+
+//        设置顶部状态栏透明
+        window.statusBarColor= Color.TRANSPARENT
+
         viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount() = 3
             override fun createFragment(position: Int): Fragment {
