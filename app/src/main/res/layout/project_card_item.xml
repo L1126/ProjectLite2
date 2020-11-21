@@ -52,6 +52,7 @@
             android:backgroundTint="#FFFFFF"
             android:contentDescription="@string/string_descrip_btn_project_tree"
             android:scaleType="fitCenter"
+            android:onClick="otherClick"
             app:layout_constraintBottom_toTopOf="@+id/progressProject"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline13"
