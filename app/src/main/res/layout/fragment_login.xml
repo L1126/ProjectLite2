@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.projectlite2.android.LoginViewModel"/>
+
+        <import type="com.projectlite2.android.LoginViewModel" />
+
         <variable
             name="model"
             type="LoginViewModel" />
