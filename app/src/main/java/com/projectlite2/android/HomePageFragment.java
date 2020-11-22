@@ -57,6 +57,12 @@ public class HomePageFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_add_project,menu);
+    }
     /*
      * 初始化列表数据
      */
@@ -73,11 +79,5 @@ public class HomePageFragment extends Fragment {
         projectList.add(new ProjectCard("交互设计专题（一）", true, 10));
         projectList.add(new ProjectCard("产品设计专题", false, 60));
 
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_add_project,menu);
     }
 }

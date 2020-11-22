@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 class ProjectCardAdapter(private val projects: List<ProjectCard>) :
         RecyclerView.Adapter<ProjectCardAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val pjName: TextView = itemView.findViewById(R.id.txtProjectName)
+        val pjName: TextView = itemView.findViewById(R.id.txtSettingItemName)
         val pjProgress:ProgressBar=itemView.findViewById(R.id.progressProject)
         val isLeader:TextView= itemView.findViewById(R.id.txtLeader)
         val dotMsgCount: ImageView = itemView.findViewById(R.id.dotMsgCount)

@@ -1,5 +1,6 @@
 package com.projectlite2.android;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -9,6 +10,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Objects;
+
 import static androidx.navigation.Navigation.findNavController;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,7 +20,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //  getSupportActionBar().hide();
+        //应该保留标题栏 标题栏自定义美化
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
+        //  设置顶部状态栏透明
+       //VUI getWindow().setStatusBarColor(Color.TRANSPARENT);
+
 
         setContentView(R.layout.activity_main);
         //  导航栏跳转配置

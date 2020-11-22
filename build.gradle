@@ -28,6 +28,8 @@ allprojects {
         maven {
             url "https://dl.bintray.com/tencentqcloudterminal/maven"
         }
+
+
     }
 }
 

@@ -28,4 +28,10 @@
     <string name="string_descrip_btn_project_tree">项目树</string>
     <string name="string_txt_isLeader">(负责人)</string>
     <string name="string_descrip_dot_msg_count">有未读消息</string>
+    <string name="string_btn_menu_create_project">创建项目</string>
+    <string name="string_btn_menu_add_project">加入项目</string>
+    <string name="string_btn_scan_qr_code">扫描二维码</string>
+    <string name="string_descrip_my_profile_bg">个人中心背景</string>
+    <string name="string_my_profile_tab_time_table">时间表</string>
+    <string name="string_my_profile_tab_memo">备忘录</string>
 </resources>

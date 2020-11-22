@@ -22,4 +22,9 @@
     <dimen name="rc_card_corner_radius">10dp</dimen>
     <dimen name="rc_card_elevation">10dp</dimen>
     <dimen name="rc_card_item_project_main_text">20sp</dimen>
+    <dimen name="rc_my_profile_avatar_width">112dp</dimen>
+    <dimen name="rc_elevation_top">99dp</dimen>
+    <dimen name="rc_main_text">24sp</dimen>
+    <dimen name="rc_third_text">12sp</dimen>
+    <dimen name="rc_sub_text">18sp</dimen>
 </resources>
