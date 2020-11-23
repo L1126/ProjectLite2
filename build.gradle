@@ -4,7 +4,9 @@ buildscript {
     repositories {
         google()
         jcenter()
-
+        maven {
+            url "https://oss.sonatype.org/content/groups/public/"
+        }
 
     }
     dependencies {
@@ -27,6 +29,9 @@ allprojects {
         }
         maven {
             url "https://dl.bintray.com/tencentqcloudterminal/maven"
+        }
+        maven {
+            url "https://oss.sonatype.org/content/groups/public/"
         }
 
 
