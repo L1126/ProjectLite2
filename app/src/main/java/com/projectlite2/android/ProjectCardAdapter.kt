@@ -6,30 +6,41 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+
 
 class ProjectCardAdapter(private val projects: List<ProjectCard>) :
         RecyclerView.Adapter<ProjectCardAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val cardBg: CardView = itemView.findViewById(R.id.cardBackground)
         val pjName: TextView = itemView.findViewById(R.id.txtSettingItemName)
         val pjProgress:ProgressBar=itemView.findViewById(R.id.progressProject)
         val isLeader:TextView= itemView.findViewById(R.id.txtLeader)
         val dotMsgCount: ImageView = itemView.findViewById(R.id.dotMsgCount)
+
+
     }
+
+
+
+    interface ItemClick{
+        fun OnItemClick(v : View, position : Int);
+    }
+
+    var itemClick : ItemClick ?= null
+
+    fun setItemClickListener(itemClick : ItemClick){
+        this.itemClick = itemClick
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectCardAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.project_card_item, parent, false)
 
-
         val viewHolder = ViewHolder(view)
-        viewHolder.itemView.setOnClickListener {
-            val position = viewHolder.adapterPosition
-            val project = projects[position]
-            MyApplication.showToast("${project.name} Clicked!")
-        }
 
-
-        return ViewHolder(view)
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: ProjectCardAdapter.ViewHolder, position: Int) {
@@ -41,6 +52,12 @@ class ProjectCardAdapter(private val projects: List<ProjectCard>) :
         }else{
             holder.isLeader.visibility = View.INVISIBLE
         }
+
+        holder.cardBg.setOnClickListener(View.OnClickListener {
+            if(itemClick != null) {
+                itemClick!!.OnItemClick(holder.itemView, position)
+            }
+        })
     }
 
     override fun getItemCount(): Int = projects.size
