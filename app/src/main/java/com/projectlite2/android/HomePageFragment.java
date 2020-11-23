@@ -54,6 +54,12 @@ public class HomePageFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new ProjectCardAdapter(projectList);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnKotlinItemClickListener(new ProjectCardAdapter.IKotlinItemClickListener() {
+            @Override
+            public void onItemClickListener(int position) {
+                MyApplication.showToast(projectList.get(position).getName());
+            }
+        });
 
     }
 
