@@ -65,15 +65,15 @@ public class HomePageFragment extends Fragment {
      //初始化列表数据
     private void addProjects() {
         projectList.add(new ProjectCard("信息与交互设计", true, 25));
-//        projectList.add(new ProjectCard("用户体验设计", false, 30));
-//        projectList.add(new ProjectCard("产品设计方法学", false, 90));
-//        projectList.add(new ProjectCard("交互设计专题（一）", true, 10));
-//        projectList.add(new ProjectCard("产品设计专题", false, 60));
-//        projectList.add(new ProjectCard("信息与交互设计", true, 25));
-//        projectList.add(new ProjectCard("用户体验设计", false, 20));
-//        projectList.add(new ProjectCard("产品设计方法学", false, 90));
-//        projectList.add(new ProjectCard("交互设计专题（一）", true, 10));
-//        projectList.add(new ProjectCard("产品设计专题", false, 60));
+        projectList.add(new ProjectCard("用户体验设计", false, 30));
+        projectList.add(new ProjectCard("产品设计方法学", false, 90));
+        projectList.add(new ProjectCard("交互设计专题（一）", true, 10));
+        projectList.add(new ProjectCard("产品设计专题", false, 60));
+        projectList.add(new ProjectCard("信息与交互设计", true, 25));
+        projectList.add(new ProjectCard("用户体验设计", false, 20));
+        projectList.add(new ProjectCard("产品设计方法学", false, 90));
+        projectList.add(new ProjectCard("交互设计专题（一）", true, 10));
+        projectList.add(new ProjectCard("产品设计专题", false, 60));
     }
 
     @Override
