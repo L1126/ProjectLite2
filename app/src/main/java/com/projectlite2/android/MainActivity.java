@@ -1,6 +1,10 @@
 package com.projectlite2.android;
 
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+import android.graphics.Color;
+>>>>>>> origin/dev-c
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +20,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +37,9 @@ import cn.leancloud.im.v2.AVIMConversation;
 import cn.leancloud.im.v2.AVIMException;
 import cn.leancloud.im.v2.callback.AVIMClientCallback;
 import cn.leancloud.im.v2.callback.AVIMConversationCreatedCallback;
+=======
+import java.util.Objects;
+>>>>>>> origin/dev-c
 
 import static androidx.navigation.Navigation.findNavController;
 
@@ -43,7 +51,12 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //  getSupportActionBar().hide();
+        //应该保留标题栏 标题栏自定义美化
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
+        //  设置顶部状态栏透明
+       //VUI getWindow().setStatusBarColor(Color.TRANSPARENT);
+
 
         setContentView(R.layout.activity_main);
         //  导航栏跳转配置

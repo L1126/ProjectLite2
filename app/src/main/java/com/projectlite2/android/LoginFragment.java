@@ -1,6 +1,8 @@
 package com.projectlite2.android;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Debug;
 import android.view.LayoutInflater;
@@ -61,6 +63,18 @@ public class LoginFragment extends Fragment {
                     public void onNext(AVUser user) {
                         // 登录成功
                         MyApplication.showToast(phone+" "+password+" 登陆成功");
+                        // 若勾选了记住密码
+                        if(binding.chkRememberPwd.isChecked()){
+                            // 保存sharedPreferences
+                            UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),phone);
+                            UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),password);
+                        }
+                        else{
+                            // 保存sharedPreferences
+                            UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
+                            UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
+                        }
+                        // 跳转到主页
                         Intent intent = new Intent(MyApplication.getContext(),MainActivity.class);
                         startActivity(intent);
                         // 销毁LoginActivity
@@ -118,4 +132,6 @@ public class LoginFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
     }
+
+
 }
