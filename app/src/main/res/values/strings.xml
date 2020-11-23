@@ -41,4 +41,5 @@
     <string name="string_descrip_my_profile_bg">My profile background image</string>
     <string name="string_my_profile_tab_time_table">Schedule</string>
     <string name="string_my_profile_tab_memo">Memo</string>
+    <string name="string_my_profile_bar_title">My profile</string>
 </resources>

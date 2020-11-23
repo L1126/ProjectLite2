@@ -2,6 +2,7 @@ package com.projectlite2.android;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +34,8 @@ public class MyProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView=inflater.inflate(R.layout.my_profile_fragment, container, false);
-
+        super.onCreate(savedInstanceState);
+      mView=inflater.inflate(R.layout.my_profile_fragment, container, false);
 
         return mView;
     }
@@ -51,10 +53,10 @@ public class MyProfileFragment extends Fragment {
     mRecyclerView.setAdapter(mAdapter);
     }
 
+
     /*
      * 初始化列表数据
      */
-
     private void addSettings() {
         settingList.add(new MyProfileSettingItem( "我的名片"));
         settingList.add(new MyProfileSettingItem( "设置"));

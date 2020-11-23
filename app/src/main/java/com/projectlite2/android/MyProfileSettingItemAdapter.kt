@@ -20,11 +20,11 @@ class MyProfileSettingItemAdapter(private val settings: List<MyProfileSettingIte
 
 
         val viewHolder = ViewHolder(view)
-//        viewHolder.itemView.setOnClickListener {
-//            val position = viewHolder.adapterPosition
-//            val item = settings[position]
-//            MyApplication.showToast("${item.settingItemName} Clicked!")
-//        }
+        viewHolder.itemView.setOnClickListener {
+            val position = viewHolder.adapterPosition
+            val item = settings[position]
+            MyApplication.showToast("${item.settingItemName} Clicked!")
+        }
 
 
         return ViewHolder(view)
