@@ -1,16 +1,11 @@
 package com.projectlite2.android;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Debug;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -19,13 +14,9 @@ import androidx.navigation.NavController;
 
 import com.projectlite2.android.databinding.FragmentLoginBinding;
 
+import org.jetbrains.annotations.NotNull;
+
 import cn.leancloud.AVUser;
-import cn.leancloud.chatkit.LCChatKit;
-import cn.leancloud.chatkit.activity.LCIMConversationActivity;
-import cn.leancloud.chatkit.utils.LCIMConstants;
-import cn.leancloud.im.v2.AVIMClient;
-import cn.leancloud.im.v2.AVIMException;
-import cn.leancloud.im.v2.callback.AVIMClientCallback;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -81,7 +72,7 @@ public class LoginFragment extends Fragment {
                         getActivity().finish();
                     }
 
-                    public void onError(Throwable throwable) {
+                    public void onError(@NotNull Throwable throwable) {
                         // 登录失败（可能是密码错误）
                         MyApplication.showToast(phone+" "+password+" 登陆失败");
                     }

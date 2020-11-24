@@ -1,20 +1,16 @@
 package com.projectlite2.android;
 
-import androidx.lifecycle.ViewModelProvider;
-
-import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
@@ -27,7 +23,6 @@ public class MyProfileFragment extends Fragment {
     RecyclerView mRecyclerView;
     MyProfileSettingItemAdapter mAdapter;
 
-
     private ArrayList<MyProfileSettingItem> settingList = new ArrayList<MyProfileSettingItem>();
 
 
@@ -35,7 +30,7 @@ public class MyProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      mView=inflater.inflate(R.layout.my_profile_fragment, container, false);
+        mView = inflater.inflate(R.layout.my_profile_fragment, container, false);
 
         return mView;
     }
@@ -45,12 +40,19 @@ public class MyProfileFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(MyProfileViewModel.class);
 
-     addSettings();
-      StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
-      mRecyclerView = mView.findViewById(R.id.settingsRecyclerView);
+        addSettings();
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView = mView.findViewById(R.id.settingsRecyclerView);
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new MyProfileSettingItemAdapter(settingList);
-    mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener(){
+
+            @Override
+            public void onItemClickListener(int position) {
+                MyApplication.showToast("123");
+            }
+        });
     }
 
 
@@ -58,7 +60,7 @@ public class MyProfileFragment extends Fragment {
      * 初始化列表数据
      */
     private void addSettings() {
-        settingList.add(new MyProfileSettingItem( "我的名片"));
-        settingList.add(new MyProfileSettingItem( "设置"));
+        settingList.add(new MyProfileSettingItem("我的名片"));
+        settingList.add(new MyProfileSettingItem("设置"));
     }
 }

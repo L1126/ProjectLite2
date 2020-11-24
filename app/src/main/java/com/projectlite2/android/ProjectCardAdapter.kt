@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 class ProjectCardAdapter(private val projects: List<ProjectCard>) :
         RecyclerView.Adapter<ProjectCardAdapter.ViewHolder>() {
 
+    //继承点击事件接口
     private var itemClickListener: IKotlinItemClickListener? = null
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        //卡片背景
         val cardBg: CardView = itemView.findViewById(R.id.cardBackground)
         val pjName: TextView = itemView.findViewById(R.id.txtSettingItemName)
         val pjProgress:ProgressBar=itemView.findViewById(R.id.progressProject)
@@ -23,14 +25,9 @@ class ProjectCardAdapter(private val projects: List<ProjectCard>) :
         val dotMsgCount: ImageView = itemView.findViewById(R.id.dotMsgCount)
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectCardAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.project_card_item, parent, false)
-
         val viewHolder = ViewHolder(view)
-
-
         return viewHolder
     }
 
@@ -49,20 +46,13 @@ class ProjectCardAdapter(private val projects: List<ProjectCard>) :
             itemClickListener!!.onItemClickListener(position)
         }
 
-
     }
 
     override fun getItemCount(): Int = projects.size
 
-
-    // 提供set方法
+    // 提供点击事件set方法
     fun setOnKotlinItemClickListener(itemClickListener: IKotlinItemClickListener) {
         this.itemClickListener = itemClickListener
-    }
-
-    //自定义接口
-    interface IKotlinItemClickListener {
-        fun onItemClickListener(position: Int)
     }
 
 }

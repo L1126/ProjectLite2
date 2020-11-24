@@ -25,16 +25,16 @@ public class MyApplication extends Application {
     private static NavController navController;
 
     //   ************ 国际版 *************
-    private String _appId = "xCPMuwMtvrHTaRYE3sdnlBez-MdYXbMMI";
-    private String _appKey = "nJY5JvhpKI3Nkcob3IevMNr3";
-    private String _serverUrl = "xCPMuwMt.api.lncldglobal.com";
-//   *****************************
+//    private String _appId = "xCPMuwMtvrHTaRYE3sdnlBez-MdYXbMMI";
+//    private String _appKey = "nJY5JvhpKI3Nkcob3IevMNr3";
+//    private String _serverUrl = "xCPMuwMt.api.lncldglobal.com";
+    //   *****************************
 
 
     //   ************ 华北版 *************
-//    private String _appId = "w1vGF0c7QirnF5rFE0CXXFvs-gzGzoHsz";
-//    private String _appKey = "t2FWWwG6j1hOgRa26Prv1mP1";
-//       private String _serverUrl ="sms.tencentcloudapi.com";
+    private String _appId = "w1vGF0c7QirnF5rFE0CXXFvs-gzGzoHsz";
+    private String _appKey = "t2FWWwG6j1hOgRa26Prv1mP1";
+    private String _serverUrl ="sms.tencentcloudapi.com";
 //   *****************************
 
 
@@ -56,14 +56,16 @@ public class MyApplication extends Application {
 
     }
 
+    //获取全局Context的静态方法
     public static Context getContext() {
         return mContext;
     }
 
+    //Toast工具方法-String
     public static void showToast(String s) {
         Toast.makeText(MyApplication.getContext(), s, Toast.LENGTH_SHORT).show();
     }
-
+    //Toast工具方法-Int
     public static void showToast(Integer i) {
         Toast.makeText(MyApplication.getContext(), i, Toast.LENGTH_SHORT).show();
     }

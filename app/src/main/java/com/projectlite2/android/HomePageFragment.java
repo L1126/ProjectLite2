@@ -1,11 +1,13 @@
 package com.projectlite2.android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,13 +19,19 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 
+import cn.leancloud.chatkit.LCChatKit;
+import cn.leancloud.chatkit.activity.LCIMConversationActivity;
+import cn.leancloud.chatkit.utils.LCIMConstants;
+import cn.leancloud.im.v2.AVIMClient;
+import cn.leancloud.im.v2.AVIMException;
+import cn.leancloud.im.v2.callback.AVIMClientCallback;
+
 public class HomePageFragment extends Fragment {
 
     View mView;
     Toolbar toolBar;
     RecyclerView mRecyclerView;
     ProjectCardAdapter mAdapter;
-
 
     private ArrayList<ProjectCard> projectList = new ArrayList<ProjectCard>();
 
@@ -54,10 +62,25 @@ public class HomePageFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new ProjectCardAdapter(projectList);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnKotlinItemClickListener(new ProjectCardAdapter.IKotlinItemClickListener() {
+        //项目卡片的点击事件监听
+        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
             @Override
             public void onItemClickListener(int position) {
-                MyApplication.showToast(projectList.get(position).getName());
+               MyApplication.showToast(projectList.get(position).getName());
+               //可以打开私聊界面
+//                LCChatKit.getInstance().open("Tom", new AVIMClientCallback() {
+//                    @Override
+//                    public void done(AVIMClient avimClient, AVIMException e) {
+//                        if (null == e) {
+//                            getActivity().finish();
+//                            Intent intent = new Intent(MyApplication.getContext(), LCIMConversationActivity.class);
+//                            intent.putExtra(LCIMConstants.PEER_ID, "Jerry");
+//                            startActivity(intent);
+//                        } else {
+//                            Toast.makeText(MyApplication.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
             }
         });
 
