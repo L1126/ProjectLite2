@@ -11,13 +11,15 @@ import androidx.recyclerview.widget.RecyclerView
 class CallingCardAdapter(private val cards: List<CallingCard>) :
         RecyclerView.Adapter<CallingCardAdapter.ViewHolder>() {
 
-    inner class ViewHolder(cardview: View) :RecyclerView.ViewHolder(cardview){
-        val cdCardBg: CardView = cardview.findViewById(R.id.myCardBackground)
-        val cdPic: ImageView = cardview.findViewById(R.id.cardPic)
-        val cdPicStatus: ImageView = cardview.findViewById(R.id.cardStatus)
-        val cdName: TextView = cardview.findViewById(R.id.cardName)
-        val cdMajor: TextView = cardview.findViewById(R.id.cardMajor)
-        val cdGrade: TextView = cardview.findViewById(R.id.cardGrade)
+    private var cardClickListener: IKotlinItemClickListener? = null
+
+    inner class ViewHolder(cardcaseview: View) :RecyclerView.ViewHolder(cardcaseview){
+        val cdCardBg: CardView = cardcaseview.findViewById(R.id.myCardBackground)
+        val cdPic: ImageView = cardcaseview.findViewById(R.id.cardPic)
+        val cdPicStatus: ImageView = cardcaseview.findViewById(R.id.cardStatus)
+        val cdName: TextView = cardcaseview.findViewById(R.id.cardName)
+        val cdMajor: TextView = cardcaseview.findViewById(R.id.cardMajor)
+        val cdGrade: TextView = cardcaseview.findViewById(R.id.cardGrade)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CallingCardAdapter.ViewHolder {
@@ -27,10 +29,25 @@ class CallingCardAdapter(private val cards: List<CallingCard>) :
 
     override fun onBindViewHolder(holder: CallingCardAdapter.ViewHolder, position: Int) {
         val card = cards[position]
-        holder.cdName.text = card.cardName
+        holder.cdName.text = card.name
         holder.cdMajor.text = card.major
         holder.cdGrade.text = card.grade
+
+        // 点击事件
+        holder.itemView.setOnClickListener {
+            cardClickListener!!.onItemClickListener(position)
+        }
     }
 
     override fun getItemCount() = cards.size
+
+    // 提供set方法
+    fun setOnKotlinItemClickListener(cardClickListener: IKotlinItemClickListener) {
+        this.cardClickListener = cardClickListener
+    }
+
+    //自定义接口
+    interface IKotlinItemClickListener {
+        fun onItemClickListener(position: Int)
+    }
 }

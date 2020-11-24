@@ -85,9 +85,6 @@ public class HomePageFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_add_project,menu);
     }
-    /*
-     * 初始化列表数据
-     */
 
     private void addProjects() {
         projectList.add(new ProjectCard("信息与交互设计", true, 25));
