@@ -13,9 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class CardcaseFragment extends Fragment {
-
     private CardcaseViewModel mViewModel;
-
     public static CardcaseFragment newInstance() {
         return new CardcaseFragment();
     }
@@ -30,7 +28,6 @@ public class CardcaseFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(CardcaseViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }

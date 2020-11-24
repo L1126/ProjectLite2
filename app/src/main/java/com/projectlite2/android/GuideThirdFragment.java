@@ -2,24 +2,12 @@ package com.projectlite2.android;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import com.tencentcloudapi.common.Credential;
-import com.tencentcloudapi.common.exception.TencentCloudSDKException;
-import com.tencentcloudapi.common.profile.ClientProfile;
-import com.tencentcloudapi.common.profile.HttpProfile;
-import com.tencentcloudapi.sms.v20190711.SmsClient;
-import com.tencentcloudapi.sms.v20190711.models.SendSmsRequest;
-import com.tencentcloudapi.sms.v20190711.models.SendSmsResponse;
-
-
 public class GuideThirdFragment extends Fragment {
 
     private Button btnFinishGuide;

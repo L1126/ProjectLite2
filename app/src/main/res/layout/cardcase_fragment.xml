@@ -6,37 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".CardcaseFragment">
 
-    <LinearLayout
+    <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/myCard"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="名片夹"
-            android:textColor="@color/black"
-            android:background="">
-        </Button>
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/black"/>
-        <Button
-            android:id="@+id/newCard"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="新朋友"
-            android:textColor="@color/black"
-            android:background="">
-        </Button>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Card" />
 
-    </LinearLayout>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/newFriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Friend" />
+    </com.google.android.material.tabs.TabLayout>
 
-<!--    <ImageView-->
+    <!--    <ImageView-->
 <!--        android:id="@+id/imageView4"-->
 <!--        android:layout_width="224dp"-->
 <!--        android:layout_height="202dp"-->

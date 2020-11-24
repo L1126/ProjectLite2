@@ -10,17 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-
 import com.projectlite2.android.databinding.FragmentLoginSmsBinding;
-import com.tencentcloudapi.common.Credential;
-import com.tencentcloudapi.common.exception.TencentCloudSDKException;
-import com.tencentcloudapi.common.profile.ClientProfile;
-import com.tencentcloudapi.common.profile.HttpProfile;
-import com.tencentcloudapi.sms.v20190711.SmsClient;
-import com.tencentcloudapi.sms.v20190711.models.SendSmsRequest;
-import com.tencentcloudapi.sms.v20190711.models.SendSmsResponse;
-
-
 import static androidx.navigation.Navigation.findNavController;
 
 ;
