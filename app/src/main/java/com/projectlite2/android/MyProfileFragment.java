@@ -1,5 +1,6 @@
 package com.projectlite2.android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,21 +47,30 @@ public class MyProfileFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new MyProfileSettingItemAdapter(settingList);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener(){
-
+        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
             @Override
             public void onItemClickListener(int position) {
-                MyApplication.showToast("123");
+                switch (position) {
+                    case Constant.MyProfileSettingItemPosition.MY_PROFILE_CARD:
+                        Intent modifyMyCardIntent = new Intent(MyApplication.getContext(), ModifyMyProfileCardActivity.class);
+                        startActivity(modifyMyCardIntent);
+                        break;
+                    case Constant.MyProfileSettingItemPosition.SYSTEM_SETTING:
+                        Intent systemSettingIntent = new Intent(MyApplication.getContext(), SystemSettingActivity.class);
+                        startActivity(systemSettingIntent);
+                        break;
+                    default:
+                        break;
+                }
             }
         });
     }
-
 
     /*
      * 初始化列表数据
      */
     private void addSettings() {
-        settingList.add(new MyProfileSettingItem("我的名片"));
-        settingList.add(new MyProfileSettingItem("设置"));
+        settingList.add(new MyProfileSettingItem(R.drawable.ic_baseline_contact_mail_24, "我的名片"));
+        settingList.add(new MyProfileSettingItem(R.drawable.ic_baseline_settings_24, "设置"));
     }
 }

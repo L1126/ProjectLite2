@@ -15,7 +15,7 @@ class MyProfileSettingItemAdapter(private val settings: List<MyProfileSettingIte
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val siName: TextView = itemView.findViewById(R.id.txtSettingItemName)
-       // val siIcon: ImageView =itemView.findViewById(R.id.imgIcon)
+        val siIcon: ImageView =itemView.findViewById(R.id.imgIcon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyProfileSettingItemAdapter.ViewHolder {
@@ -34,7 +34,7 @@ class MyProfileSettingItemAdapter(private val settings: List<MyProfileSettingIte
     override fun onBindViewHolder(holder: MyProfileSettingItemAdapter.ViewHolder, position: Int) {
         val item = settings[position]
         holder.siName.text = item.settingItemName
-        //holder.siIcon.setImageResource(item.icon) ;
+        holder.siIcon.setImageResource(item.icon) ;
         // 点击事件
         holder.itemView.setOnClickListener {
             itemClickListener!!.onItemClickListener(position)

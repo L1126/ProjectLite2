@@ -53,7 +53,8 @@ public class LoginFragment extends Fragment {
 
                     public void onNext(AVUser user) {
                         // 登录成功
-                        MyApplication.showToast(phone+" "+password+" 登陆成功");
+                        // MyApplication.showToast(phone+" "+password+" 登陆成功");
+                        MyApplication.ToastySuccess(phone+" "+password+" 登陆成功");
                         // 若勾选了记住密码
                         if(binding.chkRememberPwd.isChecked()){
                             // 保存sharedPreferences
@@ -65,6 +66,7 @@ public class LoginFragment extends Fragment {
                             UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
                             UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
                         }
+
                         // 跳转到主页
                         Intent intent = new Intent(MyApplication.getContext(),MainActivity.class);
                         startActivity(intent);
@@ -74,7 +76,8 @@ public class LoginFragment extends Fragment {
 
                     public void onError(@NotNull Throwable throwable) {
                         // 登录失败（可能是密码错误）
-                        MyApplication.showToast(phone+" "+password+" 登陆失败");
+                       // MyApplication.showToast(phone+" "+password+" 登陆失败");
+                        MyApplication.ToastyError("登录失败！");
                     }
 
                     public void onComplete() {
