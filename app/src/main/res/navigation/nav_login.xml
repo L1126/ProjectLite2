@@ -5,7 +5,7 @@
     app:startDestination="@id/loginFragment2">
     <fragment
         android:id="@+id/loginFragment2"
-        android:name="com.projectlite2.android.LoginFragment"
+        android:name="com.projectlite2.android.ui.LoginFragment"
         tools:layout="@layout/fragment_login"
         android:label="LoginFragment" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginSMSFragment"
-        android:name="com.projectlite2.android.LoginSMSFragment"
+        android:name="com.projectlite2.android.ui.LoginSMSFragment"
         tools:layout="@layout/fragment_login_sms"
         android:label="LoginSMSFragment" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/varifyPhoneFragment"
-        android:name="com.projectlite2.android.VerifyPhoneFragment"
+        android:name="com.projectlite2.android.ui.VerifyPhoneFragment"
         tools:layout="@layout/fragment_verify_phone"
         android:label="VarifyPhoneFragment" >
         <action
@@ -49,12 +49,12 @@
     </fragment>
     <fragment
         android:id="@+id/modifyPwdFragment"
-        android:name="com.projectlite2.android.ModifyPwdFragment"
+        android:name="com.projectlite2.android.ui.ModifyPwdFragment"
         tools:layout="@layout/fragment_modify_pwd"
         android:label="ModifyPwdFragment" />
     <fragment
         android:id="@+id/setPwdFragment"
-        android:name="com.projectlite2.android.SetPwdFragment"
+        android:name="com.projectlite2.android.ui.SetPwdFragment"
         tools:layout="@layout/fragment_set_pwd"
         android:label="SetPwdFragment" />
 </navigation>

@@ -14,20 +14,20 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name=".MyApplication"
+        android:name=".app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectLite2">
-        <activity android:name=".ModifyMyProfileCardActivity"></activity>
-        <activity android:name=".SystemSettingActivity" />
+        <activity android:name=".activity.ModifyMyProfileCardActivity"></activity>
+        <activity android:name=".activity.SystemSettingActivity" />
         <activity
-            android:name=".GuideActivity"
+            android:name=".activity.GuideActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activity.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>
@@ -37,10 +37,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleTask" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".activity.LoginActivity" />
     </application>
 
 </manifest>

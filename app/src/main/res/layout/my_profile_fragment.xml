@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".HomePageFragment"
+    tools:context=".ui.HomePageFragment"
     android:theme="@style/ThemeOverlay.AppCompat">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -141,13 +141,20 @@
 
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.yanzhenjie.recyclerview.SwipeRecyclerView
                 android:id="@+id/settingsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
+                android:overScrollMode="never"
                 android:fadeScrollbars="true"
-                android:overScrollMode="never" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/settingsRecyclerView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fadeScrollbars="true"-->
+<!--                android:overScrollMode="never" />-->
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

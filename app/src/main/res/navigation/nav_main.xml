@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/cardcaseFragment"
-        android:name="com.projectlite2.android.CardcaseFragment"
+        android:name="com.projectlite2.android.ui.CardcaseFragment"
         android:label="名片夹"
         tools:layout="@layout/cardcase_fragment" />
     <fragment
         android:id="@+id/homePageFragment"
-        android:name="com.projectlite2.android.HomePageFragment"
+        android:name="com.projectlite2.android.ui.HomePageFragment"
         android:label="项目列表"
         tools:layout="@layout/home_page_fragment" />
     <fragment
         android:id="@+id/messageBoxFragment"
-        android:name="com.projectlite2.android.MessageBoxFragment"
+        android:name="com.projectlite2.android.ui.MessageBoxFragment"
         android:label="收件箱"
         tools:layout="@layout/message_box_fragment" />
     <fragment
         android:id="@+id/myProfileFragment"
-        android:name="com.projectlite2.android.MyProfileFragment"
+        android:name="com.projectlite2.android.ui.MyProfileFragment"
         android:label="个人中心"
         tools:layout="@layout/my_profile_fragment" />
 </navigation>
