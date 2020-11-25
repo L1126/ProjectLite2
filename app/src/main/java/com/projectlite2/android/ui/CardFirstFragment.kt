@@ -1,13 +1,16 @@
-package com.projectlite2.android
+package com.projectlite2.android.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.projectlite2.android.R
+import com.projectlite2.android.adapter.CallingCardAdapter
+import com.projectlite2.android.app.MyApplication
+import com.projectlite2.android.model.CallingCard
 import java.util.*
 
 class CardFirstFragment : Fragment() {
@@ -36,14 +39,14 @@ class CardFirstFragment : Fragment() {
         addCards()
 
         val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        cRecyclerView = cView!!.findViewById(R.id.recyclerViewCard1)
-        cRecyclerView.setLayoutManager(layoutManager)
+        cRecyclerView = cView.findViewById(R.id.recyclerViewCard1)
+        cRecyclerView.layoutManager = layoutManager
         cAdapter = CallingCardAdapter(cardList)
-        cRecyclerView.setAdapter(cAdapter)
+        cRecyclerView.adapter = cAdapter
         //初始化列表数据
-        cAdapter!!.setOnKotlinItemClickListener(object : CallingCardAdapter.IKotlinItemClickListener {
+        cAdapter.setOnKotlinItemClickListener(object : CallingCardAdapter.IKotlinItemClickListener {
             override fun onItemClickListener(position: Int) {
-                MyApplication.showToast(cardList.get(position).name)
+                MyApplication.showToast(cardList[position].name)
             }
         })
     }

@@ -104,6 +104,26 @@
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/txtPassword" />
 
+
+<!--        <github.ishaan.buttonprogressbar.ButtonProgressBar-->
+<!--            android:id="@+id/btnLogin"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="@dimen/rc_login_button_height"-->
+<!--            android:onClick="@{()->model.Login()}"-->
+<!--            android:paddingTop="8dp"-->
+<!--            android:paddingBottom="8dp"-->
+<!--            android:text="@string/string_btn_login"-->
+<!--            android:textSize="@dimen/rc_button_text_size_1"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/guideline7"-->
+<!--            app:layout_constraintHorizontal_bias="0.0"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/guideline6"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.7"-->
+<!--            app:textColor="@android:color/white"-->
+<!--            app:type="indeterminate" />-->
+
+
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="0dp"
@@ -118,7 +138,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline6"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.7" />
+            app:layout_constraintVertical_bias="0.7"
+            />
 
         <TextView
             android:id="@+id/linkSignUp"

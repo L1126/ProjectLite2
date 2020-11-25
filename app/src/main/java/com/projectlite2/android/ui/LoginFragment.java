@@ -2,9 +2,11 @@ package com.projectlite2.android.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -13,15 +15,16 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 
 import com.projectlite2.android.LoginViewModel;
+import com.projectlite2.android.activity.MainActivity;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.R;
-import com.projectlite2.android.activity.MainActivity;
 import com.projectlite2.android.databinding.FragmentLoginBinding;
 import com.projectlite2.android.utils.UserInfoSaveSharedPreference;
 
 import org.jetbrains.annotations.NotNull;
 
 import cn.leancloud.AVUser;
+import github.ishaan.buttonprogressbar.ButtonProgressBar;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -57,6 +60,7 @@ public class LoginFragment extends Fragment {
                     }
 
                     public void onNext(AVUser user) {
+
                         // 登录成功
                         // MyApplication.showToast(phone+" "+password+" 登陆成功");
                         MyApplication.ToastySuccess(phone+" "+password+" 登陆成功");
@@ -131,6 +135,7 @@ public class LoginFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
     }
+
 
 
 }

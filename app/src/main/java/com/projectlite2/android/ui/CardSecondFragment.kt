@@ -1,4 +1,4 @@
-package com.projectlite2.android
+package com.projectlite2.android.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.projectlite2.android.app.NewFriendCard
+import com.projectlite2.android.adapter.NewFriendCardAdapter
+import com.projectlite2.android.R
+import com.projectlite2.android.app.MyApplication
 import java.util.ArrayList
 
 class CardSecondFragment : Fragment() {
@@ -35,12 +39,12 @@ class CardSecondFragment : Fragment() {
         addNewCards()
 
         val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        cSecRecyclerView = cSecView!!.findViewById(R.id.recyclerViewCard2)
-        cSecRecyclerView.setLayoutManager(layoutManager)
+        cSecRecyclerView = cSecView.findViewById(R.id.recyclerViewCard2)
+        cSecRecyclerView.layoutManager = layoutManager
         cSecAdapter = NewFriendCardAdapter(cardSecList)
-        cSecRecyclerView.setAdapter(cSecAdapter)
+        cSecRecyclerView.adapter = cSecAdapter
         //初始化列表数据
-        cSecAdapter!!.setOnKotlinItemClickListener(object : NewFriendCardAdapter.IKotlinItemClickListener {
+        cSecAdapter.setOnKotlinItemClickListener(object : NewFriendCardAdapter.IKotlinItemClickListener {
             override fun onItemClickListener(position: Int) {
                 MyApplication.showToast(cardSecList.get(position).name)
             }
@@ -48,7 +52,7 @@ class CardSecondFragment : Fragment() {
     }
 
     private fun addNewCards(){
-        cardSecList.add(NewFriendCard("小张","工业设计","2018级"))
-        cardSecList.add(NewFriendCard("院长","工业设计","2018级"))
+        cardSecList.add(NewFriendCard("小张", "工业设计", "2018级"))
+        cardSecList.add(NewFriendCard("院长", "工业设计", "2018级"))
     }
 }

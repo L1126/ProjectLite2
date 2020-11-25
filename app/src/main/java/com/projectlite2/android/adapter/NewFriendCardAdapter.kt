@@ -1,6 +1,5 @@
-package com.projectlite2.android
+package com.projectlite2.android.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.projectlite2.android.R
+import com.projectlite2.android.app.NewFriendCard
 
 class NewFriendCardAdapter (private val cards: List<NewFriendCard>) :
         RecyclerView.Adapter<NewFriendCardAdapter.ViewHolder>() {
@@ -16,18 +17,18 @@ class NewFriendCardAdapter (private val cards: List<NewFriendCard>) :
 
     inner class ViewHolder(cardcaseview: View) :RecyclerView.ViewHolder(cardcaseview){
         val cdNewCardBg: CardView = cardcaseview.findViewById(R.id.myCardNewBackground)
-        val cdNewPic: ImageView = cardcaseview.findViewById(R.id.cardPicNew)
-        val cdNewName: TextView = cardcaseview.findViewById(R.id.cardNameNew)
-        val cdNewMajor: TextView = cardcaseview.findViewById(R.id.cardGradeNew)
-        val cdNewGrade: TextView = cardcaseview.findViewById(R.id.cardMajorNew)
+        val cdNewPic: ImageView = cardcaseview.findViewById(R.id.picAvatar)
+        val cdNewName: TextView = cardcaseview.findViewById(R.id.txtName)
+        val cdNewMajor: TextView = cardcaseview.findViewById(R.id.txtGrade)
+        val cdNewGrade: TextView = cardcaseview.findViewById(R.id.txtMajor)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewFriendCardAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.card_eachone_new, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: NewFriendCardAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val card = cards[position]
         holder.cdNewName.text = card.name
         holder.cdNewMajor.text = card.major
