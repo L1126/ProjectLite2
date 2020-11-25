@@ -1,6 +1,7 @@
 package com.projectlite2.android
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,5 +50,9 @@ class CardFirstFragment : Fragment() {
 
     private fun addCards() {
         cardList.add(CallingCard("小红", "交互设计", "2018级"))
+        cardList.add(CallingCard("小白", "计算机工程", "2017级"))
+        cardList.add(CallingCard("小林", "软件工程", "2019级"))
+        cardList.add(CallingCard("小吴", "工业设计", "2020级"))
     }
+
 }

@@ -43,6 +43,7 @@ public class CardcaseFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // fragment中嵌套fragment, Manager需要用(getChildFragmentManager())
+
         MPagerAdapter mPagerAdapter = new MPagerAdapter(getChildFragmentManager());
         initFragment();
         tabLayout.setupWithViewPager(viewpager);
@@ -51,8 +52,7 @@ public class CardcaseFragment extends Fragment {
 
     private void initFragment() {
         fragmentList.add(new CardFirstFragment());
-        fragmentList.add(new CardFirstFragment());
-
+        fragmentList.add(new CardSecondFragment());
     }
 
 
@@ -84,4 +84,5 @@ public class CardcaseFragment extends Fragment {
             return temp[position];
         }
     }
+
 }
