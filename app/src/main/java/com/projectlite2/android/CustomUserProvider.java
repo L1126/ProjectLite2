@@ -8,6 +8,7 @@ import cn.leancloud.chatkit.LCChatProfileProvider;
 import cn.leancloud.chatkit.LCChatProfilesCallBack;
 
 public class CustomUserProvider implements LCChatProfileProvider {
+
     private static CustomUserProvider customUserProvider;
 
     // 单例
@@ -48,6 +49,7 @@ public class CustomUserProvider implements LCChatProfileProvider {
         callBack.done(userList, null);
     }
 
+    @Override
     public List<LCChatKitUser> getAllUsers() {
         return partUsers;
     }

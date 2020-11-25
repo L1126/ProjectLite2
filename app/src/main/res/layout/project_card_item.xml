@@ -22,7 +22,9 @@
     app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ChatRoom"
         android:layout_width="match_parent"
+        android:onClick="ChatClick"
         android:layout_height="88dp">
 
         <ProgressBar
@@ -55,6 +57,7 @@
             android:backgroundTint="#FFFFFF"
             android:contentDescription="@string/string_descrip_btn_project_tree"
             android:scaleType="fitCenter"
+            android:onClick="TreeClick"
             app:layout_constraintBottom_toTopOf="@+id/progressProject"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline13"
