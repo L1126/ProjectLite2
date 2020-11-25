@@ -1,39 +1,20 @@
 package com.projectlite2.android;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.projectlite2.android.generated.callback.OnClickListener;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import cn.leancloud.chatkit.LCChatKit;
-import cn.leancloud.chatkit.LCChatKitUser;
-import cn.leancloud.chatkit.activity.LCIMConversationActivity;
-import cn.leancloud.chatkit.utils.LCIMConstants;
-import cn.leancloud.im.v2.AVIMChatRoom;
-import cn.leancloud.im.v2.AVIMConversation;
-import cn.leancloud.im.v2.AVIMException;
-import cn.leancloud.im.v2.callback.AVIMConversationCreatedCallback;
 
 public class HomePageFragment extends Fragment {
 
@@ -73,9 +54,25 @@ public class HomePageFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         //初始化列表数据
         mAdapter.setOnKotlinItemClickListener(new ProjectCardAdapter.IKotlinItemClickListener() {
+        //项目卡片的点击事件监听
+        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
             @Override
             public void onItemClickListener(int position) {
-                MyApplication.showToast(projectList.get(position).getName());
+               MyApplication.showToast(projectList.get(position).getName());
+               //可以打开私聊界面
+//                LCChatKit.getInstance().open("Tom", new AVIMClientCallback() {
+//                    @Override
+//                    public void done(AVIMClient avimClient, AVIMException e) {
+//                        if (null == e) {
+//                            getActivity().finish();
+//                            Intent intent = new Intent(MyApplication.getContext(), LCIMConversationActivity.class);
+//                            intent.putExtra(LCIMConstants.PEER_ID, "Jerry");
+//                            startActivity(intent);
+//                        } else {
+//                            Toast.makeText(MyApplication.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
             }
         });
     }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tabHomePageFragment"
+        android:icon="@drawable/ic_baseline_snippet_folder_24"
+        android:title="@string/string_menu_home_page" />
+    <item
+        android:id="@+id/tabMessageBoxFragment"
+        android:icon="@drawable/ic_baseline_message_24"
+        android:title="@string/string_menu_message_box" />
+    <item
+        android:id="@+id/tabCardcaseFragment"
+        android:icon="@drawable/ic_baseline_contact_mail_24"
+        android:title="@string/string_menu_cardcase" />
+    <item
+        android:id="@+id/tabMyProfileFragment"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="@string/string_menu_my_profile" />
+</menu>

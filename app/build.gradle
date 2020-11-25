@@ -93,6 +93,16 @@ dependencies {
     // 圆角ImageView依赖
     implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
     implementation 'com.mikhaellopez:circularimageview:4.2.0'
+
+    //  AnimatedBottomBar
+    implementation 'nl.joery.animatedbottombar:library:1.0.9'
+
+    //  Toasty
+    implementation 'com.github.GrenderG:Toasty:1.5.0'
+
+    //  PageIndicatorView
+    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+
 }
 
 
