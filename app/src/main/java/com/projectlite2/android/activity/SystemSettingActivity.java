@@ -31,7 +31,7 @@ public class SystemSettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_setting);
-        View mView = getWindow().getDecorView();
+        mView = getWindow().getDecorView();
 
         initFirstSettingCard();
         initSecondSettingCard();
