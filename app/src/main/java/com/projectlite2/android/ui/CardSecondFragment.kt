@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.projectlite2.android.app.NewFriendCard
+import com.projectlite2.android.model.NewFriendCard
 import com.projectlite2.android.adapter.NewFriendCardAdapter
 import com.projectlite2.android.R
 import com.projectlite2.android.app.MyApplication

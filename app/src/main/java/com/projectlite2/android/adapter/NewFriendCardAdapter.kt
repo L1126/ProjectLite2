@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.projectlite2.android.R
-import com.projectlite2.android.app.NewFriendCard
+import com.projectlite2.android.model.NewFriendCard
 
 class NewFriendCardAdapter (private val cards: List<NewFriendCard>) :
         RecyclerView.Adapter<NewFriendCardAdapter.ViewHolder>() {

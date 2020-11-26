@@ -1,4 +1,4 @@
-package com.projectlite2.android.app
+package com.projectlite2.android.model
 
 class NewFriendCard (
 //        val picture: Image,
