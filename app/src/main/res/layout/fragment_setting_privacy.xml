@@ -60,7 +60,7 @@
                 android:textSize="15dp"
                 android:background="#E8E8E8"
                 android:gravity="center|left"
-                tools:text="    可以通过以下方式搜索到我"/>
+                android:text="    可以通过以下方式搜索到我"/>
         </FrameLayout>
 
         <FrameLayout
@@ -104,7 +104,7 @@
                 android:textSize="15dp"
                 android:background="#E8E8E8"
                 android:gravity="center|left"
-                tools:text="    可以通过以下方式添加我"/>
+                android:text="    可以通过以下方式添加我"/>
         </FrameLayout>
 
         <FrameLayout
@@ -178,7 +178,7 @@
                 android:textSize="15dp"
                 android:background="#E8E8E8"
                 android:gravity="center|left"
-                tools:text="    可以在以下场景添加我"/>
+                android:text="    可以在以下场景添加我"/>
         </FrameLayout>
 
         <FrameLayout
@@ -245,13 +245,6 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#ffffff">
-
-            <View
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="24dp"
-                android:background="#B3B2B2" />
 
             <TextView
                 android:layout_width="wrap_content"

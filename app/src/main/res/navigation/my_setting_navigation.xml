@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/my_setting_navigation"
+    app:startDestination="@id/systemSettingFragment2">
+    <fragment
+        android:id="@+id/systemSettingFragment2"
+        android:name="com.projectlite2.android.ui.SystemSettingFragment"
+        android:label="SystemSettingFragment" >
+        <action
+            android:id="@+id/action_systemSettingFragment2_to_settingAccountFragment2"
+            app:destination="@id/settingAccountFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_systemSettingFragment2_to_settingCurrencyFragment2"
+            app:destination="@id/settingCurrencyFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_systemSettingFragment2_to_settingInfomationFragment2"
+            app:destination="@id/settingInfomationFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_systemSettingFragment2_to_settingPrivacyFragment2"
+            app:destination="@id/settingPrivacyFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_systemSettingFragment2_to_settingMeetingFragment2"
+            app:destination="@id/settingMeetingFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingAccountFragment2"
+        android:name="com.projectlite2.android.settingFragment.SettingAccountFragment"
+        android:label="SettingAccountFragment" />
+    <fragment
+        android:id="@+id/settingCurrencyFragment2"
+        android:name="com.projectlite2.android.settingFragment.SettingCurrencyFragment"
+        android:label="SettingCurrencyFragment" />
+    <fragment
+        android:id="@+id/settingInfomationFragment2"
+        android:name="com.projectlite2.android.settingFragment.SettingInfomationFragment"
+        android:label="SettingInfomationFragment" />
+    <fragment
+        android:id="@+id/settingMeetingFragment2"
+        android:name="com.projectlite2.android.settingFragment.SettingMeetingFragment"
+        android:label="SettingMeetingFragment" />
+    <fragment
+        android:id="@+id/settingPrivacyFragment2"
+        android:name="com.projectlite2.android.settingFragment.SettingPrivacyFragment"
+        android:label="SettingPrivacyFragment" />
+</navigation>

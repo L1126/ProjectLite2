@@ -3,6 +3,7 @@ package com.projectlite2.android.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.projectlite2.android.R
@@ -24,6 +25,7 @@ class SysSettingAdapter(private val settings: List<SysSettingCard>):
     inner class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
         val sysName: TextView = itemView.findViewById(R.id.sysSetText)
         val perName: TextView = itemView.findViewById(R.id.perCenterText)
+        val isNext: ImageView = itemView.findViewById(R.id.systemSettingNext)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -43,6 +45,12 @@ class SysSettingAdapter(private val settings: List<SysSettingCard>):
         val item = settings[position]
         holder.sysName.text = item.textSys
         holder.perName.text = item.textPer
+        if (item.isNext){
+            holder.isNext.visibility = View.VISIBLE
+        }else{
+            holder.isNext.visibility = View.INVISIBLE
+        }
+
         //点击事件
         holder.itemView.setOnClickListener {
             itemClickListener!!.onItemClickListener(position)

@@ -60,7 +60,7 @@
                 android:textSize="15dp"
                 android:background="#E8E8E8"
                 android:gravity="center|left"
-                tools:text="    收到以下消息时通知我"/>
+                android:text="    收到以下消息时通知我"/>
         </FrameLayout>
 
         <FrameLayout

@@ -21,7 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectLite2">
-        <activity android:name=".activity.ModifyMyProfileCardActivity"></activity>
+        <activity
+            android:name=".activity.ModifyMyProfileCardActivity">
+        </activity>
         <activity android:name=".activity.SystemSettingActivity" />
         <activity
             android:name=".activity.GuideActivity"
