@@ -24,7 +24,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ChatRoom"
         android:layout_width="match_parent"
-        android:onClick="ChatClick"
         android:layout_height="88dp">
 
         <ProgressBar

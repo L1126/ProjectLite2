@@ -1,15 +1,11 @@
 package com.projectlite2.android.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,21 +19,8 @@ import com.projectlite2.android.adapter.ProjectCardAdapter;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.model.ProjectCard;
 import com.projectlite2.android.utils.IKotlinItemClickListener;
-import com.projectlite2.android.generated.callback.OnClickListener;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import cn.leancloud.chatkit.LCChatKit;
-import cn.leancloud.chatkit.LCChatKitUser;
-import cn.leancloud.chatkit.activity.LCIMConversationActivity;
-import cn.leancloud.chatkit.utils.LCIMConstants;
-import cn.leancloud.im.v2.AVIMChatRoom;
-import cn.leancloud.im.v2.AVIMConversation;
-import cn.leancloud.im.v2.AVIMException;
-import cn.leancloud.im.v2.callback.AVIMConversationCreatedCallback;
 
 public class HomePageFragment extends Fragment {
 
@@ -121,3 +104,8 @@ public class HomePageFragment extends Fragment {
         projectList.add(new ProjectCard("产品设计专题", false, 60));
     }
 }
+
+
+
+
+

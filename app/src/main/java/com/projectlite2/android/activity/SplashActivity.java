@@ -29,7 +29,9 @@ public class SplashActivity extends AppCompatActivity {
                     if (!UserInfoSaveSharedPreference.getPrefNotFirstUse(MyApplication.getContext())){
                          it=new Intent(getApplicationContext(), GuideActivity.class);//启动GuideActivity
                     }else{
-                         it=new Intent(getApplicationContext(), LoginActivity.class);//启动LoginActivity
+                        // it=new Intent(getApplicationContext(), LoginActivity.class);//启动LoginActivity
+                         it = new Intent(MyApplication.getContext(), MainActivity.class);
+
                     }
                     startActivity(it);
                     finish();//关闭当前活动
