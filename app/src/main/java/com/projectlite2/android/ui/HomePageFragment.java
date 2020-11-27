@@ -1,5 +1,6 @@
 package com.projectlite2.android.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,10 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.projectlite2.android.R;
+import com.projectlite2.android.activity.GuideActivity;
+import com.projectlite2.android.activity.ProjectDetailActivity;
 import com.projectlite2.android.adapter.ProjectCardAdapter;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.model.ProjectCard;
@@ -61,13 +66,30 @@ public class HomePageFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
 
-        //项目卡片的点击事件监听
+
+        //项目树的点击事件监听
         mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
         //初始化列表数据
             @Override
             public void onItemClickListener(int position) {
-               MyApplication.showToast(projectList.get(position).getName());
-               //可以打开私聊界面
+             //  MyApplication.showToast(projectList.get(position).getName());
+                // 跳转fragment
+//                FragmentManager manager=getFragmentManager();
+//                FragmentTransaction ft;
+//                NodeDetailFragment mNodeDetailFragment = new NodeDetailFragment();
+//                ft = manager.beginTransaction();
+//                //当前的fragment会被mNodeDetailFragment替换
+//                ft.replace(R.id.rootLayout, mNodeDetailFragment);
+//                ft.addToBackStack(null);
+//                ft.commit();
+
+                //跳转activity
+                Intent it;
+                it=new Intent(getContext(), ProjectDetailActivity.class);//启动GuideActivity
+                startActivity(it);
+
+
+                //可以打开私聊界面
 //                LCChatKit.getInstance().open("Tom", new AVIMClientCallback() {
 //                    @Override
 //                    public void done(AVIMClient avimClient, AVIMException e) {
@@ -83,6 +105,8 @@ public class HomePageFragment extends Fragment {
 //                });
             }
         });
+
+
     }
 
     @Override

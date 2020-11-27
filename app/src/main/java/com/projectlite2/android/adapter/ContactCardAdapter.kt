@@ -9,14 +9,18 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.github.siyamed.shapeimageview.RoundedImageView
 import com.projectlite2.android.R
 import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.ContactCard
 import com.projectlite2.android.utils.IKotlinItemClickListener
+import com.projectlite2.android.utils.ItemTouchHelperAdapter
+import java.util.*
 
-class ContactCardAdapter(private val cards: List<ContactCard>, val style: Int) :
-        RecyclerView.Adapter<ContactCardAdapter.ViewHolder>() {
+class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style: Int) :
+        RecyclerView.Adapter<ContactCardAdapter.ViewHolder>(), ItemTouchHelperAdapter {
 
     companion object {
         const val STYLE_PARAM_MY_CONTACTS = 0
@@ -31,6 +35,7 @@ class ContactCardAdapter(private val cards: List<ContactCard>, val style: Int) :
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cdCardBg: CardView = itemView.findViewById(R.id.contactCardBackground)
+        val cdConstraintLayout: ConstraintLayout = itemView.findViewById(R.id.constraintLayout)
         val cdAvatar: ImageView = itemView.findViewById(R.id.picAvatar)
         val cdBadgeStatus: ImageView = itemView.findViewById(R.id.badgeStatus)
         val cdTagsTitle: RecyclerView = itemView.findViewById(R.id.rvTagsTitle)
@@ -54,7 +59,7 @@ class ContactCardAdapter(private val cards: List<ContactCard>, val style: Int) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val card = cards[position]
+        val card = mData[position]
 
         holder.cdName.text = card.name
         holder.cdMajor.text = card.major
@@ -81,7 +86,7 @@ class ContactCardAdapter(private val cards: List<ContactCard>, val style: Int) :
 
     }
 
-    override fun getItemCount() = cards.size
+    override fun getItemCount() = mData.size
 
     // 提供set方法
     fun setOnKotlinItemClickListener(itemClickListener: IKotlinItemClickListener) {
@@ -140,9 +145,25 @@ class ContactCardAdapter(private val cards: List<ContactCard>, val style: Int) :
     }
 
 
+    /**
+     * 初始化动画成员
+     */
     private fun initAnimations() {
         mShowAction = AnimationUtils.loadAnimation(MyApplication.getContext(), R.anim.push_up_in)
         mHiddenAction = AnimationUtils.loadAnimation(MyApplication.getContext(), R.anim.push_up_out)
     }
+
+    override fun onItemDissmiss(position: Int) {
+        //移除数据
+        mData.removeAt(position)
+        notifyItemRemoved(position);
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        //交换位置
+        Collections.swap(mData,fromPosition,toPosition);
+        notifyItemMoved(fromPosition,toPosition);
+    }
+
 
 }

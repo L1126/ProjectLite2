@@ -8,37 +8,40 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.projectlite2.android.R
 import com.projectlite2.android.adapter.ContactCardAdapter
 import com.projectlite2.android.model.ContactCard
 import com.projectlite2.android.utils.IKotlinItemClickListener
+import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
 import java.util.*
 
 
-class ContactListFragment(private val style_param:Int) : Fragment() {
+class ContactListFragment(private val style_param: Int) : Fragment() {
 
     companion object {
 
-        private const val STYLE_PARAM_MY_CONTACTS=0
-        private const val STYLE_PARAM_NEW_FRIENDS=1
+        private const val STYLE_PARAM_MY_CONTACTS = 0
+        private const val STYLE_PARAM_NEW_FRIENDS = 1
 
         @JvmStatic
-        fun setStyleMyContacts():Int{
+        fun setStyleMyContacts(): Int {
             return STYLE_PARAM_MY_CONTACTS;
         }
+
         @JvmStatic
-        fun setStyleNewFriends():Int{
+        fun setStyleNewFriends(): Int {
             return STYLE_PARAM_NEW_FRIENDS;
         }
     }
 
 
-
     lateinit var mView: View
     lateinit var mRecyclerview: RecyclerView
     lateinit var mAdapter: ContactCardAdapter
+    lateinit var mCallBack: ItemTouchHelper.Callback
 
 
     private val mContactList = ArrayList<ContactCard>()
@@ -63,18 +66,24 @@ class ContactListFragment(private val style_param:Int) : Fragment() {
         val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         mRecyclerview = mView.findViewById(R.id.recyclerViewCard2)
         mRecyclerview.layoutManager = layoutManager
-        mAdapter = ContactCardAdapter(mContactList,style_param)
+        mAdapter = ContactCardAdapter(mContactList, style_param)
         mRecyclerview.adapter = mAdapter
 
         mRecyclerview.itemAnimator = DefaultItemAnimator()
         mRecyclerview.itemAnimator!!.changeDuration = 300
+
+        //先实例化Callback
+        mCallBack= SimpleItemTouchHelperCallback(mAdapter)
+        //调用ItemTouchHelper的attachToRecyclerView方法建立联系
+        ItemTouchHelper(mCallBack).attachToRecyclerView(mRecyclerview)
+
 
         Log.d("MyTEST", "style_param: $style_param")
 
         mAdapter.setOnKotlinItemClickListener(object : IKotlinItemClickListener {
             override fun onItemClickListener(position: Int) {
 //                MyApplication.showToast(mContactList[position].name)
-              //  Log.d("MyTEST", "style_param: $style_param")
+                //  Log.d("MyTEST", "style_param: $style_param")
             }
         })
     }

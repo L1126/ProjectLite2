@@ -4,28 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".ui.GuideThirdFragment">
 
     <ImageView
         android:id="@+id/imageView10"
-        android:layout_width="145dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="246dp"
-        android:layout_marginBottom="95dp"
-        android:src="@drawable/ic_baseline_contact_mail_24"
-        app:layout_constraintBottom_toTopOf="@+id/btnFinishGuide"
+        android:src="@drawable/img_guide_3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6853625" />
 
     <Button
         android:id="@+id/btnFinishGuide"
-        android:layout_width="166dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="223dp"
+        android:layout_width="162dp"
+        android:layout_height="50dp"
         android:text="finish guide"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

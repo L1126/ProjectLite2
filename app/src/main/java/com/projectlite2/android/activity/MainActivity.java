@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this,navController,appBarConfig);
 //        NavigationUI.setupWithNavController(bottomNav,navController);
 
+
+
         mAniBottomBar = findViewById(R.id.bottomBar);
         mTabLayout=findViewById(R.id.tabLayout);
         mViewPager=findViewById(R.id.viewPager);
@@ -110,5 +112,6 @@ public class MainActivity extends AppCompatActivity {
         //  关闭viewPager滑动
         mViewPager.setUserInputEnabled(false);
     }
+
 
 }

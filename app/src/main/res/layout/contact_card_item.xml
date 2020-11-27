@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,7 +16,7 @@
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="@dimen/rc_card_corner_radius"
+    app:cardCornerRadius="10dp"
     app:cardElevation="@dimen/rc_card_elevation"
     app:cardMaxElevation="10dp"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -22,197 +24,215 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:animateLayoutChanges="true"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/picAvatar"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            android:gravity="bottom|center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/rc_label_size_1"
-            app:layout_constraintStart_toEndOf="@+id/picAvatar"
-            app:layout_constraintTop_toTopOf="@+id/picAvatar"
-            tools:text="小红" />
-
-        <TextView
-            android:id="@+id/txtMajor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:gravity="bottom|center"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/txtGrade"
-            app:layout_constraintStart_toEndOf="@+id/txtGrade"
-            app:layout_constraintTop_toTopOf="@+id/txtGrade"
-            tools:text="信息与交互设计" />
-
-        <TextView
-            android:id="@+id/txtGrade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="bottom|center"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/txtName"
-            app:layout_constraintTop_toBottomOf="@+id/txtName"
-            tools:text="2018级" />
-
-        <TextView
-            android:id="@+id/txtStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="16dp"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@+id/divider4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Added" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvTagsTitle"
-            android:layout_width="58dp"
-            android:layout_height="22dp"
-            app:layout_constraintBottom_toBottomOf="@+id/txtName"
-            app:layout_constraintStart_toStartOf="@+id/txtMajor"
-            app:layout_constraintTop_toTopOf="@+id/txtName">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <View
-            android:id="@+id/divider4"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="78dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txtMoreMessage"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="14dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider4" />
+            android:animateLayoutChanges="true"
+            android:background="#FFFFFF">
 
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginEnd="14dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="@dimen/rc_third_text"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnAgree"
-            app:layout_constraintTop_toBottomOf="@+id/txtMoreMessage"
-            tools:text="Cancel" />
+            <ImageView
+                android:id="@+id/picAvatar"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
-        <Button
-            android:id="@+id/btnAgree"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginEnd="18dp"
-            android:textSize="@dimen/rc_third_text"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/btnCancel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnCancel"
-            tools:text="Agree" />
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:gravity="bottom|center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/rc_label_size_1"
+                app:layout_constraintStart_toEndOf="@+id/picAvatar"
+                app:layout_constraintTop_toTopOf="@+id/picAvatar"
+                tools:text="小红" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvTagsAll"
-            android:layout_width="0dp"
-            android:layout_height="22dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/btnCancel"
-            app:layout_constraintEnd_toEndOf="@+id/txtMoreMessage"
-            app:layout_constraintStart_toStartOf="@+id/txtMoreMessage"
-            app:layout_constraintTop_toTopOf="@+id/btnCancel">
+            <TextView
+                android:id="@+id/txtMajor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="bottom|center"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtGrade"
+                app:layout_constraintStart_toEndOf="@+id/txtGrade"
+                app:layout_constraintTop_toTopOf="@+id/txtGrade"
+                tools:text="信息与交互设计" />
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:id="@+id/txtGrade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="bottom|center"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/txtName"
+                app:layout_constraintTop_toBottomOf="@+id/txtName"
+                tools:text="2018级" />
 
-        <TextView
-            android:id="@+id/txtInfoType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@+id/txtMoreMessage"
-            app:layout_constraintTop_toBottomOf="@+id/divider4"
-            tools:text="Messages:" />
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="16dp"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@+id/divider4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Added" />
 
-        <ImageButton
-            android:id="@+id/btnMenu"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="6dp"
-            android:background="@android:color/transparent"
-            android:scaleType="centerInside"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/card_menu" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTagsTitle"
+                android:layout_width="58dp"
+                android:layout_height="22dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtName"
+                app:layout_constraintStart_toStartOf="@+id/txtMajor"
+                app:layout_constraintTop_toTopOf="@+id/txtName">
 
-        <ImageButton
-            android:id="@+id/btnMore"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="6dp"
-            android:background="@android:color/transparent"
-            android:scaleType="centerInside"
-            app:layout_constraintBottom_toTopOf="@+id/divider4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
+            </androidx.recyclerview.widget.RecyclerView>
 
-        <ImageView
-            android:id="@+id/badgeStatus"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginEnd="3dp"
-            android:layout_marginBottom="3dp"
-            app:layout_constraintBottom_toBottomOf="@+id/picAvatar"
-            app:layout_constraintEnd_toEndOf="@+id/picAvatar"
-            app:srcCompat="@drawable/card_status" />
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="78dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imgToggleBar"
-            android:layout_width="26dp"
-            android:layout_height="17dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_baseline_horizontal_rule_24" />
+            <TextView
+                android:id="@+id/txtMoreMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="14dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="@dimen/rc_third_text"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnAgree"
+                app:layout_constraintTop_toBottomOf="@+id/txtMoreMessage"
+                tools:text="Cancel" />
+
+            <Button
+                android:id="@+id/btnAgree"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="18dp"
+                android:textSize="@dimen/rc_third_text"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/btnCancel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btnCancel"
+                tools:text="Agree" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTagsAll"
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/btnCancel"
+                app:layout_constraintEnd_toEndOf="@+id/txtMoreMessage"
+                app:layout_constraintStart_toStartOf="@+id/txtMoreMessage"
+                app:layout_constraintTop_toTopOf="@+id/btnCancel">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/txtInfoType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/txtMoreMessage"
+                app:layout_constraintTop_toBottomOf="@+id/divider4"
+                tools:text="Messages:" />
+
+            <ImageButton
+                android:id="@+id/btnMenu"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="6dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/card_menu" />
+
+            <ImageButton
+                android:id="@+id/btnMore"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="6dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toTopOf="@+id/divider4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+            <ImageView
+                android:id="@+id/badgeStatus"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/picAvatar"
+                app:layout_constraintEnd_toEndOf="@+id/picAvatar"
+                app:srcCompat="@drawable/card_status" />
+
+            <ImageView
+                android:id="@+id/imgToggleBar"
+                android:layout_width="26dp"
+                android:layout_height="17dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/ic_baseline_horizontal_rule_24" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="71dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center"
+        android:layout_marginRight="6dp"
+        android:text="del"
+        android:visibility="gone"
+        app:cornerRadius="8dp" />
 
 </androidx.cardview.widget.CardView>
