@@ -4,6 +4,6 @@ class ProjectCard(
         val name: String,
         val isLeader: Boolean,
         val progress: Int
-        //,val isUnFolded: Boolean = false
+        //val isUnFolded: Boolean = false
 ) {
 }

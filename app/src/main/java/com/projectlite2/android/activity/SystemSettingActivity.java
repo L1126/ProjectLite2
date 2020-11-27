@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.projectlite2.android.R;
-import com.projectlite2.android.adapter.MyProfileSettingItemAdapter;
 import com.projectlite2.android.adapter.SysSettingAdapter;
 import com.projectlite2.android.model.SysSettingCard;
 

@@ -34,10 +34,7 @@ public class MyProfileFragment extends Fragment {
     //    RecyclerView mRecyclerView;
     MyProfileSettingItemAdapter mAdapter;
 
-
-
     private ArrayList<MyProfileSettingItem> settingList = new ArrayList<MyProfileSettingItem>();
-
 
     @Nullable
     @Override
@@ -75,16 +72,11 @@ public class MyProfileFragment extends Fragment {
                         break;
                     default:
                         break;
-                }
+                }  
             }
         });
-
-
     }
 
-    /*
-     * 初始化列表数据
-     */
     private void addSettings() {
         settingList.add(new MyProfileSettingItem(R.drawable.ic_baseline_contact_mail_24, "我的名片"));
         settingList.add(new MyProfileSettingItem(R.drawable.ic_baseline_settings_24, "设置"));
