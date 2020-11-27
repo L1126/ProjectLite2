@@ -49,9 +49,8 @@ public class CardcaseFragment extends Fragment {
     }
 
     private void initFragment() {
-        fragmentList.add(new ContactListFragment(ContactListFragment.setStyleNewFriends()));
         fragmentList.add(new ContactListFragment(ContactListFragment.setStyleMyContacts()));
-
+        fragmentList.add(new ContactListFragment(ContactListFragment.setStyleNewFriends()));
     }
 
 

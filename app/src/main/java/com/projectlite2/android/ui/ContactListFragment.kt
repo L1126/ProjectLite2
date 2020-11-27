@@ -1,16 +1,17 @@
 package com.projectlite2.android.ui
 
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.projectlite2.android.R
 import com.projectlite2.android.adapter.ContactCardAdapter
-import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.ContactCard
 import com.projectlite2.android.utils.IKotlinItemClickListener
 import java.util.*
@@ -65,12 +66,15 @@ class ContactListFragment(private val style_param:Int) : Fragment() {
         mAdapter = ContactCardAdapter(mContactList,style_param)
         mRecyclerview.adapter = mAdapter
 
-        //Log.d("MyTEST", "style_param: $style_param")
+        mRecyclerview.itemAnimator = DefaultItemAnimator()
+        mRecyclerview.itemAnimator!!.changeDuration = 300
+
+        Log.d("MyTEST", "style_param: $style_param")
 
         mAdapter.setOnKotlinItemClickListener(object : IKotlinItemClickListener {
             override fun onItemClickListener(position: Int) {
 //                MyApplication.showToast(mContactList[position].name)
-
+              //  Log.d("MyTEST", "style_param: $style_param")
             }
         })
     }

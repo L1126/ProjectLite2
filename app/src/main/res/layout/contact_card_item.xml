@@ -9,6 +9,7 @@
     android:layout_marginTop="8dp"
     android:layout_marginEnd="18dp"
     android:layout_marginBottom="8dp"
+    android:animateLayoutChanges="true"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
@@ -23,9 +24,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
+        android:animateLayoutChanges="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/picAvatar"
