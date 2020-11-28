@@ -16,42 +16,6 @@
         android:background="#E8E8E8"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#ffffff">
-
-            <View
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="24dp"
-                android:background="#B3B2B2" />
-
-            <ImageView
-                android:id="@+id/settingBack"
-                android:layout_marginLeft="7dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|left"
-                android:rotation="180"
-                android:background="@drawable/ic_baseline_arrow_forward_ios_24"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="我的卡片"
-                android:textSize="20dp"
-                android:textColor="#000000"
-                android:gravity="center"
-                android:layout_gravity="center"/>
-        </FrameLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="12dp"
-            android:background="#E8E8E8"/>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/infoSetting"
             android:layout_width="match_parent"

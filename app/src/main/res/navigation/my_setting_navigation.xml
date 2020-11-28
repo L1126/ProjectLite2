@@ -5,7 +5,7 @@
     <fragment
         android:id="@+id/systemSettingFragment2"
         android:name="com.projectlite2.android.ui.SystemSettingFragment"
-        android:label="SystemSettingFragment" >
+        android:label="系统设置">
         <action
             android:id="@+id/action_systemSettingFragment2_to_settingAccountFragment2"
             app:destination="@id/settingAccountFragment2"
@@ -35,21 +35,21 @@
     <fragment
         android:id="@+id/settingAccountFragment2"
         android:name="com.projectlite2.android.settingFragment.SettingAccountFragment"
-        android:label="SettingAccountFragment" />
+        android:label="账号安全" />
     <fragment
         android:id="@+id/settingCurrencyFragment2"
         android:name="com.projectlite2.android.settingFragment.SettingCurrencyFragment"
-        android:label="SettingCurrencyFragment" />
+        android:label="通用" />
     <fragment
         android:id="@+id/settingInfomationFragment2"
         android:name="com.projectlite2.android.settingFragment.SettingInfomationFragment"
-        android:label="SettingInfomationFragment" />
+        android:label="消息通知" />
     <fragment
         android:id="@+id/settingMeetingFragment2"
         android:name="com.projectlite2.android.settingFragment.SettingMeetingFragment"
-        android:label="SettingMeetingFragment" />
+        android:label="会议" />
     <fragment
         android:id="@+id/settingPrivacyFragment2"
         android:name="com.projectlite2.android.settingFragment.SettingPrivacyFragment"
-        android:label="SettingPrivacyFragment" />
+        android:label="隐私" />
 </navigation>

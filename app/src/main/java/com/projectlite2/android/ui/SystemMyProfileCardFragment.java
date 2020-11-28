@@ -97,7 +97,7 @@ public class SystemMyProfileCardFragment extends Fragment {
                         NavController controller2 = Navigation.findNavController(mView);
                         controller2.navigate(R.id.action_systemMyProfileCardFragment_to_myProfileMajorFragment);
                         break;
-                    case "擅长":
+                    case "优势":
                         NavController controller3 = Navigation.findNavController(mView);
                         controller3.navigate(R.id.action_systemMyProfileCardFragment_to_myProfileAdvantageFragment);
                         break;
@@ -119,9 +119,9 @@ public class SystemMyProfileCardFragment extends Fragment {
     }
     private void initMessageSettingCard(){
         messSysSetList.add(new SysSettingCard("学校","华南理工大学",true));
-        messSysSetList.add(new SysSettingCard("年级","2018级",true));
+        messSysSetList.add(new SysSettingCard("年级","大三",true));
         messSysSetList.add(new SysSettingCard("专业","信息与交互设计",true));
-        messSysSetList.add(new SysSettingCard("擅长","",true));
+        messSysSetList.add(new SysSettingCard("优势","",true));
         messSysSetList.add(new SysSettingCard("手机号","134 1717 4312",true));
     }
 
