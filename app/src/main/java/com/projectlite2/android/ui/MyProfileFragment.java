@@ -53,31 +53,31 @@ public class MyProfileFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(MyProfileViewModel.class);
 
-        addSettings();
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView = mView.findViewById(R.id.settingsRecyclerView);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MyProfileSettingItemAdapter(settingList);
-        mRecyclerView.setAdapter(mAdapter);
-
-
-        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
-            @Override
-            public void onItemClickListener(int position) {
-                switch (position) {
-                    case Constant.MyProfileSettingItemPosition.MY_PROFILE_CARD:
-                        Intent modifyMyCardIntent = new Intent(MyApplication.getContext(), ModifyMyProfileCardActivity.class);
-                        startActivity(modifyMyCardIntent);
-                        break;
-                    case Constant.MyProfileSettingItemPosition.SYSTEM_SETTING:
-                        Intent systemSettingIntent = new Intent(MyApplication.getContext(), SystemSettingActivity.class);
-                        startActivity(systemSettingIntent);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
+//        addSettings();
+//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+//        mRecyclerView = mView.findViewById(R.id.settingsRecyclerView);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        mAdapter = new MyProfileSettingItemAdapter(settingList);
+//        mRecyclerView.setAdapter(mAdapter);
+//
+//
+//        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
+//            @Override
+//            public void onItemClickListener(int position) {
+//                switch (position) {
+//                    case Constant.MyProfileSettingItemPosition.MY_PROFILE_CARD:
+//                        Intent modifyMyCardIntent = new Intent(MyApplication.getContext(), ModifyMyProfileCardActivity.class);
+//                        startActivity(modifyMyCardIntent);
+//                        break;
+//                    case Constant.MyProfileSettingItemPosition.SYSTEM_SETTING:
+//                        Intent systemSettingIntent = new Intent(MyApplication.getContext(), SystemSettingActivity.class);
+//                        startActivity(systemSettingIntent);
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+//        });
 
 
     }

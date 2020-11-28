@@ -10,18 +10,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.projectlite2.android.R;
-import com.projectlite2.android.activity.GuideActivity;
 import com.projectlite2.android.activity.ProjectDetailActivity;
 import com.projectlite2.android.adapter.ProjectCardAdapter;
-import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.model.ProjectCard;
 import com.projectlite2.android.utils.IKotlinItemClickListener;
 
@@ -40,15 +38,20 @@ public class HomePageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.home_page_fragment, container, false);
+
         toolBar = mView.findViewById(R.id.toolBar);
         toolBar.inflateMenu(R.menu.menu_add_project);
+        toolBar.setTitle(R.string.string_menu_home_page);
+        setHasOptionsMenu(true);
+
+
         return mView;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+
     }
 
     @Override
