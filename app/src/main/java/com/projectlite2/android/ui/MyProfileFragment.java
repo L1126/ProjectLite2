@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.projectlite2.android.viewmodel.MyProfileViewModel;
 import com.projectlite2.android.R;
 import com.projectlite2.android.activity.SystemSettingActivity;
@@ -45,7 +46,9 @@ public class MyProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mView = inflater.inflate(R.layout.my_profile_fragment, container, false);
 
+
         return mView;
+
     }
 
     @Override

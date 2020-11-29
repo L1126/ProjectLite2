@@ -35,8 +35,8 @@
     <string name="string_descrip_btn_project_tree">Project tree</string>
     <string name="string_txt_isLeader">(Leader)</string>
     <string name="string_descrip_dot_msg_count">There are unread messages</string>
-    <string name="string_btn_menu_create_project">Create a project</string>
-    <string name="string_btn_menu_add_project">Join a project</string>
+    <string name="string_btn_menu_search">Search</string>
+    <string name="string_btn_menu_new_project">New project</string>
     <string name="string_btn_scan_qr_code">Scan QR code</string>
     <string name="string_descrip_my_profile_bg">My profile background image</string>
     <string name="string_my_profile_tab_time_table">Schedule</string>
