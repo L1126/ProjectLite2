@@ -1,9 +1,11 @@
 package com.projectlite2.android.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -50,15 +52,21 @@ public class MainActivity extends AppCompatActivity {
      */
     TabLayout mTabLayout;
 
+    /**
+     * toolbar实例
+     */
+    Toolbar mToolBar;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //应该保留标题栏 标题栏自定义美化
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        //隐藏actionbar
+        getSupportActionBar().hide();
         //  设置顶部状态栏透明
-        //VUI getWindow().setStatusBarColor(Color.TRANSPARENT);
+         //getWindow().setStatusBarColor(Color.TRANSPARENT);
+
         setContentView(R.layout.activity_main);
 
         //  导航栏跳转配置
@@ -68,9 +76,12 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this,navController,appBarConfig);
 //        NavigationUI.setupWithNavController(bottomNav,navController);
 
+
+
         mAniBottomBar = findViewById(R.id.bottomBar);
         mTabLayout=findViewById(R.id.tabLayout);
         mViewPager=findViewById(R.id.viewPager);
+
         mViewPager.setAdapter(new FragmentStateAdapter(this){
 
             @Override
@@ -110,5 +121,6 @@ public class MainActivity extends AppCompatActivity {
         //  关闭viewPager滑动
         mViewPager.setUserInputEnabled(false);
     }
+
 
 }

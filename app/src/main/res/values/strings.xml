@@ -42,4 +42,13 @@
     <string name="string_my_profile_tab_time_table">Schedule</string>
     <string name="string_my_profile_tab_memo">Memo</string>
     <string name="string_my_profile_bar_title">My profile</string>
+    <string name="string_btn_send">send</string>
+    <string name="string_txt_hint_comment_edit">Enter your comment and send it</string>
+    <string name="string_txt_node_info">Node information</string>
+    <string name="string_txt_node_mission">Node mission</string>
+    <string name="string_txt_node_comment">Comments</string>
+    <string name="string_txt_node_name">Node name</string>
+    <string name="string_txt_node_member">Node members</string>
+    <string name="string_txt_node_brief">Node brief</string>
+    <string name="string_node_time">Node time</string>
 </resources>

@@ -1,8 +1,6 @@
 package com.projectlite2.android.model
 
-import android.media.Image
-
-class CallingCard (
+class ContactCard (
 //        val picture: Image,
 //        val status: Image,
         val name: String,

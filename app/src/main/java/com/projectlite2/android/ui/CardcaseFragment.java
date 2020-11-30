@@ -2,25 +2,21 @@ package com.projectlite2.android.ui;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
 
-import com.projectlite2.android.viewmodel.CardcaseViewModel;
 import com.projectlite2.android.R;
 
 public class CardcaseFragment extends Fragment {
@@ -46,7 +42,6 @@ public class CardcaseFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // fragment中嵌套fragment, Manager需要用(getChildFragmentManager())
-
         MPagerAdapter mPagerAdapter = new MPagerAdapter(getChildFragmentManager());
         initFragment();
         tabLayout.setupWithViewPager(viewpager);
@@ -54,8 +49,8 @@ public class CardcaseFragment extends Fragment {
     }
 
     private void initFragment() {
-        fragmentList.add(new CardFirstFragment());
-        fragmentList.add(new CardSecondFragment());
+        fragmentList.add(new ContactListFragment(ContactListFragment.setStyleMyContacts()));
+        fragmentList.add(new ContactListFragment(ContactListFragment.setStyleNewFriends()));
     }
 
 

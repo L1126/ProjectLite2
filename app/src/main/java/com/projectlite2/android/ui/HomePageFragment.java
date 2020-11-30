@@ -2,42 +2,28 @@ package com.projectlite2.android.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.projectlite2.android.R;
+import com.projectlite2.android.activity.ProjectDetailActivity;
 import com.projectlite2.android.adapter.ProjectCardAdapter;
-import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.model.ProjectCard;
 import com.projectlite2.android.utils.IKotlinItemClickListener;
-import com.projectlite2.android.generated.callback.OnClickListener;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import cn.leancloud.chatkit.LCChatKit;
-import cn.leancloud.chatkit.LCChatKitUser;
-import cn.leancloud.chatkit.activity.LCIMConversationActivity;
-import cn.leancloud.chatkit.utils.LCIMConstants;
-import cn.leancloud.im.v2.AVIMChatRoom;
-import cn.leancloud.im.v2.AVIMConversation;
-import cn.leancloud.im.v2.AVIMException;
-import cn.leancloud.im.v2.callback.AVIMConversationCreatedCallback;
 
 public class HomePageFragment extends Fragment {
 
@@ -52,15 +38,20 @@ public class HomePageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.home_page_fragment, container, false);
+
         toolBar = mView.findViewById(R.id.toolBar);
         toolBar.inflateMenu(R.menu.menu_add_project);
+        toolBar.setTitle(R.string.string_menu_home_page);
+        setHasOptionsMenu(true);
+
+
         return mView;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -78,13 +69,30 @@ public class HomePageFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
 
-        //项目卡片的点击事件监听
+
+        //项目树的点击事件监听
         mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
         //初始化列表数据
             @Override
             public void onItemClickListener(int position) {
-               MyApplication.showToast(projectList.get(position).getName());
-               //可以打开私聊界面
+             //  MyApplication.showToast(projectList.get(position).getName());
+                // 跳转fragment
+//                FragmentManager manager=getFragmentManager();
+//                FragmentTransaction ft;
+//                NodeDetailFragment mNodeDetailFragment = new NodeDetailFragment();
+//                ft = manager.beginTransaction();
+//                //当前的fragment会被mNodeDetailFragment替换
+//                ft.replace(R.id.rootLayout, mNodeDetailFragment);
+//                ft.addToBackStack(null);
+//                ft.commit();
+
+                //跳转activity
+                Intent it;
+                it=new Intent(getContext(), ProjectDetailActivity.class);//启动GuideActivity
+                startActivity(it);
+
+
+                //可以打开私聊界面
 //                LCChatKit.getInstance().open("Tom", new AVIMClientCallback() {
 //                    @Override
 //                    public void done(AVIMClient avimClient, AVIMException e) {
@@ -100,6 +108,8 @@ public class HomePageFragment extends Fragment {
 //                });
             }
         });
+
+
     }
 
     @Override
@@ -121,3 +131,8 @@ public class HomePageFragment extends Fragment {
         projectList.add(new ProjectCard("产品设计专题", false, 60));
     }
 }
+
+
+
+
+

@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="fill_horizontal|center_vertical"
+    android:background="#FFFFFF"
     tools:context=".ui.GuideFirstFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="237dp"
-        android:layout_height="244dp"
-        android:layout_marginTop="226dp"
-        android:src="@drawable/ic_baseline_account_circle_24"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/img_guide_1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
