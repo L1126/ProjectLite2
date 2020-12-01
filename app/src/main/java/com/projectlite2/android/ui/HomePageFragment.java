@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.projectlite2.android.R;
+import com.projectlite2.android.activity.CreateProjectActivity;
 import com.projectlite2.android.activity.GuideActivity;
 import com.projectlite2.android.activity.ProjectDetailActivity;
 import com.projectlite2.android.activity.SearchActivity;
@@ -52,12 +53,12 @@ public class HomePageFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.btnSearch:
-                         Intent intent = new Intent(MyApplication.getContext(), SearchActivity.class);
-                        startActivity(intent);
+                         Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
+                        startActivity(intent1);
                         break;
                     case R.id.btnNewProject:
-//                        Intent intent = new Intent(MyApplication.getContext(), SearchActivity.class);
-//                        startActivity(intent);
+                        Intent intent2 = new Intent(MyApplication.getContext(), CreateProjectActivity.class);
+                        startActivity(intent2);
                     default:
                         break;
                 }

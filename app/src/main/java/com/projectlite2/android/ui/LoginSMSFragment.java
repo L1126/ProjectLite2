@@ -1,6 +1,7 @@
 package com.projectlite2.android.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,13 @@ import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.R;
 import com.projectlite2.android.databinding.FragmentLoginSmsBinding;
 
+
+import cn.leancloud.AVUser;
+import cn.leancloud.sms.AVSMS;
+import cn.leancloud.sms.AVSMSOption;
+import cn.leancloud.types.AVNull;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 import static androidx.navigation.Navigation.findNavController;
 
@@ -52,8 +60,13 @@ public class LoginSMSFragment extends Fragment {
         binding.btnGetCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyApplication.showToast("clicked!");
-               // SmsUtils.sendSmsOldVersion();
+                String phoneNum=binding.txtPhone.getText().toString();
+                if (phoneNum.equals("")){
+                    MyApplication.ToastyWarning("请输入合法的手机号");
+                    return;
+                }
+
+                AVUser.requestLoginSmsCodeInBackground(phoneNum).blockingSubscribe();
             }
         });
 
@@ -61,7 +74,31 @@ public class LoginSMSFragment extends Fragment {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyApplication.showToast("gg");
+                String phoneNum=binding.txtPhone.getText().toString();
+                String codeNum=binding.txtSMSCode.getText().toString();
+
+                if (phoneNum.equals("")){
+                    MyApplication.ToastyWarning("请输入合法的手机号");
+                    return;
+                }
+                if (codeNum.equals("")){
+                    MyApplication.ToastyWarning("请输入验证码");
+                    return;
+                }
+
+                AVUser.signUpOrLoginByMobilePhoneInBackground(phoneNum, codeNum).subscribe(new Observer<AVUser>() {
+                    public void onSubscribe(Disposable disposable) {}
+                    public void onNext(AVUser user) {
+                        // 登录成功
+                        MyApplication.ToastySuccess("success");
+                    }
+                    public void onError(Throwable throwable) {
+                        // 验证码不正确
+                        MyApplication.ToastyError("验证码错误");
+                    }
+                    public void onComplete() {}
+                });
+
             }
         });
 
@@ -69,8 +106,7 @@ public class LoginSMSFragment extends Fragment {
         binding.linkSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController controller = findNavController(v);
-                controller.navigate(R.id.action_loginSMSFragment_to_varifyPhoneFragment);
+                MyApplication.navJump(v,R.id.action_loginSMSFragment_to_varifyPhoneFragment);
             }
         });
 

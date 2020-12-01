@@ -25,8 +25,12 @@
         android:resizeableActivity="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ProjectLite2">
-        <activity android:name=".activity.SearchActivity"></activity>
+        android:theme="@style/Theme.ProjectLite2"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.CreateProjectActivity">
+        </activity>
+        <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.ProjectDetailActivity" />
         <activity android:name=".activity.tmp" />
         <activity android:name=".activity.ModifyMyProfileCardActivity" />
@@ -53,16 +57,13 @@
 
         <meta-data
             android:name="android.max_aspect"
-            android:value="2.4" />
-        <!--适配华为（huawei）刘海屏-->
+            android:value="2.4" /> <!-- 适配华为（huawei）刘海屏 -->
         <meta-data
             android:name="android.notch_support"
-            android:value="true" />
-        <!--适配小米（xiaomi）刘海屏-->
+            android:value="true" /> <!-- 适配小米（xiaomi）刘海屏 -->
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />
-
     </application>
 
 </manifest>

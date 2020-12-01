@@ -51,4 +51,12 @@
     <string name="string_txt_node_member">Node members</string>
     <string name="string_txt_node_brief">Node brief</string>
     <string name="string_node_time">Node time</string>
+    <string name="string_txt_project_name">Project name</string>
+    <string name="string_txt_project_abstract">Abstract</string>
+    <string name="string_txt_project_leader">Leader</string>
+    <string name="string_txt_project_members">Members</string>
+    <string name="string_txt_project_time">Time line</string>
+    <string name="string_btn_create">Create</string>
+    <string name="string_btn_cancel">Cancel</string>
+    <string name="string_txt_set_user_name">User name</string>
 </resources>

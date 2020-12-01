@@ -13,6 +13,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.gyf.immersionbar.components.SimpleImmersionOwner;
+import com.gyf.immersionbar.components.SimpleImmersionProxy;
+import com.projectlite2.android.utils.Popup;
 import com.projectlite2.android.viewmodel.MyProfileViewModel;
 import com.projectlite2.android.R;
 import com.projectlite2.android.activity.SystemSettingActivity;
@@ -23,10 +26,13 @@ import com.projectlite2.android.utils.Constant;
 import com.projectlite2.android.utils.IKotlinItemClickListener;
 import com.yanzhenjie.recyclerview.SwipeRecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 
-public class MyProfileFragment extends Fragment {
+public class MyProfileFragment extends Fragment
+{
 
     private MyProfileViewModel mViewModel;
 
@@ -34,6 +40,9 @@ public class MyProfileFragment extends Fragment {
     SwipeRecyclerView mRecyclerView;
     //    RecyclerView mRecyclerView;
     MyProfileSettingItemAdapter mAdapter;
+
+
+
 
 
 
@@ -56,31 +65,32 @@ public class MyProfileFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(MyProfileViewModel.class);
 
-//        addSettings();
-//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
-//        mRecyclerView = mView.findViewById(R.id.settingsRecyclerView);
-//        mRecyclerView.setLayoutManager(layoutManager);
-//        mAdapter = new MyProfileSettingItemAdapter(settingList);
-//        mRecyclerView.setAdapter(mAdapter);
-//
-//
-//        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
-//            @Override
-//            public void onItemClickListener(int position) {
-//                switch (position) {
-//                    case Constant.MyProfileSettingItemPosition.MY_PROFILE_CARD:
+        addSettings();
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView = mView.findViewById(R.id.settingsRecyclerView);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new MyProfileSettingItemAdapter(settingList);
+        mRecyclerView.setAdapter(mAdapter);
+
+
+        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
+            @Override
+            public void onItemClickListener(int position) {
+                switch (position) {
+                    case Constant.MyProfileSettingItemPosition.MY_PROFILE_CARD:
+                        new Popup(getContext()).showPopupWindow((int) mAdapter.getItemId(position));
 //                        Intent modifyMyCardIntent = new Intent(MyApplication.getContext(), ModifyMyProfileCardActivity.class);
 //                        startActivity(modifyMyCardIntent);
-//                        break;
-//                    case Constant.MyProfileSettingItemPosition.SYSTEM_SETTING:
-//                        Intent systemSettingIntent = new Intent(MyApplication.getContext(), SystemSettingActivity.class);
-//                        startActivity(systemSettingIntent);
-//                        break;
-//                    default:
-//                        break;
-//                }
-//            }
-//        });
+                        break;
+                    case Constant.MyProfileSettingItemPosition.SYSTEM_SETTING:
+                        Intent systemSettingIntent = new Intent(MyApplication.getContext(), SystemSettingActivity.class);
+                        startActivity(systemSettingIntent);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
 
 
     }
@@ -92,4 +102,7 @@ public class MyProfileFragment extends Fragment {
         settingList.add(new MyProfileSettingItem(R.drawable.ic_baseline_contact_mail_24, "我的名片"));
         settingList.add(new MyProfileSettingItem(R.drawable.ic_baseline_settings_24, "设置"));
     }
+
+
+
 }

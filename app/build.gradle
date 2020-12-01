@@ -6,7 +6,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -131,6 +130,19 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
 
+    //basePopup
+    implementation 'com.github.razerdp:BasePopup:2.2.10'
+
+    // SublimePicker
+    implementation 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.2'
+
+    //CalendarView
+    implementation 'com.haibin:calendarview:3.2.9'
+
+
 }
+
+// 注册SecVerify的相关信息
+
 
 

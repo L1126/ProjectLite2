@@ -34,4 +34,22 @@
     <string name="string_descrip_my_profile_bg">个人中心背景</string>
     <string name="string_my_profile_tab_time_table">时间表</string>
     <string name="string_my_profile_tab_memo">备忘录</string>
+    <string name="string_my_profile_bar_title">标题</string>
+    <string name="string_btn_send">发送</string>
+    <string name="string_txt_hint_comment_edit">编辑评论，然后发送...</string>
+    <string name="string_txt_node_info">节点信息</string>
+    <string name="string_txt_node_mission">节点任务</string>
+    <string name="string_txt_node_comment">节点留言</string>
+    <string name="string_txt_node_name">节点名称</string>
+    <string name="string_txt_node_member">节点成员</string>
+    <string name="string_txt_node_brief">节点简介</string>
+    <string name="string_node_time">节点时间</string>
+    <string name="string_txt_project_name">项目名称</string>
+    <string name="string_txt_project_abstract">项目简介</string>
+    <string name="string_txt_project_leader">项目负责人</string>
+    <string name="string_txt_project_members">项目成员</string>
+    <string name="string_txt_project_time">项目时间</string>
+    <string name="string_btn_create">创建</string>
+    <string name="string_btn_cancel">取消</string>
+    <string name="string_txt_set_user_name">用户名</string>
 </resources>

@@ -51,10 +51,24 @@
         android:id="@+id/modifyPwdFragment"
         android:name="com.projectlite2.android.ui.ModifyPwdFragment"
         tools:layout="@layout/fragment_modify_pwd"
-        android:label="ModifyPwdFragment" />
+        android:label="ModifyPwdFragment" >
+        <argument
+            android:name="PHONE_NUMBER"
+            app:argType="string" />
+        <argument
+            android:name="SMS_CODE"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/setPwdFragment"
         android:name="com.projectlite2.android.ui.SetPwdFragment"
         tools:layout="@layout/fragment_set_pwd"
-        android:label="SetPwdFragment" />
+        android:label="SetPwdFragment" >
+        <argument
+            android:name="PHONE_NUMBER"
+            app:argType="string" />
+        <argument
+            android:name="SMS_CODE"
+            app:argType="string" />
+    </fragment>
 </navigation>
