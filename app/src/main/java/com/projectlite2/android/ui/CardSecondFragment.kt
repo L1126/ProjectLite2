@@ -24,7 +24,7 @@ class CardSecondFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        cSecView = inflater.inflate(R.layout.card_new_fragment, container, false)
+        cSecView = inflater.inflate(R.layout.contact_card_item, container, false)
         return cSecView
     }
 

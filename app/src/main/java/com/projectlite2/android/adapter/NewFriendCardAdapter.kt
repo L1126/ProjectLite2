@@ -16,7 +16,7 @@ class NewFriendCardAdapter (private val cards: List<NewFriendCard>) :
     private var cardNewClickListener: IKotlinItemClickListener? = null
 
     inner class ViewHolder(cardcaseview: View) :RecyclerView.ViewHolder(cardcaseview){
-        val cdNewCardBg: CardView = cardcaseview.findViewById(R.id.myCardNewBackground)
+        val cdNewCardBg: CardView = cardcaseview.findViewById(R.id.contactCardBackground)
         val cdNewPic: ImageView = cardcaseview.findViewById(R.id.picAvatar)
         val cdNewName: TextView = cardcaseview.findViewById(R.id.txtName)
         val cdNewMajor: TextView = cardcaseview.findViewById(R.id.txtGrade)
@@ -24,7 +24,7 @@ class NewFriendCardAdapter (private val cards: List<NewFriendCard>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_eachone_new, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.contact_card_item, parent, false)
         return ViewHolder(view)
     }
 

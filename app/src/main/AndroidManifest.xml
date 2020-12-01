@@ -21,15 +21,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectLite2">
-<<<<<<< HEAD
         <activity
             android:name=".activity.ModifyMyProfileCardActivity">
         </activity>
-=======
         <activity android:name=".activity.ProjectDetailActivity"></activity>
         <activity android:name=".activity.tmp"></activity>
         <activity android:name=".activity.ModifyMyProfileCardActivity" />
->>>>>>> 132ba7f632eea7a22b08f49ca062ae5e62c20309
         <activity android:name=".activity.SystemSettingActivity" />
         <activity
             android:name=".activity.GuideActivity"

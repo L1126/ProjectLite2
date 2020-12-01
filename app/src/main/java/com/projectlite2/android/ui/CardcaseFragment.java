@@ -41,7 +41,7 @@ public class CardcaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // fragment中嵌套fragment, Manager需要用(getChildFragmentManager())
+
         MPagerAdapter mPagerAdapter = new MPagerAdapter(getChildFragmentManager());
         initFragment();
         tabLayout.setupWithViewPager(viewpager);
