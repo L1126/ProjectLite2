@@ -5,8 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -14,14 +12,13 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.projectlite2.android.R
 import com.projectlite2.android.app.MyApplication
-import com.projectlite2.android.model.MessageCard
-import com.projectlite2.android.ui.MsgChatFragment
+import com.projectlite2.android.model.InviteCard
 import com.projectlite2.android.utils.IKotlinItemClickListener
 import com.projectlite2.android.utils.ItemTouchHelperAdapter
 import java.util.*
 
-class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
-        RecyclerView.Adapter<MessageCardAdapter.ViewHolder>(), ItemTouchHelperAdapter {
+class InviteCardAdapter(private var mData: MutableList<InviteCard>) :
+        RecyclerView.Adapter<InviteCardAdapter.ViewHolder>(), ItemTouchHelperAdapter {
 
     private lateinit var mShowAction: Animation
     private lateinit var mHiddenAction: Animation
@@ -30,33 +27,29 @@ class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
     private var isFolded: Boolean = true
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val cdCardBg: CardView = itemView.findViewById(R.id.messageCardBackground)
-        val cdConstraintLayout: ConstraintLayout = itemView.findViewById(R.id.constraintLayout)
-        val cdConsMessageNum: ConstraintLayout = itemView.findViewById(R.id.messageNum)
-        val cdConsMessageReply: ConstraintLayout = itemView.findViewById(R.id.messageReply)
-        val cdAvatar: ImageView = itemView.findViewById(R.id.picAvatarMessage)
-        val cdMessageAll: RecyclerView = itemView.findViewById(R.id.messageBox)
+        val cdCardBg: CardView = itemView.findViewById(R.id.inviteCardBackground)
         val cdName: TextView = itemView.findViewById(R.id.txtName)
-        val cdGroup: TextView = itemView.findViewById(R.id.txtProject)
-        val cdDate: TextView = itemView.findViewById(R.id.txtDate)
-        val cdMessage: TextView = itemView.findViewById(R.id.txtMessage)
-        val cdTime: TextView = itemView.findViewById(R.id.txtMessageTime)
+        val cdProName: TextView = itemView.findViewById(R.id.txtProName)
+        val cdProNameBar: ConstraintLayout = itemView.findViewById(R.id.projectNameBar)
+        val cdProTimeBar: ConstraintLayout = itemView.findViewById(R.id.projectTimeBar)
+        val cdProHeadmanBar: ConstraintLayout = itemView.findViewById(R.id.projectHeadmanBar)
+        val cdProIntroBar: ConstraintLayout = itemView.findViewById(R.id.projectIntro)
+        val cdMessageNumBar: ConstraintLayout = itemView.findViewById(R.id.messageNum)
+        val cdMessageReplyBar: ConstraintLayout = itemView.findViewById(R.id.messageReply)
         val cdToggleBar: ImageView = itemView.findViewById(R.id.imgToggleBar)
-        val cdChatImage: ImageView = itemView.findViewById(R.id.messageChat)
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.message_card_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InviteCardAdapter.ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.message_invite_card_item, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: InviteCardAdapter.ViewHolder, position: Int) {
         val card = mData[position]
 
         holder.cdName.text = card.name
-        holder.cdGroup.text = card.group
-        holder.cdTime.text = card.time
-        holder.cdMessage.text = card.message
+        holder.cdProName.text = card.proName
 
         // 点击事件
         holder.itemView.setOnClickListener {
@@ -85,16 +78,15 @@ class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
     }
 
     //设置卡片展开与折叠
-    private fun setCardFold(holder: ViewHolder, viewOption: Int, viewOption2: Int) {
-        holder.cdMessageAll.visibility = viewOption
-        holder.cdConsMessageReply.visibility = viewOption
+    private fun setCardFold(holder: InviteCardAdapter.ViewHolder, viewOption: Int, viewOption2: Int) {
+        holder.cdProNameBar.visibility = viewOption
+        holder.cdProTimeBar.visibility = viewOption
+        holder.cdProHeadmanBar.visibility = viewOption
+        holder.cdProIntroBar.visibility = viewOption
         holder.cdToggleBar.visibility = viewOption
-        holder.cdChatImage.visibility = viewOption
+        holder.cdMessageReplyBar.visibility = viewOption
 
-        holder.cdDate.visibility = viewOption2
-        holder.cdTime.visibility = viewOption2
-        holder.cdMessage.visibility = viewOption2
-        holder.cdConsMessageNum.visibility = viewOption2
+        holder.cdMessageNumBar.visibility = viewOption2
 
     }
 
@@ -115,4 +107,5 @@ class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
         Collections.swap(mData,fromPosition,toPosition);
         notifyItemMoved(fromPosition,toPosition);
     }
+
 }

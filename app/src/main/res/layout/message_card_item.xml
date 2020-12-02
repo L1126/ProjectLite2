@@ -198,7 +198,7 @@
                     android:ems="10"
                     android:inputType="text"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/btnCancel"
+                    app:layout_constraintEnd_toStartOf="@+id/btnReply"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -219,15 +219,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
-
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="71dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="right|center"
-        android:layout_marginRight="6dp"
-        android:text="del"
-        android:visibility="gone"
-        app:cornerRadius="8dp" />
 
 </androidx.cardview.widget.CardView>

@@ -9,28 +9,25 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.projectlite2.android.Msg
 import com.projectlite2.android.R
-import com.projectlite2.android.adapter.MessageCardAdapter
-import com.projectlite2.android.adapter.MsgChatAdapter
-import com.projectlite2.android.model.MessageCard
+import com.projectlite2.android.adapter.InviteCardAdapter
+import com.projectlite2.android.model.InviteCard
 import com.projectlite2.android.utils.IKotlinItemClickListener
 import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
-import java.util.ArrayList
 
-class MessageNewsListFragment(): Fragment() {
+class InviteListFragment(): Fragment() {
 
     lateinit var mView: View
     lateinit var mRecyclerview: RecyclerView
-    lateinit var mAdapter: MessageCardAdapter
+    lateinit var mAdapter: InviteCardAdapter
     lateinit var mCallBack: ItemTouchHelper.Callback
 
-    private val mMessageList = ArrayList<MessageCard>()
+    private val mInviteList = ArrayList<InviteCard>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_message_list, container, false)
+        mView = inflater.inflate(R.layout.fragment_invite_list, container, false)
         return mView
     }
 
@@ -43,12 +40,10 @@ class MessageNewsListFragment(): Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         addNewCards()
-
-        //消息卡片
         val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        mRecyclerview = mView.findViewById(R.id.recyclerViewCardMessage)
+        mRecyclerview = mView.findViewById(R.id.recyclerViewCardInvite)
         mRecyclerview.layoutManager = layoutManager
-        mAdapter = MessageCardAdapter(mMessageList)
+        mAdapter = InviteCardAdapter(mInviteList)
         mRecyclerview.adapter = mAdapter
 
         mRecyclerview.itemAnimator = DefaultItemAnimator()
@@ -68,8 +63,10 @@ class MessageNewsListFragment(): Fragment() {
     }
 
     private fun addNewCards(){
-        mMessageList.add(MessageCard("小军","SRP","10:12","报告这周六交"))
-        mMessageList.add(MessageCard("胖虎","互联网+","15:12","木棉开会"))
-        mMessageList.add(MessageCard("静香","SRP","9:12","原型已经发给你了"))
+        mInviteList.add(InviteCard("小亮","设计心理学"))
+        mInviteList.add(InviteCard("小熊","全景AR"))
+        mInviteList.add(InviteCard("小吴","UX"))
+        mInviteList.add(InviteCard("小熊","产品创新设计专题"))
+
     }
 }

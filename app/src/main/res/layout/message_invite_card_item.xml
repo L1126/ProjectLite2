@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contactCardBackground"
+    android:id="@+id/inviteCardBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="18dp"
@@ -67,7 +67,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/picAvatar"
                 app:layout_constraintStart_toStartOf="@+id/txtName"
                 app:layout_constraintTop_toBottomOf="@+id/txtName"
-                tools:text="邀请你加入“互联网+”项目" />
+                android:text="邀请你加入项目" />
 
             <TextView
                 android:id="@+id/txtTime"
@@ -77,22 +77,10 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="30dp"
                 android:textSize="15sp"
-
                 app:layout_constraintBottom_toTopOf="@+id/divider4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="2020/11/30" />
-
-            <ImageView
-                android:id="@+id/messageChat"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="20dp"
-                android:src="@drawable/message_chat"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/divider4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="2020/11/30" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/messageNum"
@@ -100,7 +88,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="17dp"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtTime">
 
@@ -136,17 +123,18 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/projectTimeBar"
-                android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                app:layout_constraintTop_toBottomOf="@+id/divider4">
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/projectNameBar">
 
                 <TextView
                     android:id="@+id/projectTime"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:layout_marginLeft="10dp"
+                    android:gravity="center"
                     android:text="项目时间:"
                     android:textColor="@color/black"
                     android:textStyle="bold"
@@ -165,7 +153,41 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/projectNameBar"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/divider4">
+
+                <TextView
+                    android:id="@+id/projectName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="项目名称:"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtProName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:text="信息与交互设计专题一"
+                    app:layout_constraintStart_toEndOf="@+id/projectName" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/projectHeadmanBar"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
@@ -227,6 +249,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/projectIntro"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -258,10 +281,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/messageReply"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-
                 app:layout_constraintBottom_toTopOf="@+id/imgToggleBar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -272,23 +295,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginRight="10dp"
+                    android:text="refuse"
                     android:textSize="@dimen/rc_third_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btnAgree"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    tools:text="refuse" />
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <Button
                     android:id="@+id/btnAgree"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginRight="10dp"
+                    android:text="Agree"
                     android:textSize="@dimen/rc_third_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Agree" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -298,7 +321,7 @@
                 android:layout_width="26dp"
                 android:layout_height="17dp"
                 android:scaleType="centerCrop"
-
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -307,15 +330,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
-
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="71dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="right|center"
-        android:layout_marginRight="6dp"
-        android:text="del"
-        android:visibility="gone"
-        app:cornerRadius="8dp" />
 
 </androidx.cardview.widget.CardView>
