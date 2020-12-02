@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.projectlite2.android.R
 import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.ProjectCard
-import com.projectlite2.android.utils.IKotlinItemClickListener
-import java.util.ArrayList
+import com.projectlite2.android.utils.OnItemClickListener
+import com.projectlite2.android.utils.OnItemClickListenerPlus
 
 
 class ProjectCardAdapter(private val projects: List<ProjectCard>) :
         RecyclerView.Adapter<ProjectCardAdapter.ViewHolder>() {
 
     //继承点击事件接口
-    private var itemClickListener: IKotlinItemClickListener? = null
+    private var itemClickListener: OnItemClickListenerPlus? = null
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //卡片背景
@@ -36,14 +36,13 @@ class ProjectCardAdapter(private val projects: List<ProjectCard>) :
         val view = LayoutInflater.from(parent.context).inflate(R.layout.project_card_item, parent, false)
         val viewHolder = ViewHolder(view)
 
+        //  项目树按钮的点击事件
         viewHolder.btnProjectTree.setOnClickListener{
-            itemClickListener!!.onItemClickListener(viewHolder.adapterPosition)
+            itemClickListener!!.onClick(it,viewHolder.adapterPosition,viewHolder.btnProjectTree.id)
         }
-
-        viewHolder.itemView.setOnClickListener {
-            val position=viewHolder.adapterPosition
-            val pj=projects[position]
-            MyApplication.ToastyInfo(pj.name)
+        //  卡片的点击事件
+        viewHolder.itemView.setOnClickListener{
+            itemClickListener!!.onClick(it,viewHolder.adapterPosition,viewHolder.itemView.id)
         }
 
         return viewHolder
@@ -68,7 +67,7 @@ class ProjectCardAdapter(private val projects: List<ProjectCard>) :
     override fun getItemCount(): Int = projects.size
 
     // 提供点击事件set方法
-    fun setOnKotlinItemClickListener(itemClickListener: IKotlinItemClickListener) {
+    fun setOnKotlinItemClickListener(itemClickListener: OnItemClickListenerPlus) {
         this.itemClickListener = itemClickListener
     }
 }
