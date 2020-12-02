@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contactCardBackground"
+    android:id="@+id/messageCardBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="18dp"
@@ -71,7 +71,7 @@
                 tools:text="SRP" />
 
             <TextView
-                android:id="@+id/txtMessage"
+                android:id="@+id/txtMessageTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -80,21 +80,31 @@
                 app:layout_constraintBottom_toBottomOf="@+id/picAvatar"
                 app:layout_constraintStart_toStartOf="@+id/txtName"
                 app:layout_constraintTop_toBottomOf="@+id/txtName"
-                tools:text="9:20 好的！" />
+                tools:text="9:20" />
 
             <TextView
-                android:id="@+id/txtTime"
+                android:id="@+id/txtMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="bottom|center"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/txtMessageTime"
+                app:layout_constraintTop_toTopOf="@+id/txtMessageTime"
+                tools:text="好的！" />
+
+            <TextView
+                android:id="@+id/txtDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="30dp"
                 android:textSize="15sp"
-
-                app:layout_constraintBottom_toTopOf="@+id/divider4"
+                android:text="2020/11/30"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="2020/11/30" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/messageChat"
@@ -113,12 +123,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="17dp"
-
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtTime">
+                app:layout_constraintTop_toBottomOf="@+id/txtDate">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/imagePoint"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/new_message_point"
@@ -129,9 +138,9 @@
                     android:id="@+id/textMessageNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7"
+                    android:text="1"
                     android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                    app:layout_constraintEnd_toEndOf="@+id/imagePoint"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -141,7 +150,7 @@
                 android:id="@+id/divider4"
                 android:layout_width="320dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="85dp"
+                android:layout_marginTop="84dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -149,12 +158,13 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/messageBox"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
                 app:layout_constraintBottom_toTopOf="@+id/messageReply"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -165,7 +175,7 @@
                 android:id="@+id/messageReply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/imgToggleBar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -176,7 +186,6 @@
                     android:layout_height="40dp"
                     android:layout_marginRight="10dp"
                     android:textSize="@dimen/rc_third_text"
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -201,7 +210,7 @@
                 android:layout_width="26dp"
                 android:layout_height="17dp"
                 android:scaleType="centerCrop"
-
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

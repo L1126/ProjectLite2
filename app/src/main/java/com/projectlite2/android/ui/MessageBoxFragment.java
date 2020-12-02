@@ -54,8 +54,9 @@ public class MessageBoxFragment extends Fragment {
     }
 
     private void initFragment() {
+        fragmentList.add(new MessageNewsListFragment());
         fragmentList.add(new ContactListFragment(ContactListFragment.setStyleMyContacts()));
-        fragmentList.add(new ContactListFragment(ContactListFragment.setStyleNewFriends()));
+//        fragmentList.add(new ContactListFragment(ContactListFragment.setStyleNewFriends()));
     }
 
 
