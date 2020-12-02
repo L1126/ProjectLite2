@@ -12,21 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.gyf.immersionbar.ImmersionBar;
-import com.gyf.immersionbar.components.SimpleImmersionOwner;
-import com.gyf.immersionbar.components.SimpleImmersionProxy;
 import com.projectlite2.android.utils.Popup;
 import com.projectlite2.android.viewmodel.MyProfileViewModel;
 import com.projectlite2.android.R;
 import com.projectlite2.android.activity.SystemSettingActivity;
-import com.projectlite2.android.activity.ModifyMyProfileCardActivity;
 import com.projectlite2.android.adapter.MyProfileSettingItemAdapter;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.utils.Constant;
-import com.projectlite2.android.utils.IKotlinItemClickListener;
+import com.projectlite2.android.utils.OnItemClickListener;
 import com.yanzhenjie.recyclerview.SwipeRecyclerView;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -73,7 +67,7 @@ public class MyProfileFragment extends Fragment
         mRecyclerView.setAdapter(mAdapter);
 
 
-        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
+        mAdapter.setOnKotlinItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClickListener(int position) {
                 switch (position) {

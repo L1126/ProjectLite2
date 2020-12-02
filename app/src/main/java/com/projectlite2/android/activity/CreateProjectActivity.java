@@ -26,7 +26,7 @@ public class CreateProjectActivity extends AppCompatActivity {
 //        mBtnSetTime.setOnClickListener(this);
 
         setContentView(R.layout.activity_create_project);
-
+//
 //        mBtnSetTime.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

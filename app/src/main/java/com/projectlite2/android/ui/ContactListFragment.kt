@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.projectlite2.android.R
 import com.projectlite2.android.adapter.ContactCardAdapter
 import com.projectlite2.android.model.ContactCard
-import com.projectlite2.android.utils.IKotlinItemClickListener
+import com.projectlite2.android.utils.OnItemClickListener
 import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
 import java.util.*
 
@@ -80,7 +80,7 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
 
         Log.d("MyTEST", "style_param: $style_param")
 
-        mAdapter.setOnKotlinItemClickListener(object : IKotlinItemClickListener {
+        mAdapter.setOnKotlinItemClickListener(object : OnItemClickListener {
             override fun onItemClickListener(position: Int) {
 //                MyApplication.showToast(mContactList[position].name)
                 //  Log.d("MyTEST", "style_param: $style_param")

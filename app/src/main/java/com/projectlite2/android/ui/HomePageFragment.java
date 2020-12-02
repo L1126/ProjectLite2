@@ -2,7 +2,6 @@ package com.projectlite2.android.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,15 +20,21 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.projectlite2.android.R;
 import com.projectlite2.android.activity.CreateProjectActivity;
-import com.projectlite2.android.activity.GuideActivity;
 import com.projectlite2.android.activity.ProjectDetailActivity;
 import com.projectlite2.android.activity.SearchActivity;
 import com.projectlite2.android.adapter.ProjectCardAdapter;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.model.ProjectCard;
-import com.projectlite2.android.utils.IKotlinItemClickListener;
+import com.projectlite2.android.utils.OnItemClickListenerPlus;
 
 import java.util.ArrayList;
+
+import cn.leancloud.chatkit.LCChatKit;
+import cn.leancloud.chatkit.activity.LCIMConversationActivity;
+import cn.leancloud.chatkit.utils.LCIMConstants;
+import cn.leancloud.im.v2.AVIMClient;
+import cn.leancloud.im.v2.AVIMException;
+import cn.leancloud.im.v2.callback.AVIMClientCallback;
 
 public class HomePageFragment extends Fragment {
 
@@ -53,7 +59,7 @@ public class HomePageFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.btnSearch:
-                         Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
+                        Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
                         startActivity(intent1);
                         break;
                     case R.id.btnNewProject:
@@ -95,43 +101,42 @@ public class HomePageFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
 
-        //项目树的点击事件监听
-        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
-            //初始化列表数据
+        //点击事件监听
+        mAdapter.setOnKotlinItemClickListener(new OnItemClickListenerPlus() {
             @Override
-            public void onItemClickListener(int position) {
-                //  MyApplication.showToast(projectList.get(position).getName());
-                // 跳转fragment
-//                FragmentManager manager=getFragmentManager();
-//                FragmentTransaction ft;
-//                NodeDetailFragment mNodeDetailFragment = new NodeDetailFragment();
-//                ft = manager.beginTransaction();
-//                //当前的fragment会被mNodeDetailFragment替换
-//                ft.replace(R.id.rootLayout, mNodeDetailFragment);
-//                ft.addToBackStack(null);
-//                ft.commit();
+            public void onClick(@org.jetbrains.annotations.Nullable View item, int position, int which) {
+                switch (which) {
+                    case R.id.btnProjectTree: {
+                        MyApplication.ToastyInfo("tree");
+                        //跳转activity
+                        Intent it;
+                        it = new Intent(getContext(), ProjectDetailActivity.class);//启动ProjectDetailActivity
+                        startActivity(it);
+                        break;
+                    }
+                    default: {
+                        MyApplication.ToastyInfo("card");
 
-                //跳转activity
-                Intent it;
-                it = new Intent(getContext(), ProjectDetailActivity.class);//启动GuideActivity
-                startActivity(it);
+                        //    可以打开私聊界面，但是打开私聊会结束Home的activity，在私聊点击返回就会退出程序
+                        LCChatKit.getInstance().open("Tom", new AVIMClientCallback() {
+                            @Override
+                            public void done(AVIMClient avimClient, AVIMException e) {
+                                if (null == e) {
+                                    getActivity().finish();
+                                    Intent intent = new Intent(MyApplication.getContext(), LCIMConversationActivity.class);
+                                    intent.putExtra(LCIMConstants.PEER_ID, "Jerry");
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(MyApplication.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
 
-
-                //可以打开私聊界面
-//                LCChatKit.getInstance().open("Tom", new AVIMClientCallback() {
-//                    @Override
-//                    public void done(AVIMClient avimClient, AVIMException e) {
-//                        if (null == e) {
-//                            getActivity().finish();
-//                            Intent intent = new Intent(MyApplication.getContext(), LCIMConversationActivity.class);
-//                            intent.putExtra(LCIMConstants.PEER_ID, "Jerry");
-//                            startActivity(intent);
-//                        } else {
-//                            Toast.makeText(MyApplication.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
+                        break;
+                    }
+                }
             }
+
         });
 
 

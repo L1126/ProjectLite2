@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.projectlite2.android.R
 import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.ui.MyProfileSettingItem
-import com.projectlite2.android.utils.IKotlinItemClickListener
+import com.projectlite2.android.utils.OnItemClickListener
 
 class MyProfileSettingItemAdapter(private val settings: List<MyProfileSettingItem>):
         RecyclerView.Adapter<MyProfileSettingItemAdapter.ViewHolder>()
 {
     //继承点击事件接口
-    private var itemClickListener: IKotlinItemClickListener? = null
+    private var itemClickListener: OnItemClickListener? = null
     // 提供点击事件set方法
-    fun setOnKotlinItemClickListener(itemClickListener: IKotlinItemClickListener) {
+    fun setOnKotlinItemClickListener(itemClickListener: OnItemClickListener) {
         this.itemClickListener = itemClickListener
     }
 

@@ -11,11 +11,10 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.github.siyamed.shapeimageview.RoundedImageView
 import com.projectlite2.android.R
 import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.ContactCard
-import com.projectlite2.android.utils.IKotlinItemClickListener
+import com.projectlite2.android.utils.OnItemClickListener
 import com.projectlite2.android.utils.ItemTouchHelperAdapter
 import java.util.*
 
@@ -30,7 +29,7 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
     private lateinit var mShowAction:Animation
     private lateinit var mHiddenAction:Animation
 
-    private var itemClickListener: IKotlinItemClickListener? = null
+    private var itemClickListener: OnItemClickListener? = null
     private var isFolded: Boolean = true
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -89,7 +88,7 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
     override fun getItemCount() = mData.size
 
     // 提供set方法
-    fun setOnKotlinItemClickListener(itemClickListener: IKotlinItemClickListener) {
+    fun setOnKotlinItemClickListener(itemClickListener: OnItemClickListener) {
         this.itemClickListener = itemClickListener
     }
 
