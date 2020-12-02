@@ -123,7 +123,6 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
             holder.cdTagsTitle.startAnimation(mHiddenAction)
 
         }
-
     }
 
     /**
