@@ -35,8 +35,8 @@
     <string name="string_descrip_btn_project_tree">Project tree</string>
     <string name="string_txt_isLeader">(Leader)</string>
     <string name="string_descrip_dot_msg_count">There are unread messages</string>
-    <string name="string_btn_menu_create_project">Create a project</string>
-    <string name="string_btn_menu_add_project">Join a project</string>
+    <string name="string_btn_menu_search">Search</string>
+    <string name="string_btn_menu_new_project">New project</string>
     <string name="string_btn_scan_qr_code">Scan QR code</string>
     <string name="string_descrip_my_profile_bg">My profile background image</string>
     <string name="string_my_profile_tab_time_table">Schedule</string>
@@ -51,4 +51,12 @@
     <string name="string_txt_node_member">Node members</string>
     <string name="string_txt_node_brief">Node brief</string>
     <string name="string_node_time">Node time</string>
+    <string name="string_txt_project_name">Project name</string>
+    <string name="string_txt_project_abstract">Abstract</string>
+    <string name="string_txt_project_leader">Leader</string>
+    <string name="string_txt_project_members">Members</string>
+    <string name="string_txt_project_time">Time line</string>
+    <string name="string_btn_create">Create</string>
+    <string name="string_btn_cancel">Cancel</string>
+    <string name="string_txt_set_user_name">User name</string>
 </resources>

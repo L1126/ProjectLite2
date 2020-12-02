@@ -2,24 +2,29 @@ package com.projectlite2.android.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.projectlite2.android.R;
+import com.projectlite2.android.activity.CreateProjectActivity;
+import com.projectlite2.android.activity.GuideActivity;
 import com.projectlite2.android.activity.ProjectDetailActivity;
+import com.projectlite2.android.activity.SearchActivity;
 import com.projectlite2.android.adapter.ProjectCardAdapter;
+import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.model.ProjectCard;
 import com.projectlite2.android.utils.IKotlinItemClickListener;
 
@@ -29,6 +34,7 @@ public class HomePageFragment extends Fragment {
 
     View mView;
     Toolbar toolBar;
+    TextView txtTitle;
     RecyclerView mRecyclerView;
     ProjectCardAdapter mAdapter;
 
@@ -40,8 +46,28 @@ public class HomePageFragment extends Fragment {
         mView = inflater.inflate(R.layout.home_page_fragment, container, false);
 
         toolBar = mView.findViewById(R.id.toolBar);
-        toolBar.inflateMenu(R.menu.menu_add_project);
-        toolBar.setTitle(R.string.string_menu_home_page);
+        txtTitle = mView.findViewById(R.id.txtPageTitle);
+        toolBar.inflateMenu(R.menu.menu_home_page);
+        toolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.btnSearch:
+                         Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.btnNewProject:
+                        Intent intent2 = new Intent(MyApplication.getContext(), CreateProjectActivity.class);
+                        startActivity(intent2);
+                    default:
+                        break;
+                }
+                return true;
+            }
+
+        });
+        txtTitle.setText(R.string.string_menu_home_page);
+        //toolBar.setTitle(R.string.string_menu_home_page);
         setHasOptionsMenu(true);
 
 
@@ -69,13 +95,12 @@ public class HomePageFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
 
-
         //项目树的点击事件监听
         mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
-        //初始化列表数据
+            //初始化列表数据
             @Override
             public void onItemClickListener(int position) {
-             //  MyApplication.showToast(projectList.get(position).getName());
+                //  MyApplication.showToast(projectList.get(position).getName());
                 // 跳转fragment
 //                FragmentManager manager=getFragmentManager();
 //                FragmentTransaction ft;
@@ -88,7 +113,7 @@ public class HomePageFragment extends Fragment {
 
                 //跳转activity
                 Intent it;
-                it=new Intent(getContext(), ProjectDetailActivity.class);//启动GuideActivity
+                it = new Intent(getContext(), ProjectDetailActivity.class);//启动GuideActivity
                 startActivity(it);
 
 
@@ -112,11 +137,41 @@ public class HomePageFragment extends Fragment {
 
     }
 
+    /**
+     * 加载标题栏菜单项
+     *
+     * @param menu
+     * @param inflater
+     */
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_add_project,menu);
+        inflater.inflate(R.menu.menu_home_page, menu);
     }
+
+//    /**
+//     * 标题栏菜单按钮点击
+//     *
+//     * @param item
+//     * @return
+//     */
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.btnSearch:
+//                Log.d("123", "onOptionsItemSelected: ");
+//                break;
+//            case R.id.btnNewProject:
+//                Log.d("123", "onOptionsItemSelected: ");
+//                break;
+//            default:
+//                break;
+//        }
+//
+//
+//        return super.onOptionsItemSelected(item);
+//    }
+
 
     private void addProjects() {
         projectList.add(new ProjectCard("信息与交互设计", true, 25));

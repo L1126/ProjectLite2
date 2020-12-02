@@ -28,16 +28,16 @@ public class MyApplication extends Application {
     private static NavController navController;
 
     //   ************ 国际版 *************
-    private String _appId = "xCPMuwMtvrHTaRYE3sdnlBez-MdYXbMMI";
-    private String _appKey = "nJY5JvhpKI3Nkcob3IevMNr3";
-    private String _serverUrl = "xCPMuwMt.api.lncldglobal.com";
+//    private String _appId = "xCPMuwMtvrHTaRYE3sdnlBez-MdYXbMMI";
+//    private String _appKey = "nJY5JvhpKI3Nkcob3IevMNr3";
+//    private String _serverUrl = "xCPMuwMt.api.lncldglobal.com";
     //   *****************************
 
 
     //   ************ 华北版 *************
-//    private String _appId = "w1vGF0c7QirnF5rFE0CXXFvs-gzGzoHsz";
-//    private String _appKey = "t2FWWwG6j1hOgRa26Prv1mP1";
-//    private String _serverUrl ="sms.tencentcloudapi.com";
+    private String _appId = "w1vGF0c7QirnF5rFE0CXXFvs-gzGzoHsz";
+    private String _appKey = "t2FWWwG6j1hOgRa26Prv1mP1";
+    private String _serverUrl ="https://w1vgf0c7.lc-cn-n1-shared.com";
 //   *****************************
 
 
@@ -115,5 +115,7 @@ public class MyApplication extends Application {
         navController = findNavController(view);
         navController.navigate(resId, bundle);
     }
+
+
 
 }

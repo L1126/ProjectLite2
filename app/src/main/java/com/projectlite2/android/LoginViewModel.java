@@ -47,6 +47,14 @@ public class LoginViewModel extends ViewModel {
         return password;
     }
 
+    public void setUserName(String userName) {
+        this.userName.setValue(userName);
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber.setValue(phoneNumber);
+    }
+
     public void setPassword(String password) {
         this.password.setValue(password);
     }

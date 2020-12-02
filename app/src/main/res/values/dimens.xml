@@ -28,4 +28,5 @@
     <dimen name="rc_third_text">12sp</dimen>
     <dimen name="rc_sub_text">18sp</dimen>
     <dimen name="rc_screen_margin_horizontal">18dp</dimen>
+    <dimen name="status_bar_height">0dp</dimen>
 </resources>
