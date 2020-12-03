@@ -6,18 +6,17 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.projectlite2.android.MaxRecyclerView
 import com.projectlite2.android.R
 import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.MessageCard
-import com.projectlite2.android.ui.MsgChatFragment
-import com.projectlite2.android.utils.IKotlinItemClickListener
 import com.projectlite2.android.utils.ItemTouchHelperAdapter
+import com.projectlite2.android.utils.OnItemClickListenerPlus
 import java.util.*
 
 class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
@@ -26,7 +25,7 @@ class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
     private lateinit var mShowAction: Animation
     private lateinit var mHiddenAction: Animation
 
-    private var itemClickListener: IKotlinItemClickListener? = null
+    private var itemClickListener: OnItemClickListenerPlus? = null
     private var isFolded: Boolean = true
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -35,7 +34,7 @@ class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
         val cdConsMessageNum: ConstraintLayout = itemView.findViewById(R.id.messageNum)
         val cdConsMessageReply: ConstraintLayout = itemView.findViewById(R.id.messageReply)
         val cdAvatar: ImageView = itemView.findViewById(R.id.picAvatarMessage)
-        val cdMessageAll: RecyclerView = itemView.findViewById(R.id.messageBox)
+        val cdMessageAll: MaxRecyclerView = itemView.findViewById(R.id.messageBox)
         val cdName: TextView = itemView.findViewById(R.id.txtName)
         val cdGroup: TextView = itemView.findViewById(R.id.txtProject)
         val cdDate: TextView = itemView.findViewById(R.id.txtDate)
@@ -43,6 +42,7 @@ class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
         val cdTime: TextView = itemView.findViewById(R.id.txtMessageTime)
         val cdToggleBar: ImageView = itemView.findViewById(R.id.imgToggleBar)
         val cdChatImage: ImageView = itemView.findViewById(R.id.messageChat)
+        val cdBtnReply: Button = itemView.findViewById(R.id.btnReply)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -58,9 +58,9 @@ class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
         holder.cdTime.text = card.time
         holder.cdMessage.text = card.message
 
-        // 点击事件
+        // 整体点击事件
         holder.itemView.setOnClickListener {
-            itemClickListener!!.onItemClickListener(position)
+            itemClickListener!!.onClick(it,holder.adapterPosition,holder.itemView.id)
             initAnimations()
             when (isFolded) {
                 true -> {
@@ -75,12 +75,17 @@ class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
 //            MyApplication.showToast(style.toString())
         }
 
+        //局部
+        holder.cdBtnReply.setOnClickListener {
+            itemClickListener!!.onClick(it,holder.adapterPosition,holder.cdBtnReply.id)
+        }
+
     }
 
     override fun getItemCount() = mData.size
 
     // 提供set方法
-    fun setOnKotlinItemClickListener(itemClickListener: IKotlinItemClickListener) {
+    fun setOnKotlinItemClickListener(itemClickListener: OnItemClickListenerPlus) {
         this.itemClickListener = itemClickListener
     }
 
@@ -95,7 +100,6 @@ class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
         holder.cdTime.visibility = viewOption2
         holder.cdMessage.visibility = viewOption2
         holder.cdConsMessageNum.visibility = viewOption2
-
     }
 
     //初始化成员动画

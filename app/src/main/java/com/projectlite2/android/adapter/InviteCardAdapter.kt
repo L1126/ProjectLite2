@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.projectlite2.android.R
 import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.InviteCard
-import com.projectlite2.android.utils.IKotlinItemClickListener
 import com.projectlite2.android.utils.ItemTouchHelperAdapter
+import com.projectlite2.android.utils.OnItemClickListenerPlus
 import java.util.*
 
 class InviteCardAdapter(private var mData: MutableList<InviteCard>) :
@@ -23,7 +23,7 @@ class InviteCardAdapter(private var mData: MutableList<InviteCard>) :
     private lateinit var mShowAction: Animation
     private lateinit var mHiddenAction: Animation
 
-    private var itemClickListener: IKotlinItemClickListener? = null
+    private var itemClickListener: OnItemClickListenerPlus? = null
     private var isFolded: Boolean = true
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -53,7 +53,7 @@ class InviteCardAdapter(private var mData: MutableList<InviteCard>) :
 
         // 点击事件
         holder.itemView.setOnClickListener {
-            itemClickListener!!.onItemClickListener(position)
+            itemClickListener!!.onClick(it,holder.adapterPosition,holder.itemView.id)
             initAnimations()
             when (isFolded) {
                 true -> {
@@ -73,7 +73,7 @@ class InviteCardAdapter(private var mData: MutableList<InviteCard>) :
     override fun getItemCount() = mData.size
 
     // 提供set方法
-    fun setOnKotlinItemClickListener(itemClickListener: IKotlinItemClickListener) {
+    fun setOnKotlinItemClickListener(itemClickListener: OnItemClickListenerPlus) {
         this.itemClickListener = itemClickListener
     }
 

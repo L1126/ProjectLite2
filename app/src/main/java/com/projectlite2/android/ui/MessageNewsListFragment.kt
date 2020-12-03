@@ -9,13 +9,15 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.projectlite2.android.MaxRecyclerView
 import com.projectlite2.android.Msg
 import com.projectlite2.android.R
 import com.projectlite2.android.adapter.MessageCardAdapter
 import com.projectlite2.android.adapter.MsgChatAdapter
 import com.projectlite2.android.model.MessageCard
-import com.projectlite2.android.utils.IKotlinItemClickListener
+import com.projectlite2.android.utils.OnItemClickListenerPlus
 import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
+import kotlinx.android.synthetic.main.message_card_item.*
 import java.util.ArrayList
 
 class MessageNewsListFragment(): Fragment() {
@@ -24,8 +26,12 @@ class MessageNewsListFragment(): Fragment() {
     lateinit var mRecyclerview: RecyclerView
     lateinit var mAdapter: MessageCardAdapter
     lateinit var mCallBack: ItemTouchHelper.Callback
-
     private val mMessageList = ArrayList<MessageCard>()
+
+    lateinit var cRecyclerView: MaxRecyclerView
+    lateinit var cAdapter: MsgChatAdapter
+    private val msgList = ArrayList<Msg>()
+    private var CardClick = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -45,9 +51,10 @@ class MessageNewsListFragment(): Fragment() {
         addNewCards()
 
         //消息卡片
+        val mlayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         mRecyclerview = mView.findViewById(R.id.recyclerViewCardMessage)
-        mRecyclerview.layoutManager = layoutManager
+        mRecyclerview.layoutManager = mlayoutManager
         mAdapter = MessageCardAdapter(mMessageList)
         mRecyclerview.adapter = mAdapter
 
@@ -59,10 +66,44 @@ class MessageNewsListFragment(): Fragment() {
         //调用ItemTouchHelper的attachToRecyclerView方法建立联系
         ItemTouchHelper(mCallBack).attachToRecyclerView(mRecyclerview)
 
-        mAdapter.setOnKotlinItemClickListener(object : IKotlinItemClickListener {
-            override fun onItemClickListener(position: Int) {
-//                MyApplication.showToast(mContactList[position].name)
-                //  Log.d("MyTEST", "style_param: $style_param")
+        mAdapter.setOnKotlinItemClickListener(object : OnItemClickListenerPlus {
+            override fun onClick(item: View?, position: Int, which: Int) {
+
+                when(which){
+                    R.id.messageCardBackground ->{
+
+                        if (CardClick){
+                            cRecyclerView = mView.findViewById(R.id.messageBox)
+                            cRecyclerView.layoutManager = layoutManager
+                            cAdapter = MsgChatAdapter(msgList)
+                            cRecyclerView.adapter = cAdapter
+                            val msg0 = Msg("报告这周六交", Msg.TYPE_RECEIVED)
+                            msgList.add(msg0)
+
+                            CardClick = false
+                        }else{
+                            cRecyclerView.scrollToPosition(msgList.size - 1)
+                        }
+
+                    }
+                    R.id.btnReply ->{
+                        cRecyclerView = mView.findViewById(R.id.messageBox)
+                        cRecyclerView.layoutManager = layoutManager
+                        cAdapter = MsgChatAdapter(msgList)
+                        cRecyclerView.adapter = cAdapter
+
+                        val content = textReply.text.toString()
+
+                        if (content.isNotEmpty()){
+                            val msg = Msg(content,Msg.TYPE_SENT)
+                            msgList.add(msg)
+                            cAdapter?.notifyItemInserted(msgList.size - 1)
+                            cRecyclerView.scrollToPosition(msgList.size - 1)
+                            textReply.setText("")
+                        }
+
+                    }
+                }
             }
         })
     }

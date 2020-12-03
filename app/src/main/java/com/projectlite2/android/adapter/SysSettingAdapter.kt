@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.projectlite2.android.R
 import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.SysSettingCard
-import com.projectlite2.android.utils.IKotlinItemClickListener
+import com.projectlite2.android.utils.OnItemClickListenerPlus
 
 class SysSettingAdapter(private val settings: List<SysSettingCard>):
         RecyclerView.Adapter<SysSettingAdapter.ViewHolder>()
 {
 
     //继承点击事件接口
-    private var itemClickListener: IKotlinItemClickListener? = null
+    private var itemClickListener: OnItemClickListenerPlus? = null
     // 提供点击事件set方法
-    fun setOnKotlinItemClickListener(itemClickListener: IKotlinItemClickListener) {
+    fun setOnKotlinItemClickListener(itemClickListener: OnItemClickListenerPlus) {
         this.itemClickListener = itemClickListener
     }
 
@@ -53,7 +53,7 @@ class SysSettingAdapter(private val settings: List<SysSettingCard>):
 
         //点击事件
         holder.itemView.setOnClickListener {
-            itemClickListener!!.onItemClickListener(position)
+            itemClickListener!!.onClick(it,holder.adapterPosition,holder.itemView.id)
         }
     }
 

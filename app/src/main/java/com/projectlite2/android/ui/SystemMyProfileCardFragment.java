@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.projectlite2.android.R;
 import com.projectlite2.android.adapter.SysSettingAdapter;
 import com.projectlite2.android.model.SysSettingCard;
-import com.projectlite2.android.utils.IKotlinItemClickListener;
+import com.projectlite2.android.utils.OnItemClickListenerPlus;
 
 import java.util.ArrayList;
 
@@ -63,10 +63,10 @@ public class SystemMyProfileCardFragment extends Fragment {
         messAdapter = new SysSettingAdapter(messSysSetList);
         messRecyclerView.setAdapter(messAdapter);
 
-        infoAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
+        infoAdapter.setOnKotlinItemClickListener(new OnItemClickListenerPlus() {
             @Override
-            public void onItemClickListener(int position) {
-                switch (infoSysSetList.get(position).getTextSys()){
+            public void onClick(@org.jetbrains.annotations.Nullable View item, int position, int which) {
+                switch (infoSysSetList.get(position).getTextSys()) {
                     case "昵称":
                         NavController controller = Navigation.findNavController(mView);
                         controller.navigate(R.id.action_systemMyProfileCardFragment_to_myProfileNameFragment);
@@ -78,12 +78,13 @@ public class SystemMyProfileCardFragment extends Fragment {
                     default:
                         break;
                 }
+
             }
         });
 
-        messAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
+        messAdapter.setOnKotlinItemClickListener(new OnItemClickListenerPlus() {
             @Override
-            public void onItemClickListener(int position) {
+            public void onClick(@org.jetbrains.annotations.Nullable View item, int position, int which) {
                 switch (messSysSetList.get(position).getTextSys()){
                     case "学校":
                         NavController controller = Navigation.findNavController(mView);

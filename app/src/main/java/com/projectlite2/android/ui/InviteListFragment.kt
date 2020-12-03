@@ -1,6 +1,7 @@
 package com.projectlite2.android.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.projectlite2.android.R
 import com.projectlite2.android.adapter.InviteCardAdapter
 import com.projectlite2.android.model.InviteCard
-import com.projectlite2.android.utils.IKotlinItemClickListener
+import com.projectlite2.android.utils.OnItemClickListenerPlus
 import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
 
 class InviteListFragment(): Fragment() {
@@ -54,10 +55,9 @@ class InviteListFragment(): Fragment() {
         //调用ItemTouchHelper的attachToRecyclerView方法建立联系
         ItemTouchHelper(mCallBack).attachToRecyclerView(mRecyclerview)
 
-        mAdapter.setOnKotlinItemClickListener(object : IKotlinItemClickListener {
-            override fun onItemClickListener(position: Int) {
-//                MyApplication.showToast(mContactList[position].name)
-                //  Log.d("MyTEST", "style_param: $style_param")
+        mAdapter.setOnKotlinItemClickListener(object : OnItemClickListenerPlus {
+            override fun onClick(item: View?, position: Int, which: Int) {
+
             }
         })
     }
