@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/my_profile_navigation"
+    app:startDestination="@id/systemMyProfileCardFragment">
+
+    <fragment
+        android:id="@+id/systemMyProfileCardFragment"
+        android:name="com.projectlite2.android.ui.SystemMyProfileCardFragment"
+        android:label="我的名片">
+        <action
+            android:id="@+id/action_systemMyProfileCardFragment_to_myProfileNameFragment"
+            app:destination="@id/myProfileNameFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_systemMyProfileCardFragment_to_myProfileSchoolFragment"
+            app:destination="@id/myProfileSchoolFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_systemMyProfileCardFragment_to_myProfileGradeFragment"
+            app:destination="@id/myProfileGradeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_systemMyProfileCardFragment_to_myProfileMajorFragment"
+            app:destination="@id/myProfileMajorFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_systemMyProfileCardFragment_to_myProfileAdvantageFragment"
+            app:destination="@id/myProfileAdvantageFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_systemMyProfileCardFragment_to_myProfilePhoneNumberFragment"
+            app:destination="@id/myProfilePhoneNumberFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_systemMyProfileCardFragment_to_myProfileQRCodeFragment"
+            app:destination="@id/myProfileQRCodeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/myProfileAdvantageFragment"
+        android:name="com.projectlite2.android.myProfileFragment.MyProfileAdvantageFragment"
+        android:label="优势" />
+    <fragment
+        android:id="@+id/myProfileGradeFragment"
+        android:name="com.projectlite2.android.myProfileFragment.MyProfileGradeFragment"
+        android:label="年级" />
+    <fragment
+        android:id="@+id/myProfileMajorFragment"
+        android:name="com.projectlite2.android.myProfileFragment.MyProfileMajorFragment"
+        android:label="专业" />
+    <fragment
+        android:id="@+id/myProfileNameFragment"
+        android:name="com.projectlite2.android.myProfileFragment.MyProfileNameFragment"
+        android:label="昵称" />
+    <fragment
+        android:id="@+id/myProfilePhoneNumberFragment"
+        android:name="com.projectlite2.android.myProfileFragment.MyProfilePhoneNumberFragment"
+        android:label="手机号" />
+    <fragment
+        android:id="@+id/myProfileQRCodeFragment"
+        android:name="com.projectlite2.android.myProfileFragment.MyProfileQRCodeFragment"
+        android:label="我的二维码" />
+    <fragment
+        android:id="@+id/myProfileSchoolFragment"
+        android:name="com.projectlite2.android.myProfileFragment.MyProfileSchoolFragment"
+        android:label="学校" />
+</navigation>

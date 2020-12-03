@@ -52,6 +52,4 @@ class MyProfileSettingItemAdapter(private val settings: List<MyProfileSettingIte
 
     override fun getItemCount(): Int = settings.size
 
-
-
 }

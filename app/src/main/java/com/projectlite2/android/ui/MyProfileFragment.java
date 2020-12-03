@@ -35,10 +35,7 @@ public class MyProfileFragment extends Fragment
     //    RecyclerView mRecyclerView;
     MyProfileSettingItemAdapter mAdapter;
 
-
-
     private ArrayList<MyProfileSettingItem> settingList = new ArrayList<MyProfileSettingItem>();
-
 
     @Nullable
     @Override
@@ -54,6 +51,46 @@ public class MyProfileFragment extends Fragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+//        mViewModel = new ViewModelProvider(this).get(MyProfileViewModel.class);
+//
+//        addSettings();
+//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+//        mRecyclerView = mView.findViewById(R.id.settingsRecyclerView);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        mAdapter = new MyProfileSettingItemAdapter(settingList);
+//        mRecyclerView.setAdapter(mAdapter);
+//
+//
+//        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
+//            @Override
+//            public void onItemClickListener(int position) {
+//                switch (position) {
+//                    case Constant.MyProfileSettingItemPosition.MY_PROFILE_CARD:
+//                        Intent modifyMyCardIntent = new Intent(MyApplication.getContext(), ModifyMyProfileCardActivity.class);
+//                        startActivity(modifyMyCardIntent);
+//                        break;
+//                    case Constant.MyProfileSettingItemPosition.SYSTEM_SETTING:
+//                        Intent systemSettingIntent = new Intent(MyApplication.getContext(), SystemSettingActivity.class);
+//                        startActivity(systemSettingIntent);
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+//        });
+//        addSettings();
+//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+//        mRecyclerView = mView.findViewById(R.id.settingsRecyclerView);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        mAdapter = new MyProfileSettingItemAdapter(settingList);
+//        mRecyclerView.setAdapter(mAdapter);
+//
+//
+//        mAdapter.setOnKotlinItemClickListener(new IKotlinItemClickListener() {
+//            @Override
+//            public void onItemClickListener(int position) {
+//                switch (position) {
+//                    case Constant.MyProfileSettingItemPosition.MY_PROFILE_CARD:
         mViewModel = new ViewModelProvider(this).get(MyProfileViewModel.class);
 
         addSettings();
@@ -86,9 +123,6 @@ public class MyProfileFragment extends Fragment
 
     }
 
-    /*
-     * 初始化列表数据
-     */
     private void addSettings() {
         settingList.add(new MyProfileSettingItem(R.drawable.ic_baseline_contact_mail_24, "我的名片"));
         settingList.add(new MyProfileSettingItem(R.drawable.ic_baseline_settings_24, "设置"));

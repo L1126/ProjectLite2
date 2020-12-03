@@ -42,5 +42,4 @@ public class Constant {
         //  系统设置
         public static final int SYSTEM_SETTING=1;
     }
-
 }

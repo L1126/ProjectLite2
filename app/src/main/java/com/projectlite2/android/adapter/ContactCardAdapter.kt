@@ -141,7 +141,6 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
             holder.cdTagsTitle.startAnimation(mHiddenAction)
 
         }
-
     }
 
     /**
@@ -161,7 +160,6 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
         }
         //  修改holder.cdBtnMore.的图片资源
     }
-
 
     /**
      * 初始化动画成员

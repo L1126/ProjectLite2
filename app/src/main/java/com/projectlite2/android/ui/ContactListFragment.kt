@@ -82,7 +82,6 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
         //调用ItemTouchHelper的attachToRecyclerView方法建立联系
         ItemTouchHelper(mCallBack).attachToRecyclerView(mRecyclerview)
 
-
         Log.d("MyTEST", "style_param: $style_param")
 
         //  点击事件

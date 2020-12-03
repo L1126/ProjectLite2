@@ -70,6 +70,4 @@ class ProjectCardAdapter(private val projects: List<ProjectCard>) :
     fun setOnKotlinItemClickListener(itemClickListener: OnItemClickListenerPlus) {
         this.itemClickListener = itemClickListener
     }
-
-
 }
