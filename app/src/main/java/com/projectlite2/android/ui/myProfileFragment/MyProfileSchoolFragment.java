@@ -1,4 +1,4 @@
-package com.projectlite2.android.settingFragment;
+package com.projectlite2.android.ui.myProfileFragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,13 +10,13 @@ import androidx.fragment.app.Fragment;
 
 import com.projectlite2.android.R;
 
-public class SettingInfomationFragment extends Fragment {
+public class MyProfileSchoolFragment extends Fragment {
     View mView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_setting_infomation, container, false);
+        mView = inflater.inflate(R.layout.fragment_myprofile_school, container, false);
 
         return mView;
     }

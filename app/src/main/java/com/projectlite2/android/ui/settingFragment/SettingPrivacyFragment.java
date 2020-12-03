@@ -1,4 +1,4 @@
-package com.projectlite2.android.myProfileFragment;
+package com.projectlite2.android.ui.settingFragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,13 +10,13 @@ import androidx.fragment.app.Fragment;
 
 import com.projectlite2.android.R;
 
-public class MyProfileAdvantageFragment extends Fragment {
+public class SettingPrivacyFragment extends Fragment {
     View mView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_myprofile_advantage, container, false);
+        mView = inflater.inflate(R.layout.fragment_setting_privacy, container, false);
 
         return mView;
     }
