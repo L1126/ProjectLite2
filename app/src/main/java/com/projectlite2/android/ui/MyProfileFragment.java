@@ -37,9 +37,6 @@ public class MyProfileFragment extends Fragment
 
 
 
-
-
-
     private ArrayList<MyProfileSettingItem> settingList = new ArrayList<MyProfileSettingItem>();
 
 

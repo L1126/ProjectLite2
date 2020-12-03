@@ -98,6 +98,9 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
         })
     }
 
+    /**
+     * 向卡片List添加卡片数据
+     */
     private fun addNewCards() {
         mContactList.add(ContactCard("小张", "工业设计", "2018级"))
         mContactList.add(ContactCard("院长", "工业设计", "2018级"))
@@ -109,6 +112,10 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
         mContactList.add(ContactCard("院长", "工业设计", "2018级"))
     }
 
+
+    /**
+     * 点击更多按钮监听中，调用本方法，显示更多菜单的popup window，传入的数组为菜单名称
+     */
     private fun showCardMenu(v: View, arrMenuTitle: Array<String>) {
         XPopup.Builder(context)
                 .atView(v) // 依附于所点击的View，内部会自动判断在上方或者下方显示

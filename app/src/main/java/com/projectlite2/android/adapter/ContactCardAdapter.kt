@@ -102,27 +102,6 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
         holder.cdMajor.text = card.major
         holder.cdGrade.text = card.grade
 
-        // 点击事件
-//        holder.itemView.setOnClickListener {
-//            itemClickListener!!.onClick()
-//            initAnimations()
-//            when (isFolded) {
-//                true -> {
-//                    setCardFold(holder, View.VISIBLE)
-//                    setLayoutStyle(holder, style)
-//
-//                }
-//                false -> {
-//                    setCardFold(holder, View.GONE)
-//                }
-//            }
-//            //折叠状态取反
-//            isFolded = !isFolded
-////            MyApplication.showToast(style.toString())
-//        }
-
-
-
     }
 
     override fun getItemCount() = mData.size
