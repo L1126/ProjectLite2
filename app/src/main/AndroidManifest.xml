@@ -28,8 +28,8 @@
         android:theme="@style/Theme.ProjectLite2"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.CreateProjectActivity">
-        </activity>
+            android:name=".activity.CreateProjectActivity"
+            android:parentActivityName=".activity.MainActivity" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.ProjectDetailActivity" />
         <activity android:name=".activity.tmp" />

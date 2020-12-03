@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.projectlite2.android.utils
 
 import android.content.Context

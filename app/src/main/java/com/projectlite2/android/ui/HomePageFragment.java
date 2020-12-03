@@ -1,5 +1,6 @@
 package com.projectlite2.android.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.projectlite2.android.R;
 import com.projectlite2.android.activity.CreateProjectActivity;
 import com.projectlite2.android.activity.ProjectDetailActivity;
@@ -44,6 +47,7 @@ public class HomePageFragment extends Fragment {
     RecyclerView mRecyclerView;
     ProjectCardAdapter mAdapter;
 
+
     private ArrayList<ProjectCard> projectList = new ArrayList<ProjectCard>();
 
     @Override
@@ -54,17 +58,58 @@ public class HomePageFragment extends Fragment {
         toolBar = mView.findViewById(R.id.toolBar);
         txtTitle = mView.findViewById(R.id.txtPageTitle);
         toolBar.inflateMenu(R.menu.menu_home_page);
+        View mNewProjectView = toolBar.findViewById(R.id.btnNewProject);
+        //  标题栏菜单点击
         toolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+
+            String[] mMenuTitles = new String[]{
+                    getResources().getString(R.string.string_btn_menu_create_project),
+                    getResources().getString(R.string.string_btn_menu_join_project)
+            };
+
+            int[] mMenuIcons = new int[]{
+                    R.drawable.ic_outline_create_new_folder_24,
+                    R.drawable.ic_outline_add_box_24
+            };
+
+            @SuppressLint("ResourceAsColor")
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
+                    //  点击搜索
                     case R.id.btnSearch:
                         Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
                         startActivity(intent1);
                         break;
+                    //  点击创建项目
                     case R.id.btnNewProject:
-                        Intent intent2 = new Intent(MyApplication.getContext(), CreateProjectActivity.class);
-                        startActivity(intent2);
+
+                        //  弹出新项目菜单POPUP
+                        new XPopup.Builder(getContext())
+                                .atView(mNewProjectView)
+                                // 依附于所点击的View，内部会自动判断在上方或者下方显示
+                                .asAttachList(
+                                        mMenuTitles,
+                                        mMenuIcons,
+                                        new OnSelectListener() {
+                                            @Override
+                                            public void onSelect(int position, String text) {
+                                                switch (position) {
+                                                    case 0:
+                                                        Intent it = new Intent(MyApplication.getContext(), CreateProjectActivity.class);
+                                                        startActivity(it);
+                                                        break;
+                                                    case 2:
+                                                        MyApplication.ToastyInfo("2");
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                            }
+                                        })
+                                .show();
+
+
                     default:
                         break;
                 }
@@ -154,29 +199,6 @@ public class HomePageFragment extends Fragment {
         inflater.inflate(R.menu.menu_home_page, menu);
     }
 
-//    /**
-//     * 标题栏菜单按钮点击
-//     *
-//     * @param item
-//     * @return
-//     */
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.btnSearch:
-//                Log.d("123", "onOptionsItemSelected: ");
-//                break;
-//            case R.id.btnNewProject:
-//                Log.d("123", "onOptionsItemSelected: ");
-//                break;
-//            default:
-//                break;
-//        }
-//
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
 
     private void addProjects() {
         projectList.add(new ProjectCard("信息与交互设计", true, 25));
@@ -189,6 +211,19 @@ public class HomePageFragment extends Fragment {
         projectList.add(new ProjectCard("产品设计方法学", false, 90));
         projectList.add(new ProjectCard("交互设计专题（一）", true, 10));
         projectList.add(new ProjectCard("产品设计专题", false, 60));
+    }
+
+    private void OnMenuItemClick(int position) {
+        switch (position) {
+            case 1:
+                MyApplication.ToastyInfo("1");
+                break;
+            case 2:
+                MyApplication.ToastyInfo("2");
+                break;
+            default:
+                break;
+        }
     }
 }
 

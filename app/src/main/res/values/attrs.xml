@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 日历显示模式 -->
+    <attr name="calendar_show_mode">
+        <enum name="both_month_week_view" value="0" /><!-- 默认都有 -->
+        <enum name="only_week_view" value="1" /><!-- 仅周视图 -->
+        <enum name="only_month_view" value="2" /><!-- 仅月视图 -->
+    </attr>
 
+    <attr name="default_status">
+        <enum name="expand" value="0" /> <!--默认展开-->
+        <enum name="shrink" value="1" /><!--默认搜索-->
+    </attr>
+
+    <attr name="calendar_content_view_id" format="integer" /><!--内容布局id，用于提供月视图平移过渡-->
 </resources>

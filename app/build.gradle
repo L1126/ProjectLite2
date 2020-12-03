@@ -133,12 +133,17 @@ dependencies {
     //basePopup
     implementation 'com.github.razerdp:BasePopup:2.2.10'
 
-    // SublimePicker
-    implementation 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.2'
+    //xPopup
+     implementation 'com.lxj:xpopup:2.2.5'
 
-    //CalendarView
-    implementation 'com.haibin:calendarview:3.2.9'
+    // Material DateTime Picker
+    implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
 
+    //  AndroidSwipeLayout
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+
+    //  FabOptions
+    implementation 'com.github.joaquimley:faboptions:1.2.0'
 
 }
 

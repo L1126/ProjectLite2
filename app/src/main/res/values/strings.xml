@@ -59,4 +59,8 @@
     <string name="string_btn_create">Create</string>
     <string name="string_btn_cancel">Cancel</string>
     <string name="string_txt_set_user_name">User name</string>
+    <string name="string_btn_menu_create_project">Create</string>
+    <string name="string_btn_menu_join_project">Join</string>
+    <string name="string_txt_btn_set_start_date">Start date</string>
+    <string name="string_txt_btn_set_end_date">Deadline</string>
 </resources>

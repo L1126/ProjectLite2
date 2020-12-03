@@ -11,7 +11,9 @@ import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 
+import com.lxj.xpopup.XPopup;
 import com.projectlite2.android.CustomUserProvider;
+import com.projectlite2.android.R;
 
 import cn.leancloud.AVLogger;
 import cn.leancloud.AVOSCloud;
@@ -106,15 +108,28 @@ public class MyApplication extends Application {
     }
 
 
+    /**
+     * navigation跳转
+     * @param view
+     * @param resId
+     */
     public static void navJump(View view, @IdRes int resId) {
         navController = findNavController(view);
         navController.navigate(resId);
     }
 
+    /**
+     * 传递参数的navigation跳转
+     * @param view
+     * @param resId
+     * @param bundle
+     */
     public static void navJump(View view, @IdRes int resId, @Nullable Bundle bundle) {
         navController = findNavController(view);
         navController.navigate(resId, bundle);
     }
+
+
 
 
 

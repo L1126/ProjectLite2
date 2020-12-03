@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.lxj.xpopup.XPopup
 import com.projectlite2.android.R
 import com.projectlite2.android.adapter.ContactCardAdapter
+import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.ContactCard
-import com.projectlite2.android.utils.OnItemClickListener
+import com.projectlite2.android.utils.OnItemClickListenerPlus
 import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
 import java.util.*
 
@@ -64,6 +66,9 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
         addNewCards()
 
         val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+
+
+
         mRecyclerview = mView.findViewById(R.id.recyclerViewCard2)
         mRecyclerview.layoutManager = layoutManager
         mAdapter = ContactCardAdapter(mContactList, style_param)
@@ -73,17 +78,22 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
         mRecyclerview.itemAnimator!!.changeDuration = 300
 
         //先实例化Callback
-        mCallBack= SimpleItemTouchHelperCallback(mAdapter)
+        mCallBack = SimpleItemTouchHelperCallback(mAdapter)
         //调用ItemTouchHelper的attachToRecyclerView方法建立联系
         ItemTouchHelper(mCallBack).attachToRecyclerView(mRecyclerview)
 
 
         Log.d("MyTEST", "style_param: $style_param")
 
-        mAdapter.setOnKotlinItemClickListener(object : OnItemClickListener {
-            override fun onItemClickListener(position: Int) {
-//                MyApplication.showToast(mContactList[position].name)
-                //  Log.d("MyTEST", "style_param: $style_param")
+        //  点击事件
+        mAdapter.setOnKotlinItemClickListener(object : OnItemClickListenerPlus {
+            override fun onClick(item: View?, position: Int, which: Int) {
+                when (which) {
+                    R.id.btnMenu -> item?.let { showCardMenu(it, arrayOf("邀请", "删除")) }
+                    R.id.btnAgree -> MyApplication.ToastyInfo("click agree")
+                    R.id.btnCancel -> MyApplication.ToastyInfo("click cancel")
+                }
+
             }
         })
     }
@@ -97,5 +107,28 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
         mContactList.add(ContactCard("院长", "工业设计", "2018级"))
         mContactList.add(ContactCard("小张", "工业设计", "2018级"))
         mContactList.add(ContactCard("院长", "工业设计", "2018级"))
+    }
+
+    private fun showCardMenu(v: View, arrMenuTitle: Array<String>) {
+        XPopup.Builder(context)
+                .atView(v) // 依附于所点击的View，内部会自动判断在上方或者下方显示
+                .asAttachList(
+                        arrMenuTitle,
+                        intArrayOf()
+                )
+                { position, text ->
+                    when (text) {
+                        arrMenuTitle[0]->{
+                            MyApplication.ToastyInfo("还没实现呢")
+                        }
+
+                        arrMenuTitle[1] -> {
+                            XPopup.Builder(context).asConfirm("提示", "确定要删除该名片吗？"
+                            ) { MyApplication.ToastyInfo("点击了删除") }
+                                    .show()
+                        }
+                    }
+                }
+                .show()
     }
 }

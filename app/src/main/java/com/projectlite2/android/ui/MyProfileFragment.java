@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.projectlite2.android.utils.Popup;
+import com.projectlite2.android.activity.ModifyMyProfileCardActivity;
 import com.projectlite2.android.viewmodel.MyProfileViewModel;
 import com.projectlite2.android.R;
 import com.projectlite2.android.activity.SystemSettingActivity;
@@ -72,9 +72,9 @@ public class MyProfileFragment extends Fragment
             public void onItemClickListener(int position) {
                 switch (position) {
                     case Constant.MyProfileSettingItemPosition.MY_PROFILE_CARD:
-                        new Popup(getContext()).showPopupWindow((int) mAdapter.getItemId(position));
-//                        Intent modifyMyCardIntent = new Intent(MyApplication.getContext(), ModifyMyProfileCardActivity.class);
-//                        startActivity(modifyMyCardIntent);
+
+                        Intent modifyMyCardIntent = new Intent(MyApplication.getContext(), ModifyMyProfileCardActivity.class);
+                        startActivity(modifyMyCardIntent);
                         break;
                     case Constant.MyProfileSettingItemPosition.SYSTEM_SETTING:
                         Intent systemSettingIntent = new Intent(MyApplication.getContext(), SystemSettingActivity.class);

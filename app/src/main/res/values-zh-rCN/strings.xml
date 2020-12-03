@@ -52,4 +52,6 @@
     <string name="string_btn_create">创建</string>
     <string name="string_btn_cancel">取消</string>
     <string name="string_txt_set_user_name">用户名</string>
+    <string name="string_btn_menu_create_project">创建项目</string>
+    <string name="string_btn_menu_join_project">加入项目</string>
 </resources>
