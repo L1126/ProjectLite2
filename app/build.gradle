@@ -145,6 +145,12 @@ dependencies {
     //  FabOptions
     implementation 'com.github.joaquimley:faboptions:1.2.0'
 
+    //  Welcome
+    implementation 'com.stephentuso:welcome:1.4.1'
+
+    //EasyAdapter
+    implementation 'com.lxj:easyadapter:latest release'
+
 }
 
 // 注册SecVerify的相关信息

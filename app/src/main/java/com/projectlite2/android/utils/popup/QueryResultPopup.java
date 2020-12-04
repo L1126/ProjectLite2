@@ -18,11 +18,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class ZhihuCommentPopup extends BottomPopupView {
+public class QueryResultPopup extends BottomPopupView {
 
     VerticalRecyclerView recyclerView;
 
-    public ZhihuCommentPopup(@NonNull Context context) {
+    public QueryResultPopup(@NonNull Context context) {
         super(context);
     }
 

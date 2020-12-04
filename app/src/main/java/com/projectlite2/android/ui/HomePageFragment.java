@@ -32,6 +32,7 @@ import com.projectlite2.android.utils.OnItemClickListenerPlus;
 
 import java.util.ArrayList;
 
+import cn.leancloud.AVUser;
 import cn.leancloud.chatkit.LCChatKit;
 import cn.leancloud.chatkit.activity.LCIMConversationActivity;
 import cn.leancloud.chatkit.utils.LCIMConstants;
@@ -53,6 +54,17 @@ public class HomePageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            MyApplication.ToastyInfo("用户登录");
+        } else {
+            MyApplication.ToastyError("当前无用户");
+        }
+
+
+
         mView = inflater.inflate(R.layout.home_page_fragment, container, false);
 
         toolBar = mView.findViewById(R.id.toolBar);
