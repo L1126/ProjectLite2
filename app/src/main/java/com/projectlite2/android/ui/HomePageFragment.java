@@ -56,13 +56,6 @@ public class HomePageFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
 
-        AVUser currentUser = AVUser.getCurrentUser();
-        if (currentUser != null) {
-            MyApplication.ToastyInfo("用户登录");
-        } else {
-            MyApplication.ToastyError("当前无用户");
-        }
-
 
 
         mView = inflater.inflate(R.layout.home_page_fragment, container, false);

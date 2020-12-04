@@ -40,6 +40,8 @@ public class SearchActivity extends AppCompatActivity {
         search = findViewById(R.id.searchView);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, strings);
         list.setAdapter(adapter);
+        list.setVisibility(View.GONE);
+
 
         //点击事件添加
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -84,31 +86,19 @@ public class SearchActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(newText)) {
 //                    清除ListView的过滤
                     list.clearTextFilter();
+                    list.setVisibility(View.GONE);
                 } else {
 //                    使用用户输入的内容对ListView的列表项进行过滤
                     list.setFilterText(newText);
+                    list.setVisibility(View.VISIBLE);
+
                 }
                 return true;
             }
         });
     }
 
-    /**
-     * 点击更多按钮监听中，调用本方法，显示更多菜单的popup window，传入的数组为菜单名称
-     */
-    private void showCardMenu(View v) {
-        new XPopup.Builder(MyApplication.getContext())
-                .atView(v)  // 依附于所点击的View，内部会自动判断在上方或者下方显示
-                .asAttachList(new String[]{"分享", "编辑", "不带icon"},
-                        new int[]{R.mipmap.ic_launcher, R.mipmap.ic_launcher},
-                        new OnSelectListener() {
-                            @Override
-                            public void onSelect(int position, String text) {
-                                MyApplication.ToastyInfo("click " + text);
-                            }
-                        })
-                .show();
-    }
+
 
 }
 

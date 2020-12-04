@@ -1,11 +1,12 @@
 package com.projectlite2.android.activity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,9 +14,11 @@ import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.interfaces.OnConfirmListener;
 import com.projectlite2.android.R;
 import com.projectlite2.android.app.MyApplication;
+import com.projectlite2.android.utils.ProjectUtil;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +30,20 @@ public class CreateProjectActivity extends AppCompatActivity
 
     DatePickerDialog datePickerDialog;
     int Year, Month, Day;
+
+    boolean isSetForStart;
+
+    private String strSetStartDate;
+    private String strSetEndDate;
+
+    Date mDateStart;
+    Date mDateClosing;
+
+    @BindView(R.id.editProjectName)
+    EditText mEditProjectName;
+
+    @BindView(R.id.editProjectAbstract)
+    EditText mEditProjectAbstract;
 
     @BindView(R.id.btnCancel)
     Button mBtnCancel;
@@ -52,10 +69,15 @@ public class CreateProjectActivity extends AppCompatActivity
 
         ButterKnife.bind(this);
 
+        strSetStartDate = getResources().getString(R.string.string_txt_btn_set_end_date);
+
+        strSetEndDate = getResources().getString(R.string.string_txt_btn_set_end_date);
+
     }
 
     @OnClick({R.id.btnCancel, R.id.btnCreate, R.id.btnSetStartDate, R.id.btnSetDeadline})
     void onClick(View v) {
+
         switch (v.getId()) {
             //  点击取消
             case R.id.btnCancel:
@@ -63,11 +85,30 @@ public class CreateProjectActivity extends AppCompatActivity
                 break;
             //  点击创建
             case R.id.btnCreate:
+
+                if (mEditProjectName.getText().toString().equals("")) {
+                    MyApplication.ToastyWarning("请输入项目名称");
+                    break;
+                }
+                if (mDateStart == null) {
+                    MyApplication.ToastyWarning("请设置项目开始日期");
+                    break;
+                }
+                if (mDateClosing == null) {
+                    MyApplication.ToastyWarning("请设置项目截止日期");
+                    break;
+                }
+
+
                 new XPopup.Builder(this).asConfirm("提示", "确定创建该项目吗？",
                         new OnConfirmListener() {
                             @Override
                             public void onConfirm() {
-                                MyApplication.ToastyInfo("点击了确定");
+
+                                String pjName = mEditProjectName.getText().toString();
+                                String pjBrief = mEditProjectAbstract.getText().toString();
+                                ProjectUtil.CreateProject(pjName, pjBrief, mDateStart, mDateClosing);
+
                             }
                         })
                         .show();
@@ -75,13 +116,15 @@ public class CreateProjectActivity extends AppCompatActivity
                 break;
             //  点击设置开始时间
             case R.id.btnSetStartDate:
-                PopDatePickerDialog(getResources().getString(R.string.string_txt_btn_set_start_date));
+                isSetForStart = true;
+                PopDatePickStart(strSetStartDate);
                 break;
 
 
             //  点击设置结束时间
             case R.id.btnSetDeadline:
-                PopDatePickerDialog(getResources().getString(R.string.string_txt_btn_set_end_date));
+                isSetForStart = false;
+                PopDatePickClosing(strSetEndDate);
                 break;
 
             default:
@@ -90,30 +133,62 @@ public class CreateProjectActivity extends AppCompatActivity
     }
 
 
+    //  设置日期返回
+    @SuppressLint("SetTextI18n")
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = "You picked the following date: " + dayOfMonth + "/" + (++monthOfYear) + "/" + year;
-        MyApplication.ToastyInfo(date);
+
+//        String date = "You picked the following date: " + dayOfMonth + "/" + (++monthOfYear) + "/" + year;
+//        MyApplication.ToastyInfo(date);
+
+        if (isSetForStart) {
+            mDateStart = new Date(year - 1900, monthOfYear , dayOfMonth);
+            mBtnSetStartDate.setText("" + year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+        } else {
+            mDateClosing = new Date(year - 1900, monthOfYear, dayOfMonth);
+            mBtnSetDeadline.setText("" + year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+        }
+
+        Log.d("mytest", "isSetForStart " + isSetForStart + " onDateSet: pick success");
+
         datePickerDialog = null;
     }
 
 
-    private void PopDatePickerDialog(String title) {
+    private void PopDatePickStart(String title) {
         datePickerDialog = DatePickerDialog.newInstance(CreateProjectActivity.this, Year, Month, Day);
 
         datePickerDialog.setThemeDark(false);
         datePickerDialog.showYearPickerFirst(true);
         datePickerDialog.setTitle(title);
 
-//                datePickerDialog.setAccentColor(R.color.purple_500);
-//                datePickerDialog.setOkColor(R.color.purple_500);
-//                datePickerDialog.setCancelColor(R.color.purple_500);
 
         datePickerDialog.setMinDate(Calendar.getInstance());
         datePickerDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {
-                datePickerDialog=null;
+                datePickerDialog = null;
+            }
+        });
+
+        datePickerDialog.show(getSupportFragmentManager(), "DatePickerDialog");
+    }
+
+    private void PopDatePickClosing(String title) {
+        datePickerDialog = DatePickerDialog.newInstance(CreateProjectActivity.this, Year, Month, Day);
+
+        datePickerDialog.setThemeDark(false);
+        datePickerDialog.showYearPickerFirst(true);
+        datePickerDialog.setTitle(title);
+
+        Calendar min = Calendar.getInstance();
+        min.setTime(mDateStart);
+
+        datePickerDialog.setMinDate(min);
+        datePickerDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                datePickerDialog = null;
             }
         });
 

@@ -16,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.ui.MessageBoxFragment;
 import com.projectlite2.android.ui.MyProfileFragment;
 import com.projectlite2.android.R;
@@ -24,6 +25,7 @@ import com.projectlite2.android.ui.HomePageFragment;
 
 import java.util.Objects;
 
+import cn.leancloud.AVUser;
 import nl.joery.animatedbottombar.AnimatedBottomBar;
 
 import static androidx.navigation.Navigation.findNavController;
@@ -85,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
 //        AppBarConfiguration appBarConfig=new AppBarConfiguration.Builder(bottomNav.getMenu()).build();
 //        NavigationUI.setupActionBarWithNavController(this,navController,appBarConfig);
 //        NavigationUI.setupWithNavController(bottomNav,navController);
+
+
+
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            MyApplication.ToastyInfo("当前用户："+currentUser.getMobilePhoneNumber());
+        } else {
+            MyApplication.ToastyError("当前无用户");
+        }
 
 
 
