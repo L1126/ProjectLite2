@@ -18,49 +18,66 @@ public class ProjectUtil {
     /**
      * 数据表名称：项目
      */
-    public static final  String CLASS_PROJECT ="Project";
+    public static final  String TABLE_NAME_PROJECT ="Project";
 
     /**
      * 中间表名称：用户、项目、项目负责人中间表
      */
-    public static final String CLASS_USER_PROJECT_LEADER_MAP ="UserProjectLeaderMap";
+    public static final String RELATION_NAME_USER_PROJECT_LEADER_MAP ="UserProjectLeaderMap";
 
     /**
      * 中间表名称：用户、项目、项目成员中间表
      */
-    public static final String CLASS_USER_PROJECT_MEMBER_MAP ="UserProjectMemberMap";
+    public static final String RELATION_NAME_USER_PROJECT_MEMBER_MAP ="UserProjectMemberMap";
 
     /**
      * 中间表字段：用户
      */
-    public static final String COL_USER="user";
+    public static final String RELATION_FIELD_LEADER ="leader";
 
     /**
      * 中间表字段：项目
      */
-    public static final String COL_PROJECT="project";
+    public static final String RELATION_FILED_PROJECT ="project";
 
 
+
+
+    /**
+     * 项目数据表字段名称：对象ID
+     */
+    public static final String TABLE_FIELD_OBJECT_ID = "objectId";
+
+    /**
+     * 项目数据表字段名称：项目12位ID
+     */
+    public static final String TABLE_FIELD_PROJECT_ID = "projectId";
     /**
      * 项目数据表字段名称：项目名称
      */
-    public static final String PROJECT_NAME = "projectName";
+    public static final String TABLE_FIELD_PROJECT_NAME = "projectName";
     /**
      * 项目数据表字段名称：项目简介
      */
-    public static final String PROJECT_BRIEF = "projectBrief";
+    public static final String TABLE_FIELD_PROJECT_BRIEF = "projectBrief";
+
     /**
      * 项目数据表字段名称：开始日期
      */
-    public static final String DATE_START = "dateStart";
+    public static final String TABLE_FIELD_DATE_START = "dateStart";
     /**
      * 项目数据表字段名称：截止日期
      */
-    public static final String DATE_CLOSING = "dateClosing";
+    public static final String TABLE_FIELD_DATE_CLOSING = "dateClosing";
 
 
-
-
+    /**
+     * 创建项目 v1.0
+     * @param pjName    项目名称
+     * @param pjBrief   项目摘要
+     * @param dateStart 项目开始日期
+     * @param dateClosing   项目截止日期
+     */
     public static void CreateProject(String pjName, String pjBrief,Date dateStart,Date dateClosing) {
 
         //  检查当前是否是用户登录的状态
@@ -72,20 +89,22 @@ public class ProjectUtil {
 
 
         // 构建对象
-        AVObject project = new AVObject(CLASS_PROJECT);
+        AVObject project = new AVObject(TABLE_NAME_PROJECT);
         // 为属性赋值
-        project.put(PROJECT_NAME, pjName);
-        project.put(PROJECT_BRIEF, pjBrief);
-        project.put(DATE_START,dateStart);
-        project.put(DATE_CLOSING,dateClosing);
+        project.put(TABLE_FIELD_PROJECT_ID,MyApplication.BuildRandomID());
+        project.put(TABLE_FIELD_PROJECT_NAME, pjName);
+        project.put(TABLE_FIELD_PROJECT_BRIEF, pjBrief);
+        project.put(TABLE_FIELD_DATE_START,dateStart);
+        project.put(TABLE_FIELD_DATE_CLOSING,dateClosing);
+
         // 将对象保存到云端
         project.saveInBackground();
 
         // 当前用户作为project的负责人： 创建中间表，关联用户和项目对象
-        AVObject userProjectLeaderMap = new AVObject(CLASS_USER_PROJECT_LEADER_MAP);// 选课表对象
+        AVObject userProjectLeaderMap = new AVObject(RELATION_NAME_USER_PROJECT_LEADER_MAP);// 选课表对象
         // 设置关联
-        userProjectLeaderMap.put(COL_USER, currentUser);
-        userProjectLeaderMap.put(COL_PROJECT, project);
+        userProjectLeaderMap.put(RELATION_FIELD_LEADER, currentUser);
+        userProjectLeaderMap.put(RELATION_FILED_PROJECT, project);
         // 保存选课表对象
         userProjectLeaderMap.saveInBackground().subscribe(new Observer<AVObject>() {
             public void onSubscribe(Disposable disposable) {
@@ -111,7 +130,7 @@ public class ProjectUtil {
     }
 
 
-
+//未完成
     public static void JoinProject(String projectId) {
 
         //  检查当前是否是用户登录的状态
@@ -121,7 +140,7 @@ public class ProjectUtil {
             return; // 直接return 结束创建操作
         }
 
-        AVQuery<AVObject> queryProject = new AVQuery<>(CLASS_PROJECT);
+        AVQuery<AVObject> queryProject = new AVQuery<>(TABLE_NAME_PROJECT);
         queryProject.whereEqualTo("lastName", projectId);
         queryProject.findInBackground().subscribe(new Observer<List<AVObject>>() {
             public void onSubscribe(Disposable disposable) {}
@@ -135,6 +154,10 @@ public class ProjectUtil {
 
 
     }
+
+
+
+
 
 
 
