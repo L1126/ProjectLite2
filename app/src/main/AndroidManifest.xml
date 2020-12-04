@@ -31,6 +31,7 @@
         </activity>
         <activity android:name=".activity.ProjectDetailActivity"></activity>
         <activity android:name=".activity.tmp"></activity>
+        <activity android:name=".activity.WorkPlaceActivity"></activity>
         <activity
             android:name=".activity.CreateProjectActivity">
         </activity>

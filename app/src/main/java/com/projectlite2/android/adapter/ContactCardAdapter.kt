@@ -72,7 +72,6 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
                 true -> {
                     setCardFold(holder, View.VISIBLE)
                     setLayoutStyle(holder, style)
-
                 }
                 false -> {
                     setCardFold(holder, View.GONE)

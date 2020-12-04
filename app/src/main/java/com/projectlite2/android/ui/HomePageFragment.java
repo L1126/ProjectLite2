@@ -22,6 +22,7 @@ import com.projectlite2.android.R;
 import com.projectlite2.android.activity.CreateProjectActivity;
 import com.projectlite2.android.activity.ProjectDetailActivity;
 import com.projectlite2.android.activity.SearchActivity;
+import com.projectlite2.android.activity.WorkPlaceActivity;
 import com.projectlite2.android.adapter.ProjectCardAdapter;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.model.ProjectCard;
@@ -59,8 +60,8 @@ public class HomePageFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.btnSearch:
-                        Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
-                        startActivity(intent1);
+                        Intent intent1 = new Intent(MyApplication.getContext(), WorkPlaceActivity.class);
+                             startActivity(intent1);
                         break;
                     case R.id.btnNewProject:
                         Intent intent2 = new Intent(MyApplication.getContext(), CreateProjectActivity.class);
