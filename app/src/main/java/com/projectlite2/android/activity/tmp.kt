@@ -2,10 +2,15 @@ package com.projectlite2.android.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.lapism.search.internal.SearchLayout
+import com.lapism.search.util.SearchUtils
+import com.lapism.search.widget.MaterialSearchView
 import com.projectlite2.android.R
 import com.projectlite2.android.adapter.TimeLineAdapter
+import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.OrderStatus
 import com.projectlite2.android.model.TimeLineModel
 import kotlinx.android.synthetic.main.activity_tmp.*
@@ -22,6 +27,73 @@ class tmp : AppCompatActivity() {
 
         setDataListItems()
         initRecyclerView()
+
+
+
+
+
+        val materialSearchView = findViewById<MaterialSearchView>(R.id.materialSearchView)
+        materialSearchView.apply {
+            setAdapterLayoutManager(mLayoutManager)
+            setAdapter(mAdapter)
+
+            navigationIconSupport = SearchLayout.NavigationIconSupport.SEARCH
+            setOnNavigationClickListener(object : SearchLayout.OnNavigationClickListener {
+                override fun onNavigationClick(hasFocus: Boolean) {
+                    if (hasFocus()) {
+                        finishAfterTransition()
+                    } else {
+                        materialSearchView.requestFocus()
+                    }
+                }
+            })
+
+            setTextHint("123")
+            setOnQueryTextListener(object : SearchLayout.OnQueryTextListener {
+                override fun onQueryTextChange(newText: CharSequence): Boolean {
+                   // mAdapter.filter(newText)
+                    return true
+                }
+
+                override fun onQueryTextSubmit(query: CharSequence): Boolean {
+                    return true
+                }
+            })
+
+            setOnMicClickListener(object : SearchLayout.OnMicClickListener {
+                override fun onMicClick() {
+                    if (SearchUtils.isVoiceSearchAvailable(MyApplication.getContext())) {
+                        SearchUtils.setVoiceSearch(
+                                this@tmp,
+                                getString(R.string.app_name)
+                        )
+                    }
+                }
+            })
+
+            elevation = 0f
+            setBackgroundStrokeWidth(resources.getDimensionPixelSize(R.dimen.search_stroke_width))
+            setBackgroundStrokeColor(
+                    ContextCompat.getColor(
+                            this@tmp,
+                            R.color.colorGrey500
+                    )
+            )
+            setOnFocusChangeListener(object : SearchLayout.OnFocusChangeListener {
+                override fun onFocusChange(hasFocus: Boolean) {
+                    navigationIconSupport = if (hasFocus) {
+                        SearchLayout.NavigationIconSupport.ARROW
+                    } else {
+                        SearchLayout.NavigationIconSupport.SEARCH
+                    }
+                }
+            })
+        }
+
+
+
+
+
     }
 
     private fun setDataListItems() {
@@ -42,5 +114,6 @@ class tmp : AppCompatActivity() {
         mAdapter = TimeLineAdapter(mDataList)
         recyclerView.adapter = mAdapter
     }
+
 
 }

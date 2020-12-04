@@ -45,30 +45,30 @@
     </fragment>
     <fragment
         android:id="@+id/myProfileAdvantageFragment"
-        android:name="com.projectlite2.android.myProfileFragment.MyProfileAdvantageFragment"
+        android:name="com.projectlite2.android.ui.myProfileFragment.MyProfileAdvantageFragment"
         android:label="优势" />
     <fragment
         android:id="@+id/myProfileGradeFragment"
-        android:name="com.projectlite2.android.myProfileFragment.MyProfileGradeFragment"
+        android:name="com.projectlite2.android.ui.myProfileFragment.MyProfileGradeFragment"
         android:label="年级" />
     <fragment
         android:id="@+id/myProfileMajorFragment"
-        android:name="com.projectlite2.android.myProfileFragment.MyProfileMajorFragment"
+        android:name="com.projectlite2.android.ui.myProfileFragment.MyProfileMajorFragment"
         android:label="专业" />
     <fragment
         android:id="@+id/myProfileNameFragment"
-        android:name="com.projectlite2.android.myProfileFragment.MyProfileNameFragment"
+        android:name="com.projectlite2.android.ui.myProfileFragment.MyProfileNameFragment"
         android:label="昵称" />
     <fragment
         android:id="@+id/myProfilePhoneNumberFragment"
-        android:name="com.projectlite2.android.myProfileFragment.MyProfilePhoneNumberFragment"
+        android:name="com.projectlite2.android.ui.myProfileFragment.MyProfilePhoneNumberFragment"
         android:label="手机号" />
     <fragment
         android:id="@+id/myProfileQRCodeFragment"
-        android:name="com.projectlite2.android.myProfileFragment.MyProfileQRCodeFragment"
+        android:name="com.projectlite2.android.ui.myProfileFragment.MyProfileQRCodeFragment"
         android:label="我的二维码" />
     <fragment
         android:id="@+id/myProfileSchoolFragment"
-        android:name="com.projectlite2.android.myProfileFragment.MyProfileSchoolFragment"
+        android:name="com.projectlite2.android.ui.myProfileFragment.MyProfileSchoolFragment"
         android:label="学校" />
 </navigation>

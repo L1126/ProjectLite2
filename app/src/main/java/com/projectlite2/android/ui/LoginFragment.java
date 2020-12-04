@@ -55,45 +55,23 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 String phone=binding.txtPhone.getText().toString();
                 String password=binding.txtPassword.getText().toString();
-                AVUser.loginByMobilePhoneNumber(phone,password).subscribe(new Observer<AVUser>() {
-                    public void onSubscribe(Disposable disposable) {
-                    }
 
-                    public void onNext(AVUser user) {
 
-                        // 登录成功
-                        // MyApplication.showToast(phone+" "+password+" 登陆成功");
-                        MyApplication.ToastySuccess(phone+" "+password+" 登陆成功");
-                        // 若勾选了记住密码
-                        if(binding.chkRememberPwd.isChecked()){
-                            // 保存sharedPreferences
-                            UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),phone);
-                            UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),password);
-                        }
-                        else{
-                            // 保存sharedPreferences
-                            UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
-                            UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
-                        }
+                if (!MyApplication.isMobilePhoneNum(phone)){
+                    MyApplication.ToastyWarning("请输入合法的手机号");
+                    return;
+                }
+                if (password.equals("")){
+                    MyApplication.ToastyWarning("请输入密码");
+                    return;
+                }
 
-                        // 跳转到主页
-                        Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
-                        startActivity(intent);
-                        // 销毁LoginActivity
-                        getActivity().finish();
-                    }
 
-                    public void onError(@NotNull Throwable throwable) {
-                        // 登录失败（可能是密码错误）
-                       // MyApplication.showToast(phone+" "+password+" 登陆失败");
-                        MyApplication.ToastyError("登录失败！");
-                    }
+                LoginWithPhoneAndPwd(phone, password,binding);
 
-                    public void onComplete() {
-                    }
-                });
             }
         });
+
         // 使用短信验证码登录-跳转
         binding.linkSMSLogin.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -102,6 +80,7 @@ public class LoginFragment extends Fragment {
                 navController.navigate(R.id.action_loginFragment2_to_loginSMSFragment);
             }
         });
+
         // 注册新账户-跳转-
         binding.linkSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +93,7 @@ public class LoginFragment extends Fragment {
 
             }
         });
+
         // 忘记密码-跳转
         binding.linkForgetpwd.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -133,6 +113,54 @@ public class LoginFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+    }
+
+
+    /**
+     * 使用 手机号码 和 密码 登录客户端
+     * @param phone 手机号码，不加86
+     * @param password  密码
+     * @param binding   databinding类，监听checkbox。如果AVUSER可以检测客户端是否存在当前账户，则可舍弃shp
+     */
+    public void LoginWithPhoneAndPwd(String phone,String password,FragmentLoginBinding binding){
+        AVUser.loginByMobilePhoneNumber("+86"+phone,password).subscribe(new Observer<AVUser>() {
+            public void onSubscribe(Disposable disposable) {
+            }
+
+            public void onNext(AVUser user) {
+
+                // 登录成功
+                // MyApplication.showToast(phone+" "+password+" 登陆成功");
+                MyApplication.ToastySuccess(phone+" "+password+" 登陆成功");
+                // 若勾选了记住密码
+                if(binding.chkRememberPwd.isChecked()){
+                    // 保存sharedPreferences
+                    UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),phone);
+                    UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),password);
+                }
+                else{
+                    // 保存sharedPreferences
+                    UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
+                    UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
+                }
+
+                // 跳转到主页
+                Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
+                startActivity(intent);
+                // 销毁LoginActivity
+                getActivity().finish();
+            }
+
+            public void onError(@NotNull Throwable throwable) {
+                // 登录失败（可能是密码错误）
+                // MyApplication.showToast(phone+" "+password+" 登陆失败");
+                MyApplication.ToastyError("登录失败！");
+            }
+
+            public void onComplete() {
+            }
+        });
 
     }
 

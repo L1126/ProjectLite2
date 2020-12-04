@@ -16,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.ui.MessageBoxFragment;
 import com.projectlite2.android.ui.MyProfileFragment;
 import com.projectlite2.android.R;
@@ -24,6 +25,7 @@ import com.projectlite2.android.ui.HomePageFragment;
 
 import java.util.Objects;
 
+import cn.leancloud.AVUser;
 import nl.joery.animatedbottombar.AnimatedBottomBar;
 
 import static androidx.navigation.Navigation.findNavController;
@@ -88,6 +90,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            MyApplication.ToastyInfo("当前用户："+currentUser.getMobilePhoneNumber());
+        } else {
+            MyApplication.ToastyError("当前无用户");
+        }
+
+
+
         mAniBottomBar = findViewById(R.id.bottomBar);
         mTabLayout=findViewById(R.id.tabLayout);
         mViewPager=findViewById(R.id.viewPager);
@@ -137,27 +148,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    protected void setStatusBar() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
-//            View decorView = getWindow().getDecorView();
-//            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-//            decorView.setSystemUiVisibility(option);
-//            //根据上面设置是否对状态栏单独设置颜色
-//            if (useThemeStatusBarColor) {
-//                getWindow().setStatusBarColor(getResources().getColor(R.color.black));//设置状态栏背景色
-//            } else {
-//                getWindow().setStatusBarColor(Color.TRANSPARENT);//透明
-//            }
-//        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
-//            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
-//            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
-//        } else {
-//            Toast.makeText(this, "低于4.4的android系统版本不存在沉浸式状态栏", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && useStatusBarColor) {//android6.0以后可以对状态栏文字颜色和图标进行修改
-//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//        }
-//    }
+
 }

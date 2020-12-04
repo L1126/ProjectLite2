@@ -11,7 +11,12 @@ import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 
+import com.lxj.xpopup.XPopup;
 import com.projectlite2.android.CustomUserProvider;
+import com.projectlite2.android.R;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cn.leancloud.AVLogger;
 import cn.leancloud.AVOSCloud;
@@ -106,15 +111,40 @@ public class MyApplication extends Application {
     }
 
 
+    /**
+     * navigation跳转
+     * @param view
+     * @param resId
+     */
     public static void navJump(View view, @IdRes int resId) {
         navController = findNavController(view);
         navController.navigate(resId);
     }
 
+    /**
+     * 传递参数的navigation跳转
+     * @param view
+     * @param resId
+     * @param bundle
+     */
     public static void navJump(View view, @IdRes int resId, @Nullable Bundle bundle) {
         navController = findNavController(view);
         navController.navigate(resId, bundle);
     }
+
+    /**
+     * 通用判断是否为合法手机号
+     * @param telNum
+     * @return
+     */
+    public static boolean isMobilePhoneNum(String telNum){
+        String regex = "^((13[0-9])|(15[0-9])|(18[0-9]))\\d{8}$";
+        Pattern p = Pattern.compile(regex,Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(telNum);
+        return m.matches();
+    }
+
+
 
 
 

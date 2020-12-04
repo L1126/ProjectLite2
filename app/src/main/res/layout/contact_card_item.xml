@@ -179,11 +179,13 @@
 
             <ImageButton
                 android:id="@+id/btnMenu"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="6dp"
+                android:layout_width="34dp"
+                android:layout_height="30dp"
                 android:background="@android:color/transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:padding="6dp"
                 android:scaleType="centerInside"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -237,3 +239,6 @@
         app:cornerRadius="8dp" />
 
 </androidx.cardview.widget.CardView>
+
+
+

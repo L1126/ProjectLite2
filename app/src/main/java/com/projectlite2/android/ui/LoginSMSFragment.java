@@ -1,5 +1,6 @@
 package com.projectlite2.android.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +14,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 
 import com.projectlite2.android.LoginViewModel;
+import com.projectlite2.android.activity.MainActivity;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.R;
+import com.projectlite2.android.databinding.FragmentLoginBinding;
 import com.projectlite2.android.databinding.FragmentLoginSmsBinding;
 
 
@@ -61,12 +64,33 @@ public class LoginSMSFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String phoneNum=binding.txtPhone.getText().toString();
-                if (phoneNum.equals("")){
+                if (!MyApplication.isMobilePhoneNum(phoneNum)){
                     MyApplication.ToastyWarning("请输入合法的手机号");
                     return;
                 }
 
-                AVUser.requestLoginSmsCodeInBackground(phoneNum).blockingSubscribe();
+
+                AVSMSOption option = new AVSMSOption();
+                option.setSignatureName("ProjectLite"); //设置短信签名名称
+                AVSMS.requestSMSCodeInBackground("+86"+phoneNum, option).subscribe(new Observer<AVNull>() {
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                    }
+                    @Override
+                    public void onNext(AVNull avNull) {
+                        Log.d("TAG","Result: succeed to request SMSCode.");
+                        MyApplication.ToastyInfo("验证码已发送");
+                    }
+                    @Override
+                    public void onError(Throwable throwable) {
+                        Log.d("TAG","Result: failed to request SMSCode. cause:" + throwable.getMessage());
+                    }
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+
+
             }
         });
 
@@ -86,18 +110,7 @@ public class LoginSMSFragment extends Fragment {
                     return;
                 }
 
-                AVUser.signUpOrLoginByMobilePhoneInBackground(phoneNum, codeNum).subscribe(new Observer<AVUser>() {
-                    public void onSubscribe(Disposable disposable) {}
-                    public void onNext(AVUser user) {
-                        // 登录成功
-                        MyApplication.ToastySuccess("success");
-                    }
-                    public void onError(Throwable throwable) {
-                        // 验证码不正确
-                        MyApplication.ToastyError("验证码错误");
-                    }
-                    public void onComplete() {}
-                });
+                SignUpOrLoginWithSMS(phoneNum,codeNum);
 
             }
         });
@@ -119,5 +132,32 @@ public class LoginSMSFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+
+    /**
+     * 使用手机短信验证码注册或登录
+     * @param phoneNum 手机号码，不加86
+     * @param codeNum   用户输入的验证码
+     */
+    public void  SignUpOrLoginWithSMS(String phoneNum,String codeNum){
+        AVUser.signUpOrLoginByMobilePhoneInBackground("+86"+phoneNum, codeNum).subscribe(new Observer<AVUser>() {
+            public void onSubscribe(Disposable disposable) {}
+            public void onNext(AVUser user) {
+                // 登录成功
+                MyApplication.ToastySuccess("登录成功");
+
+                // 跳转到主页
+                Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
+                startActivity(intent);
+                // 销毁LoginActivity
+                getActivity().finish();
+
+            }
+            public void onError(Throwable throwable) {
+                // 验证码不正确
+                MyApplication.ToastyError("验证码错误");
+            }
+            public void onComplete() {}
+        });
+    }
 
 }

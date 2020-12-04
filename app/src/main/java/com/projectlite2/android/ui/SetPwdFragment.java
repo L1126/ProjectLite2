@@ -15,8 +15,10 @@ import com.projectlite2.android.R;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.databinding.FragmentSetPwdBinding;
 
+import cn.leancloud.AVObject;
 import cn.leancloud.AVUser;
 import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -70,7 +72,11 @@ public class SetPwdFragment extends Fragment {
                     MyApplication.ToastyWarning("两次密码输入不同，请检查输入。");
                     return;
                 } else {
-                    SignUp(userName, _phoneNumber, password);
+
+
+                    SetPassword(userName, password);
+
+
                 }
             }
         });
@@ -81,6 +87,9 @@ public class SetPwdFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
+
         //  接收参数
         _phoneNumber = getArguments().getString("PHONE_NUMBER");
         _smsCode = getArguments().getString("SMS_CODE");
@@ -91,39 +100,34 @@ public class SetPwdFragment extends Fragment {
      * 使用手机号码和密码注册
      *
      * @param userName 用户名
-     * @param phone    手机号
      * @param password 密码
      */
-    public void SignUp(String userName, String phone, String password) {
-        // 创建实例
-        AVUser user = new AVUser();
-        user.setUsername(userName);
-        user.setPassword(password);
+    public void SetPassword(String userName,  String password) {
 
-        // 可选
-        user.setMobilePhoneNumber(phone);
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            currentUser.setUsername(userName);
+            currentUser.setPassword(password);
+            currentUser.saveInBackground().subscribe(new Observer<AVObject>() {
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+                }
+                @Override
+                public void onNext(@NonNull AVObject avObject) {
+                    MyApplication.ToastySuccess("success");
+                }
+                @Override
+                public void onError(@NonNull Throwable e) {
+                    MyApplication.ToastyError("注册失败");
+                }
+                @Override
+                public void onComplete() {
+                }
+            });
 
-        // 设置其他属性的方法跟 AVObject 一样
-        user.put("gender", "secret");
-
-        user.signUpInBackground().subscribe(new Observer<AVUser>() {
-            public void onSubscribe(Disposable disposable) {
-            }
-
-            public void onNext(AVUser user) {
-                // 注册成功
-                System.out.println("注册成功。objectId：" + user.getObjectId());
-                MyApplication.ToastySuccess("注册成功。objectId：" + user.getObjectId());
-            }
-
-            public void onError(Throwable throwable) {
-                // 注册失败（通常是因为用户名已被使用）
-                MyApplication.ToastyError("ERROR");
-            }
-
-            public void onComplete() {
-            }
-        });
+        } else {
+            MyApplication.ToastyError("当前无用户");
+        }
 
     }
 }

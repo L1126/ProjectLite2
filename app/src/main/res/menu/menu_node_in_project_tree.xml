@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/btnAddSubNode"
+        android:icon="@drawable/ic_outline_add_box_24"
+        android:title="Download" />
+
+    <item
+        android:id="@+id/btnAddMission"
+        android:icon="@drawable/ic_baseline_assignment_24"
+        android:title="Message" />
+
+    <item
+        android:id="@+id/btnEditNode"
+        android:icon="@drawable/ic_baseline_edit_24"
+        android:title="Share" />
+
+    <item
+        android:id="@+id/btnDelNode"
+        android:icon="@drawable/ic_baseline_delete_outline_24"
+        android:title="Favorite" />
+</menu>

@@ -16,10 +16,13 @@ import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.ContactCard
 import com.projectlite2.android.utils.OnItemClickListener
 import com.projectlite2.android.utils.ItemTouchHelperAdapter
+import com.projectlite2.android.utils.OnItemClickListenerPlus
 import java.util.*
 
 class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style: Int) :
-        RecyclerView.Adapter<ContactCardAdapter.ViewHolder>(), ItemTouchHelperAdapter {
+        RecyclerView.Adapter<ContactCardAdapter.ViewHolder>()
+        ,ItemTouchHelperAdapter
+{
 
     companion object {
         const val STYLE_PARAM_MY_CONTACTS = 0
@@ -29,7 +32,7 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
     private lateinit var mShowAction:Animation
     private lateinit var mHiddenAction:Animation
 
-    private var itemClickListener: OnItemClickListener? = null
+    private var itemClickListener: OnItemClickListenerPlus? = null
     private var isFolded: Boolean = true
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -54,7 +57,44 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.contact_card_item, parent, false)
-        return ViewHolder(view)
+        val viewHolder = ViewHolder(view)
+
+        //  整个卡片的点击
+        viewHolder.itemView.setOnClickListener {
+            itemClickListener!!.onClick(it,viewHolder.adapterPosition,viewHolder.itemView.id)
+            initAnimations()
+            when (isFolded) {
+                true -> {
+//                    setCardFold(holder, View.VISIBLE)
+//                    setLayoutStyle(holder, style)
+                    setCardFold(viewHolder, View.VISIBLE)
+                    setLayoutStyle(viewHolder, style)
+
+                }
+                false -> {
+                    setCardFold(viewHolder, View.GONE)
+                }
+            }
+            //折叠状态取反
+            isFolded = !isFolded
+//            MyApplication.showToast(style.toString())
+        }
+
+        //  菜单按钮的点击
+        viewHolder.cdBtnMenu.setOnClickListener {
+            itemClickListener!!.onClick(it,viewHolder.adapterPosition,viewHolder.cdBtnMenu.id)
+        }
+        //  同意按钮的点击
+        viewHolder.cdButtonAgree.setOnClickListener {
+            itemClickListener!!.onClick(it,viewHolder.adapterPosition,viewHolder.cdButtonAgree.id)
+        }
+        //  拒绝按钮的点击
+        viewHolder.cdButtonCancel.setOnClickListener{
+            itemClickListener!!.onClick(it,viewHolder.adapterPosition,viewHolder.cdButtonCancel.id)
+        }
+
+
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -64,30 +104,12 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
         holder.cdMajor.text = card.major
         holder.cdGrade.text = card.grade
 
-        // 点击事件
-        holder.itemView.setOnClickListener {
-            itemClickListener!!.onItemClickListener(position)
-            initAnimations()
-            when (isFolded) {
-                true -> {
-                    setCardFold(holder, View.VISIBLE)
-                    setLayoutStyle(holder, style)
-                }
-                false -> {
-                    setCardFold(holder, View.GONE)
-                }
-            }
-            //折叠状态取反
-            isFolded = !isFolded
-//            MyApplication.showToast(style.toString())
-        }
-
     }
 
     override fun getItemCount() = mData.size
 
     // 提供set方法
-    fun setOnKotlinItemClickListener(itemClickListener: OnItemClickListener) {
+    fun setOnKotlinItemClickListener(itemClickListener: OnItemClickListenerPlus) {
         this.itemClickListener = itemClickListener
     }
 
