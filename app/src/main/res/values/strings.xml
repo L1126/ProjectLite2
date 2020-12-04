@@ -63,7 +63,4 @@
     <string name="string_btn_menu_join_project">Join</string>
     <string name="string_txt_btn_set_start_date">Start date</string>
     <string name="string_txt_btn_set_end_date">Deadline</string>
-    <string name="string_query_result">Query result:</string>
-    <string name="string_txt_project_number">Project number</string>
-    <string name="string_btn_apply_to_join">Apply to join</string>
 </resources>

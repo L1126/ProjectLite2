@@ -122,8 +122,7 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
                         arrMenuTitle,
                         intArrayOf()
                 )
-                // _ 其实是position
-                { _, text ->
+                { position, text ->
                     when (text) {
                         arrMenuTitle[0]->{
                             MyApplication.ToastyInfo("还没实现呢")

@@ -26,18 +26,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectLite2">
-        <activity android:name=".activity.SearchActivity"
-            android:parentActivityName=".activity.MainActivity">
-        </activity>
         <activity
-            android:name=".activity.MyWelcomeActivity"
-            android:theme="@style/WelcomeScreenTheme.Light.SolidNavigation.UnderStatusBar" />
-        <activity android:name=".activity.ModifyMyProfileCardActivity" />
-        <activity android:name=".activity.ProjectDetailActivity" />
-        <activity android:name=".activity.tmp" />
+            android:name=".activity.ModifyMyProfileCardActivity">
+        </activity>
+        <activity android:name=".activity.ProjectDetailActivity"></activity>
+        <activity android:name=".activity.tmp"></activity>
         <activity
             android:name=".activity.CreateProjectActivity"
             android:parentActivityName=".activity.MainActivity" />
+        <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.SystemSettingActivity" />
         <activity
             android:name=".activity.GuideActivity"

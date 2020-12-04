@@ -82,6 +82,7 @@
             android:ems="10"
             android:inputType="textPassword"
             android:paddingHorizontal="@dimen/rc_padding_2"
+            android:text="@={model.password}"
             android:textSize="@dimen/rc_button_text_size_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"

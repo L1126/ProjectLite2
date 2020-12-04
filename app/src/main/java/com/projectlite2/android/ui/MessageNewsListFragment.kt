@@ -58,6 +58,7 @@ class MessageNewsListFragment() : Fragment() {
 
         //消息卡片
         val mlayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+        val clayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         mRecyclerview = mView.findViewById(R.id.recyclerViewCardMessage)
         mRecyclerview.layoutManager = mlayoutManager
         mAdapter = MessageCardAdapter(mMessageList)
