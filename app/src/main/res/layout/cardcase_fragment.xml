@@ -71,18 +71,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!--        <com.google.android.material.tabs.TabItem-->
-            <!--            android:id="@+id/myCard"-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:text="My Card" />-->
-
-            <!--        <com.google.android.material.tabs.TabItem-->
-            <!--            android:id="@+id/newFriend"-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:text="New Friend" />-->
-
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager

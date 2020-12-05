@@ -1,5 +1,7 @@
 package com.projectlite2.android.ui;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,6 +12,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -20,6 +23,8 @@ import java.util.ArrayList;
 
 
 import com.projectlite2.android.R;
+import com.projectlite2.android.activity.SearchActivity;
+import com.projectlite2.android.app.MyApplication;
 
 public class CardcaseFragment extends Fragment {
 
@@ -36,9 +41,33 @@ public class CardcaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         contextView = inflater.inflate(R.layout.cardcase_fragment, container, false);
+
         toolBar = contextView.findViewById(R.id.toolBar);
         txtTitle = contextView.findViewById(R.id.txtPageTitle);
         txtTitle.setText(R.string.string_menu_cardcase);
+
+        toolBar.inflateMenu(R.menu.menu_message_card);
+
+        //  标题栏菜单点击
+        toolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    //  点击搜索
+                    case R.id.btnSearch:
+                        Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
+                        startActivity(intent1);
+                        break;
+
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
+
         tabLayout = contextView.findViewById(R.id.tabLayoutCard);
         viewpager = contextView.findViewById(R.id.viewPagerCard);
         return contextView;
