@@ -4,20 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.projectlite2.android.MaxRecyclerView
-import com.projectlite2.android.Msg
 import com.projectlite2.android.R
 import com.projectlite2.android.adapter.DeleteFileAdapter
-import com.projectlite2.android.adapter.MessageCardAdapter
-import com.projectlite2.android.adapter.MsgChatAdapter
 import com.projectlite2.android.adapter.WPRecycleFileAdapter
 import com.projectlite2.android.model.DeleteFileCard
-import com.projectlite2.android.model.MessageCard
 import com.projectlite2.android.model.RecyclebinCard
 import com.projectlite2.android.utils.OnItemClickListenerPlus
 import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
@@ -41,8 +36,7 @@ class WPRecycbinFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
-        mView = inflater.inflate(R.layout.workplace_recyclebin_frag, container, false)
+        mView = inflater.inflate(R.layout.workplace_recyclebin_list_frag, container, false)
         return mView
     }
 
@@ -58,7 +52,6 @@ class WPRecycbinFragment : Fragment() {
 
         //消息卡片
         val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        val dflayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         mRecyclerview = mView.findViewById(R.id.recyclerViewBin)
         mRecyclerview.layoutManager = layoutManager
         mAdapter = WPRecycleFileAdapter(mDeleteBarList)

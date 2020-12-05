@@ -6,120 +6,163 @@
     android:layout_height="match_parent"
     tools:context=".ui.MessageBoxFragment">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayoutWorkplace"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPagerWorkplace"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="70dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayoutWorkplace"/>
+        android:animateLayoutChanges="true"
+        android:background="#FFFFFF">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="70dp"
-        android:background="#606060" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutWorkplace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-    <LinearLayout
-        android:id="@+id/toolBtnBar"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_gravity="bottom">
+        </com.google.android.material.tabs.TabLayout>
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPagerWorkplace"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/view5"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayoutWorkplace" />
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center|top"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/workplace_upload"/>
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center"
-                android:text="上传"/>
+        <View
+            android:id="@+id/view5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="#606060"
+            app:layout_constraintBottom_toTopOf="@+id/toolBtnBar"
+            tools:layout_editor_absoluteX="-16dp" />
 
-        </FrameLayout>
+        <LinearLayout
+            android:id="@+id/toolBtnBar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            <FrameLayout
+                android:id="@+id/WPupload"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center|top"
-                android:src="@drawable/workplace_multi"/>
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:text="多选"/>
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|top"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/workplace_upload" />
 
-        </FrameLayout>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="上传" />
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            </FrameLayout>
 
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center|top"
-                android:src="@drawable/workplace_cfile"/>
-            <TextView
-                android:layout_width="60dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:text="新建文件"/>
+            <FrameLayout
+                android:id="@+id/WPmulti"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-        </FrameLayout>
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center|top"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/workplace_multi" />
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="多选" />
 
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center|top"
-                android:src="@drawable/workplace_cfolder"/>
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:text="新建文件夹"/>
+            </FrameLayout>
 
-        </FrameLayout>
+            <FrameLayout
+                android:id="@+id/WPcfile"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center|top"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/workplace_cfile" />
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="新建文件" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/WPcfolder"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center|top"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/workplace_cfolder" />
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="新建文件夹" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -1,41 +1,25 @@
 package com.projectlite2.android.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.projectlite2.android.R
-import com.projectlite2.android.adapter.ContactCardAdapter
 import com.projectlite2.android.adapter.WPCardAdapter
-import com.projectlite2.android.model.ContactCard
 import com.projectlite2.android.model.WorkPlaceCard
-import com.projectlite2.android.utils.OnItemClickListener
 import com.projectlite2.android.utils.OnItemClickListenerPlus
 import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
-import java.util.ArrayList
+import java.util.*
 
-class WPListFragment(private val style_param: Int) : Fragment() {
+class WPStudyListFragment : Fragment() {
 
-    companion object {
-
-        private const val STYLE_PARAM_STUDY = 1
-        private const val STYLE_PARAM_MEETING = 2
-
-        @JvmStatic
-        fun workPlaceStudy(): Int {
-            return STYLE_PARAM_STUDY;
-        }
-
-        @JvmStatic
-        fun workPlaceMeeting(): Int {
-            return STYLE_PARAM_MEETING;
-        }
-    }
+    lateinit var linearLayout: LinearLayout
+    lateinit var lview: View
 
     lateinit var mView: View
     lateinit var mRecyclerview: RecyclerView
@@ -47,8 +31,15 @@ class WPListFragment(private val style_param: Int) : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        mView = inflater.inflate(R.layout.workplace_list_frag, container, false)
+        mView = inflater.inflate(R.layout.workplace_study_list_frag, container, false)
         return mView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        linearLayout = requireActivity().findViewById(R.id.toolBtnBar)
+        lview = requireActivity().findViewById(R.id.view5)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,10 +53,13 @@ class WPListFragment(private val style_param: Int) : Fragment() {
         addNewCards()
 
         val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        mRecyclerview = mView.findViewById(R.id.recyclerViewList)
+        mRecyclerview = mView.findViewById(R.id.recyclerViewStudy)
         mRecyclerview.layoutManager = layoutManager
-        mAdapter = WPCardAdapter(mWPtList, style_param)
+        mAdapter = WPCardAdapter(mWPtList, 1)
         mRecyclerview.adapter = mAdapter
+
+        linearLayout.visibility = View.VISIBLE
+        lview.visibility = View.VISIBLE
 
         //先实例化Callback
         mCallBack= SimpleItemTouchHelperCallback(mAdapter)

@@ -1,30 +1,23 @@
 package com.projectlite2.android.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.projectlite2.android.R;
 import com.projectlite2.android.adapter.WorkPlaceAdapter;
-import com.projectlite2.android.ui.CardcaseFragment;
-import com.projectlite2.android.ui.ContactListFragment;
-import com.projectlite2.android.ui.WPFileListFragment;
-import com.projectlite2.android.ui.WPListFragment;
+import com.projectlite2.android.generated.callback.OnClickListener;
+import com.projectlite2.android.utils.OnItemClickListenerPlus;
 
-import java.util.ArrayList;
-import java.util.List;
+import butterknife.OnClick;
 
 public class WorkPlaceActivity extends AppCompatActivity {
 
@@ -32,10 +25,15 @@ public class WorkPlaceActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private WorkPlaceAdapter mWorkPlaceAdapter;
 
+    private LinearLayout mLinearLayout;
+    private View mView;
+
     private TabLayout.Tab one;
     private TabLayout.Tab two;
     private TabLayout.Tab three;
     private TabLayout.Tab four;
+
+    private FrameLayout uploadFrag, multiFrag, cfileFrag, cfolderFrag;
 
     @Nullable
     @Override
@@ -47,6 +45,86 @@ public class WorkPlaceActivity extends AppCompatActivity {
 
         //初始化视图
         initViews();
+
+        mLinearLayout = findViewById(R.id.toolBtnBar);
+        mView = findViewById(R.id.view5);
+        uploadFrag = findViewById(R.id.WPupload);
+        multiFrag = findViewById(R.id.WPmulti);
+        cfileFrag = findViewById(R.id.WPcfile);
+        cfolderFrag = findViewById(R.id.WPcfolder);
+
+        //上传
+        uploadFrag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        //多选
+        multiFrag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        //新建文件
+        cfileFrag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        //新建文件夹
+        cfolderFrag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        //Tab点击事件
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+            @Override
+            public void onTabSelected(TabLayout.Tab tab){
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+                        mLinearLayout.setVisibility(View.VISIBLE);
+                        mView.setVisibility(View.VISIBLE);
+                        Log.d("KKang","第一个");
+                        break;
+
+                    case 1:
+                        mLinearLayout.setVisibility(View.VISIBLE);
+                        mView.setVisibility(View.VISIBLE);
+                        Log.d("KKang","第二个");
+                        break;
+
+                    case 2:
+                        mLinearLayout.setVisibility(View.GONE);
+                        mView.setVisibility(View.GONE);
+                        Log.d("KKang","第三个");
+                        break;
+
+                    case 3:
+                        mLinearLayout.setVisibility(View.GONE);
+                        mView.setVisibility(View.GONE);
+                        Log.d("KKang","第四个");
+                        break;
+
+                }
+            }
+        });
     }
 
     private void initViews() {

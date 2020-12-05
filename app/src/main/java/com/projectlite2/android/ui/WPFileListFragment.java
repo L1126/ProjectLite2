@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -21,15 +22,20 @@ public class WPFileListFragment extends Fragment {
     private View contextView;// 总视图
     private TabLayout tabLayout;
     private ViewPager viewpager;
+
+    private LinearLayout linearLayout;
+    private View lview;
+
     ArrayList filesList = new ArrayList<Fragment>();
     String[] temp = {"调研组","原型组","代码组","文档组","公共"};
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        contextView = inflater.inflate(R.layout.workplace_file_frag, container, false);
+        contextView = inflater.inflate(R.layout.workplace_file_list_frag, container, false);
         tabLayout = contextView.findViewById(R.id.tabWorkplaceFile);
         viewpager = contextView.findViewById(R.id.viewPagerWorkplaceFile);
+
         return contextView;
     }
 
@@ -38,9 +44,17 @@ public class WPFileListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         WPFileListFragment.MPagerAdapter mPagerAdapter = new WPFileListFragment.MPagerAdapter(getChildFragmentManager());
+
         initFragment();
+
+        linearLayout = getActivity().findViewById(R.id.toolBtnBar);
+        lview = getActivity().findViewById(R.id.view5);
+
         tabLayout.setupWithViewPager(viewpager);
         viewpager.setAdapter(mPagerAdapter);
+
+        linearLayout.setVisibility(View.VISIBLE);
+        lview.setVisibility(View.VISIBLE);
     }
 
     private void initFragment() {
@@ -60,8 +74,8 @@ public class WPFileListFragment extends Fragment {
         }
 
         @Override
-        public Fragment getItem(int position) {
-            return (Fragment) filesList.get(position);
+        public Fragment getItem(int inposition) {
+            return (Fragment) filesList.get(inposition);
         }
 
         @Override
@@ -70,14 +84,14 @@ public class WPFileListFragment extends Fragment {
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            return super.instantiateItem(container, position);
+        public Object instantiateItem(ViewGroup container, int inposition) {
+            return super.instantiateItem(container, inposition);
         }
 
         //返回tablayout的标题文字;
         @Override
-        public CharSequence getPageTitle(int position) {
-            return temp[position];
+        public CharSequence getPageTitle(int inposition) {
+            return temp[inposition];
         }
     }
 }

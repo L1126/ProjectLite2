@@ -23,11 +23,11 @@ import java.util.*
 class WPCardAdapter(private var mData: MutableList<WorkPlaceCard>, val style: Int) :
         RecyclerView.Adapter<WPCardAdapter.ViewHolder>(), ItemTouchHelperAdapter {
 
-    companion object{
-        const val STYLE_PARAM_FILE = 0
-        const val STYLE_PARAM_STUDY = 1
-        const val STYLE_PARAM_MEETING = 2
-    }
+//    companion object{
+//        const val STYLE_PARAM_FILE = 0
+//        const val STYLE_PARAM_STUDY = 1
+//        const val STYLE_PARAM_MEETING = 2
+//    }
 
     private var itemClickListener: OnItemClickListenerPlus? = null
 
@@ -48,8 +48,8 @@ class WPCardAdapter(private var mData: MutableList<WorkPlaceCard>, val style: In
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val card = mData[position]
+    override fun onBindViewHolder(holder: ViewHolder, inposition: Int) {
+        val card = mData[inposition]
 
         holder.cdName.text = card.name
         holder.cdIntro.text = card.intro
@@ -66,17 +66,17 @@ class WPCardAdapter(private var mData: MutableList<WorkPlaceCard>, val style: In
 
     private fun setLayoutStyle(holder: WPCardAdapter.ViewHolder, style: Int) {
 
-        if (style == STYLE_PARAM_FILE) {
+        if (style == 0) {
 
             holder.cdIntro.visibility = View.GONE
             holder.cdTime.visibility = View.GONE
 
-        } else if (style == STYLE_PARAM_STUDY) {
+        } else if (style == 1) {
 
             holder.cdDate.visibility = View.GONE
             holder.cdTime.visibility = View.GONE
 
-        } else if (style == STYLE_PARAM_MEETING){
+        } else if (style == 2){
 
             holder.cdMessageBar.visibility = View.GONE
 
@@ -90,10 +90,10 @@ class WPCardAdapter(private var mData: MutableList<WorkPlaceCard>, val style: In
         this.itemClickListener = itemClickListener
     }
 
-    override fun onItemDissmiss(position: Int) {
+    override fun onItemDissmiss(inposition: Int) {
         //移除数据
-//        mData.removeAt(position)
-//        notifyItemRemoved(position);
+//        mData.removeAt(inposition)
+//        notifyItemRemoved(inposition);
     }
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {

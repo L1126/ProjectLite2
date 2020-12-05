@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewBin"
+        android:id="@+id/recyclerViewStudy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="198dp" />
+        tools:layout_editor_absoluteX="66dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

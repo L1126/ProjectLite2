@@ -1,9 +1,13 @@
 package com.projectlite2.android.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -45,7 +49,7 @@ class WPFileGroupListFragment(private val style_group: Int) : Fragment() {
         val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         mRecyclerview = mView.findViewById(R.id.recyclerViewGruop)
         mRecyclerview.layoutManager = layoutManager
-        mAdapter = WPCardAdapter(mFlieList,3)
+        mAdapter = WPCardAdapter(mFlieList,0)
         mRecyclerview.adapter = mAdapter
 
         //先实例化Callback
@@ -55,7 +59,6 @@ class WPFileGroupListFragment(private val style_group: Int) : Fragment() {
 
         mAdapter.setOnKotlinItemClickListener(object : OnItemClickListenerPlus{
             override fun onClick(item: View?, position: Int, which: Int) {
-
             }
         })
     }

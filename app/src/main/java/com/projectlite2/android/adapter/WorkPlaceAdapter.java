@@ -1,11 +1,14 @@
 package com.projectlite2.android.adapter;
 
+import android.util.Log;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.projectlite2.android.ui.WPFileListFragment;
-import com.projectlite2.android.ui.WPListFragment;
+import com.projectlite2.android.ui.WPMeetingListFragment;
+import com.projectlite2.android.ui.WPStudyListFragment;
 import com.projectlite2.android.ui.WPRecycbinFragment;
 
 public class WorkPlaceAdapter extends FragmentPagerAdapter {
@@ -21,11 +24,12 @@ public class WorkPlaceAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             return new WPFileListFragment();
         } else if (position == 1) {
-            return new WPListFragment(WPListFragment.workPlaceStudy());
+            return new WPStudyListFragment();
         }else if (position == 2){
-            return new WPListFragment(WPListFragment.workPlaceMeeting());
+            return new WPMeetingListFragment();
+        }else {
+            return new WPRecycbinFragment();
         }
-        return new WPRecycbinFragment();
     }
 
     @Override
