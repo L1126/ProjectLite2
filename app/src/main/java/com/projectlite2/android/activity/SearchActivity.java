@@ -23,17 +23,15 @@ import java.util.List;
 
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
-import cn.leancloud.AVUser;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-import static com.projectlite2.android.utils.ProjectUtil.TABLE_FIELD_DATE_CLOSING;
-import static com.projectlite2.android.utils.ProjectUtil.TABLE_FIELD_DATE_START;
-import static com.projectlite2.android.utils.ProjectUtil.TABLE_FIELD_OBJECT_ID;
-import static com.projectlite2.android.utils.ProjectUtil.TABLE_FIELD_PROJECT_BRIEF;
-import static com.projectlite2.android.utils.ProjectUtil.TABLE_FIELD_PROJECT_ID;
-import static com.projectlite2.android.utils.ProjectUtil.TABLE_FIELD_PROJECT_NAME;
-import static com.projectlite2.android.utils.ProjectUtil.TABLE_NAME_PROJECT;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_DATE_CLOSING;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_DATE_START;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_PROJECT_BRIEF;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_PROJECT_ID;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_PROJECT_NAME;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_NAME_PROJECT;
 
 public class SearchActivity extends AppCompatActivity {
 

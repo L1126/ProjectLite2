@@ -2,6 +2,7 @@ package com.projectlite2.android.activity;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +15,7 @@ import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.interfaces.OnConfirmListener;
 import com.projectlite2.android.R;
 import com.projectlite2.android.app.MyApplication;
-import com.projectlite2.android.utils.ProjectUtil;
+import com.projectlite2.android.utils.CloudUtil;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.Calendar;
@@ -45,9 +46,6 @@ public class CreateProjectActivity extends AppCompatActivity
     @BindView(R.id.editProjectAbstract)
     EditText mEditProjectAbstract;
 
-    @BindView(R.id.btnCancel)
-    Button mBtnCancel;
-
     @BindView(R.id.btnCreate)
     Button mBtnCreate;
 
@@ -75,14 +73,10 @@ public class CreateProjectActivity extends AppCompatActivity
 
     }
 
-    @OnClick({R.id.btnCancel, R.id.btnCreate, R.id.btnSetStartDate, R.id.btnSetDeadline})
+    @OnClick({ R.id.btnCreate, R.id.btnSetStartDate, R.id.btnSetDeadline})
     void onClick(View v) {
 
         switch (v.getId()) {
-            //  点击取消
-            case R.id.btnCancel:
-                finish();
-                break;
             //  点击创建
             case R.id.btnCreate:
 
@@ -100,6 +94,7 @@ public class CreateProjectActivity extends AppCompatActivity
                 }
 
 
+
                 new XPopup.Builder(this).asConfirm("提示", "确定创建该项目吗？",
                         new OnConfirmListener() {
                             @Override
@@ -107,7 +102,14 @@ public class CreateProjectActivity extends AppCompatActivity
 
                                 String pjName = mEditProjectName.getText().toString();
                                 String pjBrief = mEditProjectAbstract.getText().toString();
-                                ProjectUtil.CreateProject(pjName, pjBrief, mDateStart, mDateClosing);
+                                CloudUtil.CLASS_PROJECT.CreateProject(pjName, pjBrief, mDateStart, mDateClosing);
+                                //  成功创建项目，向上个activity返回请求码，使其刷新
+                                Intent it=new Intent();
+                                it.putExtra("date_return","create success");
+                                setResult(RESULT_OK, it);
+
+                                //  关闭本活动
+                                finish();
 
                             }
                         })
