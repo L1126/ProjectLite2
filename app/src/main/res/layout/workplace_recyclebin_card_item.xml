@@ -39,16 +39,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="320dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="#00000000"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/deleteFileBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/deleteFileBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            android:layout_marginTop="0dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtName"
+            app:layout_constraintTop_toBottomOf="@+id/divider4"
             tools:layout_editor_absoluteX="10dp" />
 
         <RadioButton
@@ -60,6 +73,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/imgToggleBar"
+            android:layout_width="26dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/deleteFileBar"
+            app:srcCompat="@drawable/ic_baseline_horizontal_rule_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

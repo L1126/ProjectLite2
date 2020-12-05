@@ -29,13 +29,15 @@ class WPRecycbinFragment : Fragment() {
     lateinit var mRecyclerview: RecyclerView
     lateinit var mAdapter: WPRecycleFileAdapter
     lateinit var mCallBack: ItemTouchHelper.Callback
+
     private val mDeleteBarList = ArrayList<RecyclebinCard>()
+    private val mEveryCardDeleteList = ArrayList<ArrayList<DeleteFileCard>>()
+    private val mEveryCardDeleteAdapterList = ArrayList<DeleteFileAdapter>()
 
-    lateinit var dfRecyclerView: RecyclerView
-    lateinit var dfAdapter: DeleteFileAdapter
-    private val dfList = ArrayList<DeleteFileCard>()
+    private var CardClick0 = true
+    private var CardClick1 = true
+    private var CardClick2 = true
 
-    private var CardClick = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -73,16 +75,34 @@ class WPRecycbinFragment : Fragment() {
 
                 when(which){
                     R.id.WPDeleteCardBackground -> {
-                        if (CardClick){
-                            dfRecyclerView = mView.findViewById(R.id.deleteFileBar)
-                            dfRecyclerView.layoutManager = dflayoutManager
-                            dfAdapter = DeleteFileAdapter(dfList)
-                            dfRecyclerView.adapter = dfAdapter
 
-                            dfList.add(DeleteFileCard("XXX 文件"))
-                            dfList.add(DeleteFileCard("XX 文件"))
+                        val thisCardView = mRecyclerview.getChildAt(position)
+                        val thisRV = thisCardView.findViewById<RecyclerView>(R.id.deleteFileBar)
 
-                            CardClick = false
+                        thisRV.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+                        thisRV.adapter = mEveryCardDeleteAdapterList[position]
+
+                        when(position) {
+                            0 -> {
+                                if (CardClick0){
+                                    mEveryCardDeleteList[0].add(DeleteFileCard("用户调研"))
+                                    mEveryCardDeleteList[0].add(DeleteFileCard("用户访谈"))
+                                    CardClick0 = false
+                                }
+                            }
+                            1 -> {
+                                if (CardClick1){
+                                    mEveryCardDeleteList[1].add(DeleteFileCard("XXX 文件"))
+                                    CardClick1 = false
+                                }
+                            }
+                            2 -> {
+                                if (CardClick2){
+                                    mEveryCardDeleteList[2].add(DeleteFileCard("插图文件"))
+                                    mEveryCardDeleteList[2].add(DeleteFileCard("按钮文件"))
+                                    CardClick2 = false
+                                }
+                            }
                         }
                     }
                 }
@@ -94,5 +114,11 @@ class WPRecycbinFragment : Fragment() {
         mDeleteBarList.add(RecyclebinCard("APP调研小组"))
         mDeleteBarList.add(RecyclebinCard("原型开发小组"))
         mDeleteBarList.add(RecyclebinCard("视觉设计小组"))
+        mEveryCardDeleteList.add(ArrayList<DeleteFileCard>())
+        mEveryCardDeleteList.add(ArrayList<DeleteFileCard>())
+        mEveryCardDeleteList.add(ArrayList<DeleteFileCard>())
+        mEveryCardDeleteAdapterList.add(DeleteFileAdapter(mEveryCardDeleteList[0]))
+        mEveryCardDeleteAdapterList.add(DeleteFileAdapter(mEveryCardDeleteList[1]))
+        mEveryCardDeleteAdapterList.add(DeleteFileAdapter(mEveryCardDeleteList[2]))
     }
 }
