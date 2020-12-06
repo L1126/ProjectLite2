@@ -68,4 +68,5 @@
     <string name="string_btn_apply_to_join">Apply to join</string>
     <string name="string_txt_no_introduction">No introduction</string>
     <string name="string_txt_strong_point">Strong point</string>
+    <string name="title_activity_chat_room">ChatRoomActivity</string>
 </resources>
