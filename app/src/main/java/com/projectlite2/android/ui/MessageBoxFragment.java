@@ -60,7 +60,7 @@ public class MessageBoxFragment extends Fragment {
                 switch (item.getItemId()){
                     //  点击搜索
                     case R.id.btnSearch:
-                        Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
+                        Intent intent1 = new Intent(MyApplication.getContext(), WorkPlaceActivity.class);
                         startActivity(intent1);
                         break;
 
