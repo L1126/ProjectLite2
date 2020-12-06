@@ -1,23 +1,23 @@
 package com.projectlite2.android.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.lxj.xpopup.XPopup;
 import com.projectlite2.android.R;
+import com.projectlite2.android.dialog.WPfileDialog;
 import com.projectlite2.android.adapter.WorkPlaceAdapter;
-import com.projectlite2.android.generated.callback.OnClickListener;
-import com.projectlite2.android.utils.OnItemClickListenerPlus;
-
-import butterknife.OnClick;
+import com.projectlite2.android.dialog.WPfolderDialog;
 
 public class WorkPlaceActivity extends AppCompatActivity {
 
@@ -33,13 +33,17 @@ public class WorkPlaceActivity extends AppCompatActivity {
     private TabLayout.Tab three;
     private TabLayout.Tab four;
 
+    private Activity mActivity;
+
     private FrameLayout uploadFrag, multiFrag, cfileFrag, cfolderFrag;
+
+    private TextView restoreDefaults;
 
     @Nullable
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mActivity=this;
         getSupportActionBar().hide();//隐藏掉整个ActionBar
         setContentView(R.layout.activity_workplace);
 
@@ -57,7 +61,6 @@ public class WorkPlaceActivity extends AppCompatActivity {
         uploadFrag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
             }
         });
 
@@ -65,7 +68,6 @@ public class WorkPlaceActivity extends AppCompatActivity {
         multiFrag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
             }
         });
 
@@ -73,7 +75,9 @@ public class WorkPlaceActivity extends AppCompatActivity {
         cfileFrag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                new XPopup.Builder(mActivity)
+                        .asCustom(new WPfileDialog(mActivity))
+                        .show();
             }
         });
 
@@ -81,7 +85,9 @@ public class WorkPlaceActivity extends AppCompatActivity {
         cfolderFrag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                new XPopup.Builder(mActivity)
+                        .asCustom(new WPfolderDialog(mActivity))
+                        .show();
             }
         });
 
@@ -125,6 +131,7 @@ public class WorkPlaceActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private void initViews() {
