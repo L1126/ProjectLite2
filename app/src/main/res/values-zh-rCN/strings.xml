@@ -59,4 +59,5 @@
     <string name="string_query_result">查询结果：</string>
     <string name="string_txt_project_number">项目编号</string>
     <string name="string_btn_apply_to_join">申请加入</string>
+    <string name="string_txt_no_introduction">暂无介绍</string>
 </resources>

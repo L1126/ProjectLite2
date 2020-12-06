@@ -12,6 +12,7 @@ import com.projectlite2.android.ui.GuideSecondFragment
 import com.projectlite2.android.ui.GuideThirdFragment
 import com.projectlite2.android.R
 import kotlinx.android.synthetic.main.activity_guide.*
+import kotlin.concurrent.thread
 
 
 class GuideActivity : AppCompatActivity() {

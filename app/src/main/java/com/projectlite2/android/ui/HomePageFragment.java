@@ -2,13 +2,17 @@ package com.projectlite2.android.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,10 +33,17 @@ import com.projectlite2.android.activity.WorkPlaceActivity;
 import com.projectlite2.android.adapter.ProjectCardAdapter;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.model.ProjectCard;
+import com.projectlite2.android.utils.CloudUtil;
 import com.projectlite2.android.utils.OnItemClickListenerPlus;
+import com.scwang.smart.refresh.header.BezierRadarHeader;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import cn.leancloud.AVObject;
+import cn.leancloud.AVQuery;
 import cn.leancloud.AVUser;
 import cn.leancloud.chatkit.LCChatKit;
 import cn.leancloud.chatkit.activity.LCIMConversationActivity;
@@ -40,6 +51,17 @@ import cn.leancloud.chatkit.utils.LCIMConstants;
 import cn.leancloud.im.v2.AVIMClient;
 import cn.leancloud.im.v2.AVIMException;
 import cn.leancloud.im.v2.callback.AVIMClientCallback;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
+import static android.app.Activity.RESULT_OK;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_PROJECT_NAME;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_NAME_PROJECT;
+import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_MAP.RELATION_FIELD_LEADER;
+import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_MAP.RELATION_FILED_PROJECT;
+import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_MAP.RELATION_NAME_PROJECT_LEADER_MAP;
+import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FIELD_MEMBER;
+import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_NAME_PROJECT_MEMBER_MAP;
 
 public class HomePageFragment extends Fragment {
 
@@ -48,16 +70,31 @@ public class HomePageFragment extends Fragment {
     TextView txtTitle;
     RecyclerView mRecyclerView;
     ProjectCardAdapter mAdapter;
+    //    SwipeRefreshLayout mRefresh;
+    RefreshLayout mRefresh;
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1: //  用户创建了新的项目，返回resultCode为OK，执行刷新操作
+            case 2: {
+                //  用户加入了新的项目，返回resultCode为OK，执行刷新操作
+                if (resultCode == RESULT_OK) {
+                    refreshData(1000);
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
 
     private ArrayList<ProjectCard> projectList = new ArrayList<ProjectCard>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-
-
 
         mView = inflater.inflate(R.layout.home_page_fragment, container, false);
 
@@ -84,10 +121,15 @@ public class HomePageFragment extends Fragment {
                 switch (item.getItemId()) {
                     //  点击搜索
                     case R.id.btnSearch:
+<<<<<<< HEAD
                         Intent intent1 = new Intent(MyApplication.getContext(), WorkPlaceActivity.class);
                              startActivity(intent1);
+=======
+                        Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
+                        startActivityForResult(intent1,2);
+>>>>>>> origin/dev-w
                         break;
-                    //  点击创建项目
+                    //  点击新项目
                     case R.id.btnNewProject:
 
                         //  弹出新项目菜单POPUP
@@ -103,10 +145,12 @@ public class HomePageFragment extends Fragment {
                                                 switch (position) {
                                                     case 0:
                                                         Intent it = new Intent(MyApplication.getContext(), CreateProjectActivity.class);
-                                                        startActivity(it);
+                                                        //  请求数据返回，以判断是否需要刷新
+                                                        startActivityForResult(it, 1);
                                                         break;
-                                                    case 2:
-                                                        MyApplication.ToastyInfo("2");
+                                                    case 1:
+                                                        Intent it2 = new Intent(MyApplication.getContext(), SearchActivity.class);
+                                                        startActivity(it2);
                                                         break;
                                                     default:
                                                         break;
@@ -127,7 +171,6 @@ public class HomePageFragment extends Fragment {
         //toolBar.setTitle(R.string.string_menu_home_page);
         setHasOptionsMenu(true);
 
-
         return mView;
     }
 
@@ -142,14 +185,19 @@ public class HomePageFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         //initRV();
 
-        addProjects();
 
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView = mView.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new ProjectCardAdapter(projectList);
-
         mRecyclerView.setAdapter(mAdapter);
+
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(MyApplication.getContext(), R.anim.layout_animation_fall_down);
+        mRecyclerView.setLayoutAnimation(animation);
+
+
+        // 初始化数据
+        refreshData();
 
 
         //点击事件监听
@@ -191,6 +239,20 @@ public class HomePageFragment extends Fragment {
         });
 
 
+        mRefresh = mView.findViewById(R.id.smartRefresh);
+        BezierRadarHeader myHeader = new BezierRadarHeader(MyApplication.getContext());
+        myHeader.setAccentColor(Color.BLUE);
+        myHeader.setPrimaryColor(Color.RED);
+        mRefresh.setRefreshHeader(myHeader);
+        mRefresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(800/*,false*/);//传入false表示刷新失败
+                refreshData();
+            }
+        });
+
+
     }
 
     /**
@@ -205,32 +267,165 @@ public class HomePageFragment extends Fragment {
         inflater.inflate(R.menu.menu_home_page, menu);
     }
 
+    /**
+     * 刷新project列表数据 1秒后抓取
+     */
+    public void refreshData() {
+        //  先清空一波
+        projectList.clear();
+        //  查询 project-leader-map
+        queryAllLeaderProjects();
+        //  查询 project_member_map
+        queryAllMemberProjects();
 
-    private void addProjects() {
-        projectList.add(new ProjectCard("信息与交互设计", true, 25));
-        projectList.add(new ProjectCard("用户体验设计", false, 30));
-        projectList.add(new ProjectCard("产品设计方法学", false, 90));
-        projectList.add(new ProjectCard("交互设计专题（一）", true, 10));
-        projectList.add(new ProjectCard("产品设计专题", false, 60));
-        projectList.add(new ProjectCard("信息与交互设计", true, 25));
-        projectList.add(new ProjectCard("用户体验设计", false, 20));
-        projectList.add(new ProjectCard("产品设计方法学", false, 90));
-        projectList.add(new ProjectCard("交互设计专题（一）", true, 10));
-        projectList.add(new ProjectCard("产品设计专题", false, 60));
+        //  耗时操作，因而在给定时长后通知adapter刷新数据
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mAdapter.notifyDataSetChanged();
+            }
+        }, 1000);//1秒后执行Runnable中的run方法
+
+        mRecyclerView.scheduleLayoutAnimation();
+
     }
 
-    private void OnMenuItemClick(int position) {
-        switch (position) {
-            case 1:
-                MyApplication.ToastyInfo("1");
-                break;
-            case 2:
-                MyApplication.ToastyInfo("2");
-                break;
-            default:
-                break;
-        }
+    /**
+     * 刷新project列表数据
+     *
+     * @param delayMillis 毫秒数，查询为耗时操作，延迟抓取数据
+     */
+    public void refreshData(int delayMillis) {
+        //  先清空一波
+        projectList.clear();
+        //  查询 project-leader-map
+        queryAllLeaderProjects();
+        //  查询 project_member_map
+        queryAllMemberProjects();
+
+        //  耗时操作，因而在给定时长后通知adapter刷新数据
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mAdapter.notifyDataSetChanged();
+            }
+        }, delayMillis);//delayMillis毫秒后执行Runnable中的run方法
+
     }
+
+    /**
+     * 刷新数据，查询所有的leader项目
+     */
+    private void queryAllLeaderProjects() {
+
+
+        //  先从 leader map 中查找
+        AVQuery<AVObject> query = new AVQuery<>(RELATION_NAME_PROJECT_LEADER_MAP);
+        query.whereEqualTo(RELATION_FIELD_LEADER, AVUser.getCurrentUser());
+        query.findInBackground().subscribe(new Observer<List<AVObject>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(List<AVObject> relations) {
+                // relations 是所有 leader 等于 currentUser 的map对象
+//                Log.d("mytest", "init relations: " + relations.size());
+                // 然后遍历
+                for (AVObject map : relations) {
+                    AVObject project = map.getAVObject(RELATION_FILED_PROJECT);
+
+                    AVQuery<AVObject> query = new AVQuery<>(TABLE_NAME_PROJECT);
+                    query.getInBackground(project.getObjectId()).subscribe(new Observer<AVObject>() {
+                        public void onSubscribe(Disposable disposable) {
+                        }
+
+                        public void onNext(AVObject item) {
+                            // item 就是 project 实例
+                            String pjName = item.getString(TABLE_FIELD_PROJECT_NAME);
+//                            Log.d("mytest", "query: " + pjName);
+                            projectList.add(new ProjectCard(pjName, true, 10));
+                        }
+
+                        public void onError(Throwable throwable) {
+                        }
+
+                        public void onComplete() {
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        });
+
+
+    }
+
+    /**
+     * 刷新数据，查询所有的member项目
+     */
+    private void queryAllMemberProjects() {
+
+        //  先从 leader map 中查找
+        AVQuery<AVObject> query = new AVQuery<>(RELATION_NAME_PROJECT_MEMBER_MAP);
+        query.whereEqualTo(RELATION_FIELD_MEMBER, AVUser.getCurrentUser());
+        query.findInBackground().subscribe(new Observer<List<AVObject>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(List<AVObject> relations) {
+                // relations 是所有 leader 等于 currentUser 的map对象
+//                Log.d("mytest", "init relations: " + relations.size());
+                // 然后遍历
+                for (AVObject map : relations) {
+                    AVObject project = map.getAVObject(CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FILED_PROJECT);
+
+                    AVQuery<AVObject> query = new AVQuery<>(TABLE_NAME_PROJECT);
+                    query.getInBackground(project.getObjectId()).subscribe(new Observer<AVObject>() {
+                        public void onSubscribe(Disposable disposable) {
+                        }
+
+                        public void onNext(AVObject item) {
+                            // item 就是 project 实例
+                            String pjName = item.getString(TABLE_FIELD_PROJECT_NAME);
+//                            Log.d("mytest", "query: " + pjName);
+                            projectList.add(new ProjectCard(pjName, true, 10));
+                        }
+
+                        public void onError(Throwable throwable) {
+                        }
+
+                        public void onComplete() {
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        });
+
+
+    }
+
 }
 
 

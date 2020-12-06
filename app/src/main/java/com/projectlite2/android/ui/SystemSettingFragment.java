@@ -1,9 +1,11 @@
 package com.projectlite2.android.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +15,10 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.interfaces.OnConfirmListener;
 import com.projectlite2.android.R;
+import com.projectlite2.android.activity.LoginActivity;
 import com.projectlite2.android.adapter.SysSettingAdapter;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.model.SysSettingCard;
@@ -21,11 +26,14 @@ import com.projectlite2.android.utils.OnItemClickListenerPlus;
 
 import java.util.ArrayList;
 
+import cn.leancloud.AVUser;
+
 public class SystemSettingFragment extends Fragment {
 
     View mView;
     RecyclerView fRecyclerView, sRecyclerView, tRecyclerView;
     SysSettingAdapter fAdapter, sAdapter, tAdapter;
+    TextView mLogout;
 
     private ArrayList<SysSettingCard> fSysSetList = new ArrayList<SysSettingCard>();
     private ArrayList<SysSettingCard> sSysSetList = new ArrayList<SysSettingCard>();
@@ -71,6 +79,8 @@ public class SystemSettingFragment extends Fragment {
         tRecyclerView.setLayoutManager(tlayoutManager);
         tAdapter = new SysSettingAdapter(tSysSetList);
         tRecyclerView.setAdapter(tAdapter);
+
+        mLogout=mView.findViewById(R.id.myQuit);
 
         fAdapter.setOnKotlinItemClickListener(new OnItemClickListenerPlus() {
             @Override
@@ -124,6 +134,27 @@ public class SystemSettingFragment extends Fragment {
                 }
             }
         });
+
+        mLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new XPopup.Builder(getContext()).asConfirm("提示", "确定要退出当前账号吗？",
+                        new OnConfirmListener() {
+                            @Override
+                            public void onConfirm() {
+                                //  登出当前账号
+                                AVUser.logOut();
+                                //  回到登录界面
+                                Intent it=new Intent(MyApplication.getContext(), LoginActivity.class);
+                                startActivity(it);
+                                getActivity().finish();
+                            }
+                        })
+                        .show();
+
+            }
+        });
+
     }
 
     private void initFirstSettingCard(){

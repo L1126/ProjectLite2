@@ -1,11 +1,8 @@
 package com.projectlite2.android.activity;
 
-import android.graphics.Color;
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.Toast;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,19 +13,20 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.projectlite2.android.app.MyApplication;
-import com.projectlite2.android.ui.MessageBoxFragment;
-import com.projectlite2.android.ui.MyProfileFragment;
 import com.projectlite2.android.R;
+import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.ui.CardcaseFragment;
 import com.projectlite2.android.ui.HomePageFragment;
+import com.projectlite2.android.ui.MessageBoxFragment;
+import com.projectlite2.android.ui.MyProfileFragment;
 
-import java.util.Objects;
-
+import cn.leancloud.AVInstallation;
+import cn.leancloud.AVObject;
 import cn.leancloud.AVUser;
+import cn.leancloud.push.PushService;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import nl.joery.animatedbottombar.AnimatedBottomBar;
-
-import static androidx.navigation.Navigation.findNavController;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * animatedBottomBar组件实例
      */
-     AnimatedBottomBar mAniBottomBar;
+    AnimatedBottomBar mAniBottomBar;
 
     /**
      * tabLayout组件实例
@@ -68,15 +66,13 @@ public class MainActivity extends AppCompatActivity {
     protected boolean useStatusBarColor = true;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //如果有的话，隐藏actionbar
         //getSupportActionBar().hide();
         //  设置顶部状态栏透明
-         //getWindow().setStatusBarColor(Color.TRANSPARENT);
+        //getWindow().setStatusBarColor(Color.TRANSPARENT);
 
         setContentView(R.layout.activity_main);
 //        setStatusBar();
@@ -88,22 +84,15 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this,navController,appBarConfig);
 //        NavigationUI.setupWithNavController(bottomNav,navController);
 
-
-
-        AVUser currentUser = AVUser.getCurrentUser();
-        if (currentUser != null) {
-            MyApplication.ToastyInfo("当前用户："+currentUser.getMobilePhoneNumber());
-        } else {
-            MyApplication.ToastyError("当前无用户");
-        }
-
+        //  检查登陆状态，配置installationId
+        ConfigCurrentUserAndInstallationId();
 
 
         mAniBottomBar = findViewById(R.id.bottomBar);
-        mTabLayout=findViewById(R.id.tabLayout);
-        mViewPager=findViewById(R.id.viewPager);
+        mTabLayout = findViewById(R.id.tabLayout);
+        mViewPager = findViewById(R.id.viewPager);
 
-        mViewPager.setAdapter(new FragmentStateAdapter(this){
+        mViewPager.setAdapter(new FragmentStateAdapter(this) {
 
             @Override
             public int getItemCount() {
@@ -114,18 +103,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Fragment createFragment(int position) {
                 Fragment fa;
-                switch(position) {
+                switch (position) {
                     case 0:
-                        fa = (Fragment)(new HomePageFragment());
+                        fa = (Fragment) (new HomePageFragment());
                         break;
                     case 1:
-                        fa = (Fragment)(new MessageBoxFragment());
+                        fa = (Fragment) (new MessageBoxFragment());
                         break;
                     case 2:
-                        fa = (Fragment)(new CardcaseFragment());
+                        fa = (Fragment) (new CardcaseFragment());
                         break;
                     default:
-                        fa = (Fragment)(new MyProfileFragment());
+                        fa = (Fragment) (new MyProfileFragment());
                 }
                 return fa;
             }
@@ -143,8 +132,71 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setUserInputEnabled(false);
 
 
+    }
 
+    /**
+     *  检查登陆状态，配置installationId
+     */
+    private void ConfigCurrentUserAndInstallationId() {
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            //  当前为用户登录状态，配置该用户的installationId
 
+            Log.d("mytest", "ConfigCurrentUserAndInstallationId: " + "当前用户：" + currentUser.getMobilePhoneNumber());
+
+            //  配置installationId
+            AVInstallation.getCurrentInstallation().saveInBackground().subscribe(new Observer<AVObject>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+                }
+
+                @Override
+                public void onNext(AVObject avObject) {
+                    // 关联 installationId 到用户表等操作。
+                    MyApplication.MY_INSTALLATION_ID = AVInstallation.getCurrentInstallation().getInstallationId();
+                    Log.d("mytest", "关联 installationId   保存成功：" + MyApplication.MY_INSTALLATION_ID);
+                    currentUser.put("installationId", MyApplication.MY_INSTALLATION_ID);
+                    currentUser.saveInBackground().subscribe(new Observer<AVObject>() {
+                        public void onSubscribe(Disposable disposable) {
+                        }
+
+                        public void onNext(AVObject todo) {
+                            Log.d("mytest", "currentUser save installationId success");
+                        }
+
+                        public void onError(Throwable throwable) {
+                            MyApplication.ToastyError("error");
+                            Log.d("mytest", "currentUser save installationId  Error: " + throwable);
+                            // 异常处理
+                        }
+
+                        public void onComplete() {
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    Log.d("mytest", "关联 installationId   保存失败，错误信息：" + e.getMessage());
+
+                }
+
+                @Override
+                public void onComplete() {
+                }
+            });
+
+            // 启动推送服务 设置默认打开的 Activity
+            PushService.setDefaultPushCallback(this, PushTestActivity.class);
+
+        } else {
+            //  若当前为无用户登陆状态，则跳转到登录界面
+            MyApplication.ToastyError("当前无用户");
+            Intent intent = new Intent(MyApplication.getContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
     }
 

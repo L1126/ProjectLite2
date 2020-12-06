@@ -32,6 +32,7 @@
         <activity android:name=".activity.ProjectDetailActivity"></activity>
         <activity android:name=".activity.tmp"></activity>
         <activity android:name=".activity.WorkPlaceActivity"></activity>
+        <activity android:name=".activity.PushTestActivity"></activity>
         <activity
             android:name=".activity.MyWelcomeActivity"
             android:theme="@style/WelcomeScreenTheme.Light.SolidNavigation.UnderStatusBar" />
@@ -58,8 +59,11 @@
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
-        <activity android:name=".activity.LoginActivity" />
-
+        <activity android:name=".activity.LoginActivity" /> <!-- 用户反馈 START -->
+        <!-- <activity -->
+        <!-- android:name="cn.leancloud.feedback.ThreadActivity" > -->
+        <!-- </activity> -->
+        <!-- 用户反馈 END -->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" /> <!-- 适配华为（huawei）刘海屏 -->
@@ -68,7 +72,15 @@
             android:value="true" /> <!-- 适配小米（xiaomi）刘海屏 -->
         <meta-data
             android:name="notch.config"
-            android:value="portrait|landscape" />
+            android:value="portrait|landscape" /> <!-- 即时通讯和推送都需要 PushService -->
+        <service android:name="cn.leancloud.push.PushService" />
+        <receiver android:name="cn.leancloud.push.AVBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
