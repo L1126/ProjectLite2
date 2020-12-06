@@ -20,13 +20,19 @@
         android:textSize="18sp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnFile"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless">
 
         <TextView
-            android:id="@+id/group1"
+            android:id="@+id/groupFile"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center|left"
@@ -36,70 +42,55 @@
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <CheckBox
-            android:id="@+id/checkBox1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnStudy"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless">
 
         <TextView
-            android:id="@+id/group2"
+            android:id="@+id/groupStudy"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center|left"
             android:gravity="center"
-            android:text="原型小组"
+            android:text="学习资源"
             android:layout_marginLeft="20dp"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnMeeting"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless">
 
         <TextView
-            android:id="@+id/group3"
+            android:id="@+id/groupMeeting"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center|left"
             android:gravity="center"
-            android:text="代码小组"
+            android:text="会议记录"
             android:layout_marginLeft="20dp"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <CheckBox
-            android:id="@+id/checkBox3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

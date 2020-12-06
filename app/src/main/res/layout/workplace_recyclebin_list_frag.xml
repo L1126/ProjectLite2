@@ -36,6 +36,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardDelete"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
             android:layout_width="70dp"
             android:layout_height="30dp"
             app:cardCornerRadius="15dp"
@@ -62,6 +65,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardRecover"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
             android:layout_width="70dp"
             android:layout_height="30dp"
             app:cardCornerRadius="15dp"

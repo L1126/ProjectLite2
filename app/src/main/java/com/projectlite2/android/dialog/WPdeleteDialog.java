@@ -5,19 +5,18 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.CenterPopupView;
 import com.projectlite2.android.R;
 
-public class WPLoadBinDialog extends CenterPopupView {
+public class WPdeleteDialog extends CenterPopupView {
 
-    public WPLoadBinDialog(@NonNull Context context) {
+    public WPdeleteDialog(@NonNull Context context) {
         super(context);
     }
 
     @Override
     protected int getImplLayoutId() {
-        return R.layout.dialog_load_bin;
+        return R.layout.dialog_delete;
     }
 
     @Override
@@ -30,31 +29,6 @@ public class WPLoadBinDialog extends CenterPopupView {
             }
         });
         findViewById(R.id.cancel).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss(); // 关闭弹窗
-            }
-        });
-
-        //项目文件
-        findViewById(R.id.btnFile).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss(); // 关闭弹窗
-                new XPopup.Builder(getContext())
-                        .asCustom(new WPloadDialog(getContext()))
-                        .show();
-            }
-        });
-        //学习资源
-        findViewById(R.id.btnStudy).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss(); // 关闭弹窗
-            }
-        });
-        //会议记录
-        findViewById(R.id.btnMeeting).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss(); // 关闭弹窗

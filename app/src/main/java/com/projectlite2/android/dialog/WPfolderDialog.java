@@ -2,6 +2,7 @@ package com.projectlite2.android.dialog;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 
@@ -11,6 +12,9 @@ import com.projectlite2.android.R;
 import com.projectlite2.android.app.MyApplication;
 
 public class WPfolderDialog extends CenterPopupView {
+
+    private static EditText FileLoad;
+    private WPfolderDialog thisDialog;
 
     public WPfolderDialog(@NonNull Context context) {
         super(context);
@@ -24,6 +28,10 @@ public class WPfolderDialog extends CenterPopupView {
     @Override
     protected void onCreate() {
         super.onCreate();
+
+        thisDialog = this;
+        FileLoad = findViewById(R.id.newFileLoad);
+
         findViewById(R.id.confirm).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,9 +48,10 @@ public class WPfolderDialog extends CenterPopupView {
         findViewById(R.id.btnSelect).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss(); // 关闭弹窗
+                WPloadDialog dialog = new WPloadDialog(getContext());
+                dialog.isWPfloderdialog = true;
                 new XPopup.Builder(getContext())
-                        .asCustom(new WPloadDialog(getContext()))
+                        .asCustom(dialog)
                         .show();
             }
         });
@@ -75,5 +84,27 @@ public class WPfolderDialog extends CenterPopupView {
      */
     protected int getPopupHeight() {
         return 0;
+    }
+
+    public static void refreshFloder(int txt){
+        switch (txt){
+            case 1:
+                FileLoad.setText("调研小组");
+                break;
+            case 2:
+                FileLoad.setText("原型小组");
+                break;
+            case 3:
+                FileLoad.setText("代码小组");
+                break;
+            case 4:
+                FileLoad.setText("文档小组");
+                break;
+            case 5:
+                FileLoad.setText("公共小组");
+                break;
+            default:
+                break;
+        }
     }
 }

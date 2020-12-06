@@ -1,24 +1,29 @@
 package com.projectlite2.android.ui
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.lxj.xpopup.XPopup
 import com.projectlite2.android.R
 import com.projectlite2.android.adapter.DeleteFileAdapter
 import com.projectlite2.android.adapter.WPRecycleFileAdapter
+import com.projectlite2.android.dialog.WPdeleteDialog
+import com.projectlite2.android.dialog.WPrecoverDialog
 import com.projectlite2.android.model.DeleteFileCard
 import com.projectlite2.android.model.RecyclebinCard
 import com.projectlite2.android.utils.OnItemClickListenerPlus
 import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
-import java.util.ArrayList
+import java.util.*
 
-class WPRecycbinFragment : Fragment() {
+class WPRecycbinFragment : Fragment() ,View.OnClickListener {
 
     lateinit var mView: View
     lateinit var mRecyclerview: RecyclerView
@@ -33,6 +38,30 @@ class WPRecycbinFragment : Fragment() {
     private var CardClick1 = true
     private var CardClick2 = true
 
+    lateinit var mBtnDelete: CardView
+    lateinit var mBtnRecover: CardView
+
+    lateinit var mContext: Context
+
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        mContext = activity
+    }
+
+    override fun onClick(v: View?) {
+        //删除
+        if (v?.id == R.id.cardDelete){
+            XPopup.Builder(mContext)
+                    .asCustom(WPdeleteDialog(mContext)
+                    .show())
+        }
+        //复原
+        else if (v?.id == R.id.cardRecover){
+            XPopup.Builder(mContext)
+                    .asCustom(WPrecoverDialog(mContext)
+                            .show())
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -47,6 +76,12 @@ class WPRecycbinFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        mBtnDelete = mView.findViewById(R.id.cardDelete)
+        mBtnDelete?.setOnClickListener(this)
+
+        mBtnRecover = mView.findViewById(R.id.cardRecover)
+        mBtnRecover?.setOnClickListener(this)
 
         addNewCards()
 
