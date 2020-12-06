@@ -142,11 +142,19 @@ dependencies {
     implementation 'com.stephentuso:welcome:1.4.1'
 
     //EasyAdapter
-    implementation 'com.lxj:easyadapter:latest release'
+    implementation 'com.lxj:easyadapter:1.2.2'
 
     //  刷新头
     implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'
     implementation  'com.scwang.smart:refresh-header-radar:2.0.1'
+
+    // statusBarUtil
+    implementation 'com.jaeger.statusbarutil:library:1.5.1'
+
+    //    TencentIM  5.1.2
+    api 'com.tencent.imsdk:imsdk:5.1.2'
+    implementation 'com.tencent.imsdk:tuikit:5.1.2'
+
 
 }
 

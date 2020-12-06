@@ -142,12 +142,14 @@ public class SystemSettingFragment extends Fragment {
                         new OnConfirmListener() {
                             @Override
                             public void onConfirm() {
+
                                 //  登出当前账号
                                 AVUser.logOut();
                                 //  回到登录界面
                                 Intent it=new Intent(MyApplication.getContext(), LoginActivity.class);
                                 startActivity(it);
                                 getActivity().finish();
+
                             }
                         })
                         .show();

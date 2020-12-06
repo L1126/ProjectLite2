@@ -25,9 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.leancloud.AVInstallation;
 import cn.leancloud.AVObject;
-import cn.leancloud.AVPush;
 import cn.leancloud.AVQuery;
 import cn.leancloud.AVUser;
 import io.reactivex.Observer;
@@ -40,7 +38,7 @@ import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_M
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_MAP.RELATION_FILED_PROJECT;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_MAP.RELATION_NAME_PROJECT_LEADER_MAP;
 
-public class QueryResultPopup extends BottomPopupView {
+public class QueryProjectResultPopup extends BottomPopupView {
 
     @BindView(R.id.txtThisProjectName)
     TextView txtProjectName;
@@ -62,7 +60,7 @@ public class QueryResultPopup extends BottomPopupView {
     String thisLeaderUserId="";
     Activity parentActivity;
 
-    public QueryResultPopup(@NonNull Context context, String pjId, String pjName, AVUser leader, String pjBrief, Date dStart, Date dEnd) {
+    public QueryProjectResultPopup(@NonNull Context context, String pjId, String pjName, AVUser leader, String pjBrief, Date dStart, Date dEnd) {
         super(context);
         projectId = pjId;
         projectName = pjName;
@@ -72,7 +70,7 @@ public class QueryResultPopup extends BottomPopupView {
         projectLeader = leader;
     }
 
-    public QueryResultPopup(@NonNull Context context, String pjId, String pjName, AVUser leader, Date dStart, Date dEnd) {
+    public QueryProjectResultPopup(@NonNull Context context, String pjId, String pjName, AVUser leader, Date dStart, Date dEnd) {
         super(context);
         projectId = pjId;
         projectName = pjName;
@@ -81,7 +79,7 @@ public class QueryResultPopup extends BottomPopupView {
         projectLeader = leader;
     }
 
-    public QueryResultPopup(@NonNull Context context, String pjId, String pjName, String pjBrief, Date dStart, Date dEnd) {
+    public QueryProjectResultPopup(@NonNull Context context, String pjId, String pjName, String pjBrief, Date dStart, Date dEnd) {
         super(context);
         projectId = pjId;
         projectName = pjName;
@@ -91,7 +89,7 @@ public class QueryResultPopup extends BottomPopupView {
 
     }
 
-    public QueryResultPopup(@NonNull Context context, String pjId, String pjName, String pjBrief, String objID) {
+    public QueryProjectResultPopup(@NonNull Context context, String pjId, String pjName, String pjBrief, String objID) {
         super(context);
         projectId = pjId;
         projectName = pjName;
@@ -101,14 +99,14 @@ public class QueryResultPopup extends BottomPopupView {
 
     }
 
-    public QueryResultPopup(@NonNull Context context) {
+    public QueryProjectResultPopup(@NonNull Context context) {
         super(context);
     }
 
 
     @Override
     protected int getImplLayoutId() {
-        return R.layout.custom_bottom_popup;
+        return R.layout.project_card_bottom_popup;
     }
 
     @Override

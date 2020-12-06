@@ -1,7 +1,7 @@
 package com.projectlite2.android.ui
 
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.projectlite2.android.R
 import com.projectlite2.android.adapter.InviteCardAdapter
+import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.InviteCard
 import com.projectlite2.android.utils.OnItemClickListenerPlus
 import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
+import com.scwang.smart.refresh.header.BezierRadarHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.api.RefreshLayout
 
 class InviteListFragment(): Fragment() {
 
@@ -22,7 +26,7 @@ class InviteListFragment(): Fragment() {
     lateinit var mRecyclerview: RecyclerView
     lateinit var mAdapter: InviteCardAdapter
     lateinit var mCallBack: ItemTouchHelper.Callback
-
+    lateinit var mRefresh: RefreshLayout
     private val mInviteList = ArrayList<InviteCard>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +64,18 @@ class InviteListFragment(): Fragment() {
 
             }
         })
+
+
+        mRefresh = mView.findViewById<SmartRefreshLayout>(R.id.smartRefresh)
+        val myHeader = BezierRadarHeader(MyApplication.getContext())
+        myHeader.setAccentColor(Color.BLUE)
+        myHeader.setPrimaryColor(Color.RED)
+        mRefresh.setRefreshHeader(myHeader)
+        mRefresh.setOnRefreshListener { refreshlayout ->
+            refreshlayout.finishRefresh(800 /*,false*/) //传入false表示刷新失败
+//            refreshData()
+        }
+
     }
 
     private fun addNewCards(){

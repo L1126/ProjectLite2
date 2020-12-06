@@ -6,10 +6,20 @@ import java.util.List;
 import cn.leancloud.chatkit.LCChatKitUser;
 import cn.leancloud.chatkit.LCChatProfileProvider;
 import cn.leancloud.chatkit.LCChatProfilesCallBack;
+import cn.leancloud.chatkit.cache.LCIMProfileCache;
+
+
+/**
+ *  ************暂时放一放，先完成名片夹再来搞************
+ *  2020年12月6日 09点47分
+ *  **************************************************
+ */
 
 public class CustomUserProvider implements LCChatProfileProvider {
 
     private static CustomUserProvider customUserProvider;
+
+
 
     // 单例
     public synchronized static CustomUserProvider getInstance() {
@@ -52,5 +62,17 @@ public class CustomUserProvider implements LCChatProfileProvider {
     @Override
     public List<LCChatKitUser> getAllUsers() {
         return partUsers;
+    }
+
+
+    /**
+     * 更新用户信息方法
+     * @param userId    唯一用户Id
+     * @param userName  用户名
+     * @param avatarUrl 用户头像地址
+     */
+    private static  void UpdateUserInfo(String userId,String userName,String avatarUrl){
+        LCChatKitUser user = new LCChatKitUser(userId, userName, avatarUrl);
+        LCIMProfileCache.getInstance().cacheUser(user);
     }
 }

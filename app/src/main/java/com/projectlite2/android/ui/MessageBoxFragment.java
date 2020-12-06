@@ -1,5 +1,6 @@
 package com.projectlite2.android.ui;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
@@ -12,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.projectlite2.android.R;
@@ -22,6 +24,8 @@ public class MessageBoxFragment extends Fragment {
 
     private View contextView;// 总视图
     private TabLayout tabLayout;
+    Toolbar toolBar;
+    TextView txtTitle;
     private ViewPager viewpager;
     ArrayList fragmentList = new ArrayList<Fragment>();
     String[] temp = {"News","New Projects"};
@@ -30,6 +34,9 @@ public class MessageBoxFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         contextView = inflater.inflate(R.layout.message_box_fragment, container, false);
+        toolBar = contextView.findViewById(R.id.toolBar);
+        txtTitle = contextView.findViewById(R.id.txtPageTitle);
+        txtTitle.setText(R.string.string_menu_message_box);
         tabLayout = contextView.findViewById(R.id.tabLayoutMessage);
         viewpager = contextView.findViewById(R.id.viewPagerMessage);
         return contextView;

@@ -1,14 +1,15 @@
 package com.projectlite2.android.app;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.annotation.IdRes;
@@ -16,22 +17,17 @@ import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 
 import com.projectlite2.android.CustomUserProvider;
-import com.projectlite2.android.activity.PushTestActivity;
 
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import cn.leancloud.AVInstallation;
 import cn.leancloud.AVLogger;
 import cn.leancloud.AVOSCloud;
-import cn.leancloud.AVObject;
-import cn.leancloud.AVUser;
 import cn.leancloud.chatkit.LCChatKit;
 import cn.leancloud.push.PushService;
 import es.dmoral.toasty.Toasty;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 import static androidx.navigation.Navigation.findNavController;
 
@@ -99,10 +95,6 @@ public class MyApplication extends Application {
 
         // 设置默认的channel
         PushService.setDefaultChannelId(this, "default");
-
-
-
-
 
 
     }
@@ -219,6 +211,18 @@ public class MyApplication extends Application {
         }
         return val;
     }
+
+
+    /**
+     * 软键盘显示/隐藏
+     */
+    public static void hideShowKeyboard(Context ctx) {
+        InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE); //得到InputMethodManager的实例
+        if (imm.isActive()) {//如果开启
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);//关闭软键盘，开启方法相同，这个方法是切换开启与关闭状态的
+        }
+    }
+
 
 
 }

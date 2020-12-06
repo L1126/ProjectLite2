@@ -76,7 +76,7 @@
                         app:layout_constraintGuide_percent="0.92" />
 
                     <ImageView
-                        android:id="@+id/imageView4"
+                        android:id="@+id/imgAvatar"
                         android:layout_width="78dp"
                         android:layout_height="78dp"
                         app:layout_constraintStart_toStartOf="@+id/guideline18"
@@ -90,7 +90,7 @@
                         android:layout_marginStart="14dp"
                         android:textSize="@dimen/rc_main_text"
                         app:layout_constraintBottom_toTopOf="@+id/guideline21"
-                        app:layout_constraintStart_toEndOf="@+id/imageView4"
+                        app:layout_constraintStart_toEndOf="@+id/imgAvatar"
                         app:layout_constraintTop_toTopOf="@+id/guideline20"
                         tools:text="互联网+" />
 
@@ -101,7 +101,7 @@
                         android:layout_marginStart="14dp"
                         android:text="@string/string_txt_project_number"
                         app:layout_constraintBottom_toTopOf="@+id/guideline22"
-                        app:layout_constraintStart_toEndOf="@+id/imageView4"
+                        app:layout_constraintStart_toEndOf="@+id/imgAvatar"
                         app:layout_constraintTop_toTopOf="@+id/guideline21" />
 
                     <TextView
@@ -115,7 +115,7 @@
                         tools:text="8455751213" />
 
                     <TextView
-                        android:id="@+id/txtMembers"
+                        android:id="@+id/txtStrongPoint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -157,7 +157,7 @@
                         app:layout_constraintEnd_toStartOf="@+id/guideline19"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/guideline18"
-                        app:layout_constraintTop_toBottomOf="@+id/txtMembers" />
+                        app:layout_constraintTop_toBottomOf="@+id/txtStrongPoint" />
 
                     <TextView
                         android:id="@+id/txtThisProjectBrief"

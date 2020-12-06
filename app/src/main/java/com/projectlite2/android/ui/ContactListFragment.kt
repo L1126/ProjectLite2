@@ -1,6 +1,7 @@
 package com.projectlite2.android.ui
 
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,9 @@ import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.ContactCard
 import com.projectlite2.android.utils.OnItemClickListenerPlus
 import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
+import com.scwang.smart.refresh.header.BezierRadarHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.api.RefreshLayout
 import java.util.*
 
 
@@ -44,6 +48,8 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
     lateinit var mRecyclerview: RecyclerView
     lateinit var mAdapter: ContactCardAdapter
     lateinit var mCallBack: ItemTouchHelper.Callback
+    lateinit var mRefresh: RefreshLayout
+
 
 
     private val mContactList = ArrayList<ContactCard>()
@@ -83,6 +89,19 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
         ItemTouchHelper(mCallBack).attachToRecyclerView(mRecyclerview)
 
         Log.d("MyTEST", "style_param: $style_param")
+
+
+
+        mRefresh = mView.findViewById<SmartRefreshLayout>(R.id.smartRefresh)
+        val myHeader = BezierRadarHeader(MyApplication.getContext())
+        myHeader.setAccentColor(Color.BLUE)
+        myHeader.setPrimaryColor(Color.RED)
+        mRefresh.setRefreshHeader(myHeader)
+        mRefresh.setOnRefreshListener { refreshlayout ->
+            refreshlayout.finishRefresh(800 /*,false*/) //传入false表示刷新失败
+//            refreshData()
+        }
+
 
         //  点击事件
         mAdapter.setOnKotlinItemClickListener(object : OnItemClickListenerPlus {

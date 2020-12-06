@@ -7,10 +7,28 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     tools:context=".ui.ContactListFragment">
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <com.scwang.smart.refresh.header.BezierRadarHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCard2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="false"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.projectlite2.android.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,20 +14,29 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.jaeger.library.StatusBarUtil;
 import com.projectlite2.android.R;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.ui.CardcaseFragment;
 import com.projectlite2.android.ui.HomePageFragment;
 import com.projectlite2.android.ui.MessageBoxFragment;
 import com.projectlite2.android.ui.MyProfileFragment;
+import com.projectlite2.android.utils.CloudUtil;
 
 import cn.leancloud.AVInstallation;
 import cn.leancloud.AVObject;
 import cn.leancloud.AVUser;
+import cn.leancloud.im.v2.AVIMClient;
+import cn.leancloud.im.v2.AVIMException;
+import cn.leancloud.im.v2.callback.AVIMClientCallback;
 import cn.leancloud.push.PushService;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import nl.joery.animatedbottombar.AnimatedBottomBar;
+
+import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_ID;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_NAME;
+import static com.projectlite2.android.utils.CloudUtil.CURRENT_USER.ConfigImClinet;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,22 +70,20 @@ public class MainActivity extends AppCompatActivity {
      * toolbar实例
      */
     Toolbar mToolBar;
-    //是否使用特殊的标题栏背景颜色，android5.0以上可以设置状态栏背景色，如果不使用则使用透明色值
-    protected boolean useThemeStatusBarColor = false;
-    //是否使用状态栏文字和图标为暗色，如果状态栏采用了白色系，则需要使状态栏和图标为暗色，android6.0以上可以设置
-    protected boolean useStatusBarColor = true;
+
+    /**
+     * activity实例
+     */
+    Activity thisActivity;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //如果有的话，隐藏actionbar
-        //getSupportActionBar().hide();
-        //  设置顶部状态栏透明
-        //getWindow().setStatusBarColor(Color.TRANSPARENT);
-
+//        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
-//        setStatusBar();
+        thisActivity=this;
 
         //  导航栏跳转配置
 //        BottomNavigationView bottomNav=findViewById(R.id.navBottom);
@@ -139,7 +147,11 @@ public class MainActivity extends AppCompatActivity {
      */
     private void ConfigCurrentUserAndInstallationId() {
         AVUser currentUser = AVUser.getCurrentUser();
+
+
         if (currentUser != null) {
+
+
             //  当前为用户登录状态，配置该用户的installationId
 
             Log.d("mytest", "ConfigCurrentUserAndInstallationId: " + "当前用户：" + currentUser.getMobilePhoneNumber());
@@ -162,6 +174,11 @@ public class MainActivity extends AppCompatActivity {
 
                         public void onNext(AVObject todo) {
                             Log.d("mytest", "currentUser save installationId success");
+
+                            // 启动推送服务 设置默认打开的 Activity
+                            PushService.setDefaultPushCallback(thisActivity, PushTestActivity.class);
+                            //  配置登录通讯服务器
+                            ConfigImClinet(currentUser);
                         }
 
                         public void onError(Throwable throwable) {
@@ -187,8 +204,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            // 启动推送服务 设置默认打开的 Activity
-            PushService.setDefaultPushCallback(this, PushTestActivity.class);
 
         } else {
             //  若当前为无用户登陆状态，则跳转到登录界面

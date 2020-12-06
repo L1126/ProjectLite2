@@ -71,6 +71,7 @@ public class HomePageFragment extends Fragment {
     ProjectCardAdapter mAdapter;
     //    SwipeRefreshLayout mRefresh;
     RefreshLayout mRefresh;
+    private ArrayList<ProjectCard> projectList = new ArrayList<ProjectCard>();
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -89,8 +90,6 @@ public class HomePageFragment extends Fragment {
         }
     }
 
-    private ArrayList<ProjectCard> projectList = new ArrayList<ProjectCard>();
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -100,6 +99,7 @@ public class HomePageFragment extends Fragment {
         toolBar = mView.findViewById(R.id.toolBar);
         txtTitle = mView.findViewById(R.id.txtPageTitle);
         toolBar.inflateMenu(R.menu.menu_home_page);
+
         View mNewProjectView = toolBar.findViewById(R.id.btnNewProject);
         //  标题栏菜单点击
         toolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -121,6 +121,7 @@ public class HomePageFragment extends Fragment {
                     //  点击搜索
                     case R.id.btnSearch:
                         Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
+                        SearchActivity.SetSearchType(SearchActivity.SearchType.project);
                         startActivityForResult(intent1,2);
                         break;
                     //  点击新项目
@@ -143,7 +144,9 @@ public class HomePageFragment extends Fragment {
                                                         startActivityForResult(it, 1);
                                                         break;
                                                     case 1:
+
                                                         Intent it2 = new Intent(MyApplication.getContext(), SearchActivity.class);
+                                                        SearchActivity.SetSearchType(SearchActivity.SearchType.project);
                                                         startActivity(it2);
                                                         break;
                                                     default:

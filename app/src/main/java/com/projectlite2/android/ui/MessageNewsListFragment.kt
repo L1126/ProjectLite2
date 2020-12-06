@@ -1,5 +1,6 @@
 package com.projectlite2.android.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,9 @@ import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.MessageCard
 import com.projectlite2.android.utils.OnItemClickListenerPlus
 import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
+import com.scwang.smart.refresh.header.BezierRadarHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.api.RefreshLayout
 import kotlinx.android.synthetic.main.message_card_item.*
 import java.util.*
 
@@ -29,7 +33,7 @@ class MessageNewsListFragment() : Fragment() {
     lateinit var mRecyclerview: RecyclerView
     lateinit var mAdapter: MessageCardAdapter
     lateinit var mCallBack: ItemTouchHelper.Callback
-
+    lateinit var mRefresh: RefreshLayout
     private val mMessageList = ArrayList<MessageCard>()
     private val mEveryCardMsgList=ArrayList<ArrayList<Msg>>()
     private val mEveryCardMsgAdapterList = ArrayList<MsgChatAdapter>()
@@ -71,6 +75,17 @@ class MessageNewsListFragment() : Fragment() {
         mCallBack = SimpleItemTouchHelperCallback(mAdapter)
         //调用ItemTouchHelper的attachToRecyclerView方法建立联系
         ItemTouchHelper(mCallBack).attachToRecyclerView(mRecyclerview)
+
+
+        mRefresh = mView.findViewById<SmartRefreshLayout>(R.id.smartRefresh)
+        val myHeader = BezierRadarHeader(MyApplication.getContext())
+        myHeader.setAccentColor(Color.BLUE)
+        myHeader.setPrimaryColor(Color.RED)
+        mRefresh.setRefreshHeader(myHeader)
+        mRefresh.setOnRefreshListener { refreshlayout ->
+            refreshlayout.finishRefresh(800 /*,false*/) //传入false表示刷新失败
+//            refreshData()
+        }
 
 
 
@@ -135,6 +150,11 @@ class MessageNewsListFragment() : Fragment() {
             }
         })
     }
+
+
+
+
+
 
     private fun addNewCards() {
         mMessageList.add(MessageCard("小军", "SRP", "10:12", "报告这周六交"))

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.jaeger.library.StatusBarUtil;
 import com.projectlite2.android.R;
 import com.projectlite2.android.activity.GuideActivity;
 import com.projectlite2.android.activity.LoginActivity;
@@ -17,14 +18,15 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//隐藏状态栏
-        //getSupportActionBar().hide();//隐藏标题栏
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_splash);
+        StatusBarUtil.setTransparent(SplashActivity.this);
+
         Thread myThread=new Thread(){//创建子线程
             @Override
             public void run() {
                 try{
-                    sleep(1000);//使程序休眠五秒
+                    sleep(1000);//使程序休眠1秒
                     Intent it;
                     if (!UserInfoSaveSharedPreference.getPrefNotFirstUse(MyApplication.getContext())){
                          it=new Intent(getApplicationContext(), MyWelcomeActivity.class);//启动GuideActivity

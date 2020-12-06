@@ -3,7 +3,9 @@ package com.projectlite2.android.utils;
 import android.util.Log;
 
 import com.projectlite2.android.app.MyApplication;
-import com.projectlite2.android.utils.popup.QueryResultPopup;
+import com.projectlite2.android.utils.popup.QueryProjectResultPopup;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 import java.util.List;
@@ -11,14 +13,80 @@ import java.util.List;
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
 import cn.leancloud.AVUser;
+import cn.leancloud.im.v2.AVIMClient;
+import cn.leancloud.im.v2.AVIMException;
+import cn.leancloud.im.v2.callback.AVIMClientCallback;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
+import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_ID;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_NAME;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FIELD_MEMBER;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FILED_PROJECT;
 
 
 public class CloudUtil {
+
+
+    /**
+     * 当前登录用户
+     */
+    public static class CURRENT_USER {
+
+        /**
+         * 当前用户实例引用
+         */
+        public static AVUser user;
+
+        /**
+         * 当前用户名
+         */
+        public static String name;
+
+        /**
+         * 当前用户UserId
+         */
+        public static String userId;
+
+        /**
+         * 当前用户objectId
+         */
+        public static String objId;
+
+        /**
+         * 当前用户的 IM CLIENT
+         */
+        public static AVIMClient imClient;
+
+
+        public static void ConfigImClinet(@NotNull AVUser currentUser){
+
+            user=currentUser;
+            name =currentUser.getString(TABLE_FIELD_USER_NAME);
+            userId=currentUser.getString(TABLE_FIELD_USER_ID);
+            objId=currentUser.getObjectId();
+
+
+            // 与服务器连接
+            imClient = AVIMClient.getInstance(currentUser);
+            imClient.open(new AVIMClientCallback() {
+                @Override
+                public void done(final AVIMClient avimClient, AVIMException e) {
+                    if (e == null) {
+                        // 成功打开连接
+                        // 执行其他逻辑
+                        Log.d("mytest", "im client: connected!");
+                    }
+
+                }
+            });
+
+
+
+        }
+
+    }
+
 
     /**
      * 项目表 字段与方法
@@ -168,7 +236,7 @@ public class CloudUtil {
                                 public void onNext(AVObject todo) {
                                     // 成功保存之后，执行其他逻辑
                                     Log.d("mytest", "join project: 中间表保存成功。");
-                                    QueryResultPopup.joinSuccess=true;
+                                    QueryProjectResultPopup.joinSuccess = true;
 
                                 }
 
