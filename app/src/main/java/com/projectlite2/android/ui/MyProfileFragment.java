@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.projectlite2.android.activity.WorkPlaceActivity;
 import com.projectlite2.android.activity.ModifyMyProfileCardActivity;
 import com.projectlite2.android.viewmodel.MyProfileViewModel;
 import com.projectlite2.android.R;

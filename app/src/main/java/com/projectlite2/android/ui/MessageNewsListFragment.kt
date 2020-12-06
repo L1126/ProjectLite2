@@ -2,6 +2,7 @@ package com.projectlite2.android.ui
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,13 +36,16 @@ class MessageNewsListFragment() : Fragment() {
     lateinit var mCallBack: ItemTouchHelper.Callback
     lateinit var mRefresh: RefreshLayout
     private val mMessageList = ArrayList<MessageCard>()
-    private val mEveryCardMsgList=ArrayList<ArrayList<Msg>>()
+    private val mEveryCardMsgList = ArrayList<ArrayList<Msg>>()
     private val mEveryCardMsgAdapterList = ArrayList<MsgChatAdapter>()
 
 //    lateinit var cRecyclerView: MaxRecyclerView
-    lateinit var cAdapter: MsgChatAdapter
-    private val msgList = ArrayList<Msg>()
-    private var CardClick = true
+//    lateinit var cAdapter: MsgChatAdapter
+//    private val msgList = ArrayList<Msg>()
+    private var CardClick0 = true
+    private var CardClick1 = true
+    private var CardClick2 = true
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -77,6 +81,7 @@ class MessageNewsListFragment() : Fragment() {
         ItemTouchHelper(mCallBack).attachToRecyclerView(mRecyclerview)
 
 
+
         mRefresh = mView.findViewById<SmartRefreshLayout>(R.id.smartRefresh)
         val myHeader = BezierRadarHeader(MyApplication.getContext())
         myHeader.setAccentColor(Color.BLUE)
@@ -89,7 +94,6 @@ class MessageNewsListFragment() : Fragment() {
 
 
 
-
         mAdapter.setOnKotlinItemClickListener(object : OnItemClickListenerPlus {
             override fun onClick(item: View?, position: Int, which: Int) {
 
@@ -99,21 +103,37 @@ class MessageNewsListFragment() : Fragment() {
                         val thisCardView = mRecyclerview.getChildAt(position)
                         val thisRV = thisCardView.findViewById<MaxRecyclerView>(R.id.messageBox)
 
+                        thisRV.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+                        thisRV.adapter = mEveryCardMsgAdapterList[position]
 
-
-                        if (CardClick) {
-
-                            thisRV.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-                            thisRV.adapter = mEveryCardMsgAdapterList[position]
-                            val msg0 = Msg("报告这周六交", Msg.TYPE_RECEIVED)
-                            mEveryCardMsgList[position].add(msg0)
-
-                            CardClick = false
-                        } else {
-                            thisRV.scrollToPosition(mEveryCardMsgList[position].size - 1)
+                        when(position) {
+                            0 -> {
+                                if (CardClick0) {
+                                    mEveryCardMsgList[0].add(Msg("报告这周六交", Msg.TYPE_RECEIVED))
+                                    CardClick0 = false
+                                } else {
+                                    thisRV.scrollToPosition(mEveryCardMsgList[position].size - 1)
+                                }
+                            }
+                            1 -> {
+                                if (CardClick1){
+                                    mEveryCardMsgList[1].add(Msg("木棉开会", Msg.TYPE_RECEIVED))
+                                    CardClick1 = false
+                                }else{
+                                    thisRV.scrollToPosition(mEveryCardMsgList[position].size - 1)
+                                }
+                            }
+                            2 -> {
+                                if (CardClick2){
+                                    mEveryCardMsgList[2].add(Msg("原型已经发给你了", Msg.TYPE_RECEIVED))
+                                    CardClick2 = false
+                                }else{
+                                    thisRV.scrollToPosition(mEveryCardMsgList[position].size - 1)
+                                }
+                            }
                         }
-
                     }
+
                     R.id.btnReply -> {
 
                         //  测试
@@ -122,8 +142,8 @@ class MessageNewsListFragment() : Fragment() {
                         val thisCardView = mRecyclerview.getChildAt(position)
 
                         // 测试
-                        val string = thisCardView.findViewById<TextView>(R.id.txtName).text.toString()
-                        MyApplication.ToastyInfo(string)
+//                        val string = thisCardView.findViewById<TextView>(R.id.txtName).text.toString()
+//                        MyApplication.ToastyInfo(string)
 
                         val thisRV = thisCardView.findViewById<MaxRecyclerView>(R.id.messageBox)
                         //测试
@@ -139,10 +159,13 @@ class MessageNewsListFragment() : Fragment() {
 
                         if (thisReplyMsg.isNotEmpty()) {
                             val msg = Msg(thisReplyMsg, Msg.TYPE_SENT)
+
                             mEveryCardMsgList[position].add(msg)
+                            Log.d("TAG",position.toString())
                             mEveryCardMsgAdapterList[position].notifyItemInserted(mEveryCardMsgList[position].size - 1)
                             thisRV.scrollToPosition(mEveryCardMsgList[position].size - 1)
-                            textReply.setText("")
+
+                            thisCardView.findViewById<EditText>(R.id.textReply).setText("")
                         }
 
                     }

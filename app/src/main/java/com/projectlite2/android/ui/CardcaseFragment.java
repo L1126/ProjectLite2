@@ -2,6 +2,11 @@ package com.projectlite2.android.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -10,20 +15,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
-
-
 import com.projectlite2.android.R;
 import com.projectlite2.android.activity.SearchActivity;
 import com.projectlite2.android.app.MyApplication;
+
+import java.util.ArrayList;
 
 public class CardcaseFragment extends Fragment {
 
@@ -33,7 +30,7 @@ public class CardcaseFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewpager;
     ArrayList fragmentList = new ArrayList<Fragment>();
-    String[] temp = {"myCard","newFriend"};
+    String[] temp = {"myCard", "newFriend"};
 
 
     @Nullable
@@ -41,9 +38,11 @@ public class CardcaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         contextView = inflater.inflate(R.layout.cardcase_fragment, container, false);
+
         toolBar = contextView.findViewById(R.id.toolBar);
         txtTitle = contextView.findViewById(R.id.txtPageTitle);
         txtTitle.setText(R.string.string_menu_cardcase);
+
         toolBar.inflateMenu(R.menu.menu_card_case_page);
 
         /**
@@ -55,17 +54,15 @@ public class CardcaseFragment extends Fragment {
 
                 Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
                 SearchActivity.SetSearchType(SearchActivity.SearchType.user);
-                startActivityForResult(intent1,2);
+                startActivityForResult(intent1, 2);
 
                 return true;
             }
         });
 
 
-
-
-
-            tabLayout = contextView.findViewById(R.id.tabLayoutCard);
+        tabLayout = contextView.findViewById(R.id.tabLayoutCard);
+        tabLayout = contextView.findViewById(R.id.tabLayoutCard);
         viewpager = contextView.findViewById(R.id.viewPagerCard);
         return contextView;
     }

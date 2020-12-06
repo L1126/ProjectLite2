@@ -33,6 +33,12 @@
         <activity
             android:name=".activity.SearchActivity"
             android:parentActivityName=".activity.MainActivity" />
+        <activity android:name=".activity.SearchActivity"
+            android:parentActivityName=".activity.MainActivity">
+        </activity>
+        <activity android:name=".activity.ProjectDetailActivity"></activity>
+        <activity android:name=".activity.tmp"></activity>
+        <activity android:name=".activity.WorkPlaceActivity"></activity>
         <activity
             android:name=".activity.MyWelcomeActivity"
             android:theme="@style/WelcomeScreenTheme.Light.SolidNavigation.UnderStatusBar" />

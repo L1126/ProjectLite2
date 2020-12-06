@@ -65,6 +65,8 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
             initAnimations()
             when (isFolded) {
                 true -> {
+//                    setCardFold(holder, View.VISIBLE)
+//                    setLayoutStyle(holder, style)
                     setCardFold(viewHolder, View.VISIBLE)
                     setLayoutStyle(viewHolder, style)
 
