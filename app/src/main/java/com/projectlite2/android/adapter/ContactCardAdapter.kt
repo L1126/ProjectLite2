@@ -1,5 +1,6 @@
 package com.projectlite2.android.adapter
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,26 +12,27 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.lxj.xpopup.XPopup
 import com.projectlite2.android.R
 import com.projectlite2.android.app.MyApplication
 import com.projectlite2.android.model.ContactCard
-import com.projectlite2.android.utils.OnItemClickListener
 import com.projectlite2.android.utils.ItemTouchHelperAdapter
 import com.projectlite2.android.utils.OnItemClickListenerPlus
+import com.tencent.liteav.beauty.b.v
 import java.util.*
 
-class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style: Int) :
+
+class ContactCardAdapter(var ac: Activity, private var mData: MutableList<ContactCard>, val style: Int) :
         RecyclerView.Adapter<ContactCardAdapter.ViewHolder>()
-        ,ItemTouchHelperAdapter
-{
+        , ItemTouchHelperAdapter {
 
     companion object {
         const val STYLE_PARAM_MY_CONTACTS = 0
         const val STYLE_PARAM_NEW_FRIENDS = 1
     }
 
-    private lateinit var mShowAction:Animation
-    private lateinit var mHiddenAction:Animation
+    private lateinit var mShowAction: Animation
+    private lateinit var mHiddenAction: Animation
 
     private var itemClickListener: OnItemClickListenerPlus? = null
     private var isFolded: Boolean = true
@@ -58,10 +60,13 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.contact_card_item, parent, false)
         val viewHolder = ViewHolder(view)
+        // 必须在事件发生前，调用这个方法来监视View的触摸
+        val builder = XPopup.Builder(ac).watchView(view)
+
 
         //  整个卡片的点击
         viewHolder.itemView.setOnClickListener {
-            itemClickListener!!.onClick(it,viewHolder.adapterPosition,viewHolder.itemView.id)
+            itemClickListener!!.onClick(it, viewHolder.adapterPosition, viewHolder.itemView.id)
             initAnimations()
             when (isFolded) {
                 true -> {
@@ -79,18 +84,49 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
             isFolded = !isFolded
 //            MyApplication.showToast(style.toString())
         }
+        //  整个卡片的长按
+        viewHolder.itemView.setOnLongClickListener {
+            view.setOnLongClickListener {
+                builder.asAttachList(arrayOf("邀请到项目", "删除名片"), null
+                ) { position, text ->
+
+            val parentPosition = viewHolder.adapterPosition
+//            /* 将长按item对应的学生姓名发送至MainActivity */
+//            Log.d("jiyi", "adapter remove:${studentList[position].name}")
+//            MainActivity.mainActivityTodo(
+//                    MainActivity.HANDLELONGCLIECK,
+//                    studentList[position].name)
+//            /* 在ArrayList中移除此股 */
+//            studentList.remove(studentList[position])
+//            /* 通知移除该item */
+//            notifyItemRemoved(position)
+//            /* 通知调制ArrayList顺序(此句删除也无影响) */
+//            notifyItemRangeChanged(position, studentList.size)
+                    MyApplication.ToastyInfo(parentPosition.toString()+" "+position.toString())
+
+                }
+
+                        .show()
+                false
+            }
+
+
+            false
+        }
+
 
         //  菜单按钮的点击
         viewHolder.cdBtnMenu.setOnClickListener {
-            itemClickListener!!.onClick(it,viewHolder.adapterPosition,viewHolder.cdBtnMenu.id)
+            itemClickListener!!.onClick(it, viewHolder.adapterPosition, viewHolder.cdBtnMenu.id)
+
         }
         //  同意按钮的点击
         viewHolder.cdButtonAgree.setOnClickListener {
-            itemClickListener!!.onClick(it,viewHolder.adapterPosition,viewHolder.cdButtonAgree.id)
+            itemClickListener!!.onClick(it, viewHolder.adapterPosition, viewHolder.cdButtonAgree.id)
         }
         //  拒绝按钮的点击
-        viewHolder.cdButtonCancel.setOnClickListener{
-            itemClickListener!!.onClick(it,viewHolder.adapterPosition,viewHolder.cdButtonCancel.id)
+        viewHolder.cdButtonCancel.setOnClickListener {
+            itemClickListener!!.onClick(it, viewHolder.adapterPosition, viewHolder.cdButtonCancel.id)
         }
 
 
@@ -179,8 +215,8 @@ class ContactCardAdapter(private var mData: MutableList<ContactCard>, val style:
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
         //交换位置
-        Collections.swap(mData,fromPosition,toPosition);
-        notifyItemMoved(fromPosition,toPosition);
+        Collections.swap(mData, fromPosition, toPosition);
+        notifyItemMoved(fromPosition, toPosition);
     }
 
 

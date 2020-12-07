@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import android.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.projectlite2.android.activity.WorkPlaceActivity;
 import com.projectlite2.android.activity.ModifyMyProfileCardActivity;
+import com.projectlite2.android.model.MyProfileSettingItem;
 import com.projectlite2.android.viewmodel.MyProfileViewModel;
 import com.projectlite2.android.R;
 import com.projectlite2.android.activity.SystemSettingActivity;
@@ -35,6 +36,7 @@ public class MyProfileFragment extends Fragment
     SwipeRecyclerView mRecyclerView;
     //    RecyclerView mRecyclerView;
     MyProfileSettingItemAdapter mAdapter;
+    Toolbar toolBar;
 
     private ArrayList<MyProfileSettingItem> settingList = new ArrayList<MyProfileSettingItem>();
 
@@ -43,6 +45,9 @@ public class MyProfileFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mView = inflater.inflate(R.layout.my_profile_fragment, container, false);
+        toolBar = mView.findViewById(R.id.toolBar);
+
+
 
 
         return mView;
@@ -113,6 +118,7 @@ public class MyProfileFragment extends Fragment
                         break;
                     case Constant.MyProfileSettingItemPosition.SYSTEM_SETTING:
                         Intent systemSettingIntent = new Intent(MyApplication.getContext(), SystemSettingActivity.class);
+
                         startActivity(systemSettingIntent);
                         break;
                     default:

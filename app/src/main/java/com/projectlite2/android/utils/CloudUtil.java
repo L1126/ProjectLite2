@@ -1,7 +1,10 @@
 package com.projectlite2.android.utils;
 
+import android.content.Intent;
 import android.util.Log;
 
+import com.projectlite2.android.activity.LoginActivity;
+import com.projectlite2.android.activity.PushTestActivity;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.utils.popup.QueryProjectResultPopup;
 
@@ -10,12 +13,14 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Date;
 import java.util.List;
 
+import cn.leancloud.AVInstallation;
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
 import cn.leancloud.AVUser;
 import cn.leancloud.im.v2.AVIMClient;
 import cn.leancloud.im.v2.AVIMException;
 import cn.leancloud.im.v2.callback.AVIMClientCallback;
+import cn.leancloud.push.PushService;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -59,6 +64,10 @@ public class CloudUtil {
         public static AVIMClient imClient;
 
 
+        /**
+         * 用户连接服务器
+         * @param currentUser
+         */
         public static void ConfigImClinet(@NotNull AVUser currentUser){
 
             user=currentUser;
@@ -84,6 +93,79 @@ public class CloudUtil {
 
 
         }
+
+
+        /**
+         *  检查登陆状态，链接服务器，配置installationId
+         */
+        public static void ConfigCurrentUserAndInstallationId() {
+            AVUser currentUser = AVUser.getCurrentUser();
+
+
+            if (currentUser != null) {
+
+
+                //  当前为用户登录状态，配置该用户的installationId
+
+                Log.d("mytest", "ConfigCurrentUserAndInstallationId: " + "当前用户：" + currentUser.getMobilePhoneNumber());
+
+                //  配置installationId
+                AVInstallation.getCurrentInstallation().saveInBackground().subscribe(new Observer<AVObject>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(AVObject avObject) {
+                        // 关联 installationId 到用户表等操作。
+                        MyApplication.MY_INSTALLATION_ID = AVInstallation.getCurrentInstallation().getInstallationId();
+                        Log.d("mytest", "关联 installationId   保存成功：" + MyApplication.MY_INSTALLATION_ID);
+                        currentUser.put("installationId", MyApplication.MY_INSTALLATION_ID);
+                        currentUser.saveInBackground().subscribe(new Observer<AVObject>() {
+                            public void onSubscribe(Disposable disposable) {
+                            }
+
+                            public void onNext(AVObject todo) {
+                                Log.d("mytest", "currentUser save installationId success");
+
+                                // 启动推送服务 设置默认打开的 Activity
+                                PushService.setDefaultPushCallback(MyApplication.getContext(), PushTestActivity.class);
+                                //  配置登录通讯服务器
+                                ConfigImClinet(currentUser);
+                            }
+
+                            public void onError(Throwable throwable) {
+                                MyApplication.ToastyError("error");
+                                Log.d("mytest", "currentUser save installationId  Error: " + throwable);
+                                // 异常处理
+                            }
+
+                            public void onComplete() {
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("mytest", "关联 installationId   保存失败，错误信息：" + e.getMessage());
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+
+
+            } else {
+                //  若当前为无用户登陆状态，则跳转到登录界面
+                MyApplication.ToastyError("当前无用户");
+
+            }
+
+        }
+
 
     }
 
@@ -314,6 +396,12 @@ public class CloudUtil {
          * 用户数据表字段名称：用户installationId
          */
         public static final String TABLE_FIELD_USER_INSTALLATION_ID = "installationId";
+
+
+        /**
+         * 用户数据表字段名称：用户头像
+         */
+        public static final String TABLE_FIELD_USER_AVATAR = "avatar";
 
     }
 

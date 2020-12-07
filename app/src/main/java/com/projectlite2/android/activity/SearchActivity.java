@@ -111,20 +111,15 @@ public class SearchActivity extends AppCompatActivity {
 
                     Date dateStart = queryProjects.get(position).getDate(TABLE_FIELD_DATE_START);
                     Date dateClosing = queryProjects.get(position).getDate(TABLE_FIELD_DATE_CLOSING);
-
-
                     //  调用自定义的浮窗 卡片显示项目信息
                     new XPopup.Builder(thisActivity)
-//                        .asCustom(new QueryResultPopup(thisActivity))
                             .asCustom(new QueryProjectResultPopup(thisActivity, pjId, pjName, pjBrief, objId))
                             .show();
                 }
                 else if (searchType == SearchType.user) {
-//
-//                    String userId = queryUsers.get(position).getString(TABLE_FIELD_USER_ID);
-//                    String userName = queryUsers.get(position).getString(TABLE_FIELD_USER_NAME);
 
-
+                    String userId = queryUsers.get(position).getString(TABLE_FIELD_USER_ID);
+                    String userName = queryUsers.get(position).getString(TABLE_FIELD_USER_NAME);
 
                     //  调用自定义的浮窗 卡片显示项目信息
                     new XPopup.Builder(thisActivity)

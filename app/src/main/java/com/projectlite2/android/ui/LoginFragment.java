@@ -131,25 +131,13 @@ public class LoginFragment extends Fragment {
             public void onNext(AVUser user) {
 
                 // 登录成功
-                // MyApplication.showToast(phone+" "+password+" 登陆成功");
                 MyApplication.ToastySuccess(phone+" "+password+" 登陆成功");
-                // 若勾选了记住密码
-                if(binding.chkRememberPwd.isChecked()){
-                    // 保存sharedPreferences
-                    UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),phone);
-                    UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),password);
-                }
-                else{
-                    // 保存sharedPreferences
-                    UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
-                    UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
-                }
 
-                // 跳转到主页
-                Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
-                startActivity(intent);
-                // 销毁LoginActivity
-                getActivity().finish();
+                //  进入主页
+                Intent it=new Intent(MyApplication.getContext(), MainActivity.class);
+                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(it);
+
             }
 
             public void onError(@NotNull Throwable throwable) {

@@ -1,6 +1,7 @@
 package com.projectlite2.android.ui
 
 
+import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -25,7 +26,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import java.util.*
 
 
-class ContactListFragment(private val style_param: Int) : Fragment() {
+class ContactListFragment(var ac: Activity, private val style_param: Int) : Fragment() {
 
     companion object {
 
@@ -49,6 +50,7 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
     lateinit var mAdapter: ContactCardAdapter
     lateinit var mCallBack: ItemTouchHelper.Callback
     lateinit var mRefresh: RefreshLayout
+
 
 
 
@@ -77,7 +79,7 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
 
         mRecyclerview = mView.findViewById(R.id.recyclerViewCard2)
         mRecyclerview.layoutManager = layoutManager
-        mAdapter = ContactCardAdapter(mContactList, style_param)
+        mAdapter = ContactCardAdapter(ac,mContactList, style_param)
         mRecyclerview.adapter = mAdapter
 
         mRecyclerview.itemAnimator = DefaultItemAnimator()
@@ -107,13 +109,15 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
         mAdapter.setOnKotlinItemClickListener(object : OnItemClickListenerPlus {
             override fun onClick(item: View?, position: Int, which: Int) {
                 when (which) {
-                    R.id.btnMenu -> item?.let { showCardMenu(it, arrayOf("邀请", "删除")) }
+                    R.id.btnMenu -> item?.let { showCardMenu(it, arrayOf("邀请到项目", "删除名片")) }
                     R.id.btnAgree -> MyApplication.ToastyInfo("click agree")
                     R.id.btnCancel -> MyApplication.ToastyInfo("click cancel")
                 }
 
             }
         })
+
+
     }
 
     /**

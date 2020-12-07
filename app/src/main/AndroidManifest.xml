@@ -12,11 +12,10 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
+        />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -33,18 +32,13 @@
         <activity
             android:name=".activity.SearchActivity"
             android:parentActivityName=".activity.MainActivity" />
-        <activity android:name=".activity.SearchActivity"
-            android:parentActivityName=".activity.MainActivity">
-        </activity>
-        <activity android:name=".activity.ProjectDetailActivity"></activity>
-        <activity android:name=".activity.tmp"></activity>
-        <activity android:name=".activity.WorkPlaceActivity"></activity>
+        <activity android:name=".activity.ProjectDetailActivity" />
+        <activity android:name=".activity.tmp" />
+        <activity android:name=".activity.WorkPlaceActivity" />
         <activity
             android:name=".activity.MyWelcomeActivity"
             android:theme="@style/WelcomeScreenTheme.Light.SolidNavigation.UnderStatusBar" />
         <activity android:name=".activity.ModifyMyProfileCardActivity" />
-        <activity android:name=".activity.ProjectDetailActivity" />
-        <activity android:name=".activity.tmp" />
         <activity
             android:name=".activity.CreateProjectActivity"
             android:parentActivityName=".activity.MainActivity" />
@@ -81,6 +75,20 @@
             android:name="notch.config"
             android:value="portrait|landscape" /> <!-- 即时通讯和推送都需要 PushService -->
         <service android:name="cn.leancloud.push.PushService" />
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.FileProvider"
+            android:exported="false"
+            tools:replace="android:authorities"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths">
+            </meta-data>
+        </provider>
+
 
         <receiver android:name="cn.leancloud.push.AVBroadcastReceiver">
             <intent-filter>

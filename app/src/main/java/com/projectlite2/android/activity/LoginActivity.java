@@ -1,23 +1,19 @@
 package com.projectlite2.android.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.jaeger.library.StatusBarUtil;
-import com.projectlite2.android.app.MyApplication;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.projectlite2.android.R;
-import com.projectlite2.android.utils.CloudUtil;
-import com.projectlite2.android.utils.UserInfoSaveSharedPreference;
+import com.projectlite2.android.app.MyApplication;
+import com.projectlite2.android.ui.SetPwdFragment;
+
+import java.util.List;
 
 import cn.leancloud.AVUser;
-import cn.leancloud.im.v2.AVIMClient;
-
-import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_ID;
-import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_NAME;
-import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_PHONE;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,20 +25,43 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //StatusBarUtil.setTransparent(LoginActivity.this);
 
-        String prefUserPhoneNumber= UserInfoSaveSharedPreference.getUserPhone(MyApplication.getContext());
-        Log.d("PREF", "onCreate: savedPhoneNumber? "+prefUserPhoneNumber);
-        // 如果shp中存在保存的手机号码信息的话,自动登录
-        if(!prefUserPhoneNumber.equals(UserInfoSaveSharedPreference.PREF_NULL_VALUE))
-        {
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            // 跳到首页
             // 跳转到主页
             Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
             startActivity(intent);
-
-
-
             // 销毁LoginActivity
             finish();
+        } else {
+            // 显示注册或登录页面
+        }
+
+
+    }
+
+
+    /**
+     * 解决Fragment中的onActivityResult()方法无响应问题。
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * 1.使用getSupportFragmentManager().getFragments()获取到当前Activity中添加的Fragment集合
+         * 2.遍历Fragment集合，手动调用在当前Activity中的Fragment中的onActivityResult()方法。
+         */
+
+        Log.d("mytest", "onActivityResult: login activity");
+
+        if (getSupportFragmentManager().getFragments() != null && getSupportFragmentManager().getFragments().size() > 0) {
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            for (Fragment mFragment : fragments) {
+                mFragment.onActivityResult(requestCode, resultCode, data);
+            }
         }
 
     }
+
+
 }

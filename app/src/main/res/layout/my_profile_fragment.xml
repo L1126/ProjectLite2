@@ -22,7 +22,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 
             app:contentScrim="@color/design_default_color_primary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+
             app:title="@string/string_my_profile_bar_title">
 
             <ImageView

@@ -78,10 +78,10 @@ class WPRecycbinFragment : Fragment() ,View.OnClickListener {
         super.onActivityCreated(savedInstanceState)
 
         mBtnDelete = mView.findViewById(R.id.cardDelete)
-        mBtnDelete?.setOnClickListener(this)
+        mBtnDelete.setOnClickListener(this)
 
         mBtnRecover = mView.findViewById(R.id.cardRecover)
-        mBtnRecover?.setOnClickListener(this)
+        mBtnRecover.setOnClickListener(this)
 
         addNewCards()
 

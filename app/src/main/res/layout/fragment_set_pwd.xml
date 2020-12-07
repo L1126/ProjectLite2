@@ -162,19 +162,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.591" />
 
-        <ImageView
-            android:id="@+id/imgProfilePicture"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/string_image_descrip_profile_picture"
-            android:src="@drawable/ic_baseline_account_circle_24"
-            app:layout_constraintBottom_toTopOf="@+id/guideline9"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline6"
-            app:layout_constraintTop_toTopOf="@+id/guideline8"
-            app:layout_constraintVertical_bias="0.0" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline8"
             android:layout_width="wrap_content"
@@ -224,6 +211,18 @@
             app:layout_constraintBottom_toBottomOf="@+id/txtConfirmPwd"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toTopOf="@+id/txtConfirmPwd" />
+
+        <ImageButton
+            android:id="@+id/btnProfilePicture"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:backgroundTint="#FFFFFF"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/guideline9"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="@+id/guideline8"
+            app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

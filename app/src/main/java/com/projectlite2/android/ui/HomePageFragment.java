@@ -82,7 +82,7 @@ public class HomePageFragment extends Fragment {
             case 2: {
                 //  用户加入了新的项目，返回resultCode为OK，执行刷新操作
                 if (resultCode == RESULT_OK) {
-                    refreshData(1000);
+                refreshData(1000);
                 }
                 break;
             }
