@@ -23,6 +23,8 @@ import com.projectlite2.android.ui.MessageBoxFragment;
 import com.projectlite2.android.ui.MyProfileFragment;
 import com.projectlite2.android.utils.CloudUtil;
 
+import java.util.List;
+
 import cn.leancloud.AVInstallation;
 import cn.leancloud.AVObject;
 import cn.leancloud.AVUser;
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //  检查登陆状态，连接服务器，配置installationId
-   CloudUtil.CURRENT_USER.ConfigCurrentUserAndInstallationId();
+        CloudUtil.CURRENT_USER.ConfigCurrentUserAndInstallationId();
 
         //如果有的话，隐藏actionbar
 //        getSupportActionBar().hide();
@@ -143,6 +145,28 @@ public class MainActivity extends AppCompatActivity {
         //  关闭viewPager滑动
         mViewPager.setUserInputEnabled(false);
 
+
+    }
+
+    /**
+     * 解决Fragment中的onActivityResult()方法无响应问题。
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * 1.使用getSupportFragmentManager().getFragments()获取到当前Activity中添加的Fragment集合
+         * 2.遍历Fragment集合，手动调用在当前Activity中的Fragment中的onActivityResult()方法。
+         */
+
+        Log.d("mytest", "onActivityResult: main activity");
+
+        if (getSupportFragmentManager().getFragments() != null && getSupportFragmentManager().getFragments().size() > 0) {
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            for (Fragment mFragment : fragments) {
+                mFragment.onActivityResult(requestCode, resultCode, data);
+            }
+        }
 
     }
 

@@ -2,60 +2,70 @@ package com.projectlite2.android.utils.popup;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lxj.xpopup.core.BottomPopupView;
 import com.lxj.xpopup.util.XPopupUtils;
 import com.projectlite2.android.R;
+import com.projectlite2.android.app.MyApplication;
+import com.projectlite2.android.utils.CloudUtil;
 
-import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.leancloud.AVFile;
+import cn.leancloud.AVObject;
+import cn.leancloud.AVQuery;
 import cn.leancloud.AVUser;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class QueryUserResultPopup extends BottomPopupView {
 
-//    @BindView(R.id.txtThisProjectName)
-//    TextView txtProjectName;
-//
-//    @BindView(R.id.txtThisProjectNum)
-//    TextView txtProjectId;
-//
-//    @BindView(R.id.txtThisProjectBrief)
-//    TextView txtProjectBrief;
-//
-//    @BindView(R.id.btnApplyToJoin)
-//    Button btnApplyToJoin;
+    @BindView(R.id.txtThisUserName)
+    TextView txtUserName;
 
-    String projectName, projectBrief, projectId, objectId;
-    Date dateStart, dateClosing;
-    AVUser projectLeader;
-    Boolean isMeLeader = false;
-    public static Boolean joinSuccess = false;
-    String thisLeaderUserId="";
+    @BindView(R.id.txtThisUserNum)
+    TextView txtUserId;
+
+    @BindView(R.id.txtThisStrongPoint)
+    TextView txtUserBrief;
+
+    @BindView(R.id.btnChatOrRequest)
+    Button btnChatOrRequest;
+
+    @BindView(R.id.txtIsMyFriend)
+    TextView txtIsMyFriend;
+
+
+    String userName, userId, objectId;
+    AVFile userAvatar;
+
+    Boolean isFriend = false;
+
     Activity parentActivity;
 
 
-//
-//    public QueryUserResultPopup(@NonNull Context context, String pjId, String pjName, String pjBrief, String objID) {
-//        super(context);
-//        projectId = pjId;
-//        projectName = pjName;
-//        projectBrief = pjBrief;
-//        objectId = objID;
-//        parentActivity= (Activity) context;
-//
-//    }
-    //
-
     public QueryUserResultPopup(@NonNull Context context) {
         super(context);
+        parentActivity = (Activity) context;
+    }
+
+    public QueryUserResultPopup(@NonNull Context context, String name, String userid, AVFile avatar, String objId) {
+        super(context);
+        parentActivity = (Activity) context;
+        userName = name;
+        userId = userid;
+        userAvatar = avatar;
+        objectId = objId;
     }
 
 
@@ -69,13 +79,82 @@ public class QueryUserResultPopup extends BottomPopupView {
         super.onCreate();
         ButterKnife.bind(this);
 
+        txtUserName.setText(userName);
+        txtUserId.setText(userId);
 
-//        if (!projectBrief.equals("")) {
-//            txtProjectBrief.setText(projectBrief);
-//        }
-//        txtProjectId.setText(projectId);
-//        txtProjectName.setText(projectName);
+        //  设置头像
 
+
+        //  判断与他是否为好友关系 设置按钮文本
+        AVQuery<AVObject> followerQuery = CloudUtil.CURRENT_USER.user.followerQuery();
+        followerQuery.whereEqualTo("objectId", objectId);
+        followerQuery.findInBackground().subscribe(new Observer<List<AVObject>>() {
+            @Override
+            public void onSubscribe(Disposable disposable) {
+            }
+
+            @Override
+            public void onNext(List<AVObject> avObjects) {
+                if (avObjects.isEmpty()) {
+                    //非好友
+                    isFriend = false;
+                    btnChatOrRequest.setText("投递名片");
+                } else {
+                    //是好友
+                    isFriend = true;
+                    btnChatOrRequest.setText("发消息");
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                throwable.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+
+    }
+
+    @OnClick({R.id.btnChatOrRequest})
+    public void OnClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnChatOrRequest:
+                if (isFriend) {
+                    Log.d("mytest", "OnClick: btnChatOrRequest   isFriend");
+
+
+                } else {
+                    Log.d("mytest", "OnClick: btnChatOrRequest   notFriend");
+
+                    AVUser.getCurrentUser().followInBackground(objectId).subscribe(new Observer<JSONObject>() {
+                        @Override
+                        public void onSubscribe(Disposable disposable) {
+                        }
+
+                        @Override
+                        public void onNext(JSONObject object) {
+                            Log.d("mytest", "succeed follow. " + object.toString());
+                            btnChatOrRequest.setText("投递成功");
+                            MyApplication.ToastySuccess("成功向该用户投递你的名片");
+
+                        }
+
+                        @Override
+                        public void onError(Throwable throwable) {
+                            throwable.printStackTrace();
+                        }
+
+                        @Override
+                        public void onComplete() {
+                        }
+                    });
+                }
+        }
     }
 
     // 最大高度为Window的0.85
@@ -86,12 +165,12 @@ public class QueryUserResultPopup extends BottomPopupView {
     }
 
 
-//    @OnClick({R.id.btnApplyToJoin})
+//    @OnClick({R.id.btnChatOrRequest})
 //    void OnClick(View v) {
 //        switch (v.getId()) {
 //            case R.id.btnApplyToJoin:
 //
-//                //  判断本人是否为负责人
+//                //  判断与他是否为好友关系
 //                GetLeader();
 //                //  若该项目的leader为当前用户，则提示不可重复加入
 //                if (isMeLeader) {
@@ -163,12 +242,12 @@ public class QueryUserResultPopup extends BottomPopupView {
 //
 //                break;
 //        }
-    }
+}
 
 
-    /**
-     * 使用该方法判断本用户是否是该项目的负责人，结果存储在isMeLeader中，并且把项目负责人的 userId 储存在 thisLeaderUserId 中
-     */
+/**
+ * 使用该方法判断本用户是否是该项目的负责人，结果存储在isMeLeader中，并且把项目负责人的 userId 储存在 thisLeaderUserId 中
+ */
 //    private void GetLeader() {
 //
 //        AVObject project = AVObject.createWithoutData(TABLE_NAME_PROJECT, objectId);

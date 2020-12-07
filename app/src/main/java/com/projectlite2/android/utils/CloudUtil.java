@@ -1,18 +1,19 @@
 package com.projectlite2.android.utils;
 
-import android.content.Intent;
 import android.util.Log;
 
-import com.projectlite2.android.activity.LoginActivity;
+import com.projectlite2.android.R;
 import com.projectlite2.android.activity.PushTestActivity;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.utils.popup.QueryProjectResultPopup;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.List;
 
+import cn.leancloud.AVFile;
 import cn.leancloud.AVInstallation;
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
@@ -22,15 +23,40 @@ import cn.leancloud.im.v2.AVIMException;
 import cn.leancloud.im.v2.callback.AVIMClientCallback;
 import cn.leancloud.push.PushService;
 import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
+import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_AVATAR;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_ID;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_NAME;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_PHONE;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FIELD_MEMBER;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FILED_PROJECT;
 
 
 public class CloudUtil {
+
+
+    /**
+     * 文件表 字段与方法
+     */
+    public static class CLASS_FILE {
+
+        /**
+         * 数据表名称：文件
+         */
+        public static final String TABLE_NAME_FILE = "_File";
+
+        /**
+         * 文件数据表字段名称：对象ID
+         */
+        public static final String TABLE_FIELD_OBJECT_ID = "objectId";
+
+        /**
+         * 文件数据表字段名称：url
+         */
+        public static final String TABLE_FIELD_URL = "url";
+    }
 
 
     /**
@@ -59,21 +85,36 @@ public class CloudUtil {
         public static String objId;
 
         /**
+         * 当前用户绑定手机号
+         */
+        public static String phoneNumber;
+
+        /**
          * 当前用户的 IM CLIENT
          */
         public static AVIMClient imClient;
 
+        /**
+         * 当前用户的 头像
+         */
+        public static AVFile avatar;
+
 
         /**
-         * 用户连接服务器
+         * 获取表字段到该类，用户连接服务器
+         *
          * @param currentUser
          */
-        public static void ConfigImClinet(@NotNull AVUser currentUser){
+        public static void ConfigImClinet(@NotNull AVUser currentUser) {
 
-            user=currentUser;
-            name =currentUser.getString(TABLE_FIELD_USER_NAME);
-            userId=currentUser.getString(TABLE_FIELD_USER_ID);
-            objId=currentUser.getObjectId();
+            Log.d("mytest", "ConfigImClinet:  2020.12.07");
+
+            user = currentUser;
+            name = currentUser.getString(TABLE_FIELD_USER_NAME);
+            userId = currentUser.getString(TABLE_FIELD_USER_ID);
+            phoneNumber = currentUser.getString(TABLE_FIELD_USER_PHONE);
+            objId = currentUser.getObjectId();
+            avatar = currentUser.getAVFile(TABLE_FIELD_USER_AVATAR);
 
 
             // 与服务器连接
@@ -91,12 +132,11 @@ public class CloudUtil {
             });
 
 
-
         }
 
 
         /**
-         *  检查登陆状态，链接服务器，配置installationId
+         * 检查登陆状态，链接服务器，配置installationId
          */
         public static void ConfigCurrentUserAndInstallationId() {
             AVUser currentUser = AVUser.getCurrentUser();
@@ -163,6 +203,54 @@ public class CloudUtil {
                 MyApplication.ToastyError("当前无用户");
 
             }
+
+        }
+
+
+        public static void PushAvatarToCloud(String path) throws FileNotFoundException {
+
+            //  构建头像文件
+            AVFile file = AVFile.withAbsoluteLocalPath("avatar.jpg", path);
+            //  保存到云
+            file.saveInBackground().subscribe(new Observer<AVFile>() {
+                public void onSubscribe(Disposable disposable) {
+                }
+
+                public void onNext(AVFile file) {
+
+                    Log.d("mytest", "头像保存云端。objectId：" + file.getObjectId());
+
+                    user.put(TABLE_FIELD_USER_AVATAR, file);
+
+                    user.saveInBackground().subscribe(new Observer<AVObject>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+                        }
+
+                        @Override
+                        public void onNext(@NonNull AVObject avObject) {
+                            MyApplication.ToastySuccess("头像设置成功");
+
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            MyApplication.ToastyError("注册失败");
+                        }
+
+                        @Override
+                        public void onComplete() {
+                        }
+                    });
+                }
+
+                public void onError(Throwable throwable) {
+                    // 保存失败，可能是文件无法被读取，或者上传过程中出现问题
+                }
+
+                public void onComplete() {
+                }
+            });
 
         }
 

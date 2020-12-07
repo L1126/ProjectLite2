@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import cn.leancloud.AVFile;
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
 import cn.leancloud.AVUser;
@@ -34,6 +35,7 @@ import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD
 import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_PROJECT_ID;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_PROJECT_NAME;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_NAME_PROJECT;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_AVATAR;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_ID;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_NAME;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_NAME_USER;
@@ -73,12 +75,18 @@ public class SearchActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+        list = findViewById(R.id.listView);
+        search = findViewById(R.id.searchView);
+
+
         if (searchType == SearchType.project) {
             getSupportActionBar().setTitle("搜索项目");
+            search.setQueryHint("输入项目唯一Id");
             Log.d("mytest", "SearchActivity: project ");
         } else if (searchType == SearchType.user) {
             getSupportActionBar().setTitle("搜索用户");
-
+            search.setQueryHint("输入用户唯一Id");
             Log.d("mytest", "SearchActivity: user ");
         } else {
             getSupportActionBar().setTitle("error");
@@ -88,8 +96,6 @@ public class SearchActivity extends AppCompatActivity {
 
         thisActivity = this;
 
-        list = findViewById(R.id.listView);
-        search = findViewById(R.id.searchView);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrQueryResult);
         list.setAdapter(adapter);
         list.setVisibility(View.GONE);
@@ -119,11 +125,15 @@ public class SearchActivity extends AppCompatActivity {
                 else if (searchType == SearchType.user) {
 
                     String userId = queryUsers.get(position).getString(TABLE_FIELD_USER_ID);
+                    String userObjId = queryUsers.get(position).getObjectId();
                     String userName = queryUsers.get(position).getString(TABLE_FIELD_USER_NAME);
+                    AVFile userAvatar=queryUsers.get(position).getAVFile(TABLE_FIELD_USER_AVATAR);
+
+                    Log.d("mytest", "SearchActivity: "+userId);
 
                     //  调用自定义的浮窗 卡片显示项目信息
                     new XPopup.Builder(thisActivity)
-                            .asCustom(new QueryUserResultPopup(thisActivity))
+                            .asCustom(new QueryUserResultPopup(thisActivity,userName,userId,userAvatar,userObjId))
                             .show();
                 } else {
 

@@ -2,11 +2,9 @@ package com.projectlite2.android.app;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
@@ -33,7 +30,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -356,6 +352,48 @@ public class MyApplication extends Application {
                 }
             }
         }
+
+
+
+
+
+
+
+}
+
+
+    /**
+     * 保存图像到手机,并返回路径
+     * @param bitmap
+     * @return
+     */
+    public static String saveImageReturnPath(Activity activity, Bitmap bitmap) {
+        File filesDir;
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){//判断sd卡是否挂载
+            //路径1：storage/sdcard/Android/data/包名/files
+            filesDir = activity.getExternalFilesDir("");
+        }else{//手机内部存储
+            //路径：data/data/包名/files
+            filesDir = activity.getFilesDir();
+        }
+        FileOutputStream fos = null;
+        try {
+            File file = new File(filesDir,"icon.png");
+            fos = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100,fos);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }finally{
+            if(fos != null){
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return filesDir.getAbsolutePath();
+
     }
 
 

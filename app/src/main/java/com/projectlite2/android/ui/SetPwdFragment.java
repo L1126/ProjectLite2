@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.projectlite2.android.utils.GetImagePathUtil;
 import com.projectlite2.android.utils.StoragePermissionUtil;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 import cn.leancloud.AVFile;
 import cn.leancloud.AVObject;
@@ -63,6 +65,7 @@ public class SetPwdFragment extends Fragment {
     public Boolean hasSetAvatar = false;
 
     public Bitmap avatarBitmap = null;
+    public Uri uri= null;
 
     public SetPwdFragment() {
         // Required empty public constructor
@@ -163,7 +166,7 @@ public class SetPwdFragment extends Fragment {
             public void onClick(View v) {
 
                 new XPopup.Builder(getContext())
-                        .asBottomList("设置头像", new String[]{"从系统相册选择", "使用相机拍摄"},
+                        .asBottomList("设置头像", new String[]{"从本地相册选择", "使用相机拍摄"},
                                 new OnSelectListener() {
                                     @Override
                                     public void onSelect(int position, String text) {
@@ -207,15 +210,17 @@ public class SetPwdFragment extends Fragment {
                     //用相机返回的照片去调用剪裁也需要对Uri进行处理
 
                     try {
+
                         avatarBitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(MyApplication.contentUri));
                         //mAvatarPath = GetImagePathUtil.getPathFromUri(getActivity(), data.getData());
                         avatarBitmap = BitmapUtils.createCircleBitmap(avatarBitmap, 0, false, imgAvatar.getWidth(), imgAvatar.getHeight());
                         //加载显示
                         imgAvatar.setImageBitmap(avatarBitmap);
                         hasSetAvatar = true;
-                        //bitmap图片上传到服务器......
-                        //bitmap图片保存到本地
-                        MyApplication.saveImage(getActivity(), avatarBitmap);
+
+                        mAvatarPath= MyApplication.saveImageReturnPath(getActivity(), avatarBitmap);
+                        //保存裁剪后的图像
+
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -226,12 +231,13 @@ public class SetPwdFragment extends Fragment {
                 //调用相册后返回
             case MyApplication.ALBUM_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
+
                     Uri imageData = data.getData();
                     mAvatarPath = GetImagePathUtil.getPathFromUri(getActivity(), imageData);
 
-
                     avatarBitmap = BitmapFactory.decodeFile(mAvatarPath);
                     avatarBitmap = BitmapUtils.createCircleBitmap(avatarBitmap, 0, false, imgAvatar.getWidth(), imgAvatar.getHeight());
+
                     //加载显示
                     imgAvatar.setImageBitmap(avatarBitmap);
                     hasSetAvatar = true;
@@ -239,9 +245,9 @@ public class SetPwdFragment extends Fragment {
 
                     Log.d("mytest", "setImageBitmap: done");
 
-                    //bitmap图片上传到服务器......
-                    //bitmap图片保存到本地
+
                     //saveImage(bitmap2);
+                    //保存裁剪后的图像
 
                     break;
                 }
@@ -268,6 +274,7 @@ public class SetPwdFragment extends Fragment {
                 }
 
                 public void onNext(AVFile file) {
+
                     Log.d("mytest", "头像保存云端。objectId：" + file.getObjectId());
 
                     currentUser.setUsername(userName);
@@ -281,12 +288,14 @@ public class SetPwdFragment extends Fragment {
 
                         @Override
                         public void onNext(@NonNull AVObject avObject) {
-                            MyApplication.ToastySuccess("注册成功，正在跳转...");
+                            MyApplication.ToastySuccess("注册成功，正在跳转到登录界面...");
 
-                            //  进入主页
-                            Intent it = new Intent(MyApplication.getContext(), MainActivity.class);
-                            it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(it);
+//                            //  进入主页
+//                            Intent it = new Intent(MyApplication.getContext(), MainActivity.class);
+//                            it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            startActivity(it);
+
+                            MyApplication.navJump(mView,R.id.action_setPwdFragment_to_loginFragment2);
 
                         }
 
