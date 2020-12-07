@@ -22,11 +22,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.leancloud.AVFile;
+import cn.leancloud.AVInstallation;
 import cn.leancloud.AVObject;
+import cn.leancloud.AVPush;
 import cn.leancloud.AVQuery;
 import cn.leancloud.AVUser;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+
+import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_INSTALLATION_ID;
 
 public class QueryUserResultPopup extends BottomPopupView {
 
@@ -46,7 +50,7 @@ public class QueryUserResultPopup extends BottomPopupView {
     TextView txtIsMyFriend;
 
 
-    String userName, userId, objectId;
+    String userName, userId, objectId,installationId;
     AVFile userAvatar;
 
     Boolean isFriend = false;
@@ -59,13 +63,14 @@ public class QueryUserResultPopup extends BottomPopupView {
         parentActivity = (Activity) context;
     }
 
-    public QueryUserResultPopup(@NonNull Context context, String name, String userid, AVFile avatar, String objId) {
+    public QueryUserResultPopup(@NonNull Context context, String name, String userid, AVFile avatar, String insId,String objId) {
         super(context);
         parentActivity = (Activity) context;
         userName = name;
         userId = userid;
         userAvatar = avatar;
         objectId = objId;
+        installationId=insId;
     }
 
 
@@ -139,8 +144,31 @@ public class QueryUserResultPopup extends BottomPopupView {
                         @Override
                         public void onNext(JSONObject object) {
                             Log.d("mytest", "succeed follow. " + object.toString());
-                            btnChatOrRequest.setText("投递成功");
-                            MyApplication.ToastySuccess("成功向该用户投递你的名片");
+
+                            AVQuery pushQuery = AVInstallation.getQuery();
+                            // 假设 THE_INSTALLATION_ID 是保存在用户表里的 installationId，
+                            // 可以在应用启动的时候获取并保存到用户表
+                            pushQuery.whereEqualTo(TABLE_FIELD_USER_INSTALLATION_ID, installationId);
+                            AVPush push = new AVPush();
+                            AVPush.sendMessageInBackground(CloudUtil.CURRENT_USER.name+"向你投递了名片",pushQuery).subscribe(new Observer() {
+                                @Override
+                                public void onSubscribe(Disposable d) {
+                                }
+                                @Override
+                                public void onNext(Object object) {
+                                    btnChatOrRequest.setText("投递成功");
+                                    MyApplication.ToastySuccess("成功向该用户投递你的名片");
+                                }
+                                @Override
+                                public void onError(Throwable e) {
+                                    Log.d("mytest", "推送失败，错误信息：" + e.getMessage());
+                                }
+                                @Override
+                                public void onComplete() {
+                                }
+                            });
+
+
 
                         }
 

@@ -30,7 +30,6 @@ import com.projectlite2.android.R;
 import com.projectlite2.android.activity.CreateProjectActivity;
 import com.projectlite2.android.activity.ProjectDetailActivity;
 import com.projectlite2.android.activity.SearchActivity;
-import com.projectlite2.android.activity.WorkPlaceActivity;
 import com.projectlite2.android.adapter.ProjectCardAdapter;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.model.ProjectCard;
@@ -41,7 +40,6 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -87,7 +85,7 @@ public class HomePageFragment extends Fragment {
             case 2: {
                 //  用户加入了新的项目，返回resultCode为OK，执行刷新操作
                 if (resultCode == RESULT_OK) {
-                refreshData(1000);
+                    refreshData(1000);
                 }
                 break;
             }
@@ -128,7 +126,7 @@ public class HomePageFragment extends Fragment {
                     case R.id.btnSearch:
                         Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
                         SearchActivity.SetSearchType(SearchActivity.SearchType.project);
-                        startActivityForResult(intent1,2);
+                        startActivityForResult(intent1, 2);
                         break;
                     //  点击新项目
                     case R.id.btnNewProject:
@@ -183,6 +181,7 @@ public class HomePageFragment extends Fragment {
 
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -244,8 +243,8 @@ public class HomePageFragment extends Fragment {
 
         mRefresh = mView.findViewById(R.id.smartRefresh);
         BezierRadarHeader myHeader = new BezierRadarHeader(MyApplication.getContext());
-        myHeader.setAccentColor(Color.BLUE);
-        myHeader.setPrimaryColor(Color.RED);
+        myHeader.setAccentColor(R.color.colorAccent);
+        myHeader.setPrimaryColor(R.color.white);
         mRefresh.setRefreshHeader(myHeader);
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -349,9 +348,9 @@ public class HomePageFragment extends Fragment {
                             // item 就是 project 实例
                             String pjName = item.getString(TABLE_FIELD_PROJECT_NAME);
                             Date pjStart = item.getDate(TABLE_FIELD_DATE_START);
-                            Date pjClosing=item.getDate(TABLE_FIELD_DATE_CLOSING);
+                            Date pjClosing = item.getDate(TABLE_FIELD_DATE_CLOSING);
                             Date today = new Date();
-                            float progress=  ((today.getTime() - pjStart.getTime())*1.0f / (pjClosing.getTime() - pjStart.getTime())*100);
+                            float progress = ((today.getTime() - pjStart.getTime()) * 1.0f / (pjClosing.getTime() - pjStart.getTime()) * 100);
 
 
                             projectList.add(new ProjectCard(pjName, true, (int) progress));
@@ -412,11 +411,11 @@ public class HomePageFragment extends Fragment {
                             // item 就是 project 实例
                             String pjName = item.getString(TABLE_FIELD_PROJECT_NAME);
                             Date pjStart = item.getDate(TABLE_FIELD_DATE_START);
-                            Date pjClosing=item.getDate(TABLE_FIELD_DATE_CLOSING);
+                            Date pjClosing = item.getDate(TABLE_FIELD_DATE_CLOSING);
                             Date today = new Date();
-                            float progress=  ((today.getTime() - pjStart.getTime())*1.0f / (pjClosing.getTime() - pjStart.getTime())*100);
+                            float progress = ((today.getTime() - pjStart.getTime()) * 1.0f / (pjClosing.getTime() - pjStart.getTime()) * 100);
 
-                            Log.d("mytest", "progress: "+progress);
+                            Log.d("mytest", "progress: " + progress);
 
                             projectList.add(new ProjectCard(pjName, false, (int) progress));
                         }

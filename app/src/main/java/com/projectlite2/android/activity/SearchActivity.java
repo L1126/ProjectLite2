@@ -37,6 +37,7 @@ import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD
 import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_NAME_PROJECT;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_AVATAR;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_ID;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_INSTALLATION_ID;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_NAME;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_NAME_USER;
 
@@ -127,13 +128,14 @@ public class SearchActivity extends AppCompatActivity {
                     String userId = queryUsers.get(position).getString(TABLE_FIELD_USER_ID);
                     String userObjId = queryUsers.get(position).getObjectId();
                     String userName = queryUsers.get(position).getString(TABLE_FIELD_USER_NAME);
+                    String installationId = queryUsers.get(position).getString(TABLE_FIELD_USER_INSTALLATION_ID);
                     AVFile userAvatar=queryUsers.get(position).getAVFile(TABLE_FIELD_USER_AVATAR);
 
                     Log.d("mytest", "SearchActivity: "+userId);
 
                     //  调用自定义的浮窗 卡片显示项目信息
                     new XPopup.Builder(thisActivity)
-                            .asCustom(new QueryUserResultPopup(thisActivity,userName,userId,userAvatar,userObjId))
+                            .asCustom(new QueryUserResultPopup(thisActivity,userName,userId,userAvatar,installationId,userObjId))
                             .show();
                 } else {
 

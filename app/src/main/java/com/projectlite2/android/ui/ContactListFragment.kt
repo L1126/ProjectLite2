@@ -1,6 +1,7 @@
 package com.projectlite2.android.ui
 
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
@@ -68,6 +69,7 @@ class ContactListFragment(var ac: Activity, private val style_param: Int) : Frag
         setHasOptionsMenu(true)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -96,8 +98,8 @@ class ContactListFragment(var ac: Activity, private val style_param: Int) : Frag
 
         mRefresh = mView.findViewById<SmartRefreshLayout>(R.id.smartRefresh)
         val myHeader = BezierRadarHeader(MyApplication.getContext())
-        myHeader.setAccentColor(Color.BLUE)
-        myHeader.setPrimaryColor(Color.RED)
+        myHeader.setAccentColor(R.color.colorAccent)
+        myHeader.setPrimaryColor(R.attr.colorControlNormal)
         mRefresh.setRefreshHeader(myHeader)
         mRefresh.setOnRefreshListener { refreshlayout ->
             refreshlayout.finishRefresh(800 /*,false*/) //传入false表示刷新失败

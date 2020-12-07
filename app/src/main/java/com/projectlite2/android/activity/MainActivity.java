@@ -14,9 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.jaeger.library.StatusBarUtil;
 import com.projectlite2.android.R;
-import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.ui.CardcaseFragment;
 import com.projectlite2.android.ui.HomePageFragment;
 import com.projectlite2.android.ui.MessageBoxFragment;
@@ -25,20 +23,7 @@ import com.projectlite2.android.utils.CloudUtil;
 
 import java.util.List;
 
-import cn.leancloud.AVInstallation;
-import cn.leancloud.AVObject;
-import cn.leancloud.AVUser;
-import cn.leancloud.im.v2.AVIMClient;
-import cn.leancloud.im.v2.AVIMException;
-import cn.leancloud.im.v2.callback.AVIMClientCallback;
-import cn.leancloud.push.PushService;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import nl.joery.animatedbottombar.AnimatedBottomBar;
-
-import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_ID;
-import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_NAME;
-import static com.projectlite2.android.utils.CloudUtil.CURRENT_USER.ConfigImClinet;
 
 public class MainActivity extends AppCompatActivity {
 

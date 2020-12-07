@@ -112,7 +112,7 @@ public class MyApplication extends Application {
         //创建新的channel
         NotificationManager mNotiManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("default", "default", NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel("default", "default", NotificationManager.IMPORTANCE_MAX);
             mNotiManager.createNotificationChannel(channel);
         }
 

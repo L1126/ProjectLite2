@@ -108,36 +108,39 @@ public class MyProfileFragment extends Fragment {
      */
     public void initMyProfileInterface() {
         txtMyName.setText(CloudUtil.CURRENT_USER.name);
-        CloudUtil.CURRENT_USER.avatar.getDataStreamInBackground().subscribe(new Observer<InputStream>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-            }
-
-            @Override
-            public void onNext(InputStream inputStream) {
-                try {
-                    Bitmap decodeBit = BitmapFactory.decodeStream(inputStream);
-                    inputStream.close();
-                    decodeBit = BitmapUtils.createCircleBitmap(decodeBit, 0, false, mImgAvatar.getWidth(), mImgAvatar.getHeight());
-                    mImgAvatar.setImageBitmap(decodeBit);
-
-
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    Log.d("mytest", " MyProfileFragment   failed to get data. cause: " + ex);
-
+        if(CloudUtil.CURRENT_USER.avatar!=null){
+            CloudUtil.CURRENT_USER.avatar.getDataStreamInBackground().subscribe(new Observer<InputStream>() {
+                @Override
+                public void onSubscribe(Disposable d) {
                 }
-            }
 
-            @Override
-            public void onError(Throwable e) {
-                Log.d("mytest", "MyProfileFragment  failed to get data. cause: " + e);
-            }
+                @Override
+                public void onNext(InputStream inputStream) {
+                    try {
+                        Bitmap decodeBit = BitmapFactory.decodeStream(inputStream);
+                        inputStream.close();
+                        decodeBit = BitmapUtils.createCircleBitmap(decodeBit, 0, false, mImgAvatar.getWidth(), mImgAvatar.getHeight());
+                        mImgAvatar.setImageBitmap(decodeBit);
 
-            @Override
-            public void onComplete() {
-            }
-        });
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        Log.d("mytest", " MyProfileFragment   failed to get data. cause: " + ex);
+
+                    }
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    Log.d("mytest", "MyProfileFragment  failed to get data. cause: " + e);
+                }
+
+                @Override
+                public void onComplete() {
+                }
+            });
+        }
+
     }
 
     @Override
@@ -255,6 +258,7 @@ public class MyProfileFragment extends Fragment {
                             CloudUtil.CURRENT_USER.PushAvatarToCloud(mAvatarPath);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
+                            Log.d("mytest", "onActivityResult: 相机拍照设置头像"+e);
                         }
 
 
@@ -278,13 +282,14 @@ public class MyProfileFragment extends Fragment {
                     //加载显示
                     mImgAvatar.setImageBitmap(avatarBitmap);
                     //保存裁剪后的图像
-                    MyApplication.saveImage(getActivity(), avatarBitmap);
+                    mAvatarPath=MyApplication.saveImageReturnPath(getActivity(), avatarBitmap);
 
                     //上传到数据库
                     try {
                         CloudUtil.CURRENT_USER.PushAvatarToCloud(mAvatarPath);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
+                        Log.d("mytest", "onActivityResult: 相册设置头像"+e);
                     }
                     break;
                 }
