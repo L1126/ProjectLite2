@@ -30,6 +30,8 @@ import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_US
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_ID;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_NAME;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_PHONE;
+import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_MAP.RELATION_FIELD_LEADER;
+import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_MAP.RELATION_NAME_PROJECT_LEADER_MAP;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FIELD_MEMBER;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FILED_PROJECT;
 
@@ -440,6 +442,7 @@ public class CloudUtil {
 
 
         }
+
 
     }
 

@@ -165,7 +165,7 @@ public class CreateProjectActivity extends AppCompatActivity
         datePickerDialog.setTitle(title);
 
 
-        datePickerDialog.setMinDate(Calendar.getInstance());
+       // datePickerDialog.setMinDate(Calendar.getInstance());
         datePickerDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {

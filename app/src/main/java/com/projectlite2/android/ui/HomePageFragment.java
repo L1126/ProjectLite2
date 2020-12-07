@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,6 +41,8 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import cn.leancloud.AVObject;
@@ -55,6 +58,8 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 import static android.app.Activity.RESULT_OK;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_DATE_CLOSING;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_DATE_START;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_PROJECT_NAME;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_NAME_PROJECT;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_MAP.RELATION_FIELD_LEADER;
@@ -343,14 +348,21 @@ public class HomePageFragment extends Fragment {
                         public void onNext(AVObject item) {
                             // item 就是 project 实例
                             String pjName = item.getString(TABLE_FIELD_PROJECT_NAME);
-//                            Log.d("mytest", "query: " + pjName);
-                            projectList.add(new ProjectCard(pjName, true, 10));
+                            Date pjStart = item.getDate(TABLE_FIELD_DATE_START);
+                            Date pjClosing=item.getDate(TABLE_FIELD_DATE_CLOSING);
+                            Date today = new Date();
+                            float progress=  ((today.getTime() - pjStart.getTime())*1.0f / (pjClosing.getTime() - pjStart.getTime())*100);
+
+
+                            projectList.add(new ProjectCard(pjName, true, (int) progress));
                         }
 
                         public void onError(Throwable throwable) {
+
                         }
 
                         public void onComplete() {
+
                         }
                     });
                 }
@@ -359,6 +371,7 @@ public class HomePageFragment extends Fragment {
 
             @Override
             public void onError(Throwable e) {
+
             }
 
             @Override
@@ -398,8 +411,14 @@ public class HomePageFragment extends Fragment {
                         public void onNext(AVObject item) {
                             // item 就是 project 实例
                             String pjName = item.getString(TABLE_FIELD_PROJECT_NAME);
-//                            Log.d("mytest", "query: " + pjName);
-                            projectList.add(new ProjectCard(pjName, true, 10));
+                            Date pjStart = item.getDate(TABLE_FIELD_DATE_START);
+                            Date pjClosing=item.getDate(TABLE_FIELD_DATE_CLOSING);
+                            Date today = new Date();
+                            float progress=  ((today.getTime() - pjStart.getTime())*1.0f / (pjClosing.getTime() - pjStart.getTime())*100);
+
+                            Log.d("mytest", "progress: "+progress);
+
+                            projectList.add(new ProjectCard(pjName, false, (int) progress));
                         }
 
                         public void onError(Throwable throwable) {
@@ -414,10 +433,12 @@ public class HomePageFragment extends Fragment {
 
             @Override
             public void onError(Throwable e) {
+
             }
 
             @Override
             public void onComplete() {
+
             }
         });
 
