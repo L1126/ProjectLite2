@@ -1,26 +1,35 @@
 package com.projectlite2.android.activity
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.navigation.NavigationView
 import com.projectlite2.android.Msg
 import com.projectlite2.android.R
 import com.projectlite2.android.adapter.MsgChatRoomAdapter
+import com.projectlite2.android.app.MyApplication
+import com.projectlite2.android.app.MyApplication.showToast
 import kotlinx.android.synthetic.main.activity_chat_room.*
 
 class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
+
+    private var toolBar: Toolbar? = null
+    private var txtTitle: TextView? = null
+    private var drawerLayout: DrawerLayout? = null
 
     private val msgList = ArrayList<Msg>()
 
@@ -31,7 +40,58 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getSupportActionBar()?.hide()
         setContentView(R.layout.activity_chat_room)
+
+        toolBar = this.findViewById(R.id.toolBar)
+        txtTitle = this.findViewById(R.id.txtPageTitle)
+        drawerLayout = this.findViewById(R.id.chatRoomDraw)
+
+        txtTitle?.setText("四枚野指针")
+        toolBar?.inflateMenu(R.menu.menu_chatroom)
+
+        //图片显示
+        val navigationView = findViewById<View>(R.id.navView) as NavigationView
+        navigationView.itemIconTintList = null
+
+        val headview = navigationView.inflateHeaderView(R.layout.nav_header)
+
+        //工作空间界面跳转
+        val work_place: ConstraintLayout = headview.findViewById<View>(R.id.workPlaceChatRoom) as ConstraintLayout
+        work_place.setOnClickListener(View.OnClickListener {
+//            showToast("work place")
+            val workPlaceActivity = Intent(MyApplication.getContext(), WorkPlaceActivity::class.java)
+            startActivity(workPlaceActivity)
+            drawerLayout?.closeDrawers()
+        })
+        //群聊设置界面跳转
+        val setting: ConstraintLayout = headview.findViewById<View>(R.id.settingChatRoom) as ConstraintLayout
+        setting.setOnClickListener(View.OnClickListener {
+            showToast("setting")
+            drawerLayout?.closeDrawers()
+        })
+
+        //菜单目录点击
+        navView.setCheckedItem(R.id.navGroup)
+        navView.setNavigationItemSelectedListener {
+            drawerLayout?.closeDrawers()
+            true
+        }
+
+        //  标题栏菜单点击
+        toolBar?.setOnMenuItemClickListener(Toolbar.OnMenuItemClickListener { item ->
+            when (item.itemId) {
+                //进入菜单
+                R.id.btnMenu -> {
+                    drawerLayout?.openDrawer(GravityCompat.END)
+                }
+                //进入项目树
+                R.id.btnTree ->{
+
+                }
+            }
+            true
+        })
 
         initMsg()
 
@@ -67,14 +127,6 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         })
-
-//        inputTxtView.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
-//            if (hasFocus) {
-//                // 此处为得到焦点时的处理内容
-//            } else {
-//                // 此处为失去焦点时的处理内容
-//            }
-//        })
     }
 
     override fun onClick(v: View?) {

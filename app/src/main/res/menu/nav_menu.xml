@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <group android:id="@+id/g1">
+            <item
+                android:id="@+id/navGroup"
+                android:icon="@drawable/ic_chatgroup"
+                android:title="群聊"/>
+        </group>
+
+        <group android:id="@+id/g2">
+            <item
+                android:id="@+id/Member1"
+                android:icon="@drawable/ic_member1"
+                android:title="大雄"/>
+            <item
+                android:id="@+id/Member2"
+                android:icon="@drawable/ic_member2"
+                android:title="胖虎"/>
+            <item
+                android:id="@+id/Member3"
+                android:icon="@drawable/ic_member3"
+                android:title="静香"/>
+            <item
+                android:id="@+id/Member4"
+                android:icon="@drawable/ic_member4"
+                android:title="哆啦A梦"/>
+        </group>
+
+    </group>
+
+</menu>
