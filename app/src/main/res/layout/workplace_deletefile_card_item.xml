@@ -60,7 +60,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/word" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/checkButton"
             android:layout_width="30dp"
             android:layout_height="30dp"

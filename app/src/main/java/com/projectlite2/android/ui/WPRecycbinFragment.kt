@@ -3,9 +3,13 @@ package com.projectlite2.android.ui
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.LinearLayout
+import android.widget.RadioButton
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -29,6 +33,7 @@ class WPRecycbinFragment : Fragment() ,View.OnClickListener {
     lateinit var mRecyclerview: RecyclerView
     lateinit var mAdapter: WPRecycleFileAdapter
     lateinit var mCallBack: ItemTouchHelper.Callback
+    lateinit var wplayoutManager: RecyclerView.LayoutManager
 
     private val mDeleteBarList = ArrayList<RecyclebinCard>()
     private val mEveryCardDeleteList = ArrayList<ArrayList<DeleteFileCard>>()
@@ -42,6 +47,9 @@ class WPRecycbinFragment : Fragment() ,View.OnClickListener {
     lateinit var mBtnRecover: CardView
 
     lateinit var mContext: Context
+
+//    lateinit var cView: View
+//    lateinit var cBtnCheck : CheckBox
 
     override fun onAttach(activity: Activity) {
         super.onAttach(activity)
@@ -74,6 +82,15 @@ class WPRecycbinFragment : Fragment() ,View.OnClickListener {
         setHasOptionsMenu(true)
     }
 
+//    override fun onResume() {
+//        super.onResume()
+//        cView = wplayoutManager.findViewByPosition(0)!!
+//
+//        cBtnCheck = cView.findViewById<CheckBox>(R.id.checkButtonFat)
+//
+//        Log.d("KKang",cBtnCheck.toString())
+//    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -86,9 +103,9 @@ class WPRecycbinFragment : Fragment() ,View.OnClickListener {
         addNewCards()
 
         //消息卡片
-        val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+        wplayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         mRecyclerview = mView.findViewById(R.id.recyclerViewBin)
-        mRecyclerview.layoutManager = layoutManager
+        mRecyclerview.layoutManager = wplayoutManager
         mAdapter = WPRecycleFileAdapter(mDeleteBarList)
         mRecyclerview.adapter = mAdapter
 
