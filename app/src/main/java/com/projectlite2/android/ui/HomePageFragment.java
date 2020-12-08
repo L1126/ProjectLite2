@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +26,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.projectlite2.android.R;
+import com.projectlite2.android.activity.ChatRoomActivity;
 import com.projectlite2.android.activity.CreateProjectActivity;
 import com.projectlite2.android.activity.ProjectDetailActivity;
 import com.projectlite2.android.activity.SearchActivity;
@@ -46,12 +46,6 @@ import java.util.List;
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
 import cn.leancloud.AVUser;
-import cn.leancloud.chatkit.LCChatKit;
-import cn.leancloud.chatkit.activity.LCIMConversationActivity;
-import cn.leancloud.chatkit.utils.LCIMConstants;
-import cn.leancloud.im.v2.AVIMClient;
-import cn.leancloud.im.v2.AVIMException;
-import cn.leancloud.im.v2.callback.AVIMClientCallback;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -218,20 +212,25 @@ public class HomePageFragment extends Fragment {
                     default: {
                         MyApplication.ToastyInfo("card");
 
+                        //自布局聊天界面
+                        Intent it;
+                        it = new Intent(getContext(), ChatRoomActivity.class);
+                        startActivity(it);
+
                         //    可以打开私聊界面，但是打开私聊会结束Home的activity，在私聊点击返回就会退出程序
-                        LCChatKit.getInstance().open("Tom", new AVIMClientCallback() {
-                            @Override
-                            public void done(AVIMClient avimClient, AVIMException e) {
-                                if (null == e) {
-                                    getActivity().finish();
-                                    Intent intent = new Intent(MyApplication.getContext(), LCIMConversationActivity.class);
-                                    intent.putExtra(LCIMConstants.PEER_ID, "Jerry");
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(MyApplication.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+//                        LCChatKit.getInstance().open("Tom", new AVIMClientCallback() {
+//                            @Override
+//                            public void done(AVIMClient avimClient, AVIMException e) {
+//                                if (null == e) {
+//                                    getActivity().finish();
+//                                    Intent intent = new Intent(MyApplication.getContext(), LCIMConversationActivity.class);
+//                                    intent.putExtra(LCIMConstants.PEER_ID, "Jerry");
+//                                    startActivity(intent);
+//                                } else {
+//                                    Toast.makeText(MyApplication.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+//                        });
 
                         break;
                     }

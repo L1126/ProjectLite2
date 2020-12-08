@@ -26,7 +26,7 @@
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/radioButton"
             android:layout_marginLeft="10dp"
             android:layout_gravity="left"

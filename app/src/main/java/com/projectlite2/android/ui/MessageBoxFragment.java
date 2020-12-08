@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.projectlite2.android.R;
+import com.projectlite2.android.activity.ChatRoomActivity;
 import com.projectlite2.android.activity.SearchActivity;
 import com.projectlite2.android.activity.WorkPlaceActivity;
 import com.projectlite2.android.app.MyApplication;
@@ -44,11 +45,8 @@ public class MessageBoxFragment extends Fragment {
 
         toolBar = contextView.findViewById(R.id.toolBar);
         txtTitle = contextView.findViewById(R.id.txtPageTitle);
-        txtTitle.setText(R.string.string_menu_message_box);
 
-
-        toolBar = contextView.findViewById(R.id.toolBar);
-        txtTitle = contextView.findViewById(R.id.txtPageTitle);
+        txtTitle.setText("Message");
         toolBar.inflateMenu(R.menu.menu_message_card);
 
         //  标题栏菜单点击
@@ -60,7 +58,7 @@ public class MessageBoxFragment extends Fragment {
                 switch (item.getItemId()){
                     //  点击搜索
                     case R.id.btnSearch:
-                        Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
+                        Intent intent1 = new Intent(MyApplication.getContext(), ChatRoomActivity.class);
                         startActivity(intent1);
                         break;
 
@@ -71,7 +69,6 @@ public class MessageBoxFragment extends Fragment {
             }
         });
 
-        txtTitle.setText("Message");
         setHasOptionsMenu(true);
 
 
