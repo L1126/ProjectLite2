@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.projectlite2.android.Msg
 import com.projectlite2.android.R
-import java.lang.IllegalArgumentException
 
 class MsgChatRoomAdapter(val msgList: List<Msg>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
