@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorDivider">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolBar"
+            android:id="@+id/treeToolBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
 
@@ -57,142 +58,180 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_gravity="bottom|center_horizontal"
+        android:animateLayoutChanges="true"
+        android:background="@color/secondaryText">
 
 
-            <com.joaquimley.faboptions.FabOptions
-                android:id="@+id/fab_options1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
+        <com.joaquimley.faboptions.FabOptions
+            android:id="@+id/fab_options7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
 
-                android:visibility="gone"
-                app:button_menu="@menu/menu_node_in_project_tree"
-                app:layout_constraintBottom_toTopOf="@+id/fab_options0"
-                app:layout_constraintEnd_toEndOf="@+id/fab_options0"
-                app:layout_constraintStart_toStartOf="@+id/fab_options0"
-                app:layout_constraintTop_toBottomOf="@+id/fab_options2" />
+            android:visibility="gone"
+            app:button_menu="@menu/menu_node_in_project_tree"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_options6"
+            app:layout_constraintEnd_toEndOf="@+id/fab_options5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fab_options6"
+            app:layout_constraintTop_toTopOf="@+id/fab_options6" />
 
-            <com.joaquimley.faboptions.FabOptions
-                android:id="@+id/fab_options0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                app:button_menu="@menu/menu_node_in_project_tree"
+        <com.joaquimley.faboptions.FabOptions
+            android:id="@+id/fab_options4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
 
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fab_options1" />
+            android:visibility="gone"
+            app:button_menu="@menu/menu_node_in_project_tree"
+            app:layout_constraintBottom_toTopOf="@+id/fab_options2"
+            app:layout_constraintEnd_toEndOf="@+id/fab_options2"
+            app:layout_constraintStart_toStartOf="@+id/fab_options2"
+            app:layout_constraintTop_toBottomOf="@+id/fab_options5" />
 
-            <com.joaquimley.faboptions.FabOptions
-                android:id="@+id/fab_options2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:visibility="gone"
-                app:button_menu="@menu/menu_node_in_project_tree"
-                app:layout_constraintBottom_toTopOf="@+id/fab_options1"
-                app:layout_constraintEnd_toStartOf="@+id/fab_options3"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@+id/fab_options1"
-                app:layout_constraintTop_toBottomOf="@+id/fab_options4" />
+        <com.joaquimley.faboptions.FabOptions
+            android:id="@+id/fab_options1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
 
-            <com.joaquimley.faboptions.FabOptions
-                android:id="@+id/fab_options5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
+            android:visibility="gone"
+            app:button_menu="@menu/menu_node_in_project_tree"
+            app:layout_constraintBottom_toTopOf="@+id/fab_options0"
+            app:layout_constraintEnd_toEndOf="@+id/fab_options0"
+            app:layout_constraintStart_toStartOf="@+id/fab_options0"
+            app:layout_constraintTop_toBottomOf="@+id/fab_options2" />
 
-                android:visibility="gone"
-                app:button_menu="@menu/menu_node_in_project_tree"
-                app:layout_constraintBottom_toTopOf="@+id/fab_options4"
-                app:layout_constraintEnd_toEndOf="@+id/fab_options4"
-                app:layout_constraintStart_toStartOf="@+id/fab_options4"
-                app:layout_constraintTop_toBottomOf="@+id/fab_options6" />
+        <com.joaquimley.faboptions.FabOptions
+            android:id="@+id/fab_options8"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
 
-            <com.joaquimley.faboptions.FabOptions
-                android:id="@+id/fab_options3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:visibility="gone"
-                app:button_menu="@menu/menu_node_in_project_tree"
-                app:layout_constraintBottom_toBottomOf="@+id/fab_options2"
-                app:layout_constraintEnd_toEndOf="@+id/fab_options1"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/fab_options2"
-                app:layout_constraintTop_toTopOf="@+id/fab_options2" />
+            android:visibility="gone"
+            app:button_menu="@menu/menu_node_in_project_tree"
+            app:layout_constraintBottom_toTopOf="@+id/fab_options6"
+            app:layout_constraintEnd_toEndOf="@+id/fab_options6"
+            app:layout_constraintStart_toStartOf="@+id/fab_options6"
+            app:layout_constraintTop_toBottomOf="@+id/btnEdit"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-            <com.joaquimley.faboptions.FabOptions
-                android:id="@+id/fab_options4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
+        <com.joaquimley.faboptions.FabOptions
+            android:id="@+id/fab_options6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
 
-                android:visibility="gone"
-                app:button_menu="@menu/menu_node_in_project_tree"
-                app:layout_constraintBottom_toTopOf="@+id/fab_options2"
-                app:layout_constraintEnd_toEndOf="@+id/fab_options2"
-                app:layout_constraintStart_toStartOf="@+id/fab_options2"
-                app:layout_constraintTop_toBottomOf="@+id/fab_options5" />
+            android:visibility="gone"
+            app:button_menu="@menu/menu_node_in_project_tree"
+            app:layout_constraintBottom_toTopOf="@+id/fab_options5"
+            app:layout_constraintEnd_toStartOf="@+id/fab_options7"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@+id/fab_options5"
+            app:layout_constraintTop_toBottomOf="@+id/fab_options8" />
 
-            <com.joaquimley.faboptions.FabOptions
-                android:id="@+id/fab_options6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
+        <com.joaquimley.faboptions.FabOptions
+            android:id="@+id/fab_options3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:visibility="gone"
+            app:button_menu="@menu/menu_node_in_project_tree"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_options2"
+            app:layout_constraintEnd_toEndOf="@+id/fab_options1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fab_options2"
+            app:layout_constraintTop_toTopOf="@+id/fab_options2" />
 
-                android:visibility="gone"
-                app:button_menu="@menu/menu_node_in_project_tree"
-                app:layout_constraintBottom_toTopOf="@+id/fab_options5"
-                app:layout_constraintEnd_toStartOf="@+id/fab_options7"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@+id/fab_options5"
-                app:layout_constraintTop_toBottomOf="@+id/fab_options8" />
+        <com.joaquimley.faboptions.FabOptions
+            android:id="@+id/fab_options2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:visibility="gone"
+            app:button_menu="@menu/menu_node_in_project_tree"
+            app:layout_constraintBottom_toTopOf="@+id/fab_options1"
+            app:layout_constraintEnd_toStartOf="@+id/fab_options3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@+id/fab_options1"
+            app:layout_constraintTop_toBottomOf="@+id/fab_options4" />
 
-            <com.joaquimley.faboptions.FabOptions
-                android:id="@+id/fab_options7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
+        <com.joaquimley.faboptions.FabOptions
+            android:id="@+id/fab_options5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
 
-                android:visibility="gone"
-                app:button_menu="@menu/menu_node_in_project_tree"
-                app:layout_constraintBottom_toBottomOf="@+id/fab_options6"
-                app:layout_constraintEnd_toEndOf="@+id/fab_options5"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/fab_options6"
-                app:layout_constraintTop_toTopOf="@+id/fab_options6" />
+            android:visibility="gone"
+            app:button_menu="@menu/menu_node_in_project_tree"
+            app:layout_constraintBottom_toTopOf="@+id/fab_options4"
+            app:layout_constraintEnd_toEndOf="@+id/fab_options4"
+            app:layout_constraintStart_toStartOf="@+id/fab_options4"
+            app:layout_constraintTop_toBottomOf="@+id/fab_options6" />
 
-            <com.joaquimley.faboptions.FabOptions
-                android:id="@+id/fab_options8"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
+        <com.joaquimley.faboptions.FabOptions
+            android:id="@+id/fab_options0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            app:button_menu="@menu/menu_node_in_project_tree"
 
-                android:visibility="gone"
-                app:button_menu="@menu/menu_node_in_project_tree"
-                app:layout_constraintBottom_toTopOf="@+id/fab_options6"
-                app:layout_constraintEnd_toEndOf="@+id/fab_options6"
-                app:layout_constraintStart_toStartOf="@+id/fab_options6"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fab_options1" />
+
+        <Button
+            android:id="@+id/btnEdit"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/rc_screen_margin_horizontal"
+            android:backgroundTint="#FFFFFF"
+            android:text="@string/string_btn_edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline39" />
+
+        <Button
+            android:id="@+id/btnSave"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/rc_screen_margin_horizontal"
+            android:text="@string/string_btn_save"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline39" />
+
+        <Button
+            android:id="@+id/btnExit"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/rc_screen_margin_horizontal"
+            android:layout_marginTop="104dp"
+            android:backgroundTint="@color/colorWhite"
+            android:text="@string/string_btn_exit"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline39" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline39"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="56dp" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

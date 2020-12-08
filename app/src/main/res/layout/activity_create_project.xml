@@ -9,58 +9,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--    <com.google.android.material.appbar.AppBarLayout-->
-    <!--        android:id="@+id/appbar"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-
-    <!--        >-->
-
-    <!--    <androidx.appcompat.widget.Toolbar-->
-    <!--        android:id="@+id/toolBar"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="?attr/actionBarSize"-->
-
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:titleTextAppearance="@style/my_toolbar_text_style">-->
-
-    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent">-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/txtPageTitle"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textColor="@color/white"-->
-    <!--                android:textSize="22sp"-->
-    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--                app:layout_constraintEnd_toStartOf="@+id/guideline15"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toTopOf="parent"-->
-    <!--                tools:text="123" />-->
-
-    <!--            <androidx.constraintlayout.widget.Guideline-->
-    <!--                android:id="@+id/guideline14"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:orientation="vertical"-->
-    <!--                app:layout_constraintGuide_begin="-1dp" />-->
-
-    <!--            <androidx.constraintlayout.widget.Guideline-->
-    <!--                android:id="@+id/guideline15"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:orientation="vertical"-->
-    <!--                app:layout_constraintGuide_begin="379dp" />-->
-    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-    <!--    </androidx.appcompat.widget.Toolbar>-->
-    <!--    </com.google.android.material.appbar.AppBarLayout>-->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

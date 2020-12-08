@@ -244,8 +244,9 @@ public class HomePageFragment extends Fragment {
         mRefresh = mView.findViewById(R.id.smartRefresh);
         BezierRadarHeader myHeader = new BezierRadarHeader(MyApplication.getContext());
 
-       myHeader.setAccentColor(R.color.white);
-       myHeader.setPrimaryColor(R.color.colorAccent);
+       myHeader.setAccentColorId(R.color.white);
+       myHeader.setPrimaryColorId(R.color.font_blue);
+
         mRefresh.setRefreshHeader(myHeader);
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override

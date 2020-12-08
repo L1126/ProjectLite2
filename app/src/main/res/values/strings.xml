@@ -71,4 +71,11 @@
     <string name="string_txt_strong_point">Strong point</string>
     <string name="string_btn_agree">Agree</string>
     <string name="string_txt_user_id">User ID</string>
+    <string name="string_btn_edit">Edit</string>
+    <string name="string_btn_exit">Exit</string>
+    <string name="string_btn_save">Save</string>
+    <string name="string_txt_edit_mode">EDIT MODE</string>
+    <string name="string_txt_node_detail">Node detail</string>
+    <string name="string_tab_massage_new_message">New message</string>
+    <string name="string_tab_massage_project_invite">New projects</string>
 </resources>

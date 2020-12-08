@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.projectlite2.android.R;
@@ -204,6 +205,7 @@ public class MyProfileFragment extends Fragment {
             }
             case R.id.imgBtnUserAvatar: {
                 // 弹窗修改头像
+
                 new XPopup.Builder(getContext())
                         .asBottomList("修改我的头像", new String[]{"从本地相册选择", "使用相机拍摄"},
                                 new OnSelectListener() {
@@ -220,6 +222,7 @@ public class MyProfileFragment extends Fragment {
                                                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                                                 } else {
                                                     MyApplication.TakePicture(getActivity(), thisFragment);
+
                                                 }
                                             default:break;
                                         }

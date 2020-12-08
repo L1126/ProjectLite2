@@ -81,12 +81,12 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
+                            android:text="Android 程序开发"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/view"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            tools:text="低保真原型" />
+                            app:layout_constraintVertical_bias="0.0" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -116,11 +116,12 @@
                             app:layout_constraintStart_toEndOf="@+id/textView16"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvNodeMember"
+                        <TextView
+                            android:id="@+id/txtNodeMember"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_marginStart="6dp"
+                            android:text="Linwc，KKang"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/view2"
@@ -159,12 +160,12 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
+                            android:text="主要工作包含项目MVVM模式的架构、模型的设计、布局的搭建、逻辑跳转、数据传输、接入云后端、构建云数据库、接入第三方短信服务等"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/view4"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            tools:text="低保真原型" />
+                            app:layout_constraintVertical_bias="0.0" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -199,12 +200,12 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
+                            android:text="2020.11.08-2020.12.09"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/view6"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            tools:text="低保真原型" />
+                            app:layout_constraintVertical_bias="0.0" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -218,7 +219,7 @@
                 android:layout_marginHorizontal="@dimen/rc_screen_margin_horizontal"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/string_txt_node_info"
+                android:text="@string/string_txt_node_mission"
                 android:textColor="@color/primaryText"
                 android:textSize="@dimen/rc_main_text" />
 
@@ -258,6 +259,7 @@
                     android:ems="10"
                     android:hint="@string/string_txt_hint_comment_edit"
                     android:inputType="textPersonName"
+                    android:paddingLeft="6dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btnCommentSend"
                     app:layout_constraintStart_toStartOf="parent"
@@ -286,7 +288,6 @@
                     android:id="@+id/rvTimeLineComment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/rc_screen_margin_horizontal"
                     android:layout_marginTop="8dp"
                     android:isScrollContainer="false"
                     android:nestedScrollingEnabled="false" />
