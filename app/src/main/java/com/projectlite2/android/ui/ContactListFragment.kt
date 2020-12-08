@@ -73,8 +73,6 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
 
         val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
 
-
-
         mRecyclerview = mView.findViewById(R.id.recyclerViewCard2)
         mRecyclerview.layoutManager = layoutManager
         mAdapter = ContactCardAdapter(mContactList, style_param)
@@ -89,8 +87,6 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
         ItemTouchHelper(mCallBack).attachToRecyclerView(mRecyclerview)
 
         Log.d("MyTEST", "style_param: $style_param")
-
-
 
         mRefresh = mView.findViewById<SmartRefreshLayout>(R.id.smartRefresh)
         val myHeader = BezierRadarHeader(MyApplication.getContext())
