@@ -37,14 +37,13 @@ public class WorkPlaceActivity extends AppCompatActivity {
 
     private FrameLayout uploadFrag, multiFrag, cfileFrag, cfolderFrag;
 
-    private TextView restoreDefaults;
-
     @Nullable
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity=this;
-        getSupportActionBar().hide();//隐藏掉整个ActionBar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //给左上角添加返回箭头
+        getSupportActionBar().setTitle("工作空间");  //设置Title文字
         setContentView(R.layout.activity_workplace);
 
         //初始化视图
@@ -132,6 +131,14 @@ public class WorkPlaceActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    // 返回上一界面
+    @Override
+    public boolean onSupportNavigateUp()
+    {
+        finish();
+        return super.onSupportNavigateUp();
     }
 
     private void initViews() {

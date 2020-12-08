@@ -22,10 +22,6 @@
                 android:id="@+id/Member3"
                 android:icon="@drawable/ic_member3"
                 android:title="静香"/>
-            <item
-                android:id="@+id/Member4"
-                android:icon="@drawable/ic_member4"
-                android:title="哆啦A梦"/>
         </group>
 
     </group>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -67,13 +68,46 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
         //群聊设置界面跳转
         val setting: ConstraintLayout = headview.findViewById<View>(R.id.settingChatRoom) as ConstraintLayout
         setting.setOnClickListener(View.OnClickListener {
-            showToast("setting")
+//            showToast("setting")
+            val chatRoomSettingActivity = Intent(MyApplication.getContext(), ChatRoomSettingActivity::class.java)
+            startActivity(chatRoomSettingActivity)
             drawerLayout?.closeDrawers()
         })
 
         //菜单目录点击
         navView.setCheckedItem(R.id.navGroup)
         navView.setNavigationItemSelectedListener {
+
+            Log.d("KKang", it.toString())
+
+            when(it.toString()){
+                "群聊" ->{
+                    txtTitle?.setText("四枚野指针")
+                    msgList.clear()
+                    initMsg()
+                }
+                "大雄" ->{
+                    txtTitle?.setText("大雄")
+                    msgList.clear()
+                    msgList.add(Msg("云端数据能够实现吗？",Msg.TYPE_SENT))
+                    msgList.add(Msg("正在努力！加油！打工人！",Msg.TYPE_RECEIVED))
+                }
+                "胖虎" ->{
+                    txtTitle?.setText("胖虎")
+                    msgList.clear()
+                    msgList.add(Msg("原型快点做！",Msg.TYPE_RECEIVED))
+                    msgList.add(Msg("做不出来",Msg.TYPE_RECEIVED))
+                    msgList.add(Msg("把你按在地上摩擦（bushi）",Msg.TYPE_RECEIVED))
+                }
+                "静香" ->{
+                    txtTitle?.setText("静香")
+                    msgList.clear()
+                    msgList.add(Msg("你先做设计规范吧",Msg.TYPE_RECEIVED))
+                    msgList.add(Msg("OKk，莫问题",Msg.TYPE_SENT))
+                    msgList.add(Msg("我原型做好了马上发你",Msg.TYPE_RECEIVED))
+                }
+            }
+
             drawerLayout?.closeDrawers()
             true
         }
@@ -151,6 +185,5 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
         msgList.add(Msg("把交互操作梳理清楚",Msg.TYPE_RECEIVED))
         msgList.add(Msg("好哒！！！",Msg.TYPE_SENT))
         msgList.add(Msg("最晚明天下午发给我",Msg.TYPE_RECEIVED))
-
     }
 }
