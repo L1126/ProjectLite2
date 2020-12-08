@@ -1,6 +1,8 @@
 package com.projectlite2.android.ui
 
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -25,7 +27,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import java.util.*
 
 
-class ContactListFragment(private val style_param: Int) : Fragment() {
+class ContactListFragment(var ac: Activity, private val style_param: Int) : Fragment() {
 
     companion object {
 
@@ -52,6 +54,7 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
 
 
 
+
     private val mContactList = ArrayList<ContactCard>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +69,7 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
         setHasOptionsMenu(true)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -75,7 +79,7 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
 
         mRecyclerview = mView.findViewById(R.id.recyclerViewCard2)
         mRecyclerview.layoutManager = layoutManager
-        mAdapter = ContactCardAdapter(mContactList, style_param)
+        mAdapter = ContactCardAdapter(ac,mContactList, style_param)
         mRecyclerview.adapter = mAdapter
 
         mRecyclerview.itemAnimator = DefaultItemAnimator()
@@ -90,8 +94,8 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
 
         mRefresh = mView.findViewById<SmartRefreshLayout>(R.id.smartRefresh)
         val myHeader = BezierRadarHeader(MyApplication.getContext())
-        myHeader.setAccentColor(Color.BLUE)
-        myHeader.setPrimaryColor(Color.RED)
+        myHeader.setAccentColor(R.color.colorAccent)
+        myHeader.setPrimaryColor(R.attr.colorControlNormal)
         mRefresh.setRefreshHeader(myHeader)
         mRefresh.setOnRefreshListener { refreshlayout ->
             refreshlayout.finishRefresh(800 /*,false*/) //传入false表示刷新失败
@@ -103,13 +107,15 @@ class ContactListFragment(private val style_param: Int) : Fragment() {
         mAdapter.setOnKotlinItemClickListener(object : OnItemClickListenerPlus {
             override fun onClick(item: View?, position: Int, which: Int) {
                 when (which) {
-                    R.id.btnMenu -> item?.let { showCardMenu(it, arrayOf("邀请", "删除")) }
+                    R.id.btnMenu -> item?.let { showCardMenu(it, arrayOf("邀请到项目", "删除名片")) }
                     R.id.btnAgree -> MyApplication.ToastyInfo("click agree")
                     R.id.btnCancel -> MyApplication.ToastyInfo("click cancel")
                 }
 
             }
         })
+
+
     }
 
     /**

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.WindowManager;
 
 import com.jaeger.library.StatusBarUtil;
@@ -22,27 +23,27 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         StatusBarUtil.setTransparent(SplashActivity.this);
 
-        Thread myThread=new Thread(){//创建子线程
+        //
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                try{
-                    sleep(1000);//使程序休眠1秒
-                    Intent it;
-                    if (!UserInfoSaveSharedPreference.getPrefNotFirstUse(MyApplication.getContext())){
-                         it=new Intent(getApplicationContext(), GuideActivity.class);//启动GuideActivity
-                    }else{
-                         it=new Intent(getApplicationContext(), LoginActivity.class);//启动LoginActivity
+
+                Intent it;
+                if (!UserInfoSaveSharedPreference.getPrefNotFirstUse(MyApplication.getContext())){
+                    it=new Intent(getApplicationContext(), MyWelcomeActivity.class);//启动WelcomeActivity
+                }else{
+                    it=new Intent(getApplicationContext(), LoginActivity.class);//启动LoginActivity
 //                         it = new Intent(MyApplication.getContext(), MainActivity.class);
 
-                    }
-                    startActivity(it);
-                    finish();//关闭当前活动
-                }catch (Exception e){
-                    e.printStackTrace();
                 }
+                startActivity(it);
+                finish();//关闭当前活动
             }
-        };
-        myThread.start();//启动线程
+        }, 1000);//1秒后执行Runnable中的run方法
+
+
+
     }
 }
 

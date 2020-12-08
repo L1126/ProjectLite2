@@ -70,5 +70,10 @@
         <argument
             android:name="SMS_CODE"
             app:argType="string" />
+        <action
+            android:id="@+id/action_setPwdFragment_to_loginFragment2"
+            app:destination="@id/loginFragment2"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
 </navigation>

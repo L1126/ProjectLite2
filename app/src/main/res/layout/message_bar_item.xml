@@ -13,7 +13,6 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
-    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="5dp"
     app:cardElevation="@dimen/rc_card_elevation"
     app:cardMaxElevation="5dp"

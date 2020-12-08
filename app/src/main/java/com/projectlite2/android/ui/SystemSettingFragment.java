@@ -1,5 +1,6 @@
 package com.projectlite2.android.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -34,6 +35,8 @@ public class SystemSettingFragment extends Fragment {
     RecyclerView fRecyclerView, sRecyclerView, tRecyclerView;
     SysSettingAdapter fAdapter, sAdapter, tAdapter;
     TextView mLogout;
+
+    public static Activity PARENT;
 
     private ArrayList<SysSettingCard> fSysSetList = new ArrayList<SysSettingCard>();
     private ArrayList<SysSettingCard> sSysSetList = new ArrayList<SysSettingCard>();
@@ -147,8 +150,9 @@ public class SystemSettingFragment extends Fragment {
                                 AVUser.logOut();
                                 //  回到登录界面
                                 Intent it=new Intent(MyApplication.getContext(), LoginActivity.class);
+                                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(it);
-                                getActivity().finish();
+
 
                             }
                         })

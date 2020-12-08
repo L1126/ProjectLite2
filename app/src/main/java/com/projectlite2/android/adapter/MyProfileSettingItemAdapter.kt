@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.projectlite2.android.R
 import com.projectlite2.android.app.MyApplication
-import com.projectlite2.android.ui.MyProfileSettingItem
+import com.projectlite2.android.model.MyProfileSettingItem
 import com.projectlite2.android.utils.OnItemClickListener
 
 class MyProfileSettingItemAdapter(private val settings: List<MyProfileSettingItem>):

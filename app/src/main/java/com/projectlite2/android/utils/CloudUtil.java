@@ -2,30 +2,63 @@ package com.projectlite2.android.utils;
 
 import android.util.Log;
 
+import com.projectlite2.android.R;
+import com.projectlite2.android.activity.PushTestActivity;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.utils.popup.QueryProjectResultPopup;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.List;
 
+import cn.leancloud.AVFile;
+import cn.leancloud.AVInstallation;
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
 import cn.leancloud.AVUser;
 import cn.leancloud.im.v2.AVIMClient;
 import cn.leancloud.im.v2.AVIMException;
 import cn.leancloud.im.v2.callback.AVIMClientCallback;
+import cn.leancloud.push.PushService;
 import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
+import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_AVATAR;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_ID;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_NAME;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_PHONE;
+import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_MAP.RELATION_FIELD_LEADER;
+import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_MAP.RELATION_NAME_PROJECT_LEADER_MAP;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FIELD_MEMBER;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FILED_PROJECT;
 
 
 public class CloudUtil {
+
+
+    /**
+     * 文件表 字段与方法
+     */
+    public static class CLASS_FILE {
+
+        /**
+         * 数据表名称：文件
+         */
+        public static final String TABLE_NAME_FILE = "_File";
+
+        /**
+         * 文件数据表字段名称：对象ID
+         */
+        public static final String TABLE_FIELD_OBJECT_ID = "objectId";
+
+        /**
+         * 文件数据表字段名称：url
+         */
+        public static final String TABLE_FIELD_URL = "url";
+    }
 
 
     /**
@@ -54,17 +87,36 @@ public class CloudUtil {
         public static String objId;
 
         /**
+         * 当前用户绑定手机号
+         */
+        public static String phoneNumber;
+
+        /**
          * 当前用户的 IM CLIENT
          */
         public static AVIMClient imClient;
 
+        /**
+         * 当前用户的 头像
+         */
+        public static AVFile avatar;
 
-        public static void ConfigImClinet(@NotNull AVUser currentUser){
 
-            user=currentUser;
-            name =currentUser.getString(TABLE_FIELD_USER_NAME);
-            userId=currentUser.getString(TABLE_FIELD_USER_ID);
-            objId=currentUser.getObjectId();
+        /**
+         * 获取表字段到该类，用户连接服务器
+         *
+         * @param currentUser
+         */
+        public static void ConfigImClinet(@NotNull AVUser currentUser) {
+
+            Log.d("mytest", "ConfigImClinet:  2020.12.07");
+
+            user = currentUser;
+            name = currentUser.getString(TABLE_FIELD_USER_NAME);
+            userId = currentUser.getString(TABLE_FIELD_USER_ID);
+            phoneNumber = currentUser.getString(TABLE_FIELD_USER_PHONE);
+            objId = currentUser.getObjectId();
+            avatar = currentUser.getAVFile(TABLE_FIELD_USER_AVATAR);
 
 
             // 与服务器连接
@@ -82,8 +134,128 @@ public class CloudUtil {
             });
 
 
+        }
+
+
+        /**
+         * 检查登陆状态，链接服务器，配置installationId
+         */
+        public static void ConfigCurrentUserAndInstallationId() {
+            AVUser currentUser = AVUser.getCurrentUser();
+
+
+            if (currentUser != null) {
+
+
+                //  当前为用户登录状态，配置该用户的installationId
+
+                Log.d("mytest", "ConfigCurrentUserAndInstallationId: " + "当前用户：" + currentUser.getMobilePhoneNumber());
+
+                //  配置installationId
+                AVInstallation.getCurrentInstallation().saveInBackground().subscribe(new Observer<AVObject>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(AVObject avObject) {
+                        // 关联 installationId 到用户表等操作。
+                        MyApplication.MY_INSTALLATION_ID = AVInstallation.getCurrentInstallation().getInstallationId();
+                        Log.d("mytest", "关联 installationId   保存成功：" + MyApplication.MY_INSTALLATION_ID);
+                        currentUser.put("installationId", MyApplication.MY_INSTALLATION_ID);
+                        currentUser.saveInBackground().subscribe(new Observer<AVObject>() {
+                            public void onSubscribe(Disposable disposable) {
+                            }
+
+                            public void onNext(AVObject todo) {
+                                Log.d("mytest", "currentUser save installationId success");
+
+                                // 启动推送服务 设置默认打开的 Activity
+                                PushService.setDefaultPushCallback(MyApplication.getContext(), PushTestActivity.class);
+                                //  配置登录通讯服务器
+                                ConfigImClinet(currentUser);
+                            }
+
+                            public void onError(Throwable throwable) {
+                                MyApplication.ToastyError("error");
+                                Log.d("mytest", "currentUser save installationId  Error: " + throwable);
+                                // 异常处理
+                            }
+
+                            public void onComplete() {
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("mytest", "关联 installationId   保存失败，错误信息：" + e.getMessage());
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+
+
+            } else {
+                //  若当前为无用户登陆状态，则跳转到登录界面
+                MyApplication.ToastyError("当前无用户");
+
+            }
 
         }
+
+
+        public static void PushAvatarToCloud(String path) throws FileNotFoundException {
+
+            //  构建头像文件
+            AVFile file = AVFile.withAbsoluteLocalPath("avatar.jpg", path);
+            //  保存到云
+            file.saveInBackground().subscribe(new Observer<AVFile>() {
+                public void onSubscribe(Disposable disposable) {
+                }
+
+                public void onNext(AVFile file) {
+
+                    Log.d("mytest", "头像保存云端。objectId：" + file.getObjectId());
+
+                    user.put(TABLE_FIELD_USER_AVATAR, file);
+
+                    user.saveInBackground().subscribe(new Observer<AVObject>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+                        }
+
+                        @Override
+                        public void onNext(@NonNull AVObject avObject) {
+                            MyApplication.ToastySuccess("头像设置成功");
+
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            MyApplication.ToastyError("注册失败");
+                        }
+
+                        @Override
+                        public void onComplete() {
+                        }
+                    });
+                }
+
+                public void onError(Throwable throwable) {
+                    // 保存失败，可能是文件无法被读取，或者上传过程中出现问题
+                }
+
+                public void onComplete() {
+                }
+            });
+
+        }
+
 
     }
 
@@ -271,6 +443,7 @@ public class CloudUtil {
 
         }
 
+
     }
 
     /**
@@ -314,6 +487,12 @@ public class CloudUtil {
          * 用户数据表字段名称：用户installationId
          */
         public static final String TABLE_FIELD_USER_INSTALLATION_ID = "installationId";
+
+
+        /**
+         * 用户数据表字段名称：用户头像
+         */
+        public static final String TABLE_FIELD_USER_AVATAR = "avatar";
 
     }
 

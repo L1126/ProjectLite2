@@ -49,7 +49,7 @@
         </FrameLayout>
 
         <Button
-            android:id="@+id/MyprofileSetGrade"
+            android:id="@+id/btnModifyMyPhone"
             android:layout_marginTop="50dp"
             android:layout_gravity="center"
             android:layout_width="100dp"

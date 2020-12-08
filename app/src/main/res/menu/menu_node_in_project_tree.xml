@@ -3,20 +3,20 @@
     <item
         android:id="@+id/btnAddSubNode"
         android:icon="@drawable/ic_outline_add_box_24"
-        android:title="Download" />
+        android:title="添加子节点" />
 
     <item
         android:id="@+id/btnAddMission"
         android:icon="@drawable/ic_baseline_assignment_24"
-        android:title="Message" />
+        android:title="添加子任务" />
 
     <item
         android:id="@+id/btnEditNode"
         android:icon="@drawable/ic_baseline_edit_24"
-        android:title="Share" />
+        android:title="编辑本节点" />
 
     <item
         android:id="@+id/btnDelNode"
         android:icon="@drawable/ic_baseline_delete_outline_24"
-        android:title="Favorite" />
+        android:title="删除本节点" />
 </menu>

@@ -13,7 +13,6 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
-    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="10dp"
     app:cardElevation="@dimen/rc_card_elevation"
     app:cardMaxElevation="10dp"
@@ -32,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
-            android:background="#FFFFFF">
+            android:background="@color/my_card_background_color">
 
             <ImageView
                 android:id="@+id/picAvatarMessage"
@@ -51,7 +50,6 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="10dp"
                 android:gravity="bottom|center"
-                android:textColor="@color/black"
                 android:textSize="@dimen/rc_label_size_1"
                 app:layout_constraintStart_toEndOf="@+id/picAvatarMessage"
                 app:layout_constraintTop_toTopOf="@+id/picAvatarMessage"
@@ -100,8 +98,8 @@
                 android:layout_gravity="center"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="30dp"
-                android:textSize="15sp"
                 android:text="2020/11/30"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -147,18 +145,18 @@
 
             <com.projectlite2.android.MaxRecyclerView
                 android:id="@+id/messageBox"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
-                app:maxHeight="200dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/messageReply"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+                app:layout_constraintTop_toBottomOf="@+id/divider4"
+                app:maxHeight="200dp" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout

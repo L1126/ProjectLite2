@@ -45,11 +45,7 @@ public class ModifyMyProfileCardActivity extends AppCompatActivity implements Vi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnDelNode:
-                MyApplication.ToastyInfo("666");
-                break;
-            default:
-                break;
+
         }
     }
 }

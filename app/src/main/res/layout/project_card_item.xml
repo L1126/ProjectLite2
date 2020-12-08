@@ -12,7 +12,6 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
-    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="@dimen/rc_card_corner_radius"
     app:cardElevation="@dimen/rc_card_elevation"
     app:cardMaxElevation="10dp"
@@ -24,7 +23,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ChatRoom"
         android:layout_width="match_parent"
-        android:layout_height="88dp">
+        android:layout_height="88dp"
+        android:background="@color/my_card_background_color">
 
         <ProgressBar
             android:id="@+id/progressProject"
@@ -53,8 +53,12 @@
             android:id="@+id/btnProjectTree"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:backgroundTint="#FFFFFF"
+            android:background="@android:color/transparent"
+            android:clickable="true"
             android:contentDescription="@string/string_descrip_btn_project_tree"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="13dp"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/progressProject"
             app:layout_constraintEnd_toEndOf="parent"

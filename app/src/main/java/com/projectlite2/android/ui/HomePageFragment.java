@@ -2,9 +2,9 @@ package com.projectlite2.android.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,8 +27,8 @@ import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.projectlite2.android.R;
 import com.projectlite2.android.activity.ChatRoomActivity;
 import com.projectlite2.android.activity.CreateProjectActivity;
-import com.projectlite2.android.activity.ProjectDetailActivity;
 import com.projectlite2.android.activity.SearchActivity;
+import com.projectlite2.android.activity.TreeActivity;
 import com.projectlite2.android.adapter.ProjectCardAdapter;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.model.ProjectCard;
@@ -39,6 +39,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cn.leancloud.AVObject;
@@ -48,6 +49,8 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 import static android.app.Activity.RESULT_OK;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_DATE_CLOSING;
+import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_DATE_START;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_FIELD_PROJECT_NAME;
 import static com.projectlite2.android.utils.CloudUtil.CLASS_PROJECT.TABLE_NAME_PROJECT;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_MAP.RELATION_FIELD_LEADER;
@@ -67,6 +70,8 @@ public class HomePageFragment extends Fragment {
     RefreshLayout mRefresh;
     private ArrayList<ProjectCard> projectList = new ArrayList<ProjectCard>();
 
+    int refreshMillis = 1500;
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -75,7 +80,7 @@ public class HomePageFragment extends Fragment {
             case 2: {
                 //  用户加入了新的项目，返回resultCode为OK，执行刷新操作
                 if (resultCode == RESULT_OK) {
-                    refreshData(1000);
+                    refreshData(refreshMillis);
                 }
                 break;
             }
@@ -116,7 +121,7 @@ public class HomePageFragment extends Fragment {
                     case R.id.btnSearch:
                         Intent intent1 = new Intent(MyApplication.getContext(), SearchActivity.class);
                         SearchActivity.SetSearchType(SearchActivity.SearchType.project);
-                        startActivityForResult(intent1,2);
+                        startActivityForResult(intent1, 2);
                         break;
                     //  点击新项目
                     case R.id.btnNewProject:
@@ -171,6 +176,7 @@ public class HomePageFragment extends Fragment {
 
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -200,7 +206,7 @@ public class HomePageFragment extends Fragment {
                         MyApplication.ToastyInfo("tree");
                         //跳转activity
                         Intent it;
-                        it = new Intent(getContext(), ProjectDetailActivity.class);//启动ProjectDetailActivity
+                        it = new Intent(getContext(), TreeActivity.class);//启动TreeActivityActivity
                         startActivity(it);
                         break;
                     }
@@ -237,18 +243,23 @@ public class HomePageFragment extends Fragment {
 
         mRefresh = mView.findViewById(R.id.smartRefresh);
         BezierRadarHeader myHeader = new BezierRadarHeader(MyApplication.getContext());
-        myHeader.setAccentColor(Color.BLUE);
-        myHeader.setPrimaryColor(Color.RED);
+
+       myHeader.setAccentColor(R.color.white);
+       myHeader.setPrimaryColor(R.color.colorAccent);
         mRefresh.setRefreshHeader(myHeader);
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(800/*,false*/);//传入false表示刷新失败
+                refreshlayout.finishRefresh(refreshMillis()/*,false*/);//传入false表示刷新失败
                 refreshData();
             }
         });
 
 
+    }
+
+    public int refreshMillis() {
+        return 1500;
     }
 
     /**
@@ -281,7 +292,7 @@ public class HomePageFragment extends Fragment {
             public void run() {
                 mAdapter.notifyDataSetChanged();
             }
-        }, 1000);//1秒后执行Runnable中的run方法
+        }, refreshMillis());//1500ms后执行Runnable中的run方法
 
         mRecyclerView.scheduleLayoutAnimation();
 
@@ -341,14 +352,21 @@ public class HomePageFragment extends Fragment {
                         public void onNext(AVObject item) {
                             // item 就是 project 实例
                             String pjName = item.getString(TABLE_FIELD_PROJECT_NAME);
-//                            Log.d("mytest", "query: " + pjName);
-                            projectList.add(new ProjectCard(pjName, true, 10));
+                            Date pjStart = item.getDate(TABLE_FIELD_DATE_START);
+                            Date pjClosing = item.getDate(TABLE_FIELD_DATE_CLOSING);
+                            Date today = new Date();
+                            float progress = ((today.getTime() - pjStart.getTime()) * 1.0f / (pjClosing.getTime() - pjStart.getTime()) * 100);
+
+
+                            projectList.add(new ProjectCard(pjName, true, (int) progress));
                         }
 
                         public void onError(Throwable throwable) {
+
                         }
 
                         public void onComplete() {
+
                         }
                     });
                 }
@@ -357,6 +375,7 @@ public class HomePageFragment extends Fragment {
 
             @Override
             public void onError(Throwable e) {
+
             }
 
             @Override
@@ -396,8 +415,14 @@ public class HomePageFragment extends Fragment {
                         public void onNext(AVObject item) {
                             // item 就是 project 实例
                             String pjName = item.getString(TABLE_FIELD_PROJECT_NAME);
-//                            Log.d("mytest", "query: " + pjName);
-                            projectList.add(new ProjectCard(pjName, true, 10));
+                            Date pjStart = item.getDate(TABLE_FIELD_DATE_START);
+                            Date pjClosing = item.getDate(TABLE_FIELD_DATE_CLOSING);
+                            Date today = new Date();
+                            float progress = ((today.getTime() - pjStart.getTime()) * 1.0f / (pjClosing.getTime() - pjStart.getTime()) * 100);
+
+                            Log.d("mytest", "progress: " + progress);
+
+                            projectList.add(new ProjectCard(pjName, false, (int) progress));
                         }
 
                         public void onError(Throwable throwable) {
@@ -412,10 +437,12 @@ public class HomePageFragment extends Fragment {
 
             @Override
             public void onError(Throwable e) {
+
             }
 
             @Override
             public void onComplete() {
+
             }
         });
 

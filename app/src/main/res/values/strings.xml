@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjectLite</string>
+    <string name="app_name">Lite</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="string_btn_login">Login</string>
@@ -31,6 +31,7 @@
     <string name="string_btn_modify_pwd">Modify</string>
     <string name="string_txt_set_pwd">Password</string>
     <string name="string_btn_signup">Sign up</string>
+    <string name="string_txt_project_tree">Project tree</string>
     <string name="string_btn_descrip_project_tree">Project tree</string>
     <string name="string_descrip_btn_project_tree">Project tree</string>
     <string name="string_txt_isLeader">(Leader)</string>
@@ -68,4 +69,6 @@
     <string name="string_btn_apply_to_join">Apply to join</string>
     <string name="string_txt_no_introduction">No introduction</string>
     <string name="string_txt_strong_point">Strong point</string>
+    <string name="string_btn_agree">Agree</string>
+    <string name="string_txt_user_id">User ID</string>
 </resources>

@@ -35,21 +35,21 @@ public class MyWelcomeActivity extends WelcomeActivity  {
 
 
                 .page(new BasicPage(R.drawable.img_guide_1_min,
-                        "欢迎页面1",
-                        "一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述")
+                        "项目讯息，触手可及",
+                        "日程安排、人员变动、任务进度，随时随地轻松点击。")
                         .background(R.color.white)
                 )
 
                 .page(new BasicPage(R.drawable.img_guide_2_min,
-                        "欢迎页面2",
-                        "一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述")
+                        "创意迸发，尽在规划",
+                        "看似偶然的灵感，得益于项目如大树般牢牢扎根，蓬勃生长。")
                         .background(R.color.white)
                 )
 
 
                 .page(new BasicPage(R.drawable.img_guide_3_min,
-                        "欢迎页面3",
-                        "一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述一点点描述")
+                        "资源人才，不再错过",
+                        "云端平台共享小组资源，名片夹标记重要伙伴，不再担心遗忘和丢失，专注初心更好地实施。")
                         .background(R.color.white)
                 )
 

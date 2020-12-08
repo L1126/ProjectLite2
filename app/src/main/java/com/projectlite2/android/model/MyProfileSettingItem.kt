@@ -1,4 +1,4 @@
-package com.projectlite2.android.ui
+package com.projectlite2.android.model
 
 class MyProfileSettingItem(
         val icon:Int,

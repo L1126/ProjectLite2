@@ -13,7 +13,6 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
-    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="10dp"
     app:cardElevation="@dimen/rc_card_elevation"
     app:cardMaxElevation="10dp"
@@ -24,34 +23,37 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
-            android:background="#FFFFFF">
+            android:animateLayoutChanges="true">
 
             <ImageView
                 android:id="@+id/picAvatarMessage"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="18dp"
+                android:background="@drawable/message_project_invite"
+                android:backgroundTint="?android:attr/textColorPrimary"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@+id/guideline29"
+                app:layout_constraintEnd_toStartOf="@+id/guideline23"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/message_project_invite" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
                 android:gravity="bottom|center"
-                android:textColor="@color/black"
                 android:textSize="@dimen/rc_label_size_1"
                 app:layout_constraintStart_toEndOf="@+id/picAvatarMessage"
                 app:layout_constraintTop_toTopOf="@+id/picAvatarMessage"
@@ -63,24 +65,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="bottom|center"
+                android:text="邀请你加入项目"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/picAvatar"
                 app:layout_constraintStart_toStartOf="@+id/txtName"
-                app:layout_constraintTop_toBottomOf="@+id/txtName"
-                android:text="邀请你加入项目" />
+                app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
             <TextView
                 android:id="@+id/txtTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="30dp"
+                android:text="2020/11/30"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/divider4"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="2020/11/30" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/messageNum"
@@ -123,10 +125,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/projectTimeBar"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/projectNameBar">
 
                 <TextView
@@ -136,7 +138,6 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
                     android:text="项目时间:"
-                    android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -154,10 +155,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/projectNameBar"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/divider4">
 
                 <TextView
@@ -167,7 +168,6 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
                     android:text="项目名称:"
-                    android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -187,10 +187,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/projectHeadmanBar"
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/projectTimeBar"
                 tools:layout_editor_absoluteX="0dp">
 
@@ -202,7 +202,6 @@
                     android:gravity="center"
                     android:text="组长:"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -210,8 +209,8 @@
                     android:id="@+id/picAvatarHeadman"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
                     app:layout_constraintStart_toEndOf="@+id/projectHeadman"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_baseline_account_circle_24" />
@@ -237,10 +236,10 @@
 
                 <TextView
                     android:id="@+id/textMajor"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="7dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="7dp"
                     android:text="信息与交互设计"
                     app:layout_constraintStart_toEndOf="@+id/picAvatarHeadman"
                     app:layout_constraintTop_toBottomOf="@+id/textHeadman" />
@@ -249,10 +248,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/projectIntro"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/projectHeadmanBar"
                 tools:layout_editor_absoluteX="0dp">
 
@@ -260,11 +259,9 @@
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="0dp"
                     android:layout_marginLeft="10dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
                     android:text="项目简介:"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -281,10 +278,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/messageReply"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/imgToggleBar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -326,6 +323,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/ic_baseline_horizontal_rule_24" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="85dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

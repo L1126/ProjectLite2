@@ -6,19 +6,30 @@ import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 
+import com.projectlite2.android.BuildConfig;
 import com.projectlite2.android.CustomUserProvider;
 
-import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,6 +48,19 @@ public class MyApplication extends Application {
     private static Context mContext;
     @SuppressLint("StaticFieldLeak")
     private static NavController navController;
+
+
+    //相册请求码
+    public static final int ALBUM_REQUEST_CODE = 1;
+    //相机请求码
+    public static final int CAMERA_REQUEST_CODE = 2;
+    //剪裁请求码
+    public static final int CROP_SMALL_PICTURE = 3;
+
+    //相机拍摄图像uri
+    public static Uri contentUri = null;
+
+
 
     //   ************ 国际版 *************
 //    private String _appId = "xCPMuwMtvrHTaRYE3sdnlBez-MdYXbMMI";
@@ -88,7 +112,7 @@ public class MyApplication extends Application {
         //创建新的channel
         NotificationManager mNotiManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("default", "default", NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel("default", "default", NotificationManager.IMPORTANCE_MAX);
             mNotiManager.createNotificationChannel(channel);
         }
 
@@ -222,6 +246,157 @@ public class MyApplication extends Application {
             imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);//关闭软键盘，开启方法相同，这个方法是切换开启与关闭状态的
         }
     }
+
+
+
+    /**
+     * 拍照
+     */
+    public static void TakePicture(Activity activity){
+        try{
+
+            //用于保存调用相机拍照后所生成的文件
+            File mTempFile = new File(activity.getExternalCacheDir().getPath() + "/picture/", System.currentTimeMillis() + ".png");
+            if (!mTempFile.getParentFile().exists()) {
+                mTempFile.getParentFile().mkdirs();
+            }
+            //跳转到调用系统相机
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+
+            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".FileProvider", mTempFile);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
+
+            activity. startActivityForResult(intent, CAMERA_REQUEST_CODE);
+
+
+
+        }catch( SecurityException e){
+            e.printStackTrace();
+        }
+    }
+    public static void TakePicture(Activity activity, Fragment fg){
+        try{
+
+            //用于保存调用相机拍照后所生成的文件
+            File mTempFile = new File(activity.getExternalCacheDir().getPath() + "/picture/", System.currentTimeMillis() + ".png");
+            if (!mTempFile.getParentFile().exists()) {
+                mTempFile.getParentFile().mkdirs();
+            }
+            mTempFile.createNewFile();
+
+
+           if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
+                contentUri=FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".FileProvider", mTempFile);
+            }else{
+               Uri.fromFile(mTempFile);
+           }
+
+            //跳转到调用系统相机
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
+            fg. startActivityForResult(intent, CAMERA_REQUEST_CODE);
+
+
+
+        }catch(SecurityException | IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 从相册获取图片
+     */
+    public static void GetPicFromAlbm(Activity activity) {
+
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        photoPickerIntent.setType("image/*");
+        activity.startActivityForResult(photoPickerIntent, ALBUM_REQUEST_CODE);
+    }
+    public static void GetPicFromAlbm(Activity activity,Fragment fg) {
+
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        photoPickerIntent.setType("image/*");
+        fg.startActivityForResult(photoPickerIntent, ALBUM_REQUEST_CODE);
+    }
+
+
+    /**
+     * 保存图像到手机
+     * @param bitmap
+     */
+    public static void saveImage(Activity activity,Bitmap bitmap) {
+        File filesDir;
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){//判断sd卡是否挂载
+            //路径1：storage/sdcard/Android/data/包名/files
+            filesDir = activity.getExternalFilesDir("");
+        }else{//手机内部存储
+            //路径：data/data/包名/files
+            filesDir = activity.getFilesDir();
+        }
+        FileOutputStream fos = null;
+        try {
+            File file = new File(filesDir,"icon.png");
+            fos = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100,fos);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }finally{
+            if(fos != null){
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+
+
+
+
+
+}
+
+
+    /**
+     * 保存图像到手机,并返回路径
+     * @param bitmap
+     * @return
+     */
+    public static String saveImageReturnPath(Activity activity, Bitmap bitmap) {
+        File filesDir;
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){//判断sd卡是否挂载
+            //路径1：storage/sdcard/Android/data/包名/files
+            filesDir = activity.getExternalFilesDir("");
+        }else{//手机内部存储
+            //路径：data/data/包名/files
+            filesDir = activity.getFilesDir();
+        }
+        FileOutputStream fos = null;
+        try {
+            File file = new File(filesDir,"icon.png");
+            fos = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100,fos);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }finally{
+            if(fos != null){
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return filesDir.getAbsolutePath();
+
+    }
+
+
 
 
 

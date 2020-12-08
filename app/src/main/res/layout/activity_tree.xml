@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+
+
+            app:titleTextAppearance="@style/my_toolbar_text_style">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtPageTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline15"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="123" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="-1dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="379dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.joaquimley.faboptions.FabOptions
+                android:id="@+id/fab_options1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+
+                android:visibility="gone"
+                app:button_menu="@menu/menu_node_in_project_tree"
+                app:layout_constraintBottom_toTopOf="@+id/fab_options0"
+                app:layout_constraintEnd_toEndOf="@+id/fab_options0"
+                app:layout_constraintStart_toStartOf="@+id/fab_options0"
+                app:layout_constraintTop_toBottomOf="@+id/fab_options2" />
+
+            <com.joaquimley.faboptions.FabOptions
+                android:id="@+id/fab_options0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                app:button_menu="@menu/menu_node_in_project_tree"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fab_options1" />
+
+            <com.joaquimley.faboptions.FabOptions
+                android:id="@+id/fab_options2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:visibility="gone"
+                app:button_menu="@menu/menu_node_in_project_tree"
+                app:layout_constraintBottom_toTopOf="@+id/fab_options1"
+                app:layout_constraintEnd_toStartOf="@+id/fab_options3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/fab_options1"
+                app:layout_constraintTop_toBottomOf="@+id/fab_options4" />
+
+            <com.joaquimley.faboptions.FabOptions
+                android:id="@+id/fab_options5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+
+                android:visibility="gone"
+                app:button_menu="@menu/menu_node_in_project_tree"
+                app:layout_constraintBottom_toTopOf="@+id/fab_options4"
+                app:layout_constraintEnd_toEndOf="@+id/fab_options4"
+                app:layout_constraintStart_toStartOf="@+id/fab_options4"
+                app:layout_constraintTop_toBottomOf="@+id/fab_options6" />
+
+            <com.joaquimley.faboptions.FabOptions
+                android:id="@+id/fab_options3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:visibility="gone"
+                app:button_menu="@menu/menu_node_in_project_tree"
+                app:layout_constraintBottom_toBottomOf="@+id/fab_options2"
+                app:layout_constraintEnd_toEndOf="@+id/fab_options1"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fab_options2"
+                app:layout_constraintTop_toTopOf="@+id/fab_options2" />
+
+            <com.joaquimley.faboptions.FabOptions
+                android:id="@+id/fab_options4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+
+                android:visibility="gone"
+                app:button_menu="@menu/menu_node_in_project_tree"
+                app:layout_constraintBottom_toTopOf="@+id/fab_options2"
+                app:layout_constraintEnd_toEndOf="@+id/fab_options2"
+                app:layout_constraintStart_toStartOf="@+id/fab_options2"
+                app:layout_constraintTop_toBottomOf="@+id/fab_options5" />
+
+            <com.joaquimley.faboptions.FabOptions
+                android:id="@+id/fab_options6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+
+                android:visibility="gone"
+                app:button_menu="@menu/menu_node_in_project_tree"
+                app:layout_constraintBottom_toTopOf="@+id/fab_options5"
+                app:layout_constraintEnd_toStartOf="@+id/fab_options7"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/fab_options5"
+                app:layout_constraintTop_toBottomOf="@+id/fab_options8" />
+
+            <com.joaquimley.faboptions.FabOptions
+                android:id="@+id/fab_options7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+
+                android:visibility="gone"
+                app:button_menu="@menu/menu_node_in_project_tree"
+                app:layout_constraintBottom_toBottomOf="@+id/fab_options6"
+                app:layout_constraintEnd_toEndOf="@+id/fab_options5"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fab_options6"
+                app:layout_constraintTop_toTopOf="@+id/fab_options6" />
+
+            <com.joaquimley.faboptions.FabOptions
+                android:id="@+id/fab_options8"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+
+                android:visibility="gone"
+                app:button_menu="@menu/menu_node_in_project_tree"
+                app:layout_constraintBottom_toTopOf="@+id/fab_options6"
+                app:layout_constraintEnd_toEndOf="@+id/fab_options6"
+                app:layout_constraintStart_toStartOf="@+id/fab_options6"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+

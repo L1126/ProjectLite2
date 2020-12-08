@@ -14,29 +14,16 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.jaeger.library.StatusBarUtil;
 import com.projectlite2.android.R;
-import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.ui.CardcaseFragment;
 import com.projectlite2.android.ui.HomePageFragment;
 import com.projectlite2.android.ui.MessageBoxFragment;
 import com.projectlite2.android.ui.MyProfileFragment;
 import com.projectlite2.android.utils.CloudUtil;
 
-import cn.leancloud.AVInstallation;
-import cn.leancloud.AVObject;
-import cn.leancloud.AVUser;
-import cn.leancloud.im.v2.AVIMClient;
-import cn.leancloud.im.v2.AVIMException;
-import cn.leancloud.im.v2.callback.AVIMClientCallback;
-import cn.leancloud.push.PushService;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import nl.joery.animatedbottombar.AnimatedBottomBar;
+import java.util.List;
 
-import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_ID;
-import static com.projectlite2.android.utils.CloudUtil.CLASS_USER.TABLE_FIELD_USER_NAME;
-import static com.projectlite2.android.utils.CloudUtil.CURRENT_USER.ConfigImClinet;
+import nl.joery.animatedbottombar.AnimatedBottomBar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,9 +67,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //  检查登陆状态，连接服务器，配置installationId
+        CloudUtil.CURRENT_USER.ConfigCurrentUserAndInstallationId();
+
         //如果有的话，隐藏actionbar
 //        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+
+
         thisActivity=this;
 
         //  导航栏跳转配置
@@ -92,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this,navController,appBarConfig);
 //        NavigationUI.setupWithNavController(bottomNav,navController);
 
-        //  检查登陆状态，配置installationId
-        ConfigCurrentUserAndInstallationId();
+
 
 
         mAniBottomBar = findViewById(R.id.bottomBar);
@@ -143,74 +134,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *  检查登陆状态，配置installationId
+     * 解决Fragment中的onActivityResult()方法无响应问题。
      */
-    private void ConfigCurrentUserAndInstallationId() {
-        AVUser currentUser = AVUser.getCurrentUser();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * 1.使用getSupportFragmentManager().getFragments()获取到当前Activity中添加的Fragment集合
+         * 2.遍历Fragment集合，手动调用在当前Activity中的Fragment中的onActivityResult()方法。
+         */
 
+        Log.d("mytest", "onActivityResult: main activity");
 
-        if (currentUser != null) {
-
-
-            //  当前为用户登录状态，配置该用户的installationId
-
-            Log.d("mytest", "ConfigCurrentUserAndInstallationId: " + "当前用户：" + currentUser.getMobilePhoneNumber());
-
-            //  配置installationId
-            AVInstallation.getCurrentInstallation().saveInBackground().subscribe(new Observer<AVObject>() {
-                @Override
-                public void onSubscribe(Disposable d) {
-                }
-
-                @Override
-                public void onNext(AVObject avObject) {
-                    // 关联 installationId 到用户表等操作。
-                    MyApplication.MY_INSTALLATION_ID = AVInstallation.getCurrentInstallation().getInstallationId();
-                    Log.d("mytest", "关联 installationId   保存成功：" + MyApplication.MY_INSTALLATION_ID);
-                    currentUser.put("installationId", MyApplication.MY_INSTALLATION_ID);
-                    currentUser.saveInBackground().subscribe(new Observer<AVObject>() {
-                        public void onSubscribe(Disposable disposable) {
-                        }
-
-                        public void onNext(AVObject todo) {
-                            Log.d("mytest", "currentUser save installationId success");
-
-                            // 启动推送服务 设置默认打开的 Activity
-                            PushService.setDefaultPushCallback(thisActivity, PushTestActivity.class);
-                            //  配置登录通讯服务器
-                            ConfigImClinet(currentUser);
-                        }
-
-                        public void onError(Throwable throwable) {
-                            MyApplication.ToastyError("error");
-                            Log.d("mytest", "currentUser save installationId  Error: " + throwable);
-                            // 异常处理
-                        }
-
-                        public void onComplete() {
-                        }
-                    });
-
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    Log.d("mytest", "关联 installationId   保存失败，错误信息：" + e.getMessage());
-
-                }
-
-                @Override
-                public void onComplete() {
-                }
-            });
-
-
-        } else {
-            //  若当前为无用户登陆状态，则跳转到登录界面
-            MyApplication.ToastyError("当前无用户");
-            Intent intent = new Intent(MyApplication.getContext(), LoginActivity.class);
-            startActivity(intent);
-            finish();
+        if (getSupportFragmentManager().getFragments() != null && getSupportFragmentManager().getFragments().size() > 0) {
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            for (Fragment mFragment : fragments) {
+                mFragment.onActivityResult(requestCode, resultCode, data);
+            }
         }
 
     }

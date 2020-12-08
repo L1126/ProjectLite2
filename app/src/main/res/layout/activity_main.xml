@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".activity.MainActivity"
 
     >
@@ -58,32 +59,67 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.tabs.TabLayout>
 
+
+    <nl.joery.animatedbottombar.AnimatedBottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:abb_animationInterpolator="@android:anim/overshoot_interpolator"
+        app:abb_indicatorAppearance="round"
+        app:abb_indicatorHeight="4dp"
+        app:abb_indicatorMargin="16dp"
+
+        app:abb_selectedIndex="1"
+        app:abb_selectedTabType="text"
+        app:abb_tabs="@menu/menu_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@+id/bottomBar"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" >
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout">
 
     </androidx.viewpager2.widget.ViewPager2>
 
-    <nl.joery.animatedbottombar.AnimatedBottomBar
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#FFF"
-        app:abb_indicatorAppearance="round"
-        app:abb_indicatorHeight="4dp"
-        app:abb_indicatorMargin="16dp"
-        app:abb_selectedIndex="1"
-        app:abb_selectedTabType="text"
-        app:abb_tabs="@menu/menu_bottom"
-        app:abb_rippleEnabled="true"
-        app:abb_animationInterpolator="@android:anim/overshoot_interpolator"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--    <nl.joery.animatedbottombar.AnimatedBottomBar-->
+<!--        android:id="@+id/bottomBar"-->
+<!--    android:background="#FFF"-->
+
+<!--        app:abb_rippleEnabled="true"-->
+<!--        app:abb_animationInterpolator="@android:anim/overshoot_interpolator"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--    <nl.joery.animatedbottombar.AnimatedBottomBar-->
+<!--        android:id="@+id/bottomBar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:background="?android:attr/colorBackgroundCacheHint"-->
+<!--        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"-->
+<!--        app:abb_animationInterpolator="@android:anim/overshoot_interpolator"-->
+<!--        app:abb_badgeBackgroundColor="?attr/colorControlNormal"-->
+<!--        app:abb_badgeTextColor="@color/colorAccent"-->
+<!--        app:abb_indicatorAppearance="round"-->
+<!--        app:abb_indicatorColor="@color/colorAccent"-->
+<!--        app:abb_indicatorHeight="4dp"-->
+<!--        app:abb_indicatorMargin="16dp"-->
+<!--        app:abb_rippleColor="#FFFFFF"-->
+<!--        app:abb_rippleEnabled="true"-->
+<!--        app:abb_selectedIndex="1"-->
+<!--        app:abb_selectedTabType="text"-->
+<!--        app:abb_tabColor="?android:attr/textColorPrimary"-->
+<!--        app:abb_tabColorSelected="@color/colorAccent"-->
+<!--        app:abb_tabs="@menu/menu_bottom"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
