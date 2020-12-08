@@ -2,7 +2,6 @@ package com.projectlite2.android.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -28,8 +27,8 @@ import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.projectlite2.android.R;
 import com.projectlite2.android.activity.ChatRoomActivity;
 import com.projectlite2.android.activity.CreateProjectActivity;
-import com.projectlite2.android.activity.ProjectDetailActivity;
 import com.projectlite2.android.activity.SearchActivity;
+import com.projectlite2.android.activity.TreeActivity;
 import com.projectlite2.android.adapter.ProjectCardAdapter;
 import com.projectlite2.android.app.MyApplication;
 import com.projectlite2.android.model.ProjectCard;
@@ -71,6 +70,8 @@ public class HomePageFragment extends Fragment {
     RefreshLayout mRefresh;
     private ArrayList<ProjectCard> projectList = new ArrayList<ProjectCard>();
 
+    int refreshMillis = 1500;
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -79,7 +80,7 @@ public class HomePageFragment extends Fragment {
             case 2: {
                 //  用户加入了新的项目，返回resultCode为OK，执行刷新操作
                 if (resultCode == RESULT_OK) {
-                    refreshData(1000);
+                    refreshData(refreshMillis);
                 }
                 break;
             }
@@ -205,7 +206,7 @@ public class HomePageFragment extends Fragment {
                         MyApplication.ToastyInfo("tree");
                         //跳转activity
                         Intent it;
-                        it = new Intent(getContext(), ProjectDetailActivity.class);//启动ProjectDetailActivity
+                        it = new Intent(getContext(), TreeActivity.class);//启动TreeActivityActivity
                         startActivity(it);
                         break;
                     }
@@ -242,18 +243,23 @@ public class HomePageFragment extends Fragment {
 
         mRefresh = mView.findViewById(R.id.smartRefresh);
         BezierRadarHeader myHeader = new BezierRadarHeader(MyApplication.getContext());
-        myHeader.setAccentColor(R.color.colorAccent);
-        myHeader.setPrimaryColor(R.color.white);
+
+       myHeader.setAccentColor(R.color.white);
+       myHeader.setPrimaryColor(R.color.colorAccent);
         mRefresh.setRefreshHeader(myHeader);
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(800/*,false*/);//传入false表示刷新失败
+                refreshlayout.finishRefresh(refreshMillis()/*,false*/);//传入false表示刷新失败
                 refreshData();
             }
         });
 
 
+    }
+
+    public int refreshMillis() {
+        return 1500;
     }
 
     /**
@@ -286,7 +292,7 @@ public class HomePageFragment extends Fragment {
             public void run() {
                 mAdapter.notifyDataSetChanged();
             }
-        }, 1000);//1秒后执行Runnable中的run方法
+        }, refreshMillis());//1500ms后执行Runnable中的run方法
 
         mRecyclerView.scheduleLayoutAnimation();
 
