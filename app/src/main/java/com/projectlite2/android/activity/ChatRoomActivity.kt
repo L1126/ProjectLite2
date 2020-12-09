@@ -81,6 +81,8 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
             msgList.clear()
             msgList.add(Msg("云端数据能够实现吗？",Msg.TYPE_SENT))
             msgList.add(Msg("正在努力！加油！打工人！",Msg.TYPE_RECEIVED))
+        }else{
+            initMsg()
         }
 
         //菜单目录点击
@@ -104,9 +106,8 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
                 "胖虎" ->{
                     txtTitle?.setText("胖虎")
                     msgList.clear()
-                    msgList.add(Msg("原型快点做！",Msg.TYPE_RECEIVED))
-                    msgList.add(Msg("做不出来",Msg.TYPE_RECEIVED))
-                    msgList.add(Msg("把你按在地上摩擦（bushi）",Msg.TYPE_RECEIVED))
+                    msgList.add(Msg("高保真gkd",Msg.TYPE_RECEIVED))
+                    msgList.add(Msg("拖ddl这么久了",Msg.TYPE_RECEIVED))
                 }
                 "静香" ->{
                     txtTitle?.setText("静香")
@@ -130,13 +131,12 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 //进入项目树
                 R.id.btnTree ->{
-
+                    val treeActivity = Intent(MyApplication.getContext(), TreeActivity::class.java)
+                    startActivity(treeActivity)
                 }
             }
             true
         })
-
-        initMsg()
 
         val layoutManager = LinearLayoutManager(this)
         recyclerViewRoom.layoutManager = layoutManager
