@@ -20,9 +20,14 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.viewpager.widget.ViewPager;
 
+
+import com.google.android.material.tabs.TabLayout;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.interfaces.OnSelectListener;
@@ -70,6 +75,10 @@ public class MyProfileFragment extends Fragment {
     TextView txtMyName;
     MyProfileFragment thisFragment;
 
+    private TabLayout myProfileTab;
+    private ViewPager myProfileVp;
+    ArrayList fragmentList = new ArrayList<Fragment>();
+
     public Bitmap avatarBitmap = null;
     public String mAvatarPath=null;
 
@@ -94,6 +103,9 @@ public class MyProfileFragment extends Fragment {
         toolBar = mView.findViewById(R.id.toolBar);
         mImgAvatar = mView.findViewById(R.id.imgBtnUserAvatar);
         txtMyName = mView.findViewById(R.id.txtMyName);
+        myProfileTab=mView.findViewById(R.id.myProfileTab);
+        myProfileVp=mView.findViewById(R.id.myProfileVp);
+
 
 
         initMyProfileInterface();
@@ -102,6 +114,17 @@ public class MyProfileFragment extends Fragment {
         return mView;
 
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        MyProfileFragment.MPagerAdapter mPagerAdapter = new MyProfileFragment.MPagerAdapter(getChildFragmentManager());
+        initFragment();
+        myProfileTab.setupWithViewPager(myProfileVp);
+        myProfileVp.setAdapter(mPagerAdapter);
+    }
+
 
 
     /**
@@ -298,6 +321,48 @@ public class MyProfileFragment extends Fragment {
                 }
         }
 
+    }
+
+
+    private void initFragment() {
+        fragmentList.add(new MyTimeTableFragment());
+        fragmentList.add(new MyMemoFragment());
+    }
+
+
+
+    class MPagerAdapter extends FragmentPagerAdapter {
+
+
+        public MPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return (Fragment) fragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            return super.instantiateItem(container, position);
+        }
+
+        //返回tablayout的标题文字;
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if (position == 0) {
+                return getActivity().getResources().getString(R.string.string_my_profile_tab_time_table);
+            }else{
+                return getActivity().getResources().getString(R.string.string_my_profile_tab_memo);
+            }
+
+        }
     }
 
 }

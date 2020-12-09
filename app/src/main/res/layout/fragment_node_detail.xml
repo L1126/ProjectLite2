@@ -223,13 +223,368 @@
                 android:textColor="@color/primaryText"
                 android:textSize="@dimen/rc_main_text" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvNodeMission"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/rc_screen_margin_horizontal">
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                app:cardCornerRadius="@dimen/rc_card_corner_radius"
+                app:cardElevation="@dimen/rc_card_elevation"
+                app:cardMaxElevation="10dp">
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ChatRoom"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@color/my_card_background_color">
+
+                    <TextView
+                        android:id="@+id/txtLeader2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="KKang，Linwc"
+                        app:layout_constraintBottom_toBottomOf="@+id/txtSettingItemName"
+                        app:layout_constraintStart_toEndOf="@+id/txtSettingItemName"
+                        app:layout_constraintTop_toTopOf="@+id/txtSettingItemName" />
+
+                    <ProgressBar
+                        android:id="@+id/progressProject"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="376dp"
+                        android:layout_height="13dp"
+                        android:progress="75"
+                        android:progressDrawable="@drawable/custom_progressbar"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtSettingItemName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="界面布局搭建"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textSize="@dimen/rc_card_item_project_main_text"
+                        app:layout_constraintBottom_toTopOf="@+id/progressProject"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/btnProjectTree"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:contentDescription="@string/string_descrip_btn_project_tree"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:padding="13dp"
+                        android:scaleType="fitCenter"
+                        app:layout_constraintBottom_toTopOf="@+id/progressProject"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline13"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/img_progress_75" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.84" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.75" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.8" />
+
+                    <ImageView
+                        android:id="@+id/dotMsgCount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/string_descrip_dot_msg_count"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/guideline5"
+                        app:srcCompat="@drawable/ic_baseline_error_24" />
+
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="?android:attr/listDivider"
+                        android:backgroundTint="#000000"
+                        app:layout_constraintBottom_toBottomOf="@+id/btnProjectTree"
+                        app:layout_constraintEnd_toStartOf="@+id/btnProjectTree"
+                        app:layout_constraintTop_toTopOf="@+id/btnProjectTree" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                app:cardCornerRadius="@dimen/rc_card_corner_radius"
+                app:cardElevation="@dimen/rc_card_elevation"
+                app:cardMaxElevation="10dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ChatRoom"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@color/my_card_background_color">
+
+                    <TextView
+                        android:id="@+id/txtLeader3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="Linwc"
+                        app:layout_constraintBottom_toBottomOf="@+id/txtSettingItemName"
+                        app:layout_constraintStart_toEndOf="@+id/txtSettingItemName"
+                        app:layout_constraintTop_toTopOf="@+id/txtSettingItemName" />
+
+                    <ProgressBar
+                        android:id="@+id/progressProject"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="376dp"
+                        android:layout_height="13dp"
+                        android:progress="50"
+                        android:progressDrawable="@drawable/custom_progressbar"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtSettingItemName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="同步云后端数据库"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textSize="@dimen/rc_card_item_project_main_text"
+                        app:layout_constraintBottom_toTopOf="@+id/progressProject"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/btnProjectTree"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:contentDescription="@string/string_descrip_btn_project_tree"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:padding="13dp"
+                        android:scaleType="fitCenter"
+                        app:layout_constraintBottom_toTopOf="@+id/progressProject"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline13"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/img_progress_50" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.84" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.75" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.8" />
+
+                    <ImageView
+                        android:id="@+id/dotMsgCount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/string_descrip_dot_msg_count"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/guideline5"
+                        app:srcCompat="@drawable/ic_baseline_error_24" />
+
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="?android:attr/listDivider"
+                        android:backgroundTint="#000000"
+                        app:layout_constraintBottom_toBottomOf="@+id/btnProjectTree"
+                        app:layout_constraintEnd_toStartOf="@+id/btnProjectTree"
+                        app:layout_constraintTop_toTopOf="@+id/btnProjectTree" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                app:cardCornerRadius="@dimen/rc_card_corner_radius"
+                app:cardElevation="@dimen/rc_card_elevation"
+                app:cardMaxElevation="10dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ChatRoom"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@color/my_card_background_color">
+
+                    <TextView
+                        android:id="@+id/txtLeader4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="Linwc，KKang"
+                        app:layout_constraintBottom_toBottomOf="@+id/txtSettingItemName"
+                        app:layout_constraintStart_toEndOf="@+id/txtSettingItemName"
+                        app:layout_constraintTop_toTopOf="@+id/txtSettingItemName" />
+
+                    <ProgressBar
+                        android:id="@+id/progressProject"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="376dp"
+                        android:layout_height="13dp"
+                        android:progress="75"
+                        android:progressDrawable="@drawable/custom_progressbar"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtSettingItemName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="统一主题和逻辑跳转"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textSize="@dimen/rc_card_item_project_main_text"
+                        app:layout_constraintBottom_toTopOf="@+id/progressProject"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/btnProjectTree"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:contentDescription="@string/string_descrip_btn_project_tree"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:padding="13dp"
+                        android:scaleType="fitCenter"
+                        app:layout_constraintBottom_toTopOf="@+id/progressProject"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline13"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/img_progress_75" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.84" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.75" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.8" />
+
+                    <ImageView
+                        android:id="@+id/dotMsgCount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/string_descrip_dot_msg_count"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/guideline5"
+                        app:srcCompat="@drawable/ic_baseline_error_24" />
+
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="?android:attr/listDivider"
+                        android:backgroundTint="#000000"
+                        app:layout_constraintBottom_toBottomOf="@+id/btnProjectTree"
+                        app:layout_constraintEnd_toStartOf="@+id/btnProjectTree"
+                        app:layout_constraintTop_toTopOf="@+id/btnProjectTree" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/txtNodeComment"

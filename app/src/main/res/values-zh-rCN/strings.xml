@@ -63,6 +63,7 @@
     <string name="string_txt_no_introduction">暂无介绍</string>
     <string name="string_txt_strong_point">强项</string>
     <string name="string_btn_agree">同意</string>
+    <string name="string_btn_refuse">拒绝</string>
     <string name="string_txt_user_id">用户ID</string>
     <string name="string_btn_edit">编辑</string>
     <string name="string_btn_exit">退出编辑</string>

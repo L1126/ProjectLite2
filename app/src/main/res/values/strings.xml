@@ -78,4 +78,6 @@
     <string name="string_txt_node_detail">Node detail</string>
     <string name="string_tab_massage_new_message">New message</string>
     <string name="string_tab_massage_project_invite">New projects</string>
+    <string name="string_btn_refuse">Refuse</string>
+
 </resources>
