@@ -131,7 +131,8 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 //进入项目树
                 R.id.btnTree ->{
-
+                    val treeActivity = Intent(MyApplication.getContext(), TreeActivity::class.java)
+                    startActivity(treeActivity)
                 }
             }
             true
