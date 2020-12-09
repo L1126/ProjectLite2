@@ -12,7 +12,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E8E8E8"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="-49dp"
         tools:layout_editor_absoluteY="16dp">
@@ -20,13 +19,12 @@
         <FrameLayout
             android:id="@+id/ZHAQ_dlmm"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#ffffff">
+            android:layout_height="50dp">
 
             <View
-                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="24dp"
                 android:background="#B3B2B2" />
 
@@ -35,36 +33,37 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:gravity="center"
+                android:text="登录密码"
                 android:textColor="#5A5A5A"
                 android:textSize="15dp"
-                android:textStyle="bold"
-                android:text="登录密码"/>
+                android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
-                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />/>
+                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" /><![CDATA[
 
+            />
+
+        ]]>
         </FrameLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="12dp"
-            android:background="#E8E8E8"
             android:gravity="center|left" />
 
         <FrameLayout
             android:id="@+id/ZHAQ_zhgl"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#ffffff">
+            android:layout_height="50dp">
 
             <View
-                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="24dp"
                 android:background="#B3B2B2" />
 
@@ -73,41 +72,50 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:gravity="center"
+                android:text="账号管理"
                 android:textColor="#5A5A5A"
                 android:textSize="15dp"
-                android:textStyle="bold"
-                android:text="账号管理"/>
+                android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
-                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />/>
+                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" /><![CDATA[
 
+            />
+
+        ]]>
         </FrameLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="12dp"
-            android:background="#E8E8E8"
             android:gravity="center|left" />
 
         <FrameLayout
             android:id="@+id/ZHAQ_dlsb"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#ffffff">
+            android:layout_height="50dp">
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:background="#B3B2B2" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:gravity="center"
+                android:text="登录设备管理"
                 android:textColor="#5A5A5A"
                 android:textSize="15dp"
-                android:textStyle="bold"
-                android:text="登录设备管理"/>
+                android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="wrap_content"

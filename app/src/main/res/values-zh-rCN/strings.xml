@@ -14,6 +14,7 @@
     <string name="string_menu_home_page">我的项目</string>
     <string name="string_menu_message_box">收件箱</string>
     <string name="string_menu_cardcase">名片夹</string>
+    <string name="string_txt_project_tree">项目树</string>
     <string name="string_menu_my_profile">个人中心</string>
     <string name="string_link_pwdlogin">使用密码登录</string>
     <string name="string_txt_sms_code">验证码</string>
@@ -62,5 +63,15 @@
     <string name="string_txt_no_introduction">暂无介绍</string>
     <string name="string_txt_strong_point">强项</string>
     <string name="string_btn_agree">同意</string>
+    <string name="string_btn_refuse">拒绝</string>
     <string name="string_txt_user_id">用户ID</string>
+    <string name="string_btn_edit">编辑</string>
+    <string name="string_btn_exit">退出编辑</string>
+    <string name="string_btn_save">保存</string>
+    <string name="string_txt_edit_mode">编辑模式</string>
+    <string name="string_txt_node_detail">节点详情</string>
+    <string name="string_tab_massage_new_message">新消息</string>
+    <string name="string_tab_massage_project_invite">项目邀请</string>
+    <string name="string_tab_cardcase_saved_card">已存名片</string>
+    <string name="string_tab_cardcase_push_card">新的名片</string>
 </resources>

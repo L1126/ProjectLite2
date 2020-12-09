@@ -12,8 +12,12 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -26,14 +30,25 @@
         android:roundIcon="@mipmap/ic_tmp_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectLite2">
-        <activity android:name=".activity.ChatRoomSettingActivity"></activity>
-        <activity android:name=".activity.TreeActivity"></activity>
+
+        <activity android:name=".activity.ChatRoomSettingActivity" />
+
+
+
+
         <activity android:name=".activity.PushTestActivity" />
         <activity
             android:name=".activity.SearchActivity"
             android:parentActivityName=".activity.MainActivity" />
         <activity android:name=".activity.ChatRoomActivity" />
-        <activity android:name=".activity.ProjectDetailActivity" />
+
+        <activity android:name=".activity.ProjectDetailActivity"
+            android:parentActivityName=".activity.TreeActivity">
+
+        </activity>
+
+
+
         <activity android:name=".activity.tmp" />
         <activity android:name=".activity.WorkPlaceActivity" />
         <activity
@@ -57,10 +72,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.TreeActivity"
+            android:theme="@style/Theme.ProjectLite2.NoActionBar" >
+
+        </activity>
+        <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.ProjectLite2.NoActionBar" />
+            android:launchMode="singleTask" />
         <activity android:name=".activity.LoginActivity" /> <!-- 用户反馈 START -->
         <!-- <activity -->
         <!-- android:name="cn.leancloud.feedback.ThreadActivity" > -->
@@ -76,17 +95,6 @@
             android:name="notch.config"
             android:value="portrait|landscape" /> <!-- 即时通讯和推送都需要 PushService -->
         <service android:name="cn.leancloud.push.PushService" />
-
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.FileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true"
-            tools:replace="android:authorities">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
-        </provider>
 
         <receiver android:name="cn.leancloud.push.AVBroadcastReceiver">
             <intent-filter>

@@ -5,6 +5,8 @@ class ContactCard (
 //        val status: Image,
         val name: String,
         val major: String,
-        val grade: String
+        val grade: String,
+        val brief: String,
+        val param: Int
 ){
 }

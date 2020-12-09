@@ -265,25 +265,29 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+
+
                 <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/myProfileTab"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
 
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/string_my_profile_tab_time_table" />
+<!--                    <com.google.android.material.tabs.TabItem-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/string_my_profile_tab_time_table" />-->
 
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/string_my_profile_tab_memo" />
+<!--                    <com.google.android.material.tabs.TabItem-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/string_my_profile_tab_memo" />-->
 
                 </com.google.android.material.tabs.TabLayout>
 
-                <androidx.viewpager2.widget.ViewPager2
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/myProfileVp"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp" />
+                    android:layout_height="330dp" />
 
             </LinearLayout>
 

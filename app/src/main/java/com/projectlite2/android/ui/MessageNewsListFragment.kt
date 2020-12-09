@@ -1,8 +1,7 @@
 package com.projectlite2.android.ui
 
-import android.content.Intent
 import android.annotation.SuppressLint
-import android.graphics.Color
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -82,8 +81,9 @@ class MessageNewsListFragment() : Fragment() {
 
         mRefresh = mView.findViewById<SmartRefreshLayout>(R.id.smartRefresh)
         val myHeader = BezierRadarHeader(MyApplication.getContext())
-        myHeader.setAccentColor(R.color.colorAccent)
-        myHeader.setPrimaryColor(R.attr.colorControlNormal)
+
+        myHeader.setAccentColorId(R.color.white)
+        myHeader.setPrimaryColorId(R.color.font_blue)
         mRefresh.setRefreshHeader(myHeader)
         mRefresh.setOnRefreshListener { refreshlayout ->
             refreshlayout.finishRefresh(800 /*,false*/) //传入false表示刷新失败

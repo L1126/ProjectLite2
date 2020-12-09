@@ -11,8 +11,8 @@
         android:title="添加子任务" />
 
     <item
-        android:id="@+id/btnEditNode"
-        android:icon="@drawable/ic_baseline_edit_24"
+        android:id="@+id/btnNodeMoreInfo"
+        android:icon="@drawable/ic_baseline_read_more_24"
         android:title="编辑本节点" />
 
     <item

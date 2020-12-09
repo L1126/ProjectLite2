@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 
 import com.projectlite2.android.R;
 import com.projectlite2.android.app.MyApplication;
-import com.projectlite2.android.ui.SetPwdFragment;
 
 import java.util.List;
 
@@ -24,11 +23,9 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
         //StatusBarUtil.setTransparent(LoginActivity.this);
-
         AVUser currentUser = AVUser.getCurrentUser();
         if (currentUser != null) {
             // 跳到首页
-            // 跳转到主页
             Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
             startActivity(intent);
             // 销毁LoginActivity
@@ -36,10 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // 显示注册或登录页面
         }
-
-
     }
-
 
     /**
      * 解决Fragment中的onActivityResult()方法无响应问题。

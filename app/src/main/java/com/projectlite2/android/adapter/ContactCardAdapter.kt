@@ -91,18 +91,8 @@ class ContactCardAdapter(var ac: Activity, private var mData: MutableList<Contac
                 ) { position, text ->
 
             val parentPosition = viewHolder.adapterPosition
-//            /* 将长按item对应的学生姓名发送至MainActivity */
-//            Log.d("jiyi", "adapter remove:${studentList[position].name}")
-//            MainActivity.mainActivityTodo(
-//                    MainActivity.HANDLELONGCLIECK,
-//                    studentList[position].name)
-//            /* 在ArrayList中移除此股 */
-//            studentList.remove(studentList[position])
-//            /* 通知移除该item */
-//            notifyItemRemoved(position)
-//            /* 通知调制ArrayList顺序(此句删除也无影响) */
-//            notifyItemRangeChanged(position, studentList.size)
-                    MyApplication.ToastyInfo(parentPosition.toString()+" "+position.toString())
+
+//                    MyApplication.ToastyInfo(parentPosition.toString()+" "+position.toString())
 
                 }
 
@@ -139,6 +129,14 @@ class ContactCardAdapter(var ac: Activity, private var mData: MutableList<Contac
         holder.cdName.text = card.name
         holder.cdMajor.text = card.major
         holder.cdGrade.text = card.grade
+        holder.cdMoreInformation.text=card.brief
+
+        if(card.param==STYLE_PARAM_MY_CONTACTS){
+            holder.cdInfoType.text="擅长领域："
+        }else{
+            holder.cdInfoType.text="投递信息："
+        }
+
 
     }
 

@@ -73,7 +73,7 @@ public class CreateProjectActivity extends AppCompatActivity
 
     }
 
-    @OnClick({ R.id.btnCreate, R.id.btnSetStartDate, R.id.btnSetDeadline})
+    @OnClick({R.id.btnCreate, R.id.btnSetStartDate, R.id.btnSetDeadline})
     void onClick(View v) {
 
         switch (v.getId()) {
@@ -94,7 +94,6 @@ public class CreateProjectActivity extends AppCompatActivity
                 }
 
 
-
                 new XPopup.Builder(this).asConfirm("提示", "确定创建该项目吗？",
                         new OnConfirmListener() {
                             @Override
@@ -104,8 +103,8 @@ public class CreateProjectActivity extends AppCompatActivity
                                 String pjBrief = mEditProjectAbstract.getText().toString();
                                 CloudUtil.CLASS_PROJECT.CreateProject(pjName, pjBrief, mDateStart, mDateClosing);
                                 //  成功创建项目，向上个activity返回请求码，使其刷新
-                                Intent it=new Intent();
-                                it.putExtra("date_return","create success");
+                                Intent it = new Intent();
+                                it.putExtra("date_return", "create success");
                                 setResult(RESULT_OK, it);
 
                                 //  关闭本活动
@@ -125,8 +124,12 @@ public class CreateProjectActivity extends AppCompatActivity
 
             //  点击设置结束时间
             case R.id.btnSetDeadline:
-                isSetForStart = false;
-                PopDatePickClosing(strSetEndDate);
+                if (mDateStart != null) {
+                    isSetForStart = false;
+                    PopDatePickClosing(strSetEndDate);
+                } else {
+                    MyApplication.ToastyWarning("请先设置开始时间");
+                }
                 break;
 
             default:
@@ -144,7 +147,7 @@ public class CreateProjectActivity extends AppCompatActivity
 //        MyApplication.ToastyInfo(date);
 
         if (isSetForStart) {
-            mDateStart = new Date(year - 1900, monthOfYear , dayOfMonth);
+            mDateStart = new Date(year - 1900, monthOfYear, dayOfMonth);
             mBtnSetStartDate.setText("" + year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
         } else {
             mDateClosing = new Date(year - 1900, monthOfYear, dayOfMonth);
@@ -165,7 +168,7 @@ public class CreateProjectActivity extends AppCompatActivity
         datePickerDialog.setTitle(title);
 
 
-       // datePickerDialog.setMinDate(Calendar.getInstance());
+        // datePickerDialog.setMinDate(Calendar.getInstance());
         datePickerDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {

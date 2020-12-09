@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         CloudUtil.CURRENT_USER.ConfigCurrentUserAndInstallationId();
 
         //如果有的话，隐藏actionbar
-//        getSupportActionBar().hide();
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
 

@@ -36,7 +36,7 @@ public class MessageBoxFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewpager;
     ArrayList fragmentList = new ArrayList<Fragment>();
-    String[] temp = {"News","New Projects"};
+
 
     @Nullable
     @Override
@@ -46,7 +46,7 @@ public class MessageBoxFragment extends Fragment {
         toolBar = contextView.findViewById(R.id.toolBar);
         txtTitle = contextView.findViewById(R.id.txtPageTitle);
 
-        txtTitle.setText("Message");
+        txtTitle.setText(R.string.string_menu_message_box);
         toolBar.inflateMenu(R.menu.menu_message_card);
 
         //  标题栏菜单点击
@@ -117,7 +117,12 @@ public class MessageBoxFragment extends Fragment {
         //返回tablayout的标题文字;
         @Override
         public CharSequence getPageTitle(int position) {
-            return temp[position];
+            if (position == 0) {
+                return getActivity().getResources().getString(R.string.string_tab_massage_new_message);
+            }else{
+                return getActivity().getResources().getString(R.string.string_tab_massage_project_invite);
+            }
+
         }
     }
 
