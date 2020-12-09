@@ -24,6 +24,9 @@ android {
             // viewBinding = true
         }
     }
+    lintOptions{
+        abortOnError false
+    }
 
     buildTypes {
         release {
