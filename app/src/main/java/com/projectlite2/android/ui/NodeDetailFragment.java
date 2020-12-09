@@ -102,6 +102,8 @@ public class NodeDetailFragment extends Fragment implements View.OnClickListener
                 mCommentDataList.add(new TimeLineModel(CloudUtil.CURRENT_USER.name+":  "+mCommentInput.getText().toString(), "2020-12-10 15:46", OrderStatus.INACTIVE));
                 mCommentAdapter=new TimeLineAdapter(mCommentDataList);
                 mRvTimeLineComment.setAdapter(mCommentAdapter);
+                MyApplication.ToastySuccess("留言成功");
+                mCommentInput.setText("");
                 break;
             }
         }

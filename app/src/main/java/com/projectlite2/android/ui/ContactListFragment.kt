@@ -3,7 +3,6 @@ package com.projectlite2.android.ui
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -53,8 +52,6 @@ class ContactListFragment(var ac: Activity, private val style_param: Int) : Frag
     lateinit var mRefresh: RefreshLayout
 
 
-
-
     private val mContactList = ArrayList<ContactCard>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -79,7 +76,7 @@ class ContactListFragment(var ac: Activity, private val style_param: Int) : Frag
 
         mRecyclerview = mView.findViewById(R.id.recyclerViewCard2)
         mRecyclerview.layoutManager = layoutManager
-        mAdapter = ContactCardAdapter(ac,mContactList, style_param)
+        mAdapter = ContactCardAdapter(ac, mContactList, style_param)
         mRecyclerview.adapter = mAdapter
 
         mRecyclerview.itemAnimator = DefaultItemAnimator()
@@ -94,8 +91,8 @@ class ContactListFragment(var ac: Activity, private val style_param: Int) : Frag
 
         mRefresh = mView.findViewById<SmartRefreshLayout>(R.id.smartRefresh)
         val myHeader = BezierRadarHeader(MyApplication.getContext())
-        myHeader.setAccentColor(R.color.colorAccent)
-        myHeader.setPrimaryColor(R.attr.colorControlNormal)
+        myHeader.setAccentColorId(R.color.white)
+        myHeader.setPrimaryColorId(R.color.font_blue)
         mRefresh.setRefreshHeader(myHeader)
         mRefresh.setOnRefreshListener { refreshlayout ->
             refreshlayout.finishRefresh(800 /*,false*/) //传入false表示刷新失败
@@ -122,14 +119,16 @@ class ContactListFragment(var ac: Activity, private val style_param: Int) : Frag
      * 向卡片List添加卡片数据
      */
     private fun addNewCards() {
-        mContactList.add(ContactCard("小张", "工业设计", "2018级"))
-        mContactList.add(ContactCard("院长", "工业设计", "2018级"))
-        mContactList.add(ContactCard("小张", "工业设计", "2018级"))
-        mContactList.add(ContactCard("院长", "工业设计", "2018级"))
-        mContactList.add(ContactCard("小张", "工业设计", "2018级"))
-        mContactList.add(ContactCard("院长", "工业设计", "2018级"))
-        mContactList.add(ContactCard("小张", "工业设计", "2018级"))
-        mContactList.add(ContactCard("院长", "工业设计", "2018级"))
+
+        if(style_param==STYLE_PARAM_MY_CONTACTS){
+            mContactList.add(ContactCard("小林", "交互设计", "2018级","Alias建模、Android开发、关系数据库设计",style_param))
+            mContactList.add(ContactCard("小陈", "工业设计", "2020级","犀牛建模、C4D动画、产品策划、用研",style_param))
+            mContactList.add(ContactCard("康康", "交互设计", "2018级","Alias建模、3DMax建模、Unity开发",style_param))
+            mContactList.add(ContactCard("学委", "交互设计", "2018级","产品手绘、UI设计、策划、产品设计",style_param))
+        }else{
+            mContactList.add(ContactCard("小王", "机械工程", "2019级","向你投递了名片",style_param))
+        }
+
     }
 
 
@@ -146,7 +145,7 @@ class ContactListFragment(var ac: Activity, private val style_param: Int) : Frag
                 // _ 其实是position
                 { _, text ->
                     when (text) {
-                        arrMenuTitle[0]->{
+                        arrMenuTitle[0] -> {
                             MyApplication.ToastyInfo("还没实现呢")
                         }
 

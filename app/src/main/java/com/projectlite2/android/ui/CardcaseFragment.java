@@ -109,7 +109,11 @@ public class CardcaseFragment extends Fragment {
         //返回tablayout的标题文字;
         @Override
         public CharSequence getPageTitle(int position) {
-            return temp[position];
+           if(position==0){
+               return getActivity().getResources().getString(R.string.string_tab_cardcase_saved_card);
+           }else{
+               return getActivity().getResources().getString(R.string.string_tab_cardcase_push_card);
+           }
         }
     }
 

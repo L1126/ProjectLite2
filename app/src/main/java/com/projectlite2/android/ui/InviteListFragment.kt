@@ -70,8 +70,8 @@ class InviteListFragment(): Fragment() {
 
         mRefresh = mView.findViewById<SmartRefreshLayout>(R.id.smartRefresh)
         val myHeader = BezierRadarHeader(MyApplication.getContext())
-        myHeader.setAccentColor(R.color.colorAccent)
-        myHeader.setPrimaryColor(R.attr.colorControlNormal)
+        myHeader.setAccentColorId(R.color.white)
+        myHeader.setPrimaryColorId(R.color.font_blue)
         mRefresh.setRefreshHeader(myHeader)
         mRefresh.setOnRefreshListener { refreshlayout ->
             refreshlayout.finishRefresh(800 /*,false*/) //传入false表示刷新失败

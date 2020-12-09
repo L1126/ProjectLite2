@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -66,6 +67,9 @@ public class HomePageFragment extends Fragment {
     TextView txtTitle;
     RecyclerView mRecyclerView;
     ProjectCardAdapter mAdapter;
+
+    ConstraintLayout mImgEmpty;
+
     //    SwipeRefreshLayout mRefresh;
     RefreshLayout mRefresh;
     private ArrayList<ProjectCard> projectList = new ArrayList<ProjectCard>();
@@ -188,7 +192,7 @@ public class HomePageFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new ProjectCardAdapter(projectList);
         mRecyclerView.setAdapter(mAdapter);
-
+        mImgEmpty=mView.findViewById(R.id.imgEmpty);
         LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(MyApplication.getContext(), R.anim.layout_animation_fall_down);
         mRecyclerView.setLayoutAnimation(animation);
 
@@ -291,6 +295,11 @@ public class HomePageFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                if(projectList.size()<1){
+                    mImgEmpty.setVisibility(View.VISIBLE);
+                }else{
+                    mImgEmpty.setVisibility(View.GONE);
+                }
                 mAdapter.notifyDataSetChanged();
             }
         }, refreshMillis());//1500ms后执行Runnable中的run方法
@@ -317,6 +326,11 @@ public class HomePageFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                if(projectList.size()<1){
+                    mImgEmpty.setVisibility(View.VISIBLE);
+                }else{
+                    mImgEmpty.setVisibility(View.GONE);
+                }
                 mAdapter.notifyDataSetChanged();
             }
         }, delayMillis);//delayMillis毫秒后执行Runnable中的run方法
