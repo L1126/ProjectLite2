@@ -74,4 +74,5 @@
     <string name="string_tab_massage_project_invite">项目邀请</string>
     <string name="string_tab_cardcase_saved_card">已存名片</string>
     <string name="string_tab_cardcase_push_card">新的名片</string>
+    <string name="string_txt_create_project">创建项目</string>
 </resources>

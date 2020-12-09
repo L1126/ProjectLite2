@@ -61,7 +61,7 @@ public class CreateProjectActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_project);
 
-        getSupportActionBar().setTitle("Create project");
+        getSupportActionBar().setTitle(getResources().getString(R.string.string_txt_create_project));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //  mToolbar = findViewById(R.id.toolBar);
 
