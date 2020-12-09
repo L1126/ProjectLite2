@@ -74,6 +74,15 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
             drawerLayout?.closeDrawers()
         })
 
+        //消息卡片进入
+        val extraData = intent.getStringExtra("Member")
+        if (extraData == "Single"){
+            txtTitle?.setText("大雄")
+            msgList.clear()
+            msgList.add(Msg("云端数据能够实现吗？",Msg.TYPE_SENT))
+            msgList.add(Msg("正在努力！加油！打工人！",Msg.TYPE_RECEIVED))
+        }
+
         //菜单目录点击
         navView.setCheckedItem(R.id.navGroup)
         navView.setNavigationItemSelectedListener {

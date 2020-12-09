@@ -98,9 +98,11 @@ class MessageNewsListFragment() : Fragment() {
                     //消息页面点击
                     R.id.btnMsgChat -> {
 //                        Log.d("KKang","测试")
-                        val it: Intent
-                        it = Intent(context, ChatRoomActivity::class.java)
-                        startActivity(it)
+                        val data = "Single"
+                        val intent = Intent(context, ChatRoomActivity::class.java)
+
+                        intent.putExtra("Member",data)
+                        startActivity(intent)
                     }
 
                     //卡片点击事件
@@ -179,9 +181,9 @@ class MessageNewsListFragment() : Fragment() {
     }
 
     private fun addNewCards() {
-        mMessageList.add(MessageCard("小军", "SRP", "10:12", "报告这周六交"))
-        mMessageList.add(MessageCard("胖虎", "互联网+", "15:12", "木棉开会"))
-        mMessageList.add(MessageCard("静香", "SRP", "9:12", "原型已经发给你了"))
+        mMessageList.add(MessageCard("大雄", "专题一", "10:12", "报告这周六交"))
+        mMessageList.add(MessageCard("胖虎", "专题一", "15:12", "木棉开会"))
+        mMessageList.add(MessageCard("静香", "专题一", "9:12", "原型已经发给你了"))
         mEveryCardMsgList.add(ArrayList<Msg>())
         mEveryCardMsgList.add(ArrayList<Msg>())
         mEveryCardMsgList.add(ArrayList<Msg>())
