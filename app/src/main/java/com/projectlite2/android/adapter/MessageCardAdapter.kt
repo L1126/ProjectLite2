@@ -41,7 +41,7 @@ class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
         val cdMessage: TextView = itemView.findViewById(R.id.txtMessage)
         val cdTime: TextView = itemView.findViewById(R.id.txtMessageTime)
         val cdToggleBar: ImageView = itemView.findViewById(R.id.imgToggleBar)
-        val cdChatImage: ImageView = itemView.findViewById(R.id.messageChat)
+        val cdChatImage: ImageView = itemView.findViewById(R.id.btnMsgChat)
         val cdBtnReply: Button = itemView.findViewById(R.id.btnReply)
     }
 
@@ -75,9 +75,14 @@ class MessageCardAdapter(private var mData: MutableList<MessageCard>) :
 //            MyApplication.showToast(style.toString())
         }
 
-        //局部
+        //回复
         holder.cdBtnReply.setOnClickListener {
             itemClickListener!!.onClick(it,holder.adapterPosition,holder.cdBtnReply.id)
+        }
+
+        //聊天室
+        holder.cdChatImage.setOnClickListener {
+            itemClickListener!!.onClick(it,holder.adapterPosition,holder.cdChatImage.id)
         }
 
     }

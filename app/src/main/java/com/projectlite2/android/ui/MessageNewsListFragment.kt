@@ -1,5 +1,6 @@
 package com.projectlite2.android.ui
 
+import android.content.Intent
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
@@ -8,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.projectlite2.android.MaxRecyclerView
 import com.projectlite2.android.Msg
 import com.projectlite2.android.R
+import com.projectlite2.android.activity.ChatRoomActivity
 import com.projectlite2.android.adapter.MessageCardAdapter
 import com.projectlite2.android.adapter.MsgChatAdapter
 import com.projectlite2.android.app.MyApplication
@@ -26,7 +27,6 @@ import com.projectlite2.android.utils.SimpleItemTouchHelperCallback
 import com.scwang.smart.refresh.header.BezierRadarHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
-import kotlinx.android.synthetic.main.message_card_item.*
 import java.util.*
 
 class MessageNewsListFragment() : Fragment() {
@@ -46,7 +46,6 @@ class MessageNewsListFragment() : Fragment() {
     private var CardClick0 = true
     private var CardClick1 = true
     private var CardClick2 = true
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -76,13 +75,10 @@ class MessageNewsListFragment() : Fragment() {
         mRecyclerview.itemAnimator = DefaultItemAnimator()
         mRecyclerview.itemAnimator!!.changeDuration = 300
 
-
         //先实例化Callback
         mCallBack = SimpleItemTouchHelperCallback(mAdapter)
         //调用ItemTouchHelper的attachToRecyclerView方法建立联系
         ItemTouchHelper(mCallBack).attachToRecyclerView(mRecyclerview)
-
-
 
         mRefresh = mView.findViewById<SmartRefreshLayout>(R.id.smartRefresh)
         val myHeader = BezierRadarHeader(MyApplication.getContext())
@@ -94,12 +90,20 @@ class MessageNewsListFragment() : Fragment() {
 //            refreshData()
         }
 
-
-
         mAdapter.setOnKotlinItemClickListener(object : OnItemClickListenerPlus {
             override fun onClick(item: View?, position: Int, which: Int) {
 
                 when (which) {
+
+                    //消息页面点击
+                    R.id.btnMsgChat -> {
+//                        Log.d("KKang","测试")
+                        val it: Intent
+                        it = Intent(context, ChatRoomActivity::class.java)
+                        startActivity(it)
+                    }
+
+                    //卡片点击事件
                     R.id.messageCardBackground -> {
 
                         val thisCardView = mRecyclerview.getChildAt(position)
@@ -136,11 +140,11 @@ class MessageNewsListFragment() : Fragment() {
                         }
                     }
 
+                    //回复消息按钮
                     R.id.btnReply -> {
 
                         //  测试
                         MyApplication.ToastyInfo("$position")
-
                         val thisCardView = mRecyclerview.getChildAt(position)
 
                         // 测试
@@ -152,10 +156,8 @@ class MessageNewsListFragment() : Fragment() {
 //                        MyApplication.ToastyInfo(thisCardView.findViewById<TextView>(R.id.txtName).id.toString())
 //                        MyApplication.ToastyInfo(thisRV.id.toString())
 
-
                         thisRV.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
                         thisRV.adapter = mEveryCardMsgAdapterList[position]
-
 
                         val thisReplyMsg = thisCardView.findViewById<EditText>(R.id.textReply).text.toString()
 
@@ -175,11 +177,6 @@ class MessageNewsListFragment() : Fragment() {
             }
         })
     }
-
-
-
-
-
 
     private fun addNewCards() {
         mMessageList.add(MessageCard("小军", "SRP", "10:12", "报告这周六交"))
