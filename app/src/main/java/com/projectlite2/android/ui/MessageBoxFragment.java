@@ -36,11 +36,7 @@ public class MessageBoxFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewpager;
     ArrayList fragmentList = new ArrayList<Fragment>();
-    String[] temp = {
-//            this.getResources().getString(R.string.string_tab_massage_new_message),
-//           this. getResources().getString(R.string.string_tab_massage_project_invite)
-            "123","456"
-    };
+
 
     @Nullable
     @Override
