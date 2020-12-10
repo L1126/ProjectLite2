@@ -1,4 +1,4 @@
-package com.projectlite2.android.dialog;
+package com.projectlite2.android.ui.dialog;
 
 import android.content.Context;
 import android.view.View;
@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.CenterPopupView;
 import com.projectlite2.android.R;
-import com.projectlite2.android.app.MyApplication;
 
 public class WPfolderDialog extends CenterPopupView {
 

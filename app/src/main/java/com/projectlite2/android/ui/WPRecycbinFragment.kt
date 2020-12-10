@@ -3,13 +3,9 @@ package com.projectlite2.android.ui
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.LinearLayout
-import android.widget.RadioButton
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -19,8 +15,8 @@ import com.lxj.xpopup.XPopup
 import com.projectlite2.android.R
 import com.projectlite2.android.adapter.DeleteFileAdapter
 import com.projectlite2.android.adapter.WPRecycleFileAdapter
-import com.projectlite2.android.dialog.WPdeleteDialog
-import com.projectlite2.android.dialog.WPrecoverDialog
+import com.projectlite2.android.ui.dialog.WPdeleteDialog
+import com.projectlite2.android.ui.dialog.WPrecoverDialog
 import com.projectlite2.android.model.DeleteFileCard
 import com.projectlite2.android.model.RecyclebinCard
 import com.projectlite2.android.utils.OnItemClickListenerPlus

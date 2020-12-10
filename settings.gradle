@@ -1,3 +1,4 @@
+include ':jiguang'
 include ':app'
 rootProject.name = "ProjectLite2"
 include ':leancloudchatkit'

@@ -1,22 +1,23 @@
-package com.projectlite2.android.dialog;
+package com.projectlite2.android.ui.dialog;
 
 import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.CenterPopupView;
 import com.projectlite2.android.R;
 
-public class WPdeleteDialog extends CenterPopupView {
+public class WPrecoverDialog extends CenterPopupView {
 
-    public WPdeleteDialog(@NonNull Context context) {
+    public WPrecoverDialog(@NonNull Context context) {
         super(context);
     }
 
     @Override
     protected int getImplLayoutId() {
-        return R.layout.dialog_delete;
+        return R.layout.dialog_recover;
     }
 
     @Override
@@ -32,6 +33,16 @@ public class WPdeleteDialog extends CenterPopupView {
             @Override
             public void onClick(View v) {
                 dismiss(); // 关闭弹窗
+            }
+        });
+
+        findViewById(R.id.saveAs).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss(); // 关闭弹窗
+                new XPopup.Builder(getContext())
+                        .asCustom(new WPLoadBinDialog(getContext()))
+                        .show();
             }
         });
     }

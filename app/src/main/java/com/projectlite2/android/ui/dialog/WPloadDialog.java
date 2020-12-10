@@ -1,13 +1,10 @@
-package com.projectlite2.android.dialog;
+package com.projectlite2.android.ui.dialog;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.lxj.xpopup.core.CenterPopupView;
 import com.projectlite2.android.R;

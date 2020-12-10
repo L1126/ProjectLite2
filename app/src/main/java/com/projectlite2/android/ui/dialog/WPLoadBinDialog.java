@@ -1,8 +1,7 @@
-package com.projectlite2.android.dialog;
+package com.projectlite2.android.ui.dialog;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 
@@ -10,32 +9,24 @@ import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.CenterPopupView;
 import com.projectlite2.android.R;
 
-public class WPfileDialog extends CenterPopupView {
+public class WPLoadBinDialog extends CenterPopupView {
 
-    private static EditText FileLoad;
-    private  WPfileDialog thisDialog;
-
-    public WPfileDialog(@NonNull Context context) {
+    public WPLoadBinDialog(@NonNull Context context) {
         super(context);
     }
 
     @Override
     protected int getImplLayoutId() {
-        return R.layout.dialog_file;
+        return R.layout.dialog_load_bin;
     }
 
     @Override
     protected void onCreate() {
         super.onCreate();
-
-        thisDialog=this;
-        FileLoad = findViewById(R.id.newFileLoad);
-
         findViewById(R.id.confirm).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 关闭弹窗
-                dismiss();
+                dismiss(); // 关闭弹窗
             }
         });
         findViewById(R.id.cancel).setOnClickListener(new OnClickListener() {
@@ -45,14 +36,28 @@ public class WPfileDialog extends CenterPopupView {
             }
         });
 
-        findViewById(R.id.btnSelectfile).setOnClickListener(new OnClickListener() {
+        //项目文件
+        findViewById(R.id.btnFile).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                WPloadDialog dialog = new WPloadDialog(getContext());
-                dialog.isWPfiledialog = true;
+                dismiss(); // 关闭弹窗
                 new XPopup.Builder(getContext())
-                        .asCustom(dialog)
+                        .asCustom(new WPloadDialog(getContext()))
                         .show();
+            }
+        });
+        //学习资源
+        findViewById(R.id.btnStudy).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss(); // 关闭弹窗
+            }
+        });
+        //会议记录
+        findViewById(R.id.btnMeeting).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss(); // 关闭弹窗
             }
         });
     }
@@ -84,27 +89,5 @@ public class WPfileDialog extends CenterPopupView {
      */
     protected int getPopupHeight() {
         return 0;
-    }
-
-    public static void refreshFile(int txt){
-        switch (txt){
-            case 1:
-                FileLoad.setText("调研小组");
-                break;
-            case 2:
-                FileLoad.setText("原型小组");
-                break;
-            case 3:
-                FileLoad.setText("代码小组");
-                break;
-            case 4:
-                FileLoad.setText("文档小组");
-                break;
-            case 5:
-                FileLoad.setText("公共小组");
-                break;
-            default:
-                break;
-        }
     }
 }

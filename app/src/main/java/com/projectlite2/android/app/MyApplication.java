@@ -34,6 +34,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.leancloud.AVLogger;
 import cn.leancloud.AVOSCloud;
 import cn.leancloud.chatkit.LCChatKit;
@@ -93,6 +94,9 @@ public class MyApplication extends Application {
         //  初始化ChatKit
         LCChatKit.getInstance().setProfileProvider(CustomUserProvider.getInstance());
         LCChatKit.getInstance().init(mContext, _appId, _appKey, _serverUrl);
+
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
 
 
         //  订阅某个频道（channel）的消息，只要在保存 Installation 之前调用 PushService.subscribe 方法

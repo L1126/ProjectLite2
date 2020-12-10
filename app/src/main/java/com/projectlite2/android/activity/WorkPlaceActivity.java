@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +14,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.lxj.xpopup.XPopup;
 import com.projectlite2.android.R;
-import com.projectlite2.android.dialog.WPfileDialog;
+import com.projectlite2.android.ui.dialog.WPfileDialog;
 import com.projectlite2.android.adapter.WorkPlaceAdapter;
-import com.projectlite2.android.dialog.WPfolderDialog;
+import com.projectlite2.android.ui.dialog.WPfolderDialog;
 
 public class WorkPlaceActivity extends AppCompatActivity {
 

@@ -17,6 +17,19 @@ android {
         versionCode 1
         versionName "1.0"
 
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a','x86', 'x86_64', 'mips', 'mips64'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "063a0deac5cb65505811a020", //极光开发平台上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
+
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildFeatures{
             dataBinding = true
@@ -161,6 +174,11 @@ dependencies {
     //Material
     implementation 'com.google.android.material:material:1.0.0'
 //    implementation 'de.hdodenhof:circleimageview:3.0.1'
+
+    // 极光推送
+    implementation 'cn.jiguang.sdk:jpush:3.8.5'
+    implementation 'cn.jiguang.sdk:jcore:2.5.5'
+
 
 }
 
