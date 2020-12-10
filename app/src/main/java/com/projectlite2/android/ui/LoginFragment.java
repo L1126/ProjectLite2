@@ -59,6 +59,7 @@ public class LoginFragment extends Fragment {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
                 String phone = binding.txtPhone.getText().toString();
                 String password = binding.txtPassword.getText().toString();
 
@@ -154,13 +155,57 @@ public class LoginFragment extends Fragment {
 
 //         使用短信验证码登录-跳转
         binding.linkSMSLogin.setOnClickListener(new View.OnClickListener() {
+=======
+                String phone=binding.txtPhone.getText().toString();
+                String password=binding.txtPassword.getText().toString();
+                AVUser.loginByMobilePhoneNumber(phone,password).subscribe(new Observer<AVUser>() {
+                    public void onSubscribe(Disposable disposable) {
+                    }
+
+                    public void onNext(AVUser user) {
+
+                        // 登录成功
+                        // MyApplication.showToast(phone+" "+password+" 登陆成功");
+                        MyApplication.ToastySuccess(phone+" "+password+" 登陆成功");
+                        // 若勾选了记住密码
+                        if(binding.chkRememberPwd.isChecked()){
+                            // 保存sharedPreferences
+                            UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),phone);
+                            UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),password);
+                        }
+                        else{
+                            // 保存sharedPreferences
+                            UserInfoSaveSharedPreference.setUserPhone(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
+                            UserInfoSaveSharedPreference.setUserPwd(MyApplication.getContext(),UserInfoSaveSharedPreference.PREF_NULL_VALUE);
+                        }
+
+                        // 跳转到主页
+                        Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
+                        startActivity(intent);
+                        // 销毁LoginActivity
+                        getActivity().finish();
+                    }
+
+                    public void onError(@NotNull Throwable throwable) {
+                        // 登录失败（可能是密码错误）
+                       // MyApplication.showToast(phone+" "+password+" 登陆失败");
+                        MyApplication.ToastyError("登录失败！");
+                    }
+
+                    public void onComplete() {
+                    }
+                });
+            }
+        });
+        // 使用短信验证码登录-跳转
+        binding.linkSMSLogin.setOnClickListener(new View.OnClickListener(){
+>>>>>>> 2b65d275b8abc085741fbf892a09bc5366e41c3d
             @Override
             public void onClick(View v) {
                 NavController navController = findNavController(v);
                 navController.navigate(R.id.action_loginFragment2_to_loginSMSFragment);
             }
         });
-
         // 注册新账户-跳转-
         binding.linkSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +218,6 @@ public class LoginFragment extends Fragment {
 
             }
         });
-
         // 忘记密码-跳转
         binding.linkForgetpwd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,6 +241,7 @@ public class LoginFragment extends Fragment {
     }
 
 
+<<<<<<< HEAD
     /**
      * 使用 手机号码 和 密码 登录客户端
      *
@@ -233,5 +278,7 @@ public class LoginFragment extends Fragment {
 
     }
 
+=======
+>>>>>>> 2b65d275b8abc085741fbf892a09bc5366e41c3d
 
 }

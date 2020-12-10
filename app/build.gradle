@@ -154,6 +154,7 @@ dependencies {
     //  FabOptions
     implementation 'com.github.joaquimley:faboptions:1.2.0'
 
+<<<<<<< HEAD
     //  Welcome
     implementation 'com.stephentuso:welcome:1.4.1'
 
@@ -180,6 +181,8 @@ dependencies {
     implementation 'cn.jiguang.sdk:jcore:2.5.5'
 
 
+=======
+>>>>>>> 2b65d275b8abc085741fbf892a09bc5366e41c3d
 }
 
 // 注册SecVerify的相关信息

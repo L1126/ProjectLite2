@@ -1,5 +1,6 @@
 package com.projectlite2.android.activity;
 
+<<<<<<< HEAD
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -270,5 +271,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+=======
+public class SearchActivity {
+>>>>>>> 2b65d275b8abc085741fbf892a09bc5366e41c3d
 }
-

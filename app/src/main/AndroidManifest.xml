@@ -49,6 +49,7 @@
         android:roundIcon="@mipmap/ic_tmp_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectLite2">
+<<<<<<< HEAD
 
         <activity android:name=".activity.ChatRoomSettingActivity" />
 
@@ -74,9 +75,17 @@
             android:name=".activity.MyWelcomeActivity"
             android:theme="@style/WelcomeScreenTheme.Light.SolidNavigation.UnderStatusBar" />
         <activity android:name=".activity.ModifyMyProfileCardActivity" />
+=======
+        <activity
+            android:name=".activity.ModifyMyProfileCardActivity">
+        </activity>
+        <activity android:name=".activity.ProjectDetailActivity"></activity>
+        <activity android:name=".activity.tmp"></activity>
+>>>>>>> 2b65d275b8abc085741fbf892a09bc5366e41c3d
         <activity
             android:name=".activity.CreateProjectActivity"
             android:parentActivityName=".activity.MainActivity" />
+        <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.SystemSettingActivity" />
         <activity
             android:name=".activity.GuideActivity"

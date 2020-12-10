@@ -26,6 +26,7 @@ import androidx.navigation.NavController;
 import com.projectlite2.android.BuildConfig;
 import com.projectlite2.android.CustomUserProvider;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -35,6 +36,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.jpush.android.api.JPushInterface;
+=======
+>>>>>>> 2b65d275b8abc085741fbf892a09bc5366e41c3d
 import cn.leancloud.AVLogger;
 import cn.leancloud.AVOSCloud;
 import cn.leancloud.chatkit.LCChatKit;
@@ -202,6 +205,7 @@ public class MyApplication extends Application {
         navController.navigate(resId, bundle);
     }
 
+<<<<<<< HEAD
     /**
      * 通用判断是否为合法手机号
      *
@@ -215,6 +219,8 @@ public class MyApplication extends Application {
         return m.matches();
     }
 
+=======
+>>>>>>> 2b65d275b8abc085741fbf892a09bc5366e41c3d
 
     /**
      * 生成随机的12位id

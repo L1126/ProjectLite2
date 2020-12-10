@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+<<<<<<< HEAD
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
 import cn.leancloud.AVUser;
@@ -59,6 +60,14 @@ import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_M
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_MAP.RELATION_NAME_PROJECT_LEADER_MAP;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FIELD_MEMBER;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_NAME_PROJECT_MEMBER_MAP;
+=======
+import cn.leancloud.chatkit.LCChatKit;
+import cn.leancloud.chatkit.activity.LCIMConversationActivity;
+import cn.leancloud.chatkit.utils.LCIMConstants;
+import cn.leancloud.im.v2.AVIMClient;
+import cn.leancloud.im.v2.AVIMException;
+import cn.leancloud.im.v2.callback.AVIMClientCallback;
+>>>>>>> 2b65d275b8abc085741fbf892a09bc5366e41c3d
 
 public class HomePageFragment extends Fragment {
 
@@ -74,6 +83,7 @@ public class HomePageFragment extends Fragment {
     RefreshLayout mRefresh;
     private ArrayList<ProjectCard> projectList = new ArrayList<ProjectCard>();
 
+<<<<<<< HEAD
     int refreshMillis = 1500;
 
     @Override
@@ -97,6 +107,11 @@ public class HomePageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+=======
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+>>>>>>> 2b65d275b8abc085741fbf892a09bc5366e41c3d
         mView = inflater.inflate(R.layout.home_page_fragment, container, false);
 
         toolBar = mView.findViewById(R.id.toolBar);

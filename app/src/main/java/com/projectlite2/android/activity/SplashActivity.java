@@ -28,6 +28,7 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+<<<<<<< HEAD
 
                 Intent it;
                 if (!UserInfoSaveSharedPreference.getPrefNotFirstUse(MyApplication.getContext())){
@@ -35,6 +36,16 @@ public class SplashActivity extends AppCompatActivity {
                 }else{
                     it=new Intent(getApplicationContext(), LoginActivity.class);//启动LoginActivity
 //                         it = new Intent(MyApplication.getContext(), MainActivity.class);
+=======
+                try{
+                    sleep(1000);//使程序休眠五秒
+                    Intent it;
+                    if (!UserInfoSaveSharedPreference.getPrefNotFirstUse(MyApplication.getContext())){
+                         it=new Intent(getApplicationContext(), GuideActivity.class);//启动GuideActivity
+                    }else{
+                         //it=new Intent(getApplicationContext(), LoginActivity.class);//启动LoginActivity
+                         it = new Intent(MyApplication.getContext(), MainActivity.class);
+>>>>>>> 2b65d275b8abc085741fbf892a09bc5366e41c3d
 
                 }
                 startActivity(it);

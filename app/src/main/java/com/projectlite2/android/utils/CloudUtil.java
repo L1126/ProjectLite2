@@ -35,9 +35,10 @@ import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_LEADER_M
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FIELD_MEMBER;
 import static com.projectlite2.android.utils.CloudUtil.RELATION_PROJECT_MEMBER_MAP.RELATION_FILED_PROJECT;
 
-
+/**
+ * 云端数据库交互工具类
+ */
 public class CloudUtil {
-
 
     /**
      * 文件表 字段与方法
@@ -59,7 +60,6 @@ public class CloudUtil {
          */
         public static final String TABLE_FIELD_URL = "url";
     }
-
 
     /**
      * 当前登录用户
@@ -258,7 +258,6 @@ public class CloudUtil {
 
 
     }
-
 
     /**
      * 项目表 字段与方法

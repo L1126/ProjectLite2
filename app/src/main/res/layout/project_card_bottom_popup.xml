@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="14dp"
-    android:background="@drawable/bg_white_round"
-    android:orientation="vertical">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+<<<<<<< HEAD:app/src/main/res/layout/project_card_bottom_popup.xml
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -177,3 +173,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 </LinearLayout>
+=======
+</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> 2b65d275b8abc085741fbf892a09bc5366e41c3d:app/src/main/res/layout/custom_bottom_popup.xml
